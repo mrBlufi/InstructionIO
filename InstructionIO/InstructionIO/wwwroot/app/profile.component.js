@@ -24,14 +24,14 @@ var ProfileComponent = (function () {
             console.log(_this.user);
         }, function (err) { return console.log('Get me user error'); });
     };
-    ProfileComponent = __decorate([
-        core_1.Component({
-            selector: 'my-profile',
-            templateUrl: '/partial/profileComponent'
-        }),
-        __metadata("design:paramtypes", [http_1.Http])
-    ], ProfileComponent);
     return ProfileComponent;
 }());
+ProfileComponent = __decorate([
+    core_1.Component({
+        selector: 'my-profile',
+        templateUrl: '/partial/profileComponent'
+    }),
+    __metadata("design:paramtypes", [http_1.Http])
+], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

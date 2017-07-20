@@ -10,13 +10,13 @@ var core_1 = require("@angular/core");
 var IndexComponent = (function () {
     function IndexComponent() {
     }
-    IndexComponent = __decorate([
-        core_1.Component({
-            selector: 'my-index',
-            templateUrl: '/partial/indexComponent'
-        })
-    ], IndexComponent);
     return IndexComponent;
 }());
+IndexComponent = __decorate([
+    core_1.Component({
+        selector: 'my-index',
+        templateUrl: '/partial/indexComponent'
+    })
+], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map

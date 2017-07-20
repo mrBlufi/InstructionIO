@@ -10,13 +10,13 @@ var core_1 = require("@angular/core");
 var AboutComponent = (function () {
     function AboutComponent() {
     }
-    AboutComponent = __decorate([
-        core_1.Component({
-            selector: 'my-about',
-            templateUrl: '/partial/aboutComponent'
-        })
-    ], AboutComponent);
     return AboutComponent;
 }());
+AboutComponent = __decorate([
+    core_1.Component({
+        selector: 'my-about',
+        templateUrl: '/partial/aboutComponent'
+    })
+], AboutComponent);
 exports.AboutComponent = AboutComponent;
 //# sourceMappingURL=about.component.js.map

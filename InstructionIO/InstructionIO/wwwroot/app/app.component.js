@@ -20,14 +20,14 @@ var AppComponent = (function () {
     AppComponent.prototype.setTitle = function (newTitle) {
         this.titleService.setTitle(newTitle);
     };
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            templateUrl: '/partial/appComponent'
-        }),
-        __metadata("design:paramtypes", [platform_browser_1.Title])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'my-app',
+        templateUrl: '/partial/appComponent'
+    }),
+    __metadata("design:paramtypes", [platform_browser_1.Title])
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
