@@ -1,0 +1,57 @@
+﻿@using InstructionIO.Models
+@model UserInfo
+@{
+    ViewData["Title"] = "Contact";
+}
+<head>
+    <link href="~/css/ProfilePage.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Exo+2|Nunito" rel="stylesheet">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/ProfilePage.js"></script>
+    <meta charset="utf-8">
+</head>
+<div *ngIf="user != null">
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <div>
+                                <h3><strong>About Me</strong><span class="pull-right small glyphicon glyphicon-pencil editable"></span></h3>
+                                <input type="text" class="editableTarget" disabled="disabled" style="border:none" value="blabblalbal" />
+                            </div>
+                            <hr>
+                            <div>
+                                <h3><strong>Birthday</strong><span class="pull-right small glyphicon glyphicon-pencil editable"></span></h3>
+                                <input type="date" class="editableTarget" disabled="disabled" style="border:none" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div>
+                        <div><span class="pull-right small glyphicon glyphicon-pencil editable"></span>{{user.firstName}} {{user.lastName}}</div>
+                        <input type="text" class="editableTarget pull-left h1Input" disabled="disabled" value="" />
+                    </div>
+                    <br><br>
+                    <span><strong></strong></span>
+                    <hr style="margin-top:5px;">
+                    <span class="pull-left">
+                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
+                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
+                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
+                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
+                    </span>
+                </div>
+            </div>
+            <hr>
+        </div>
+</div>

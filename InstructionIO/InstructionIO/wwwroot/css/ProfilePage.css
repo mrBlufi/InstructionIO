@@ -1,0 +1,65 @@
+﻿body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.slim_header {
+    font-size: medium;
+    word-wrap: break-word;
+    background-color: #DEE5EB;
+    position: unset;
+    padding: 5px 7px;
+    margin-top: -1px;
+    margin-bottom:0px;
+    color: #657e9b;
+    font-family: 'Exo 2', sans-serif;
+    font-weight:bold;
+}
+
+.avatar {
+    padding: initial;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.about {
+    padding: initial;
+    padding-left:5px;
+}
+
+.userName{
+    color:darkslategray;
+    letter-spacing:-.5px;
+    margin:unset;
+}
+
+.pinfo_berhtday {
+    font-size: small;
+    color: lightslategray;
+    letter-spacing: -.6px;
+}
+
+.profile_panel{
+    padding:12px;
+}
+
+.pblock{
+    padding:5px;
+    margin:initial;
+}
+
+.editable {
+    color: #777;
+}
+
+input[disabled].editableTarget {
+    background-color: transparent;
+}
+
+.h1Input {
+    border: none;
+    font-size: 30px;
+    color: inherit;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+}

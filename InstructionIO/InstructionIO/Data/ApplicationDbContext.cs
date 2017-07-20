@@ -18,9 +18,15 @@ namespace InstructionIO.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<Instruction> Instructions { get; set; }
+        public DbSet<Step> Steps { get; set; }
+        public DbSet<ContentBlock> ContentBlocks { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagsRelation> TagsRelations { get; set; }
+        public DbSet<Category> Categorys { get; set; }
     }
 }
