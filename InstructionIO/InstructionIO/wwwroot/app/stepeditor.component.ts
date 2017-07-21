@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { DragulaService } from "ng2-dragula";
+import { ContentBlock } from './model/ContentBlock'
 
 
 @Component({
@@ -7,7 +8,9 @@ import { DragulaService } from "ng2-dragula";
     templateUrl: '/partial/StepEditorComponent'
 })
 export class StepEditorComponent {
+    public ContentBlocks: ContentBlock[];
     constructor(private dragulaService: DragulaService) {
+        this.ContentBlocks.push(new ContentBlock('text','asdfsdf'));
         dragulaService.setOptions('textRow', {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
@@ -15,7 +18,7 @@ export class StepEditorComponent {
         });
     }
 
-    boxDelete(event: any) {
-        console.log(event);
+    boxDelete(event: MouseEvent) {
+        event.srcElement.parentElement.parentElement.remove();
     }
 }

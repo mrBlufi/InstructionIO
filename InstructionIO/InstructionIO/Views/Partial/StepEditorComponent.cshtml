@@ -11,27 +11,18 @@
     </div>
     <div class="row step_body panel panel-default">
         <div class="panel-body">
-            <div class="row content" [dragula]="'textRow'" >
+            <div class="row content" *ngFor="let block of ContentBlocks" [dragula]="'textRow'" >
                 <div class="textRow">
                     <div class="pull-left" style="margin-left:-16px;">
                         <span class="glyphicon glyphicon-move"></span>
                     </div>
                     <div class="pull-right" style="margin-right:-16px;">
-                        <span class="glyphicon glyphicon-remove delete" onclick="boxDelete($event)"></span>
+                        <span class="glyphicon glyphicon-remove delete" (click)="boxDelete($event)"></span>
                     </div>
-                    <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
-                        <p class="textBox" data-text="blblbla"></p>
-                    </div>
-                </div>
-                <div class="textRow">
-                    <div class="pull-left" style="margin-left:-16px;">
-                        <span class="glyphicon glyphicon-move"></span>
-                    </div>
-                    <div class="pull-right" style="margin-right:-16px;">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </div>
-                    <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
-                        <p class="textBox" data-text="blblbla"></p>
+                    <div [ngSwitch]="block.type">
+                        <div [ngSwitchCase]="text" class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
+                            <p class="textBox" data-text="blblbla"></p>
+                        </div>
                     </div>
                 </div>
             </div>

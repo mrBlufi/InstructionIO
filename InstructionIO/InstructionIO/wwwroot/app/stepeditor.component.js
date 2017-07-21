@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var ng2_dragula_1 = require("ng2-dragula");
+var ContentBlock_1 = require("./model/ContentBlock");
 var StepEditorComponent = (function () {
     function StepEditorComponent(dragulaService) {
         this.dragulaService = dragulaService;
+        this.ContentBlocks.push(new ContentBlock_1.ContentBlock('text', 'asdfsdf'));
         dragulaService.setOptions('textRow', {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
@@ -21,7 +23,7 @@ var StepEditorComponent = (function () {
         });
     }
     StepEditorComponent.prototype.boxDelete = function (event) {
-        console.log(event);
+        event.srcElement.parentElement.parentElement.remove();
     };
     StepEditorComponent = __decorate([
         core_1.Component({
