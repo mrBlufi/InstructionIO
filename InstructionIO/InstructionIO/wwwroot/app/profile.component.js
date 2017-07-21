@@ -16,12 +16,19 @@ var ProfileComponent = (function () {
         this.http = http;
         this.getMe();
     }
+    ProfileComponent.prototype.editDate = function (id) {
+        var elem = document.getElementById(id);
+        elem.removeAttribute('disabled');
+        elem.focus();
+        elem.addEventListener('focusout', function () {
+            elem.setAttribute('disabled', 'disabled');
+        });
+    };
     ProfileComponent.prototype.getMe = function () {
         var _this = this;
         this.http.get('https://localhost:44328/api/profile').map(function (res) { return (res).json(); })
             .subscribe(function (data) {
             _this.user = data;
-            console.log(_this.user);
         }, function (err) { return console.log('Get me user error'); });
     };
     ProfileComponent = __decorate([

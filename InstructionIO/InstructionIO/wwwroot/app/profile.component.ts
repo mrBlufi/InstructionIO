@@ -15,12 +15,20 @@ export class ProfileComponent {
         this.getMe();
     }
 
+    editDate(id: string) {
+        let elem: HTMLElement = document.getElementById(id);
+        elem.removeAttribute('disabled');
+        elem.focus();
+        elem.addEventListener('focusout', function () {
+            elem.setAttribute('disabled', 'disabled');
+        })
+    }
+
     getMe() {
         this.http.get('https://localhost:44328/api/profile').map(res => (res).json())
         .subscribe(
             data => {
                 this.user = data;
-                console.log(this.user);
             }, err => console.log('Get me user error'));
 
     }
