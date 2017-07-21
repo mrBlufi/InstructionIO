@@ -1,0 +1,47 @@
+﻿<head>
+    <link href="~/css/StepEditor.css" rel="stylesheet" />
+    <link href="~/node_modules/dragula/dist/dragula.css" rel="stylesheet"/>
+</head>
+
+<div class="container">
+    <div class="row step_info">
+        <div class="col-xs-12 form-group">
+            <input type="text" class="form-control" placeholder="Step name" />
+        </div>
+    </div>
+    <div class="row step_body panel panel-default">
+        <div class="panel-body">
+            <div class="row content" [dragula]="'textRow'" >
+                <div class="textRow">
+                    <div class="pull-left" style="margin-left:-16px;">
+                        <span class="glyphicon glyphicon-move"></span>
+                    </div>
+                    <div class="pull-right" style="margin-right:-16px;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </div>
+                    <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
+                        <p class="textBox" data-text="blblbla"></p>
+                    </div>
+                </div>
+                <div class="textRow">
+                    <div class="pull-left" style="margin-left:-16px;">
+                        <span class="glyphicon glyphicon-move"></span>
+                    </div>
+                    <div class="pull-right" style="margin-right:-16px;">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </div>
+                    <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
+                        <p class="textBox" data-text="blblbla"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center add_panel">
+                    <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-picture"></i></button>
+                    <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-facetime-video"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

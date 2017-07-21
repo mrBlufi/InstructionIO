@@ -12,13 +12,14 @@ var app_routing_1 = require("./app.routing");
 var common_1 = require("@angular/common");
 var app_component_1 = require("./app.component");
 var http_1 = require("@angular/http");
+var ng2_dragula_1 = require("ng2-dragula");
 // enableProdMode();
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule],
+            imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, ng2_dragula_1.DragulaModule],
             declarations: [app_component_1.AppComponent, app_routing_1.routedComponents],
             providers: [platform_browser_1.Title, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
             bootstrap: [app_component_1.AppComponent]
