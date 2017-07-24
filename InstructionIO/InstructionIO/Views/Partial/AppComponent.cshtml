@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav navbar-right">
                <li>@await Html.PartialAsync("_LoginPartial")</li>
             </ul>
-            <form class="navbar-form">
+            <form  class="navbar-form">
                 <div class="form-group" style="display:inline;">
                     <div class="input-group" style="display:table;">
                         <input class="form-control" name="search" placeholder="Search for" autocomplete="off" autofocus="autofocus" type="text">
@@ -34,7 +34,7 @@
                 <h4 class="modal-title">Log in</h4>
             </div>
             <div class="modal-body">
-                <form asp-controller="Account" asp-action="ExternalLogin" method="post" class="form-horizontal">
+                <form ngNoForm asp-controller="Account" asp-action="ExternalLogin" method="post" class="form-horizontal">
                     <div class="row">
                         <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="fa fa-facebook"></i></button></div>
                         <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-twitter" name="provider" value="Twitter" title="Log in using your Twitter account"><i class="fa fa-twitter"></i></button></div>
@@ -55,13 +55,8 @@
 
     <router-outlet></router-outlet>
 
-    @{
-        string razorServerSideData = "ASP.Net Core";
-    }
-    <hr />
+   
     <footer>
-        <p>&copy; 2017 - A2SPA = (@razorServerSideData + {{angularClientSideData}})<sup>2</sup></p>
-    </footer>
+    
+</footer>
 </div>
-
-sdf

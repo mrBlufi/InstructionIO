@@ -9,13 +9,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var IndexComponent = (function () {
     function IndexComponent() {
+        this.titleArray = ["Category1", "Category2", "Category3", "Category4", "Category5"];
     }
+    IndexComponent.prototype.open = function () {
+        console.log('Open');
+    };
     return IndexComponent;
 }());
 IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',
-        templateUrl: '/partial/indexComponent'
+        templateUrl: '/partial/indexComponent',
+        styleUrls: ['css/blog-home.css']
     })
 ], IndexComponent);
 exports.IndexComponent = IndexComponent;
