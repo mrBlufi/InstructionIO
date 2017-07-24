@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ContentBlock = (function () {
-    function ContentBlock(Type, Content) {
+    function ContentBlock(Type) {
         this.Type = Type;
-        this.Content = Content;
     }
     return ContentBlock;
 }());

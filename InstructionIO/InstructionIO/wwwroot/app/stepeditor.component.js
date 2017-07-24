@@ -14,16 +14,46 @@ var ng2_dragula_1 = require("ng2-dragula");
 var ContentBlock_1 = require("./model/ContentBlock");
 var StepEditorComponent = (function () {
     function StepEditorComponent(dragulaService) {
+        var _this = this;
         this.dragulaService = dragulaService;
-        this.ContentBlocks.push(new ContentBlock_1.ContentBlock('text', 'asdfsdf'));
+        this.contentBlocks = new Array();
         dragulaService.setOptions('textRow', {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
             }
         });
+        dragulaService.dropModel.subscribe(function (value) {
+            _this.onDropModel(value.slice(1));
+        });
+        dragulaService.removeModel.subscribe(function (value) {
+            _this.onRemoveModel(value.slice(1));
+        });
     }
+    StepEditorComponent.prototype.onDropModel = function (args) {
+        var el = args[0], target = args[1], source = args[2];
+        console.log(this.contentBlocks);
+        // do something else
+    };
+    StepEditorComponent.prototype.onRemoveModel = function (args) {
+        var el = args[0], source = args[1];
+        console.log(this.contentBlocks);
+        // do something else
+    };
+    StepEditorComponent.prototype.cw = function (n) {
+        console.log(n);
+    };
+    StepEditorComponent.prototype.textBoxAdd = function () {
+        var n = new ContentBlock_1.ContentBlock('text');
+        n.Content = 'sssss';
+        this.contentBlocks.push(n);
+    };
+    StepEditorComponent.prototype.pictureBoxAdd = function () {
+        var n = new ContentBlock_1.ContentBlock('picture');
+        n.Content = 'https://i.stack.imgur.com/1pQk8.jpg';
+        this.contentBlocks.push(n);
+    };
     StepEditorComponent.prototype.boxDelete = function (event) {
-        event.srcElement.parentElement.parentElement.remove();
+        this.contentBlocks.splice(this.contentBlocks.indexOf(event), 1);
     };
     StepEditorComponent = __decorate([
         core_1.Component({

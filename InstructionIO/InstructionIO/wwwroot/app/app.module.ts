@@ -5,12 +5,13 @@ import { APP_BASE_HREF, Location } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula';
+import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
 
 // enableProdMode();
 
 @NgModule({
     imports: [BrowserModule, routing, HttpModule, DragulaModule],
-    declarations: [AppComponent, routedComponents],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate],
     providers: [Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })

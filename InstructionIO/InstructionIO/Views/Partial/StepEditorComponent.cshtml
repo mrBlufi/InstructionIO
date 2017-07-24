@@ -6,30 +6,38 @@
 <div class="container">
     <div class="row step_info">
         <div class="col-xs-12 form-group">
-            <input type="text" class="form-control" placeholder="Step name" />
+            <input type="text" class="form-control" placeholder="Step name" value=""/>
         </div>
     </div>
     <div class="row step_body panel panel-default">
-        <div class="panel-body">
-            <div class="row content" *ngFor="let block of ContentBlocks" [dragula]="'textRow'" >
+        <div class="panel-body" [dragula]="'textRow'" [dragulaModel]="contentBlocks">
+            <div class="row content" *ngFor="let block of contentBlocks" >
                 <div class="textRow">
                     <div class="pull-left" style="margin-left:-16px;">
                         <span class="glyphicon glyphicon-move"></span>
                     </div>
                     <div class="pull-right" style="margin-right:-16px;">
-                        <span class="glyphicon glyphicon-remove delete" (click)="boxDelete($event)"></span>
-                    </div>
-                    <div [ngSwitch]="block.type">
-                        <div [ngSwitchCase]="text" class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
-                            <p class="textBox" data-text="blblbla"></p>
-                        </div>
+                        <span class="glyphicon glyphicon-remove delete" (click)="boxDelete(block)"></span>
+                    </div> 
+                    <div [ngSwitch]="block.Type">
+                        <template ngSwitchCase="text">
+                            <div class="content_block_type_text"   [textBox]="block.Content" role="textbox" contenteditable="true" aria-multiline="true">
+                                <p class="textBox"  data-text="blblbla"></p>
+                            </div>
+                        </template>
+                        <template ngSwitchCase="picture">
+                            <div class="content_block_type_pictire" [id]="block.Id">
+                                <img class="pictireBox" [src]="block.Content"/>
+                            </div>
+                        </template>
+                        
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="text-center add_panel">
-                    <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-pencil"></i></button>
-                    <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-picture"></i></button>
+                    <button type="button" class="btn btn-default btn-circle btn-lg" (click)="textBoxAdd()"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <button type="button" class="btn btn-default btn-circle btn-lg" (click)="pictureBoxAdd()"><i class="glyphicon glyphicon-picture"></i></button>
                     <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-facetime-video"></i></button>
                 </div>
             </div>
