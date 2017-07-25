@@ -10,11 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/filter");
 var core_1 = require("@angular/core");
+var HomeService_1 = require("./service/HomeService");
 var ChildComponent = (function () {
-    function ChildComponent(route) {
+    function ChildComponent(_Activatedroute, _router, homeservice) {
         var _this = this;
-        this.route = route;
+        this._Activatedroute = _Activatedroute;
+        this._router = _router;
+        this.homeservice = homeservice;
         this.onClick = function ($event) {
             console.log('onClick $event: ', $event);
             _this.onClickResult = $event;
@@ -30,8 +34,10 @@ var ChildComponent = (function () {
         this.stringarray = ["111111111111111", "22222222222", "333333333333333"];
     }
     ChildComponent.prototype.ngOnInit = function () {
-        this.sub = this.route.params.subscribe(function (params) {
-            console.log(+params['category']);
+        console.log('OnInit');
+        this.sub = this._Activatedroute.queryParams
+            .subscribe(function (params) {
+            console.log('Query params ', params);
         });
     };
     ChildComponent.prototype.ngOnDestroy = function () {
@@ -45,7 +51,8 @@ ChildComponent = __decorate([
         templateUrl: '/partial/contentChildHomeComponent',
         styleUrls: ['css/blog-home.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        router_1.Router, HomeService_1.HomeService])
 ], ChildComponent);
 exports.ChildComponent = ChildComponent;
 //# sourceMappingURL=childcontenthome.component.js.map

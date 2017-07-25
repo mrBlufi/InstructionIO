@@ -6,6 +6,8 @@ import { IndexComponent } from './index.component';
 import { ContactComponent } from './contact.component';
 import { ProfileComponent } from './profile.component';
 import { ChildComponent } from './childcontenthome.component';
+import { TestComponent } from './test.component';
+
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,4 +26,4 @@ const appRoutes: Routes = [
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [AboutComponent, IndexComponent, ContactComponent, ProfileComponent, ChildComponent];
+export const routedComponents = [AboutComponent, IndexComponent, ContactComponent, ProfileComponent, ChildComponent, TestComponent];

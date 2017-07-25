@@ -54,8 +54,12 @@ select{
 #sidebar {
     width: 20%;
     max-width: 300px;
+    padding-top:20px;
 }
 
 .well{
-    padding-bottom:20px;
+    padding-top:20px;
+}
+span {
+    word-wrap: break-word;
 }

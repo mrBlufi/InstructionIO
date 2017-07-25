@@ -1,6 +1,8 @@
 ﻿import { Router, ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/filter';
 import { OnInit, Component } from '@angular/core';
 import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnHoverRatingChangeEvent } from "angular-star-rating/star-rating-struct";
+import { HomeService } from "./service/HomeService";
 
 @Component({
     selector: 'child-content',
@@ -30,16 +32,22 @@ export class ChildComponent implements OnInit {
         console.log('onHoverRatingChange $event: ', $event);
         this.onHoverRatingChangeResult = $event;
     };
+
     public stringarray: string[] = ["111111111111111", "22222222222", "333333333333333"];
-    private id: string;
-    constructor(private route: ActivatedRoute) {
+    sub: any;
+    constructor(private _Activatedroute: ActivatedRoute,
+        private _router: Router, private homeservice: HomeService) {
+
     }
 
-    private sub:any;
+
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            console.log(+params['category']);
-        });
+        console.log('OnInit');
+        this.sub = this._Activatedroute.queryParams
+            .subscribe(params => {
+                console.log('Query params ', params)
+            });
+      
     }
     ngOnDestroy() {
         this.sub.unsubscribe();

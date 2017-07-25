@@ -7,12 +7,13 @@ import { HttpModule } from '@angular/http';
 import { ChildComponent } from './childContentHome.component';
 import { FormsModule } from '@angular/forms';
 import { StarRatingModule } from 'angular-star-rating';
+import { HomeService } from "./service/HomeService";
 // enableProdMode();
 
 @NgModule({
     imports: [BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot()],
     declarations: [AppComponent, routedComponents, ChildComponent],
-    providers: [Title, { provide: APP_BASE_HREF, useValue: '/' }],
+    providers: [HomeService,Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

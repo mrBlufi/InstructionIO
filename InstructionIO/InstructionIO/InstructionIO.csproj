@@ -14,7 +14,10 @@
 
   <ItemGroup>
     <Content Include="wwwroot\app\childcontenthome.component.ts" />
+    <Content Include="wwwroot\app\model\Category.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
+    <Content Include="wwwroot\app\service\HomeService.ts" />
+    <Content Include="wwwroot\app\test.component.ts" />
     <Content Include="wwwroot\css\site_nav.css" />
   </ItemGroup>
   <ItemGroup>
