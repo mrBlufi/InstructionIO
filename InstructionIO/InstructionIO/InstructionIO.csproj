@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\app\instructionEditor.component.ts" />
     <Content Include="wwwroot\app\model\ContentBlock.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />

@@ -15,5 +15,7 @@ namespace InstructionIO.Controllers
         public IActionResult ProfileComponent() => PartialView();
 
         public IActionResult StepEditorComponent() => PartialView();
+
+        public IActionResult InstructionEditorComponent() => PartialView();
     }
 }

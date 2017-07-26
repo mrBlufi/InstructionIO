@@ -27,15 +27,20 @@
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'ng2-dragula': 'npm:ng2-dragula/bundles/ng2-dragula.umd.js',
+      'angular-ui-carousel': 'npm:angular-ui-carousel'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
-        main: './main.js',
-        defaultExtension: 'js'
+          main: './main.js',
+          defaultExtension: 'js'
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      'angular-ui-carousel': {
+          main: 'dist/ui-carousel.js',
+          defaultExtension: 'js'
       }
     }
   });

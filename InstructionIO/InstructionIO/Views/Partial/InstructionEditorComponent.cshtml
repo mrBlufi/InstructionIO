@@ -1,0 +1,32 @@
+<div class="item">
+    <div class="new_html_code"></div>
+    <div class="carousel-caption">
+        <h4>Thumbnail label</h4>
+        <p>Carousel caption text<p>
+    </div>
+</div>
+<ui-carousel slides="ctrl.slides"
+             slides-to-show="3"
+             slides-to-scroll="1"
+             initial-slide="1"
+             autoplay="true"
+             autoplay-speed="2000"
+             dots="true">
+
+    <carousel-item>
+        <h3>{{ item + 1 }}</h3>
+    </carousel-item>
+</ui-carousel>
+@*<nav class="navbar navbar-default navbar-fixed-bottom">
+<div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+        <li><a href="#">Page 3</a></li>
+    </ul>
+</div>
+</nav>*@

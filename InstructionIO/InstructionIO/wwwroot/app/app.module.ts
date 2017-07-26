@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { DragulaModule } from 'ng2-dragula';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
-
 // enableProdMode();
 
 @NgModule({
