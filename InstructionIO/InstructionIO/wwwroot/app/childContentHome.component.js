@@ -20,25 +20,42 @@ var ChildComponent = (function () {
         this._router = _router;
         this.homeservice = homeservice;
         this.onClick = function ($event) {
-            console.log('onClick $event: ', $event);
+            //console.log('onClick $event: ', $event);
             _this.onClickResult = $event;
         };
         this.onRatingChange = function ($event) {
-            console.log('onRatingUpdated $event: ', $event);
+            //console.log('onRatingUpdated $event: ', $event);
             _this.onRatingChangeResult = $event;
         };
         this.onHoverRatingChange = function ($event) {
-            console.log('onHoverRatingChange $event: ', $event);
+            //console.log('onHoverRatingChange $event: ', $event);
             _this.onHoverRatingChangeResult = $event;
         };
-        this.stringarray = ["111111111111111", "22222222222", "333333333333333"];
+        this.stringarray = ["1", "2", "3"];
+        this.categoryQueryParams = null;
+        this.sortQueryParams = null;
+        this.instructions = null;
     }
     ChildComponent.prototype.ngOnInit = function () {
-        console.log('OnInit');
+        var _this = this;
         this.sub = this._Activatedroute.queryParams
             .subscribe(function (params) {
+            _this.categoryQueryParams = params['category'];
+            _this.sortQueryParams = params['sort'];
+            _this.getInstructions();
             console.log('Query params ', params);
         });
+    };
+    ChildComponent.prototype.getInstructions = function () {
+        var _this = this;
+        if (this.sortQueryParams == null)
+            this.sortQueryParams = 'full';
+        if (this.categoryQueryParams == null)
+            this.categoryQueryParams = 'Full';
+        this.homeservice.getInstructions(this.sortQueryParams, this.categoryQueryParams).subscribe(function (data) {
+            _this.instructions = data;
+            console.log(_this.instructions);
+        }, function (err) { return console.log(err); });
     };
     ChildComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();

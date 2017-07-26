@@ -15,8 +15,15 @@ var HomeService = (function () {
     function HomeService(http) {
         this.http = http;
     }
-    HomeService.prototype.getData = function () {
+    HomeService.prototype.getPopularTags = function () {
         return this.http.get('https://localhost:44328/api/datahome/tag').map(function (res) { return (res).json(); });
+    };
+    HomeService.prototype.getCategories = function () {
+        return this.http.get('https://localhost:44328/api/datahome/categories').map(function (res) { return (res).json(); });
+    };
+    HomeService.prototype.getInstructions = function (sort, category) {
+        console.log('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category);
+        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category).map(function (res) { return (res).json(); });
     };
     return HomeService;
 }());

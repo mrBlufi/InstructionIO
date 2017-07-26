@@ -14,17 +14,27 @@ var HomeService_1 = require("./service/HomeService");
 var IndexComponent = (function () {
     function IndexComponent(homeservice) {
         this.homeservice = homeservice;
-        this.titleArray = ["Category1", "Category2", "Category3", "Category4", "Category5"];
-        this.subcrib = this.titleArray[0];
         this.tags = null;
+        this.categories = null;
+        this.categoryQueryParams = 'Full';
     }
     IndexComponent.prototype.ngOnInit = function () {
+        this.getTags();
+        this.getCategories();
+    };
+    IndexComponent.prototype.getTags = function () {
         var _this = this;
-        this.homeservice.getData()
-            .subscribe(function (data) {
+        this.homeservice.getPopularTags().subscribe(function (data) {
             _this.tags = data;
             console.log(_this.tags);
-        }, function (err) { return console.log('Get me user error'); });
+        }, function (err) { return console.log(err); });
+    };
+    IndexComponent.prototype.getCategories = function () {
+        var _this = this;
+        this.homeservice.getCategories().subscribe(function (data) {
+            _this.categories = data;
+            console.log(_this.categories);
+        }, function (err) { return console.log(err); });
     };
     return IndexComponent;
 }());

@@ -9,27 +9,28 @@
                 <p>
                     <span>Caterories </span>
 
-                    <select id="categories"  class="form-control"  [(ngModel)]="subcrib">
-                        <option *ngFor="let title of titleArray" [value]="title" ng-selected="selected">
-                            {{title}}
+                    <select id="categories"  class="form-control"  [(ngModel)]="categoryQueryParams">
+                        <option [value]="'Full'" ng-selected="selected">Full</option>
+                        <option *ngFor="let category of categories" [value]="category.name" >
+                            {{category.name}}
                         </option>
                     </select>
                 </p>
-                 <p>{{subcrib}}</p>
+                 <p>{{categoryQueryParams}}</p>
             </div>
             <ul style="visibility: visible;" class="nav nav-tabs ">
                 <li data-toggle="tab" class="active">
                     <a [routerLink]="['child-content']"
-                       [queryParams]="{'category':12, 'sort':'raiting'}" >Popular</a>
+                       [queryParams]="{'category':categoryQueryParams, 'sort':'popular'}" >Popular</a>
                 </li>
 
                 <li data-toggle="tab" class="">
                     <a [routerLink]="['child-content']"
-                       [queryParams]="{'category':123, 'sort':'dat'}">Last added</a>
+                       [queryParams]="{'category':categoryQueryParams, 'sort':'lastchange'}">Last added</a>
                 </li>
                 <li data-toggle="tab" class="">
                     <a [routerLink]="['child-content']"
-                       [queryParams]="{'wqe':43, 'sort':'full'}">Full</a>
+                       [queryParams]="{'category':categoryQueryParams, 'sort':'full'}">Full</a>
                 </li>
             </ul>
 

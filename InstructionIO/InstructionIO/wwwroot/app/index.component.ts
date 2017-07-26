@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { HomeService } from "./service/HomeService";
 import { Tag } from "./model/Tag";
+import { Category } from "./model/Category";
 
 @Component({
     selector: 'my-index',
@@ -10,27 +11,35 @@ import { Tag } from "./model/Tag";
 
 export class IndexComponent implements OnInit {
     
-    titleArray: string[] = ["Category1", "Category2", "Category3", "Category4", "Category5"];
-    subcrib = this.titleArray[0];
-
-
     tags: Array<Tag> = null;
+    categories: Array<Category> = null;
+    categoryQueryParams: any;
     constructor(private homeservice: HomeService) {
-
+        this.categoryQueryParams = 'Full';
     }
 
     ngOnInit() {
-            this.homeservice.getData()
-            //.subscribe((data: Array<Tag>) => this.tags = data);
+        this.getTags();
+        this.getCategories();
 
-            .subscribe(
-            data => {
-                this.tags = data;
-                console.log(this.tags);
-            }, err => console.log('Get me user error'));
     }
 
+    private getTags() {
+        this.homeservice.getPopularTags().subscribe(data => {
+            this.tags = data;
+            console.log(this.tags);
+        }, err => console.log(err));
+    }
+
+    private getCategories() {
+        this.homeservice.getCategories().subscribe(data => {
+            this.categories = data;
+            console.log(this.categories);
+        }, err => console.log(err));
+        
+        
+    }
+
+    
+
 }
-
-
-
