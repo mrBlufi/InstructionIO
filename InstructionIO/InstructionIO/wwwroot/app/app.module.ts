@@ -8,10 +8,12 @@ import { ChildComponent } from './childContentHome.component';
 import { FormsModule } from '@angular/forms';
 import { StarRatingModule } from 'angular-star-rating';
 import { HomeService } from "./service/HomeService";
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 // enableProdMode();
 
 @NgModule({
-    imports: [BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot()],
+    imports: [BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(),InfiniteScrollModule],
     declarations: [AppComponent, routedComponents, ChildComponent],
     providers: [HomeService,Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]

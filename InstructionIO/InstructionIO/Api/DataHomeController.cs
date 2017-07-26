@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InstructionIO.Models;
 using InstructionIO.Data;
-using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace InstructionIO.Api
 {
@@ -15,11 +14,17 @@ namespace InstructionIO.Api
     public class DataHomeController : Controller
     {
         private ApplicationDbContext _context;
-
-       public DataHomeController(ApplicationDbContext context)
+        private IEnumerable<Instruction> _unstructions=null;
+        private int _stepTake =10;
+        public DataHomeController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
+
+     
+
+
         [HttpGet("tag")]
         public IEnumerable<Tag> getListPopulTags()
         {
@@ -27,37 +32,26 @@ namespace InstructionIO.Api
             return populartag;
         }
 
-        [HttpGet("instruction/popular/category/{category}")]
-        public IEnumerable<Instruction> getListPopulInstruction(string category)
+        [HttpGet("instruction/popular/category/{category}/{page}")]
+        public IEnumerable<Instruction> getListPopulInstruction(string category, int page)
         {
-           IEnumerable<Instruction> unstructions = null;
-            if (category == "Full")
-            {
-                unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderBy(x => x.Rating);
-
-            }
-            else
-            {
-                unstructions = _context.Instructions.Where(x => x.Category.Name == category).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderBy(x => x.Rating);
-
-            }
-
-            return unstructions;
+            if (category == "Full"){
+                _unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.Rating);
+             } else{
+                _unstructions = _context.Instructions.Where(x => x.Category.Name == category).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.Rating);
+             }
+            return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
 
-        [HttpGet("instruction/lastchange/category/{category}")]
-        public IEnumerable<Instruction> getListLastAddInstruction(string category)
+        [HttpGet("instruction/lastchange/category/{category}/{page}")]
+        public IEnumerable<Instruction> getListLastAddInstruction(string category, int page)
         {
-            IEnumerable<Instruction> unstructions = null;
-            if (category == "Full")
-            {
-                unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
+            if (category == "Full"){
+                _unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
+            }else {
+                _unstructions = _context.Instructions.Where(x => x.Category.Name == category).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
             }
-            else
-            {
-                unstructions = _context.Instructions.Where(x => x.Category.Name == category).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
-            }
-            return unstructions;
+            return _unstructions.Skip(page * _stepTake).Take(_stepTake);
 
         }
 
@@ -68,21 +62,18 @@ namespace InstructionIO.Api
             return category;
         }
 
-        [HttpGet("instruction/full/category/{category}")]
-        public IEnumerable<Instruction> getFullListInstruction(string category)
+        [HttpGet("instruction/full/category/{category}/{page}")]
+        public IEnumerable<Instruction> getFullListInstruction(string category,int page)
         {
-            IEnumerable<Instruction> unstructions=null;
             if (category == "Full"){
-                unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
-
-            }
-            else
-            {
-                unstructions = _context.Instructions.Where(x => x.Category.Name ==category).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
-
-            }
-            return unstructions;
+                _unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate); }
+            else {
+                _unstructions = _context.Instructions.Where(x => x.Category.Name ==category).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
+             }
+            return _unstructions.Skip(page* _stepTake).Take(_stepTake);
         }
+
+       
 
     }
 }

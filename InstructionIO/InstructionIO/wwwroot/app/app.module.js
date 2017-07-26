@@ -16,6 +16,7 @@ var childContentHome_component_1 = require("./childContentHome.component");
 var forms_1 = require("@angular/forms");
 var angular_star_rating_1 = require("angular-star-rating");
 var HomeService_1 = require("./service/HomeService");
+var angular2_infinite_scroll_1 = require("angular2-infinite-scroll");
 // enableProdMode();
 var AppModule = (function () {
     function AppModule() {
@@ -24,7 +25,7 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, forms_1.FormsModule, angular_star_rating_1.StarRatingModule.forRoot()],
+        imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, forms_1.FormsModule, angular_star_rating_1.StarRatingModule.forRoot(), angular2_infinite_scroll_1.InfiniteScrollModule],
         declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, childContentHome_component_1.ChildComponent],
         providers: [HomeService_1.HomeService, platform_browser_1.Title, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent]

@@ -35,30 +35,54 @@ var ChildComponent = (function () {
         this.categoryQueryParams = null;
         this.sortQueryParams = null;
         this.instructions = null;
+        this.stepSkip = 0;
+        this.infinitydisable = false;
     }
     ChildComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log(Date.now);
         this.sub = this._Activatedroute.queryParams
             .subscribe(function (params) {
             _this.categoryQueryParams = params['category'];
             _this.sortQueryParams = params['sort'];
             _this.getInstructions();
             console.log('Query params ', params);
-        });
+        }, function (err) { return console.log(err); });
     };
     ChildComponent.prototype.getInstructions = function () {
         var _this = this;
         if (this.sortQueryParams == null)
-            this.sortQueryParams = 'full';
+            this.sortQueryParams = 'popular';
         if (this.categoryQueryParams == null)
             this.categoryQueryParams = 'Full';
-        this.homeservice.getInstructions(this.sortQueryParams, this.categoryQueryParams).subscribe(function (data) {
+        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(function (data) {
             _this.instructions = data;
+            _this.stepSkip += 1;
             console.log(_this.instructions);
         }, function (err) { return console.log(err); });
     };
     ChildComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+    };
+    ChildComponent.prototype.onScroll = function () {
+        var _this = this;
+        if (this.infinitydisable)
+            return;
+        this.infinitydisable = true;
+        console.log('scroll');
+        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(function (data) {
+            if (data.length == 0) {
+                _this.infinitydisable = false;
+                return;
+            }
+            var instructionscroll = data;
+            console.log(instructionscroll);
+            _this.stepSkip += 1;
+            for (var i = 0; i < instructionscroll.length; i++) {
+                _this.instructions.push(instructionscroll[i]);
+            }
+            _this.infinitydisable = false;
+        }, function (err) { return console.log(err); });
     };
     return ChildComponent;
 }());

@@ -26,7 +26,8 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'angular-star-rating':'npm:angular-star-rating/angular-star-rating.umd.js'
+      'angular-star-rating': 'npm:angular-star-rating/angular-star-rating.umd.js',
+      'angular2-infinite-scroll': 'npm:angular2-infinite-scroll'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -36,6 +37,10 @@
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      'angular2-infinite-scroll': {
+          main: 'angular2-infinite-scroll.js',
+          defaultExtension: 'js'
       }
     }
   });

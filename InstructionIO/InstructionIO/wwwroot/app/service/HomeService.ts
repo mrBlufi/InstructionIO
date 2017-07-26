@@ -13,8 +13,11 @@ export class HomeService {
         return this.http.get('https://localhost:44328/api/datahome/categories').map(res => (res).json());
     }
 
-    getInstructions(sort: string, category: string) {
-        console.log('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category);
-        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category).map(res => (res).json());
+    getInstructionsFirst(sort: string, category: string, stepSkip: number) {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(res => (res).json());
+    }
+
+    getInstructionsScroll() {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/scroll').map(res => (res).json());
     }
 }

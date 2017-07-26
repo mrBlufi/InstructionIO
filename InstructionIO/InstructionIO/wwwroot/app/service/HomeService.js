@@ -21,9 +21,11 @@ var HomeService = (function () {
     HomeService.prototype.getCategories = function () {
         return this.http.get('https://localhost:44328/api/datahome/categories').map(function (res) { return (res).json(); });
     };
-    HomeService.prototype.getInstructions = function (sort, category) {
-        console.log('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category);
-        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category).map(function (res) { return (res).json(); });
+    HomeService.prototype.getInstructionsFirst = function (sort, category, stepSkip) {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(function (res) { return (res).json(); });
+    };
+    HomeService.prototype.getInstructionsScroll = function () {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/scroll').map(function (res) { return (res).json(); });
     };
     return HomeService;
 }());

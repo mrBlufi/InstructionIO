@@ -5,8 +5,8 @@ export class Instruction {
     id: number;
     name: string;
     author: UserInfo;
-    createDate: string;
-    lastChangeDate: string;
+    createDate: Date;
+    lastChangedDate: Date;
     category: Category;
     rating: number;
 
