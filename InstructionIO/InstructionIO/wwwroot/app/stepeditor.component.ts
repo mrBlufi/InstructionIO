@@ -2,6 +2,10 @@
 import { DragulaService } from "ng2-dragula";
 import { ContentBlock } from './model/ContentBlock';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
+import { SafeResourceUrl } from "@angular/platform-browser/src/platform-browser";
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from "rxjs/Observable";
+import { RequestOptions, Http, Headers } from "@angular/http";
 
 @Component({
     selector: 'my-stepEditor',
@@ -10,7 +14,7 @@ import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
 export class StepEditorComponent {
     public contentBlocks: ContentBlock[] = new Array();
 
-    constructor(private dragulaService: DragulaService) {
+    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http) {
         dragulaService.setOptions('textRow', {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
@@ -26,17 +30,14 @@ export class StepEditorComponent {
 
     private onDropModel(args: any) {
         let [el, target, source] = args;
-        console.log(this.contentBlocks);
         // do something else
     }
 
     private onRemoveModel(args: any) {
         let [el, source] = args;
-        console.log(this.contentBlocks);
         // do something else
     }
     
-
     cw(n: any) {
         console.log(n);
     }
@@ -47,9 +48,19 @@ export class StepEditorComponent {
         this.contentBlocks.push(n);
     }
 
-    pictureBoxAdd() {
+    addPictureBox(url: string) {
         let n: ContentBlock = new ContentBlock('picture');
-        n.Content = 'https://i.stack.imgur.com/1pQk8.jpg';
+        n.Content = url;
+        this.contentBlocks.push(n);
+    }
+
+    redirectToInput() {
+        document.getElementById('fileInput').click();
+    }
+
+    videoBoxAdd(input: HTMLInputElement) {
+        let n: ContentBlock = new ContentBlock('video');
+        n.Content = input.value.replace('watch?v=', 'embed/');
         this.contentBlocks.push(n);
     }
 
@@ -57,4 +68,18 @@ export class StepEditorComponent {
         this.contentBlocks.splice(this.contentBlocks.indexOf(event), 1);
     }
 
+    safeOn(url: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+
+    saveFile(input: HTMLInputElement) {
+        let res: any;
+        //let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+        //let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+        //let files: FileList = target.files;
+        let formData: FormData = new FormData();
+        formData.append(input.files[0].name, input.files[0]);
+        console.info(formData);
+        this.http.post('http://localhost:57640/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g,"")));
+    }
 }

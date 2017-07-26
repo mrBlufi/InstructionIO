@@ -19,6 +19,13 @@
 .text_editor {
     outline: none;
 }
+.add_panel {
+    margin:5px;
+}
+.contentBlock {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 
 .textBox {
     margin: 5px;

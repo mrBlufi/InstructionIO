@@ -9,29 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var ProfileComponent = (function () {
-    function ProfileComponent(http) {
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
+let ProfileComponent = class ProfileComponent {
+    constructor(http) {
         this.http = http;
         this.getMe();
     }
-    ProfileComponent.prototype.getMe = function () {
-        var _this = this;
-        this.http.get('https://localhost:44328/api/profile').map(function (res) { return (res).json(); })
-            .subscribe(function (data) {
-            _this.user = data;
-            console.log(_this.user);
-        }, function (err) { return console.log('Get me user error'); });
-    };
-    ProfileComponent = __decorate([
-        core_1.Component({
-            selector: 'my-profile',
-            templateUrl: '/partial/profileComponent'
-        }),
-        __metadata("design:paramtypes", [http_1.Http])
-    ], ProfileComponent);
-    return ProfileComponent;
-}());
+    getMe() {
+        this.http.get('https://localhost:44328/api/profile').map(res => (res).json())
+            .subscribe(data => {
+            this.user = data;
+            console.log(this.user);
+        }, err => console.log('Get me user error'));
+    }
+};
+ProfileComponent = __decorate([
+    core_1.Component({
+        selector: 'my-profile',
+        templateUrl: '/partial/profileComponent'
+    }),
+    __metadata("design:paramtypes", [http_1.Http])
+], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

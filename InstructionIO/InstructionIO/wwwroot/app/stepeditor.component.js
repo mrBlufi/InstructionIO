@@ -9,60 +9,81 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var ng2_dragula_1 = require("ng2-dragula");
-var ContentBlock_1 = require("./model/ContentBlock");
-var StepEditorComponent = (function () {
-    function StepEditorComponent(dragulaService) {
-        var _this = this;
+const core_1 = require("@angular/core");
+const ng2_dragula_1 = require("ng2-dragula");
+const ContentBlock_1 = require("./model/ContentBlock");
+const platform_browser_1 = require("@angular/platform-browser");
+const http_1 = require("@angular/http");
+let StepEditorComponent = class StepEditorComponent {
+    constructor(dragulaService, sanitizer, http) {
         this.dragulaService = dragulaService;
+        this.sanitizer = sanitizer;
+        this.http = http;
         this.contentBlocks = new Array();
         dragulaService.setOptions('textRow', {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
             }
         });
-        dragulaService.dropModel.subscribe(function (value) {
-            _this.onDropModel(value.slice(1));
+        dragulaService.dropModel.subscribe((value) => {
+            this.onDropModel(value.slice(1));
         });
-        dragulaService.removeModel.subscribe(function (value) {
-            _this.onRemoveModel(value.slice(1));
+        dragulaService.removeModel.subscribe((value) => {
+            this.onRemoveModel(value.slice(1));
         });
     }
-    StepEditorComponent.prototype.onDropModel = function (args) {
-        var el = args[0], target = args[1], source = args[2];
-        console.log(this.contentBlocks);
+    onDropModel(args) {
+        let [el, target, source] = args;
         // do something else
-    };
-    StepEditorComponent.prototype.onRemoveModel = function (args) {
-        var el = args[0], source = args[1];
-        console.log(this.contentBlocks);
+    }
+    onRemoveModel(args) {
+        let [el, source] = args;
         // do something else
-    };
-    StepEditorComponent.prototype.cw = function (n) {
+    }
+    cw(n) {
         console.log(n);
-    };
-    StepEditorComponent.prototype.textBoxAdd = function () {
-        var n = new ContentBlock_1.ContentBlock('text');
+    }
+    textBoxAdd() {
+        let n = new ContentBlock_1.ContentBlock('text');
         n.Content = 'sssss';
         this.contentBlocks.push(n);
-    };
-    StepEditorComponent.prototype.pictureBoxAdd = function () {
-        var n = new ContentBlock_1.ContentBlock('picture');
-        n.Content = 'https://i.stack.imgur.com/1pQk8.jpg';
+    }
+    addPictureBox(url) {
+        let n = new ContentBlock_1.ContentBlock('picture');
+        n.Content = url;
         this.contentBlocks.push(n);
-    };
-    StepEditorComponent.prototype.boxDelete = function (event) {
+    }
+    redirectToInput() {
+        document.getElementById('fileInput').click();
+    }
+    videoBoxAdd(input) {
+        let n = new ContentBlock_1.ContentBlock('video');
+        n.Content = input.value.replace('watch?v=', 'embed/');
+        this.contentBlocks.push(n);
+    }
+    boxDelete(event) {
         this.contentBlocks.splice(this.contentBlocks.indexOf(event), 1);
-    };
-    StepEditorComponent = __decorate([
-        core_1.Component({
-            selector: 'my-stepEditor',
-            templateUrl: '/partial/StepEditorComponent'
-        }),
-        __metadata("design:paramtypes", [ng2_dragula_1.DragulaService])
-    ], StepEditorComponent);
-    return StepEditorComponent;
-}());
+    }
+    safeOn(url) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    saveFile(input) {
+        let res;
+        //let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+        //let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+        //let files: FileList = target.files;
+        let formData = new FormData();
+        formData.append(input.files[0].name, input.files[0]);
+        console.info(formData);
+        this.http.post('http://localhost:57640/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g, "")));
+    }
+};
+StepEditorComponent = __decorate([
+    core_1.Component({
+        selector: 'my-stepEditor',
+        templateUrl: '/partial/StepEditorComponent'
+    }),
+    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http])
+], StepEditorComponent);
 exports.StepEditorComponent = StepEditorComponent;
 //# sourceMappingURL=stepeditor.component.js.map

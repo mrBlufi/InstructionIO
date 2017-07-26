@@ -1,10 +1,12 @@
 ﻿export class ContentBlock {
-    constructor(Type: string) {
-        this.Type = Type;
+    constructor(public Type: string) {
     }
 
-    public Id: number;
+    private _id: number; // microsoft guidelines for contributors in typescript
     public Content: string;
     public SteoId: number;
-    public Type: string;
+
+    get id(): number {
+        return this.id;
+    }
 }

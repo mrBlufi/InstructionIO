@@ -6,17 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var IndexComponent = (function () {
-    function IndexComponent() {
-    }
-    IndexComponent = __decorate([
-        core_1.Component({
-            selector: 'my-index',
-            templateUrl: '/partial/indexComponent'
-        })
-    ], IndexComponent);
-    return IndexComponent;
-}());
+const core_1 = require("@angular/core");
+let IndexComponent = class IndexComponent {
+};
+IndexComponent = __decorate([
+    core_1.Component({
+        selector: 'my-index',
+        templateUrl: '/partial/indexComponent'
+    })
+], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map

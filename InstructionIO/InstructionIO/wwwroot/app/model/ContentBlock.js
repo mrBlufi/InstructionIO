@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ContentBlock = (function () {
-    function ContentBlock(Type) {
+class ContentBlock {
+    constructor(Type) {
         this.Type = Type;
     }
-    return ContentBlock;
-}());
+    get id() {
+        return this.id;
+    }
+}
 exports.ContentBlock = ContentBlock;
 //# sourceMappingURL=ContentBlock.js.map

@@ -1,4 +1,26 @@
-﻿body {
+﻿/*// css preprocessors: after LESS, SASS
+
+.content(@width) {
+    // ...
+        width: @width;
+}
+
+.main {
+    .content(30);
+    >~+
+    &:hover {
+
+    }
+}
+
+    //dist
+    //  /app.js <--- main.ts
+    //  /vendor.js
+    //  /pollyfils.js
+    //  /0.chunck.js
+    //  /.......*/
+
+body {
     font-family: 'Nunito', sans-serif;
 }
 

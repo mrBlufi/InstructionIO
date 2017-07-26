@@ -6,17 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var AboutComponent = (function () {
-    function AboutComponent() {
-    }
-    AboutComponent = __decorate([
-        core_1.Component({
-            selector: 'my-about',
-            templateUrl: '/partial/aboutComponent'
-        })
-    ], AboutComponent);
-    return AboutComponent;
-}());
+const core_1 = require("@angular/core");
+let AboutComponent = class AboutComponent {
+};
+AboutComponent = __decorate([
+    core_1.Component({
+        selector: 'my-about',
+        templateUrl: '/partial/aboutComponent'
+    })
+], AboutComponent);
 exports.AboutComponent = AboutComponent;
 //# sourceMappingURL=about.component.js.map

@@ -11,7 +11,7 @@
     </div>
     <div class="row step_body panel panel-default">
         <div class="panel-body" [dragula]="'textRow'" [dragulaModel]="contentBlocks">
-            <div class="row content" *ngFor="let block of contentBlocks" >
+            <div class="row contentBlock" *ngFor="let block of contentBlocks" >
                 <div class="textRow">
                     <div class="pull-left" style="margin-left:-16px;">
                         <span class="glyphicon glyphicon-move"></span>
@@ -27,19 +27,39 @@
                         </template>
                         <template ngSwitchCase="picture">
                             <div class="content_block_type_pictire" [id]="block.Id">
-                                <img class="pictireBox" [src]="block.Content"/>
+                                <img class="pictireBox" [src]="safeOn(block.Content)"/>
                             </div>
                         </template>
-                        
+                        <template ngSwitchCase="video">
+                            <div class="content_block_type_video" [id]="block.Id">
+                                <iframe [src]="safeOn(block.Content)" frameborder="0" allowfullscreen>
+                                </iframe>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="text-center add_panel">
-                    <button type="button" class="btn btn-default btn-circle btn-lg" (click)="textBoxAdd()"><i class="glyphicon glyphicon-pencil"></i></button>
-                    <button type="button" class="btn btn-default btn-circle btn-lg" (click)="pictureBoxAdd()"><i class="glyphicon glyphicon-picture"></i></button>
-                    <button type="button" class="btn btn-default btn-circle btn-lg"><i class="glyphicon glyphicon-facetime-video"></i></button>
-                </div>
+        </div>
+        <div class="row">
+            <div class="text-center add_panel">
+                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-pencil" (click)="textBoxAdd()"></button>
+                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-picture" (click)="redirectToInput()"></button>
+                <a role="button" class="btn btn-default btn-circle btn-lg" href="#videLinckModal" data-toggle="modal" data-target="#videLinckModal"><span class="glyphicon glyphicon-facetime-video" style="vertical-align:middle"></span></a>
+                <input #img id="fileInput" type="file" (change)="saveFile(img)" style="display:none" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="videLinckModal" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body form-group" style="display:flex">
+                <input id="videoUrlInput" #videoUrl class="form-control" placeholder="url..." type="text" />
+                <button class="btn" style="margin-left:5px" (click)="videoBoxAdd(videoUrl)">Load</button>
             </div>
         </div>
     </div>
