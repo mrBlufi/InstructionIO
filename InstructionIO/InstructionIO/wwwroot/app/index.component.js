@@ -9,35 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var HomeService_1 = require("./service/HomeService");
-var IndexComponent = (function () {
-    function IndexComponent(homeservice) {
+const core_1 = require("@angular/core");
+const HomeService_1 = require("./service/HomeService");
+let IndexComponent = class IndexComponent {
+    constructor(homeservice) {
         this.homeservice = homeservice;
         this.tags = null;
         this.categories = null;
         this.categoryQueryParams = 'Full';
     }
-    IndexComponent.prototype.ngOnInit = function () {
+    ngOnInit() {
         this.getTags();
         this.getCategories();
-    };
-    IndexComponent.prototype.getTags = function () {
-        var _this = this;
-        this.homeservice.getPopularTags().subscribe(function (data) {
-            _this.tags = data;
-            console.log(_this.tags);
-        }, function (err) { return console.log(err); });
-    };
-    IndexComponent.prototype.getCategories = function () {
-        var _this = this;
-        this.homeservice.getCategories().subscribe(function (data) {
-            _this.categories = data;
-            console.log(_this.categories);
-        }, function (err) { return console.log(err); });
-    };
-    return IndexComponent;
-}());
+    }
+    getTags() {
+        this.homeservice.getPopularTags().subscribe(data => {
+            this.tags = data;
+            console.log(this.tags);
+        }, err => console.log(err));
+    }
+    getCategories() {
+        this.homeservice.getCategories().subscribe(data => {
+            this.categories = data;
+            console.log(this.categories);
+        }, err => console.log(err));
+    }
+};
 IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',

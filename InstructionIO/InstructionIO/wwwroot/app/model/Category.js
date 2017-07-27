@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Category = (function () {
-    function Category() {
-    }
-    return Category;
-}());
+class Category {
+}
 exports.Category = Category;
 //# sourceMappingURL=Category.js.map

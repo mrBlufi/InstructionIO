@@ -24,7 +24,7 @@
                             </div>
                             <hr>
                             <div>
-                                <h3><strong>Birthday</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
+                                <h3><strong>Birthday {{user.birthday}}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" style="border:none" [value]="user.birthday" />
                             </div>
                         </div>

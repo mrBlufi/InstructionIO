@@ -9,27 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var router_1 = require("@angular/router");
+const router_1 = require("@angular/router");
 require("rxjs/add/operator/filter");
-var core_1 = require("@angular/core");
-var HomeService_1 = require("./service/HomeService");
-var ChildComponent = (function () {
-    function ChildComponent(_Activatedroute, _router, homeservice) {
-        var _this = this;
+const core_1 = require("@angular/core");
+const HomeService_1 = require("./service/HomeService");
+let ChildComponent = class ChildComponent {
+    constructor(_Activatedroute, _router, homeservice) {
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this.homeservice = homeservice;
-        this.onClick = function ($event) {
+        this.onClick = ($event) => {
             //console.log('onClick $event: ', $event);
-            _this.onClickResult = $event;
+            this.onClickResult = $event;
         };
-        this.onRatingChange = function ($event) {
+        this.onRatingChange = ($event) => {
             //console.log('onRatingUpdated $event: ', $event);
-            _this.onRatingChangeResult = $event;
+            this.onRatingChangeResult = $event;
         };
-        this.onHoverRatingChange = function ($event) {
+        this.onHoverRatingChange = ($event) => {
             //console.log('onHoverRatingChange $event: ', $event);
-            _this.onHoverRatingChangeResult = $event;
+            this.onHoverRatingChangeResult = $event;
         };
         this.stringarray = ["1", "2", "3"];
         this.categoryQueryParams = null;
@@ -38,55 +37,51 @@ var ChildComponent = (function () {
         this.stepSkip = 0;
         this.infinitydisable = false;
     }
-    ChildComponent.prototype.ngOnInit = function () {
-        var _this = this;
+    ngOnInit() {
         console.log(Date.now);
         this.sub = this._Activatedroute.queryParams
-            .subscribe(function (params) {
-            _this.stepSkip = 0;
-            _this.categoryQueryParams = params['category'];
-            _this.sortQueryParams = params['sort'];
-            _this.getInstructions();
+            .subscribe(params => {
+            this.stepSkip = 0;
+            this.categoryQueryParams = params['category'];
+            this.sortQueryParams = params['sort'];
+            this.getInstructions();
             console.log('Query params ', params);
-        }, function (err) { return console.log(err); });
-    };
-    ChildComponent.prototype.getInstructions = function () {
-        var _this = this;
+        }, err => console.log(err));
+    }
+    getInstructions() {
         if (this.sortQueryParams == null)
             this.sortQueryParams = 'popular';
         if (this.categoryQueryParams == null)
             this.categoryQueryParams = 'Full';
-        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(function (data) {
-            _this.instructions = data;
-            _this.stepSkip += 1;
-            console.log(_this.instructions);
-        }, function (err) { return console.log(err); });
-    };
-    ChildComponent.prototype.ngOnDestroy = function () {
+        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
+            this.instructions = data;
+            this.stepSkip += 1;
+            console.log(this.instructions);
+        }, err => console.log(err));
+    }
+    ngOnDestroy() {
         this.sub.unsubscribe();
-    };
-    ChildComponent.prototype.onScroll = function () {
-        var _this = this;
+    }
+    onScroll() {
         if (this.infinitydisable)
             return;
         this.infinitydisable = true;
         console.log('scroll');
-        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(function (data) {
+        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             if (data.length == 0) {
-                _this.infinitydisable = false;
+                this.infinitydisable = false;
                 return;
             }
             var instructionscroll = data;
             console.log(instructionscroll);
-            _this.stepSkip += 1;
+            this.stepSkip += 1;
             for (var i = 0; i < instructionscroll.length; i++) {
-                _this.instructions.push(instructionscroll[i]);
+                this.instructions.push(instructionscroll[i]);
             }
-            _this.infinitydisable = false;
-        }, function (err) { return console.log(err); });
-    };
-    return ChildComponent;
-}());
+            this.infinitydisable = false;
+        }, err => console.log(err));
+    }
+};
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',

@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Tag = (function () {
-    function Tag() {
-    }
-    return Tag;
-}());
+class Tag {
+}
 exports.Tag = Tag;
 //# sourceMappingURL=Tag.js.map

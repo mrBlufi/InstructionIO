@@ -9,26 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var HomeService = (function () {
-    function HomeService(http) {
+const core_1 = require("@angular/core");
+const http_1 = require("@angular/http");
+let HomeService = class HomeService {
+    constructor(http) {
         this.http = http;
     }
-    HomeService.prototype.getPopularTags = function () {
-        return this.http.get('https://localhost:44328/api/datahome/tag').map(function (res) { return (res).json(); });
-    };
-    HomeService.prototype.getCategories = function () {
-        return this.http.get('https://localhost:44328/api/datahome/categories').map(function (res) { return (res).json(); });
-    };
-    HomeService.prototype.getInstructionsFirst = function (sort, category, stepSkip) {
-        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(function (res) { return (res).json(); });
-    };
-    HomeService.prototype.getInstructionsScroll = function () {
-        return this.http.get('https://localhost:44328/api/datahome/instruction/scroll').map(function (res) { return (res).json(); });
-    };
-    return HomeService;
-}());
+    getPopularTags() {
+        return this.http.get('https://localhost:44328/api/datahome/tag').map(res => (res).json());
+    }
+    getCategories() {
+        return this.http.get('https://localhost:44328/api/datahome/categories').map(res => (res).json());
+    }
+    getInstructionsFirst(sort, category, stepSkip) {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(res => (res).json());
+    }
+    getInstructionsScroll() {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/scroll').map(res => (res).json());
+    }
+};
 HomeService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])

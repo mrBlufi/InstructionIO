@@ -6,25 +6,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var childContentHome_component_1 = require("./childContentHome.component");
-var forms_1 = require("@angular/forms");
-var angular_star_rating_1 = require("angular-star-rating");
-var HomeService_1 = require("./service/HomeService");
-var angular2_infinite_scroll_1 = require("angular2-infinite-scroll");
 const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
 const app_routing_1 = require("./app.routing");
 const common_1 = require("@angular/common");
 const app_component_1 = require("./app.component");
 const http_1 = require("@angular/http");
+const childContentHome_component_1 = require("./childContentHome.component");
+const forms_1 = require("@angular/forms");
+const angular_star_rating_1 = require("angular-star-rating");
+const HomeService_1 = require("./service/HomeService");
+const angular2_infinite_scroll_1 = require("angular2-infinite-scroll");
 const ng2_dragula_1 = require("ng2-dragula");
 const textBoxTemplate_1 = require("./patrialComponent/textBoxTemplate");
 // enableProdMode();
-var AppModule = (function () {
-    function AppModule() {
-    }
-    return AppModule;
-}());
+let AppModule = class AppModule {
+};
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, forms_1.FormsModule, angular_star_rating_1.StarRatingModule.forRoot(), angular2_infinite_scroll_1.InfiniteScrollModule, ng2_dragula_1.DragulaModule],
