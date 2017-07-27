@@ -13,8 +13,7 @@ import { Instruction } from "./model/Instruction";
 
 
 export class ChildComponent implements OnInit {
-
-
+    
     onClickResult: IStarRatingOnClickEvent;
     onHoverRatingChangeResult: IStarRatingIOnHoverRatingChangeEvent;
     onRatingChangeResult: IStarRatingOnRatingChangeEven;
@@ -47,6 +46,7 @@ export class ChildComponent implements OnInit {
         console.log(Date.now);
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
+                this.stepSkip = 0;
                 this.categoryQueryParams = params['category'];
                 this.sortQueryParams = params['sort'];
                 this.getInstructions();

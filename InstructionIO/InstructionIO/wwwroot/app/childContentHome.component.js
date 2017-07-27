@@ -43,6 +43,7 @@ var ChildComponent = (function () {
         console.log(Date.now);
         this.sub = this._Activatedroute.queryParams
             .subscribe(function (params) {
+            _this.stepSkip = 0;
             _this.categoryQueryParams = params['category'];
             _this.sortQueryParams = params['sort'];
             _this.getInstructions();
