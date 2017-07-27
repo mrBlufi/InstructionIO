@@ -1,20 +1,25 @@
-﻿import { Component } from '@angular/core';
-import { Http, Response } from '@angular/http'
-import { UserInfo } from './model/UserInfo'
-import { NgFor } from '@angular/common';
+﻿import { Component, OnInit } from '@angular/core';
+import { UserInfo } from './model/UserInfo';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/filter';
+import { Instruction } from "./model/Instruction";
+import { ProfileService } from "./service/ProfileService";
 
 
 @Component({
     selector: 'my-profile',
-    templateUrl: '/partial/profileComponent'
+    templateUrl: '/partial/profileComponent',
+    styleUrls: ['css/ProfilePage.css']
 })
-export class ProfileComponent {
-    user: UserInfo;
+export class ProfileComponent implements OnInit {
+    user: UserInfo = new UserInfo(0, 'FirstName', 'LastName', new Date(), '', 'sadasda');
 
-    constructor(public http: Http) {
-        this.getMe();
+    constructor(private _Activatedroute: ActivatedRoute,
+        private _router: Router, private _profileservice: ProfileService) {
+        
     }
 
+   
     editDate(id: string) {
         let elem: HTMLElement = document.getElementById(id);
         elem.removeAttribute('disabled');
@@ -24,13 +29,28 @@ export class ProfileComponent {
         })
     }
 
-    getMe() {
-        this.http.get('https://localhost:44328/api/profile').map(res => (res).json())
-        .subscribe(
+    getDataUser(){
+        this._profileservice.getDataProfile(this.userQueryParams).subscribe(
             data => {
                 this.user = data;
             }, err => console.log('Get me user error'));
 
     }
+    userQueryParams: string = null;
+    instructions: Array<Instruction> = null;
+    sub: any;
 
+    ngOnInit() {
+        this.sub = this._Activatedroute.queryParams
+            .subscribe(params => {
+                this.userQueryParams = params['user'];
+                this.getDataUser();
+                console.log('Query params ', this.userQueryParams)
+            }, err => console.log(err));
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    
 }

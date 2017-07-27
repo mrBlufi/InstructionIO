@@ -17,7 +17,12 @@ const appRoutes = [
     },
     { path: 'about', component: about_component_1.AboutComponent, data: { title: 'About' } },
     { path: 'contact', component: contact_component_1.ContactComponent, data: { title: 'Contact' } },
-    { path: 'profile', component: profile_component_1.ProfileComponent, data: { title: 'Profile' } },
+    {
+        path: 'profile', component: profile_component_1.ProfileComponent, children: [
+            { path: '', redirectTo: 'child-content', pathMatch: 'full' },
+            { path: 'child-content', component: childcontenthome_component_1.ChildComponent }
+        ]
+    },
     { path: 'stepeditor', component: stepeditor_component_1.StepEditorComponent, data: { title: 'StepEditor' } }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);

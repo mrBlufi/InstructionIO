@@ -4,7 +4,8 @@ import 'rxjs/add/operator/map'
 
 @Component({
     selector: 'my-app',
-    templateUrl: '/partial/appComponent'
+    templateUrl: '/partial/appComponent',
+    styleUrls: ['css/AppStyle.css']
 })
 export class AppComponent {
     public constructor(private titleService: Title) { }

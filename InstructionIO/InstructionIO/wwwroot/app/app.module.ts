@@ -11,14 +11,14 @@ import { HomeService } from "./service/HomeService";
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DragulaModule } from 'ng2-dragula';
-import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
-
+import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
+import { ProfileService } from "./service/ProfileService";
 // enableProdMode();
 
 @NgModule({
     imports: [BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(), InfiniteScrollModule, DragulaModule],
     declarations: [AppComponent, routedComponents, ChildComponent, TextBoxTemplate],
-    providers: [HomeService,Title, { provide: APP_BASE_HREF, useValue: '/' }],
+    providers: [HomeService, ProfileService,Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

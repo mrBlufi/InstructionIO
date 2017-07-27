@@ -28,5 +28,10 @@ namespace InstructionIO.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<TagsRelation> TagsRelations { get; set; }
         public DbSet<Category> Categorys { get; set; }
+
+        internal object SingleOrDefault(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

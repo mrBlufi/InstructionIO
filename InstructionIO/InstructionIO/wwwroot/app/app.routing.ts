@@ -17,7 +17,13 @@ const appRoutes: Routes = [
     },
     { path: 'about', component: AboutComponent, data: { title: 'About' } },
     { path: 'contact', component: ContactComponent, data: { title: 'Contact' } },
-    { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
+    
+    {
+        path: 'profile', component: ProfileComponent, children: [
+            { path: '', redirectTo: 'child-content', pathMatch: 'full' },
+            { path: 'child-content', component: ChildComponent }
+        ]
+    },
     { path: 'stepeditor', component: StepEditorComponent, data: { title: 'StepEditor' } }
 ];
 

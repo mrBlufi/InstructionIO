@@ -1,15 +1,6 @@
-﻿@using InstructionIO.Models
-@model UserInfo
-@{
-    ViewData["Title"] = "Contact";
-}
-<head>
-    <link href="~/css/ProfilePage.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Exo+2|Nunito" rel="stylesheet">
-    <meta charset="utf-8">
-</head>
-<div *ngIf="user != null">
-    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+﻿<div class="row">
+    <div class="profile" >
+        <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="media">
@@ -20,11 +11,11 @@
                             <hr>
                             <div>
                                 <h3><strong>About Me</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
-                                <input id="interestsBox" type="text" class="editableTarget" disabled="disabled" style="border:none" [value]="user.interests"/>
+                                <input id="interestsBox" type="text" class="editableTarget" disabled="disabled" style="border:none" [value]="user.interests" />
                             </div>
                             <hr>
                             <div>
-                                <h3><strong>Birthday {{user.birthday}}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
+                                <h3><strong>Birthday </strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" style="border:none" [value]="user.birthday" />
                             </div>
                         </div>
@@ -51,5 +42,14 @@
                 </div>
             </div>
             <hr>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <router-outlet></router-outlet>
+            </div>
+            
         </div>
+    </div>
+    
 </div>
+
+

@@ -10,24 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-const platform_browser_1 = require("@angular/platform-browser");
-require("rxjs/add/operator/map");
-let AppComponent = class AppComponent {
-    constructor(titleService) {
-        this.titleService = titleService;
-        this.angularClientSideData = 'Angular';
+const http_1 = require("@angular/http");
+let ProfileService = class ProfileService {
+    constructor(http) {
+        this.http = http;
     }
-    setTitle(newTitle) {
-        this.titleService.setTitle(newTitle);
+    getDataProfile(userparams) {
+        console.log(userparams);
+        return this.http.get('https://localhost:44328/api/profile/user/' + userparams).map(res => (res).json());
+    }
+    getInstructions(userparams, stepSkip) {
+        console.log(userparams);
+        return this.http.get('https://localhost:44328/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
     }
 };
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        templateUrl: '/partial/appComponent',
-        styleUrls: ['css/AppStyle.css']
-    }),
-    __metadata("design:paramtypes", [platform_browser_1.Title])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+ProfileService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], ProfileService);
+exports.ProfileService = ProfileService;
+//# sourceMappingURL=ProfileService.js.map

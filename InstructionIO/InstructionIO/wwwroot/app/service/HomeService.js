@@ -21,11 +21,11 @@ let HomeService = class HomeService {
     getCategories() {
         return this.http.get('https://localhost:44328/api/datahome/categories').map(res => (res).json());
     }
-    getInstructionsFirst(sort, category, stepSkip) {
+    getInstructionsFull(sort, category, stepSkip) {
         return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(res => (res).json());
     }
-    getInstructionsScroll() {
-        return this.http.get('https://localhost:44328/api/datahome/instruction/scroll').map(res => (res).json());
+    getInstructionsUser(stepSkip) {
+        return this.http.get('https://localhost:44328/api/datahome/instruction/user/' + stepSkip).map(res => (res).json());
     }
 };
 HomeService = __decorate([

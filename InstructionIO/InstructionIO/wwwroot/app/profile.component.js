@@ -10,11 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-const http_1 = require("@angular/http");
+const UserInfo_1 = require("./model/UserInfo");
+const router_1 = require("@angular/router");
+require("rxjs/add/operator/filter");
+const ProfileService_1 = require("./service/ProfileService");
 let ProfileComponent = class ProfileComponent {
-    constructor(http) {
-        this.http = http;
-        this.getMe();
+    constructor(_Activatedroute, _router, _profileservice) {
+        this._Activatedroute = _Activatedroute;
+        this._router = _router;
+        this._profileservice = _profileservice;
+        this.user = new UserInfo_1.UserInfo(0, 'FirstName', 'LastName', new Date(), '', 'sadasda');
+        this.userQueryParams = null;
+        this.instructions = null;
     }
     editDate(id) {
         let elem = document.getElementById(id);
@@ -24,19 +31,31 @@ let ProfileComponent = class ProfileComponent {
             elem.setAttribute('disabled', 'disabled');
         });
     }
-    getMe() {
-        this.http.get('https://localhost:44328/api/profile').map(res => (res).json())
-            .subscribe(data => {
+    getDataUser() {
+        this._profileservice.getDataProfile(this.userQueryParams).subscribe(data => {
             this.user = data;
         }, err => console.log('Get me user error'));
+    }
+    ngOnInit() {
+        this.sub = this._Activatedroute.queryParams
+            .subscribe(params => {
+            this.userQueryParams = params['user'];
+            this.getDataUser();
+            console.log('Query params ', this.userQueryParams);
+        }, err => console.log(err));
+    }
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 };
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
-        templateUrl: '/partial/profileComponent'
+        templateUrl: '/partial/profileComponent',
+        styleUrls: ['css/ProfilePage.css']
     }),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        router_1.Router, ProfileService_1.ProfileService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

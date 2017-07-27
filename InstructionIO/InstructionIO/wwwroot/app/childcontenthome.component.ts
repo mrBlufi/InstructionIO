@@ -4,6 +4,7 @@ import { OnInit, Component } from '@angular/core';
 import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnHoverRatingChangeEvent } from "angular-star-rating/star-rating-struct";
 import { HomeService } from "./service/HomeService";
 import { Instruction } from "./model/Instruction";
+import { ProfileService } from "./service/ProfileService";
 
 @Component({
     selector: 'child-content',
@@ -33,33 +34,51 @@ export class ChildComponent implements OnInit {
         this.onHoverRatingChangeResult = $event;
     };
 
-    public stringarray: string[] = ["1", "2", "3"];
     sub: any;
     categoryQueryParams: string=null;
-    sortQueryParams: string=null;
+    sortQueryParams: string = null;
+    userQueryParams: string = null;
     instructions: Array<Instruction> = null;
     stepSkip = 0;
     constructor(private _Activatedroute: ActivatedRoute,
-        private _router: Router, private homeservice: HomeService) {
+        private _router: Router, private homeservice: HomeService,private profileservice:ProfileService) {
     }
     ngOnInit() {
-        console.log(Date.now);
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
                 this.stepSkip = 0;
                 this.categoryQueryParams = params['category'];
                 this.sortQueryParams = params['sort'];
+                this.userQueryParams = params['user'];
+                console.log('useruser ', this.userQueryParams);
                 this.getInstructions();
-                console.log('Query params ', params)
+               
             }, err => console.log(err));
     }
 
     private getInstructions() {
-        if (this.sortQueryParams == null) this.sortQueryParams = 'popular';
-        if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
-        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
+        if (this.userQueryParams != null) {
+            this.getInstructionsUser();
+        } else {
+            if (this.sortQueryParams == null) this.sortQueryParams = 'popular';
+            if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
+            this.getInstructionsFullUser();
+        }
+    }
+
+
+    getInstructionsFullUser() {
+        this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            this.stepSkip +=1;
+            this.stepSkip += 1;
+            console.log(this.instructions);
+        }, err => console.log(err));
+    }
+
+    getInstructionsUser() {
+        this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
+            this.instructions = data;
+            this.stepSkip += 1;
             console.log(this.instructions);
         }, err => console.log(err));
     }
@@ -69,23 +88,47 @@ export class ChildComponent implements OnInit {
 
     infinitydisable = false;
     onScroll() {
+        if (this.userQueryParams != null) {
+            this.getScrollUserData();
+        } else {
+            this.getScrollFullData();
+        }
+       
+    }
+
+    getScrollFullData() {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
         console.log('scroll');
-        this.homeservice.getInstructionsFirst(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
+        this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             if (data.length == 0) {
                 this.infinitydisable = false;
                 return;
             }
-            var instructionscroll = data;
+            let instructionscroll = data;
+            this.instructions = this.instructions.concat(instructionscroll);
             console.log(instructionscroll);
-            this.stepSkip +=1;
-            for (var i = 0; i < instructionscroll.length; i++) {
-                this.instructions.push(instructionscroll[i]);
-            }
+            this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));
-        
+
+    }
+    getScrollUserData() {
+        if (this.infinitydisable) return;
+        this.infinitydisable = true;
+        console.log('scroll');
+        this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
+            if (data.length == 0) {
+                this.infinitydisable = false;
+                return;
+            }
+            let instructionscroll = data;
+            this.instructions = this.instructions.concat(instructionscroll);
+            console.log('instr1',this.instructions);
+            this.stepSkip += 1;
+            this.infinitydisable = false;
+        }, err => console.log(err));
+
     }
 
 }
