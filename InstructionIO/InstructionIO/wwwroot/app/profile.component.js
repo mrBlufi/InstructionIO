@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-const http_1 = require("@angular/http");
-let ProfileComponent = class ProfileComponent {
-    constructor(http) {
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var ProfileComponent = (function () {
+    function ProfileComponent(http) {
         this.http = http;
         this.getMe();
     }
