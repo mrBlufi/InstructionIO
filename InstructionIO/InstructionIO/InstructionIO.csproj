@@ -13,6 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\app\childcontenthome.component.ts" />
+    <Content Include="wwwroot\app\model\Category.ts" />
+    <Content Include="wwwroot\app\model\Instruction.ts" />
+    <Content Include="wwwroot\app\model\Tag.ts" />
+    <Content Include="wwwroot\app\service\HomeService.ts" />
+    <Content Include="wwwroot\app\test.component.ts" />
     <Content Include="wwwroot\app\model\ContentBlock.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />

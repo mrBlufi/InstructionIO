@@ -6,6 +6,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var childContentHome_component_1 = require("./childContentHome.component");
+var forms_1 = require("@angular/forms");
+var angular_star_rating_1 = require("angular-star-rating");
+var HomeService_1 = require("./service/HomeService");
+var angular2_infinite_scroll_1 = require("angular2-infinite-scroll");
 const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
 const app_routing_1 = require("./app.routing");
@@ -15,13 +20,16 @@ const http_1 = require("@angular/http");
 const ng2_dragula_1 = require("ng2-dragula");
 const textBoxTemplate_1 = require("./patrialComponent/textBoxTemplate");
 // enableProdMode();
-let AppModule = class AppModule {
-};
+var AppModule = (function () {
+    function AppModule() {
+    }
+    return AppModule;
+}());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, ng2_dragula_1.DragulaModule],
-        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate],
-        providers: [platform_browser_1.Title, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, forms_1.FormsModule, angular_star_rating_1.StarRatingModule.forRoot(), angular2_infinite_scroll_1.InfiniteScrollModule, ng2_dragula_1.DragulaModule],
+        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, childContentHome_component_1.ChildComponent, textBoxTemplate_1.TextBoxTemplate],
+        providers: [HomeService_1.HomeService, platform_browser_1.Title, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

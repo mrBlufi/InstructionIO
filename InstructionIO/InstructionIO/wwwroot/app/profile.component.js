@@ -16,14 +16,16 @@ let ProfileComponent = class ProfileComponent {
         this.http = http;
         this.getMe();
     }
-    getMe() {
-        this.http.get('https://localhost:44328/api/profile').map(res => (res).json())
-            .subscribe(data => {
-            this.user = data;
-            console.log(this.user);
-        }, err => console.log('Get me user error'));
-    }
-};
+    ProfileComponent.prototype.getMe = function () {
+        var _this = this;
+        this.http.get('https://localhost:44328/api/profile').map(function (res) { return (res).json(); })
+            .subscribe(function (data) {
+            _this.user = data;
+            console.log(_this.user);
+        }, function (err) { return console.log('Get me user error'); });
+    };
+    return ProfileComponent;
+}());
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',

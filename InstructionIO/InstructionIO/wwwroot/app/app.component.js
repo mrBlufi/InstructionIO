@@ -19,8 +19,9 @@ let AppComponent = class AppComponent {
     }
     setTitle(newTitle) {
         this.titleService.setTitle(newTitle);
-    }
-};
+    };
+    return AppComponent;
+}());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',

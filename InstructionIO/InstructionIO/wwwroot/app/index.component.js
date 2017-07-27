@@ -5,15 +5,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-let IndexComponent = class IndexComponent {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var HomeService_1 = require("./service/HomeService");
+var IndexComponent = (function () {
+    function IndexComponent(homeservice) {
+        this.homeservice = homeservice;
+        this.tags = null;
+        this.categories = null;
+        this.categoryQueryParams = 'Full';
+    }
+    IndexComponent.prototype.ngOnInit = function () {
+        this.getTags();
+        this.getCategories();
+    };
+    IndexComponent.prototype.getTags = function () {
+        var _this = this;
+        this.homeservice.getPopularTags().subscribe(function (data) {
+            _this.tags = data;
+            console.log(_this.tags);
+        }, function (err) { return console.log(err); });
+    };
+    IndexComponent.prototype.getCategories = function () {
+        var _this = this;
+        this.homeservice.getCategories().subscribe(function (data) {
+            _this.categories = data;
+            console.log(_this.categories);
+        }, function (err) { return console.log(err); });
+    };
+    return IndexComponent;
+}());
 IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',
-        templateUrl: '/partial/indexComponent'
-    })
+        templateUrl: '/partial/indexComponent',
+        styleUrls: ['css/blog-home.css']
+    }),
+    __metadata("design:paramtypes", [HomeService_1.HomeService])
 ], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map
