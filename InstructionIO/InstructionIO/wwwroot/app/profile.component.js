@@ -14,6 +14,7 @@ const UserInfo_1 = require("./model/UserInfo");
 const router_1 = require("@angular/router");
 require("rxjs/add/operator/filter");
 const ProfileService_1 = require("./service/ProfileService");
+const angular_l10n_1 = require("angular-l10n");
 let ProfileComponent = class ProfileComponent {
     constructor(_Activatedroute, _router, _profileservice) {
         this._Activatedroute = _Activatedroute;
@@ -48,6 +49,10 @@ let ProfileComponent = class ProfileComponent {
         this.sub.unsubscribe();
     }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], ProfileComponent.prototype, "lang", void 0);
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',

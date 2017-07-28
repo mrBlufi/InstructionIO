@@ -10,12 +10,12 @@
                         <div class="media-body">
                             <hr>
                             <div>
-                                <h3><strong>About Me</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
+                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
                                 <input id="interestsBox" type="text" class="editableTarget" disabled="disabled" style="border:none" [value]="user.interests" />
                             </div>
                             <hr>
                             <div>
-                                <h3><strong>Birthday </strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
+                                <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" style="border:none" [value]="user.birthday" />
                             </div>
                         </div>

@@ -13,12 +13,24 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DragulaModule } from 'ng2-dragula';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
 import { ProfileService } from "./service/ProfileService";
+import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
 // enableProdMode();
 
 @NgModule({
-    imports: [BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(), InfiniteScrollModule, DragulaModule],
+    imports: [BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(), InfiniteScrollModule, DragulaModule, TranslationModule.forRoot()],
     declarations: [AppComponent, routedComponents, ChildComponent, TextBoxTemplate],
     providers: [HomeService, ProfileService,Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(public locale: LocaleService, public translation: TranslationService) {
+        this.locale.addConfiguration()
+            .addLanguages(['en', 'ru'])
+            .setCookieExpiration(30)
+            .defineLanguage('en');
+
+        this.translation.addConfiguration()
+            .addProvider('./assets/locale-');
+
+        this.translation.init();
+    }}

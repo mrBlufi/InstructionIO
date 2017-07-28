@@ -2,6 +2,7 @@
 import { HomeService } from "./service/HomeService";
 import { Tag } from "./model/Tag";
 import { Category } from "./model/Category";
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'my-index',
@@ -10,7 +11,7 @@ import { Category } from "./model/Category";
 })
 
 export class IndexComponent implements OnInit {
-    
+    @Language() lang: string;
     tags: Array<Tag> = null;
     categories: Array<Category> = null;
     categoryQueryParams: any;

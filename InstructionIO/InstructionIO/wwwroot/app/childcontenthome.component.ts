@@ -5,6 +5,7 @@ import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnH
 import { HomeService } from "./service/HomeService";
 import { Instruction } from "./model/Instruction";
 import { ProfileService } from "./service/ProfileService";
+import { Language } from 'angular-l10n';
 
 @Component({
     selector: 'child-content',
@@ -35,6 +36,7 @@ export class ChildComponent implements OnInit {
     };
 
     sub: any;
+    @Language() lang: string;
     categoryQueryParams: string=null;
     sortQueryParams: string = null;
     userQueryParams: string = null;

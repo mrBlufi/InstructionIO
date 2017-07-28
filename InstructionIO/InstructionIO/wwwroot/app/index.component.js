@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const HomeService_1 = require("./service/HomeService");
+const angular_l10n_1 = require("angular-l10n");
 let IndexComponent = class IndexComponent {
     constructor(homeservice) {
         this.homeservice = homeservice;
@@ -35,6 +36,10 @@ let IndexComponent = class IndexComponent {
         }, err => console.log(err));
     }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], IndexComponent.prototype, "lang", void 0);
 IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',

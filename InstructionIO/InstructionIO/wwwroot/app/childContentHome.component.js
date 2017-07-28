@@ -14,6 +14,7 @@ require("rxjs/add/operator/filter");
 const core_1 = require("@angular/core");
 const HomeService_1 = require("./service/HomeService");
 const ProfileService_1 = require("./service/ProfileService");
+const angular_l10n_1 = require("angular-l10n");
 let ChildComponent = class ChildComponent {
     constructor(_Activatedroute, _router, homeservice, profileservice) {
         this._Activatedroute = _Activatedroute;
@@ -122,6 +123,10 @@ let ChildComponent = class ChildComponent {
         }, err => console.log(err));
     }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], ChildComponent.prototype, "lang", void 0);
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',

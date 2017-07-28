@@ -17,13 +17,13 @@
     <Content Include="wwwroot\app\model\Category.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
-    <Content Include="wwwroot\app\profileinstriction.component.ts" />
     <Content Include="wwwroot\app\service\HomeService.ts" />
     <Content Include="wwwroot\app\service\ProfileService.ts" />
-    <Content Include="wwwroot\app\test.component.ts" />
     <Content Include="wwwroot\app\model\ContentBlock.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
+    <Content Include="wwwroot\assets\locale-en.json" />
+    <Content Include="wwwroot\assets\locale-ru.json" />
     <Content Include="wwwroot\css\AppStyle.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />

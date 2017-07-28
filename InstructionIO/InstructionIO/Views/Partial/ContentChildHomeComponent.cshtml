@@ -43,12 +43,12 @@
                 <img class="img-responsive" src="http://minionomaniya.ru/wp-content/uploads/2015/10/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8-%D0%B8%D0%B7-%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%D0%B0-%D0%BC%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD%D1%8B-2015.jpg">
                 <div class="paneltextbody">
                     <p class="lead">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p><small class="text-muted ">Create date: {{instruction.createDate | date:'MM/dd/yyyy'}}  Author: {{instruction.author.lastName}} {{instruction.author.firstName}}</small></p>
+                    <p><small class="text-muted ">{{ 'Create date' | translate:lang }}: {{instruction.createDate | date:'MM/dd/yyyy'}}  Author: {{instruction.author.lastName}} {{instruction.author.firstName}}</small></p>
                 </div>
             </div>
             <div class="panel-footer">
-                <small class="text-muted text-left">Last updated {{instruction.lastChangedDate  | date:'MM/dd/yyyy'}}</small>
-                <a class="btn btn-default right">Read more</a>
+                <small class="text-muted text-left">{{ 'Last updated' | translate:lang }} {{instruction.lastChangedDate  | date:'MM/dd/yyyy'}}</small>
+                <a class="btn btn-default right">{{ 'Read more' | translate:lang }}</a>
             </div>
 
         </div>
