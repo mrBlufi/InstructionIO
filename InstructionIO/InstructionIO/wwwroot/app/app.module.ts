@@ -15,7 +15,7 @@ import { ProfileService } from "./service/ProfileService";
 import { AppComponent } from './app.component';
 import { ChildComponent } from './childContentHome.component';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
-import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
+import { TranslationModule, LocaleService, TranslationService, Language } from 'angular-l10n';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',

@@ -1,6 +1,5 @@
 ﻿$(function () {
-    console.log('s');
-    $(".editable").on("click", function () {
+    $(".editable").on("clionsole.ck", function () {
         var editableObject = $(this).parent().siblings('.editableTarget')[0];
         editableObject.removeAttribute('disabled');
         editableObject.focus();
