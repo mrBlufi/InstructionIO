@@ -1,7 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 import { DragulaService } from "ng2-dragula";
 import { ContentBlock } from './model/ContentBlock';
-import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
 import { SafeResourceUrl } from "@angular/platform-browser/src/platform-browser";
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from "rxjs/Observable";

@@ -1,23 +1,21 @@
 import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { routing, routedComponents } from './app.routing';
 import { APP_BASE_HREF, Location } from '@angular/common';
-import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
-import { ChildComponent } from './childContentHome.component';
 import { FormsModule } from '@angular/forms';
 import { StarRatingModule } from 'angular-star-rating';
-import { HomeService } from "./service/HomeService";
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { DragulaModule } from 'ng2-dragula';
-import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
-import { ProfileService } from "./service/ProfileService";
-import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
-import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
 import { CarouselModule, SortableModule, AccordionModule  } from 'ngx-bootstrap';
-import { FormsModule } from '@angular/forms';
 import { SwiperModule, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+import { DragulaModule } from 'ng2-dragula';
+import { HomeService } from "./service/HomeService";
+import { ProfileService } from "./service/ProfileService";
+import { AppComponent } from './app.component';
+import { ChildComponent } from './childContentHome.component';
+import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
+import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -27,7 +25,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 // enableProdMode();
 
 @NgModule({
-    imports: [BrowserModule, routing, HttpModule, DragulaModule, FormsModule, InfiniteScrollModule, TranslationModule.forRoot(), StarRatingModule.forRoot(), CarouselModule.forRoot(), SortableModule.forRoot(), AccordionModule.forRoot(), FormsModule, SwiperModule.forRoot(SWIPER_CONFIG)],
+    imports: [BrowserModule, routing, HttpModule,FormsModule, StarRatingModule.forRoot(), CarouselModule.forRoot(), SortableModule.forRoot(), AccordionModule.forRoot(), SwiperModule.forRoot(SWIPER_CONFIG), InfiniteScrollModule, DragulaModule, TranslationModule.forRoot()],
     declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent],
     providers: [HomeService, ProfileService,Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
