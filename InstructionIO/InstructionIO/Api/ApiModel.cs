@@ -18,6 +18,7 @@ namespace InstructionIO.Api
             instruction = _instruction;
             tags = new List<string>();
             steps = new List<StepFull>();
+            instruction.Rating = _instruction.RatingRelation.Average(x => x.Value);
             comments = new List<CommentFull>();
             for (int i = 0; i < _instruction.TagsRelation.Count; i++)
             {
@@ -36,6 +37,7 @@ namespace InstructionIO.Api
             instruction.TagsRelation = new List<TagsRelation>();
             instruction.Step = new List<Step>();
             instruction.Comment = new List<Comment>();
+            instruction.RatingRelation = new List<RatingRelation>();
         }
     }
     public class StepFull{

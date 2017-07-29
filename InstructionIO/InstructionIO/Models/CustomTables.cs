@@ -30,16 +30,18 @@ namespace InstructionIO.Models
         public DateTime CreateDate { get; set; }
         public DateTime LastChangedDate { get; set; }
         public Category Category { get; set; }
-        public int Rating { get; set; }
+        public double Rating { get; set; }
         public ICollection<TagsRelation> TagsRelation { get; set; }
         public ICollection<Step> Step { get; set; }
         public ICollection<Comment> Comment { get; set; }
+        public ICollection<RatingRelation> RatingRelation { get; set; }
 
         public Instruction()
         {
             TagsRelation = new List<TagsRelation>();
             Step = new List<Step>();
             Comment = new List<Comment>();
+            RatingRelation = new List<RatingRelation>();
         }
 
         
@@ -102,6 +104,16 @@ namespace InstructionIO.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+    }
+
+    public class RatingRelation
+    {
+        public int Id { get; set; }
+        public int Value { get; set; }
+        public UserInfo User { get; set; }
+        [Required]
+        public Instruction Instruction { get; set; }
 
     }
 

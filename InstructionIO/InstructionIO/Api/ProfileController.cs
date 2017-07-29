@@ -92,9 +92,9 @@ namespace instructionsIO.Controllers.Api
         {
             var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock)
                 .Include(x=>x.TagsRelation).ThenInclude(x=>x.Tag)
-                .Include(x=>x.Author).Include(x=>x.Category)
-                .Include(x=>x.Comment)
-                .ToList().Find(x=>x.Id==1);
+                .Include(x=>x.Author).Include(x=>x.Category).Include(x => x.RatingRelation)
+                .Include(x=>x.Comment).ToList()
+                .Find(x=>x.Id==1);
             return new ObjectResult(new InstructionFull(test));
         }
 
