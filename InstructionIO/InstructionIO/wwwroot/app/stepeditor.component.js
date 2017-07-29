@@ -20,7 +20,8 @@ let StepEditorComponent = class StepEditorComponent {
         this.sanitizer = sanitizer;
         this.http = http;
         this.contentBlocks = new Array();
-        dragulaService.setOptions('textRow', {
+        this.stepName = this.randomString();
+        dragulaService.setOptions(this.stepName, {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
             }
@@ -31,6 +32,9 @@ let StepEditorComponent = class StepEditorComponent {
         dragulaService.removeModel.subscribe((value) => {
             this.onRemoveModel(value.slice(1));
         });
+    }
+    randomString() {
+        return (Math.random() * 100).toString();
     }
     onDropModel(args) {
         let [el, target, source] = args;
@@ -69,15 +73,16 @@ let StepEditorComponent = class StepEditorComponent {
     }
     saveFile(input) {
         let res;
-        //let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
-        //let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
-        //let files: FileList = target.files;
         let formData = new FormData();
         formData.append(input.files[0].name, input.files[0]);
         console.info(formData);
         this.http.post('http://localhost:57640/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g, "")));
     }
 };
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], StepEditorComponent.prototype, "stepName", void 0);
 StepEditorComponent = __decorate([
     core_1.Component({
         selector: 'my-stepEditor',

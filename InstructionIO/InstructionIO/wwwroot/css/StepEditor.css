@@ -1,4 +1,26 @@
-﻿
+﻿.carousel-indicators{
+    display:none;
+}
+
+.table_of_contents {
+    margin-left:-0px;
+    margin-right:0px;
+}
+
+.contentBody {
+    margin: 0px;
+    padding-right: 78px;
+    padding-left: 10px;
+}
+
+@media(max-width:750px) {
+    .contentBody {
+        margin: unset;
+        padding: unset;
+    }
+}
+
+
 
 .textBox:not(:focus):empty:after {
     content: attr(data-text);
@@ -41,7 +63,6 @@
 .btn-circle:focus:active {
     outline: 0;
 }
-
 
 .btn-circle.btn-lg {
     width: 50px;

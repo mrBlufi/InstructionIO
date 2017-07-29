@@ -1,32 +1,43 @@
-<div class="item">
-    <div class="new_html_code"></div>
-    <div class="carousel-caption">
-        <h4>Thumbnail label</h4>
-        <p>Carousel caption text<p>
-    </div>
-</div>
-<ui-carousel slides="ctrl.slides"
-             slides-to-show="3"
-             slides-to-scroll="1"
-             initial-slide="1"
-             autoplay="true"
-             autoplay-speed="2000"
-             dots="true">
+<link rel="stylesheet" href="~/css/InstructionEditor.css" />
 
-    <carousel-item>
-        <h3>{{ item + 1 }}</h3>
-    </carousel-item>
-</ui-carousel>
-@*<nav class="navbar navbar-default navbar-fixed-bottom">
-<div class="container-fluid">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Instruction construction</h3>
     </div>
-    <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-    </ul>
+    <div class="panel-body">
+        <div class="form">
+            <input type="text" class="form-control instForm" placeholder="Instruction name" />
+            <input type="text" class="form-control instForm" placeholder="tags.." />
+        </div>
+        <accordion class="previevDropDown">
+            <accordion-group>
+                <div accordion-heading>
+                    Previev
+                    <i class="pull-right float-xs-right glyphicon"
+                       [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+                </div>
+                <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
+                    <p class="textBox" data-text="about"></p>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
 </div>
-</nav>*@
+<div class="panel panel-default">
+    <div class="panel-body panle_body_main">
+        <swiper #mainSwiper [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
+            <my-stepEditor *ngFor="let step of Steps" class="swiper-slide mySlide" style="box-sizing:border-box" [stepName]="step"></my-stepEditor>
+        </swiper>
+    </div>
+    <div>
+        <swiper #miniSwiper [config]="miniSwiperConfig" (indexChange)="onIndexChange($event)">
+            <span style="height:50px;width:50px;background-color:white" [dragula]="'stepD'" *ngFor="let step of Steps" class="swiper-slide miniSlide well">{{step}}</span>
+            <div class="swiper-slide miniSlide">
+                <button #btn (click)="add(btn)">add</button>
+            </div>
+        </swiper>
+    </div>
+</div>
+
+        
+

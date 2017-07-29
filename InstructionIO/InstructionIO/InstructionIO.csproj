@@ -17,6 +17,7 @@
     <Content Include="wwwroot\app\model\ContentBlock.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
+    <Content Include="wwwroot\css\InstructionEditor.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />
   </ItemGroup>

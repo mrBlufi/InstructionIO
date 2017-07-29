@@ -1,16 +1,11 @@
-﻿<head>
-    <link href="~/css/StepEditor.css" rel="stylesheet" />
-    <link href="~/node_modules/dragula/dist/dragula.css" rel="stylesheet"/>
-</head>
-
-<div class="container">
+﻿<div class="container contentBody">
     <div class="row step_info">
         <div class="col-xs-12 form-group">
             <input type="text" class="form-control" placeholder="Step name" value=""/>
         </div>
     </div>
     <div class="row step_body panel panel-default">
-        <div class="panel-body" [dragula]="'textRow'" [dragulaModel]="contentBlocks">
+        <div class="panel-body" [dragula]="stepName" [dragulaModel]="contentBlocks">
             <div class="row contentBlock" *ngFor="let block of contentBlocks" >
                 <div class="textRow">
                     <div class="pull-left" style="margin-left:-16px;">

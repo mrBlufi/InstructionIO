@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 import { DragulaService } from "ng2-dragula";
 import { ContentBlock } from './model/ContentBlock';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
@@ -7,15 +7,22 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from "rxjs/Observable";
 import { RequestOptions, Http, Headers } from "@angular/http";
 
+
 @Component({
     selector: 'my-stepEditor',
     templateUrl: '/partial/StepEditorComponent'
 })
 export class StepEditorComponent {
     public contentBlocks: ContentBlock[] = new Array();
+    @Input() stepName: string;
+
+    randomString(): string {
+        return (Math.random() * 100).toString();
+    }
 
     constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http) {
-        dragulaService.setOptions('textRow', {
+        this.stepName = this.randomString();
+        dragulaService.setOptions(this.stepName, {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
             }
@@ -74,9 +81,6 @@ export class StepEditorComponent {
 
     saveFile(input: HTMLInputElement) {
         let res: any;
-        //let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
-        //let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
-        //let files: FileList = target.files;
         let formData: FormData = new FormData();
         formData.append(input.files[0].name, input.files[0]);
         console.info(formData);

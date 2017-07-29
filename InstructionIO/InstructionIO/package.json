@@ -19,7 +19,9 @@
     "ng2-dragula": "1.5.0",
     "primeng": "4.1.1",
     "angular-upload": "1.0.13",
-    "angular-ui-carousel": "0.1.10"
+    "ngx-bootstrap": "1.8.0",
+    "moment": "2.18.1",
+    "ngx-swiper-wrapper": "4.0.0"
   },
   "devDependencies": {
     "typescript": "2.4.2",
@@ -27,3 +29,4 @@
   },
   "repository": {}
 }
+
