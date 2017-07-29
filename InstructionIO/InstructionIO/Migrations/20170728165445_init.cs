@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InstructionIO.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,7 @@ namespace InstructionIO.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Frequency = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -96,9 +97,8 @@ namespace InstructionIO.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Avatar = table.Column<string>(nullable: true),
                     Birthday = table.Column<DateTime>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
                     Interests = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -284,7 +284,7 @@ namespace InstructionIO.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     InstructionId = table.Column<int>(nullable: true),
-                    TagId = table.Column<int>(nullable: false)
+                    TagId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -300,7 +300,7 @@ namespace InstructionIO.Migrations
                         column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -310,7 +310,7 @@ namespace InstructionIO.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(nullable: true),
-                    StepId = table.Column<int>(nullable: false),
+                    StepId = table.Column<int>(nullable: true),
                     Type = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -321,7 +321,7 @@ namespace InstructionIO.Migrations
                         column: x => x.StepId,
                         principalTable: "Steps",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

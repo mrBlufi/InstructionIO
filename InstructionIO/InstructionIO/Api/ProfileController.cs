@@ -8,6 +8,7 @@ using InstructionIO.Models;
 using InstructionIO.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using InstructionIO.Api;
 
 namespace instructionsIO.Controllers.Api
 {
@@ -18,6 +19,7 @@ namespace instructionsIO.Controllers.Api
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private int _stepTake = 10;
+        private ApplicationDbContext _context;
 
         public ProfileController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
@@ -43,11 +45,9 @@ namespace instructionsIO.Controllers.Api
         }
 
         [HttpGet("user/{userparams}")]
-        public async Task<UserInfo> getUserProfile(string userparams)
+        public UserInfo GetUserProfile(string userparams)
         {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-
-            var messages = _context.UserInfos.FirstOrDefault(f => f.Id==Convert.ToInt32(userparams));
+            var messages = _context.UserInfos.FirstOrDefault(f => f.Id == Convert.ToInt32(userparams));
             messages.User = null;
 
 
@@ -73,13 +73,39 @@ namespace instructionsIO.Controllers.Api
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
 
-        [HttpGet("gotoprofile")]
-        public bool goToProfile()
+
+        [HttpPost("user/update")]
+        public UserInfo setUserProfile([FromBody]UserInfo userprofile)
         {
-            return false;
+            var messages = _context.UserInfos.FirstOrDefault(f => f.Id == userprofile.Id);
+            messages.FullName = userprofile.FullName;
+            messages.Avatar = userprofile.Avatar;
+            messages.Birthday = userprofile.Birthday;
+            messages.Interests = userprofile.Interests;
+            _context.UserInfos.Update(messages);
+            _context.SaveChanges();
+            return messages;
         }
 
-        private ApplicationDbContext _context;
-       
+       [HttpGet("test")]
+        public IActionResult getTest()
+        {
+            var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock).ToList().Find(x=>x.Id==1);
+            return new ObjectResult(test.Step.ToList());
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

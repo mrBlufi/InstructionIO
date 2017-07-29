@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/http");
+const http_2 = require("@angular/http");
 let ProfileService = class ProfileService {
     constructor(http) {
         this.http = http;
@@ -22,6 +23,14 @@ let ProfileService = class ProfileService {
     getInstructions(userparams, stepSkip) {
         console.log(userparams);
         return this.http.get('https://localhost:44328/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
+    }
+    setProfileData(obj) {
+        const body = JSON.stringify(obj);
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('https://localhost:44328/api/profile/user/update', body, { headers: headers }).subscribe((data) => {
+            console.log('Response received');
+            console.log(data);
+        }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
     }
 };
 ProfileService = __decorate([

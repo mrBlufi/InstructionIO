@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { UserInfo } from './model/UserInfo';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/filter';
@@ -11,9 +11,9 @@ import { Language } from 'angular-l10n';
     templateUrl: '/partial/profileComponent',
     styleUrls: ['css/ProfilePage.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit,OnDestroy {
     @Language() lang: string;
-    user: UserInfo = new UserInfo(0, 'FirstName', 'LastName', new Date(), '', 'sadasda');
+    user: UserInfo = new UserInfo(0, 'FullName', new Date(2012,12,12), '', '','');
 
     constructor(private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService) {
@@ -50,8 +50,25 @@ export class ProfileComponent implements OnInit {
             }, err => console.log(err));
     }
     ngOnDestroy() {
+        console.log('destroy and user', this.user);
+        this._profileservice.setProfileData(this.user);
         this.sub.unsubscribe();
     }
+
+    parseDate(dateString: string): Date {
+        if (dateString) {
+            return new Date(dateString);
+        } else {
+            return null;
+        }
+    }
+
+    @HostListener('window:beforeunload', ['$event'])
+    public beforeUnload(event: any) {
+        this._profileservice.setProfileData(this.user);
+
+    }
+
 
     
 }

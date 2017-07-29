@@ -12,9 +12,18 @@
     width: 39px;
     height: 34px;
 }
+@media (max-width: 750) {
+    .container {
+        margin: 0px;
+    }
+}
 
 li img {
     vertical-align: middle;
+}
+
+ul{
+    padding-top:0px;
 }
 
 .caret {

@@ -6,10 +6,12 @@ import { LocaleService, Language } from 'angular-l10n';
 @Component({
     selector: 'my-app',
     templateUrl: '/partial/appComponent',
-    styleUrls: ['css/AppStyle.css']
+    styleUrls: ['css/site_nav.css']
 })
 export class AppComponent implements OnInit {
-    public constructor(private titleService: Title, public locale: LocaleService)  { }
+    public constructor(private titleService: Title, public locale: LocaleService) {
+
+    }
 
     angularClientSideData = 'Angular';
 

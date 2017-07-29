@@ -17,7 +17,12 @@ namespace InstructionIO.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Tag>()
+           .HasIndex(u => u.Name)
+           .IsUnique();
             base.OnModelCreating(builder);
+
+            
         }
 
         public DbSet<UserInfo> UserInfos { get; set; }
@@ -28,10 +33,5 @@ namespace InstructionIO.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<TagsRelation> TagsRelations { get; set; }
         public DbSet<Category> Categorys { get; set; }
-
-        internal object SingleOrDefault(Func<object, bool> p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

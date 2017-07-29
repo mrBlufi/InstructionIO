@@ -20,7 +20,7 @@ let ProfileComponent = class ProfileComponent {
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this._profileservice = _profileservice;
-        this.user = new UserInfo_1.UserInfo(0, 'FirstName', 'LastName', new Date(), '', 'sadasda');
+        this.user = new UserInfo_1.UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
         this.userQueryParams = null;
         this.instructions = null;
     }
@@ -46,13 +46,32 @@ let ProfileComponent = class ProfileComponent {
         }, err => console.log(err));
     }
     ngOnDestroy() {
+        console.log('destroy and user', this.user);
+        this._profileservice.setProfileData(this.user);
         this.sub.unsubscribe();
+    }
+    parseDate(dateString) {
+        if (dateString) {
+            return new Date(dateString);
+        }
+        else {
+            return null;
+        }
+    }
+    beforeUnload(event) {
+        this._profileservice.setProfileData(this.user);
     }
 };
 __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
 ], ProfileComponent.prototype, "lang", void 0);
+__decorate([
+    core_1.HostListener('window:beforeunload', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ProfileComponent.prototype, "beforeUnload", null);
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
