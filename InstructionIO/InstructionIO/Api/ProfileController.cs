@@ -17,7 +17,10 @@ namespace instructionsIO.Controllers.Api
             return new UserInfo
             {
                 FirstName = "gleb",
-                LastName = "sidorov"
+                LastName = "sidorov",
+                Birthday = new DateTime(),
+                Interests = @"«Понимание Медиа: внешние расширения человека» (англ. Understanding Media: The ... Маклюэн разделяет средства коммуникации на «горячие» и «холодные» (cool), имея в виду характер их воздействия: «Горячие» средства",
+                Avatar = "https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png"
             };
         }
     }

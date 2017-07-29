@@ -1,6 +1,4 @@
-﻿
-import { Routes, RouterModule } from '@angular/router';
-
+﻿import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about.component';
 import { IndexComponent } from './index.component';
 import { ContactComponent } from './contact.component';
