@@ -1,10 +1,10 @@
 ﻿export class UserInfo {
-    constructor(public Id: number,
-        public FirstName: string,
-        public LastName: string,
-        public Birthday: Date,
-        public Avatar: string,
-        public Interests: string) {
+    constructor(public id: number,
+        public fullName: string,
+        public birthday: Date,
+        public avatar: string,
+        public interests: string,
+        public user: string) {
 
     }
 }

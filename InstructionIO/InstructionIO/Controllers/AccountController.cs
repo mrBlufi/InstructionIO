@@ -20,6 +20,7 @@ namespace InstructionIO.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -27,7 +28,7 @@ namespace InstructionIO.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //db = context;
+            _context = context;
         }
 
         //static UserInfo info = new UserInfo()
@@ -105,17 +106,12 @@ namespace InstructionIO.Controllers
 
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
-            //if (info == null)
-            //{
-            //    return RedirectToAction(nameof(Login));
-            //}
-
-            // Sign in the user with this external login provider if the user already has a login.
+           
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
-                //return RedirectToLocal(returnUrl);
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+                
             }
             else
             {
@@ -128,19 +124,25 @@ namespace InstructionIO.Controllers
                     Email = email
                 };
                 var result1 = await _userManager.CreateAsync(user);
+                var userinfo = new UserInfo()
+                {
+                    FullName = "Full Name",
+                    Birthday = new DateTime(),
+                    Interests = "Interests",
+                    User = user
+                };
+                _context.UserInfos.Add(userinfo);
                 if (result1.Succeeded)
                 {
                     result1 = await _userManager.AddLoginAsync(user, info);
                     if (result1.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return RedirectToAction("Index", "Home");
-                        //return RedirectToLocal(returnUrl);
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
                     }
                 }
 
-                return RedirectToAction("Index", "Home");
-                //return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
 

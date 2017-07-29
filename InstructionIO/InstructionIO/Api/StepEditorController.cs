@@ -31,7 +31,7 @@ namespace InstructionIO.Api
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload()
+        public IActionResult Upload()
         {
             var files = Request.Form.Files;
             return Ok(UploadToCloudinary(files[0]).SecureUri);

@@ -1,27 +1,9 @@
-﻿/*// css preprocessors: after LESS, SASS
-
-.content(@width) {
-    // ...
-        width: @width;
-}
-
-.main {
-    .content(30);
-    >~+
-    &:hover {
-
-    }
-}
-
-    //dist
-    //  /app.js <--- main.ts
-    //  /vendor.js
-    //  /pollyfils.js
-    //  /0.chunck.js
-    //  /.......*/
-
+﻿
 body {
     font-family: 'Nunito', sans-serif;
+}
+.profile {
+padding-top:20px;
 }
 
 .slim_header {
@@ -31,10 +13,10 @@ body {
     position: unset;
     padding: 5px 7px;
     margin-top: -1px;
-    margin-bottom:0px;
+    margin-bottom: 0px;
     color: #657e9b;
     font-family: 'Exo 2', sans-serif;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .avatar {
@@ -85,3 +67,4 @@ input[disabled].editableTarget {
     font-weight: 500;
     line-height: 1.1;
 }
+

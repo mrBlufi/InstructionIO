@@ -133,7 +133,7 @@ namespace InstructionIO.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Rating");
+                    b.Property<double>("Rating");
 
                     b.HasKey("Id");
 
@@ -142,6 +142,26 @@ namespace InstructionIO.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Instructions");
+                });
+
+            modelBuilder.Entity("InstructionIO.Models.RatingRelation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("InstructionId");
+
+                    b.Property<int?>("UserId");
+
+                    b.Property<int>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstructionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RatingRelation");
                 });
 
             modelBuilder.Entity("InstructionIO.Models.Step", b =>
@@ -167,9 +187,14 @@ namespace InstructionIO.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Frequency");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Tags");
                 });
@@ -179,9 +204,9 @@ namespace InstructionIO.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("InstructionId");
+                    b.Property<int>("InstructionId");
 
-                    b.Property<int>("TagId");
+                    b.Property<int?>("TagId");
 
                     b.HasKey("Id");
 
@@ -201,11 +226,9 @@ namespace InstructionIO.Migrations
 
                     b.Property<DateTime>("Birthday");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FullName");
 
                     b.Property<string>("Interests");
-
-                    b.Property<string>("LastName");
 
                     b.Property<string>("UserId")
                         .IsRequired();
@@ -331,7 +354,7 @@ namespace InstructionIO.Migrations
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("InstructionIO.Models.Instruction", "Instruction")
-                        .WithMany()
+                        .WithMany("Comment")
                         .HasForeignKey("InstructionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -339,7 +362,7 @@ namespace InstructionIO.Migrations
             modelBuilder.Entity("InstructionIO.Models.ContentBlock", b =>
                 {
                     b.HasOne("InstructionIO.Models.Step", "Step")
-                        .WithMany()
+                        .WithMany("ContentBlock")
                         .HasForeignKey("StepId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -356,10 +379,22 @@ namespace InstructionIO.Migrations
                         .HasForeignKey("CategoryId");
                 });
 
+            modelBuilder.Entity("InstructionIO.Models.RatingRelation", b =>
+                {
+                    b.HasOne("InstructionIO.Models.Instruction", "Instruction")
+                        .WithMany("RatingRelation")
+                        .HasForeignKey("InstructionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InstructionIO.Models.UserInfo", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("InstructionIO.Models.Step", b =>
                 {
                     b.HasOne("InstructionIO.Models.Instruction", "Instruction")
-                        .WithMany()
+                        .WithMany("Step")
                         .HasForeignKey("InstructionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -367,13 +402,13 @@ namespace InstructionIO.Migrations
             modelBuilder.Entity("InstructionIO.Models.TagsRelation", b =>
                 {
                     b.HasOne("InstructionIO.Models.Instruction", "Instruction")
-                        .WithMany()
-                        .HasForeignKey("InstructionId");
+                        .WithMany("TagsRelation")
+                        .HasForeignKey("InstructionId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("InstructionIO.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("TagsRelation")
+                        .HasForeignKey("TagId");
                 });
 
             modelBuilder.Entity("InstructionIO.Models.UserInfo", b =>

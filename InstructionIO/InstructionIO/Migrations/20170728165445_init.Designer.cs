@@ -8,8 +8,8 @@ using InstructionIO.Data;
 namespace InstructionIO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170719210500_initial")]
-    partial class initial
+    [Migration("20170728165445_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,7 +108,7 @@ namespace InstructionIO.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<int>("StepId");
+                    b.Property<int?>("StepId");
 
                     b.Property<string>("Type");
 
@@ -168,6 +168,8 @@ namespace InstructionIO.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Frequency");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
@@ -182,7 +184,7 @@ namespace InstructionIO.Migrations
 
                     b.Property<int?>("InstructionId");
 
-                    b.Property<int>("TagId");
+                    b.Property<int?>("TagId");
 
                     b.HasKey("Id");
 
@@ -202,11 +204,9 @@ namespace InstructionIO.Migrations
 
                     b.Property<DateTime>("Birthday");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FullName");
 
                     b.Property<string>("Interests");
-
-                    b.Property<string>("LastName");
 
                     b.Property<string>("UserId")
                         .IsRequired();
@@ -340,9 +340,8 @@ namespace InstructionIO.Migrations
             modelBuilder.Entity("InstructionIO.Models.ContentBlock", b =>
                 {
                     b.HasOne("InstructionIO.Models.Step", "Step")
-                        .WithMany()
-                        .HasForeignKey("StepId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("ContentBlock")
+                        .HasForeignKey("StepId");
                 });
 
             modelBuilder.Entity("InstructionIO.Models.Instruction", b =>
@@ -368,13 +367,12 @@ namespace InstructionIO.Migrations
             modelBuilder.Entity("InstructionIO.Models.TagsRelation", b =>
                 {
                     b.HasOne("InstructionIO.Models.Instruction", "Instruction")
-                        .WithMany()
+                        .WithMany("TagsRelation")
                         .HasForeignKey("InstructionId");
 
                     b.HasOne("InstructionIO.Models.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("TagsRelation")
+                        .HasForeignKey("TagId");
                 });
 
             modelBuilder.Entity("InstructionIO.Models.UserInfo", b =>

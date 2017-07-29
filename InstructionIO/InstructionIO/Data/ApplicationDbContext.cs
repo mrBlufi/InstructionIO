@@ -17,7 +17,12 @@ namespace InstructionIO.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Tag>()
+           .HasIndex(u => u.Name)
+           .IsUnique();
             base.OnModelCreating(builder);
+
+            
         }
 
         public DbSet<UserInfo> UserInfos { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,11 +13,12 @@ namespace InstructionIO.Models
         public int Id { get; set; }
         [Required]
         public ApplicationUser User { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
         public string Interests { get; set; }
+
+       
     }
 
     public class Instruction
@@ -28,7 +30,23 @@ namespace InstructionIO.Models
         public DateTime CreateDate { get; set; }
         public DateTime LastChangedDate { get; set; }
         public Category Category { get; set; }
-        public int Rating { get; set; }
+        public double Rating { get; set; }
+        public ICollection<TagsRelation> TagsRelation { get; set; }
+        public ICollection<Step> Step { get; set; }
+        public ICollection<Comment> Comment { get; set; }
+        public ICollection<RatingRelation> RatingRelation { get; set; }
+
+        public Instruction()
+        {
+            TagsRelation = new List<TagsRelation>();
+            Step = new List<Step>();
+            Comment = new List<Comment>();
+            RatingRelation = new List<RatingRelation>();
+        }
+
+        
+
+       
     }
 
     public class Step
@@ -38,6 +56,7 @@ namespace InstructionIO.Models
         public Instruction Instruction { get; set; }
         public int Number { get; set; }
         public string Subtitle { get; set; }
+        public ICollection<ContentBlock> ContentBlock { get; set; }
     }
 
     public class ContentBlock
@@ -63,20 +82,39 @@ namespace InstructionIO.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Frequency { get; set; }
+        public ICollection<TagsRelation> TagsRelation { get; set; }
+
+        public Tag()
+        {
+            TagsRelation = new List<TagsRelation>();
+        }
     }
 
     public class TagsRelation
     {
-        public int Id { get; set; }
+        public int Id{ get; set; }
         [Required]
-        public Tag Tag { get; set; }
         public Instruction Instruction { get; set; }
+        [ForeignKey("TagId")]
+        public Tag Tag { get; set; }
     }
 
     public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+    }
+
+    public class RatingRelation
+    {
+        public int Id { get; set; }
+        public int Value { get; set; }
+        public UserInfo User { get; set; }
+        [Required]
+        public Instruction Instruction { get; set; }
+
     }
 
 }

@@ -12,21 +12,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
 require("rxjs/add/operator/map");
+const angular_l10n_1 = require("angular-l10n");
 let AppComponent = class AppComponent {
-    constructor(titleService) {
+    constructor(titleService, locale) {
         this.titleService = titleService;
+        this.locale = locale;
         this.angularClientSideData = 'Angular';
     }
     setTitle(newTitle) {
         this.titleService.setTitle(newTitle);
     }
+    ngOnInit() { }
+    selectLanguage(language) {
+        this.locale.setCurrentLanguage(language);
+    }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], AppComponent.prototype, "lang", void 0);
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        templateUrl: '/partial/appComponent'
+        templateUrl: '/partial/appComponent',
+        styleUrls: ['css/site_nav.css']
     }),
-    __metadata("design:paramtypes", [platform_browser_1.Title])
+    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
