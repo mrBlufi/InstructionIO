@@ -26,11 +26,9 @@ let ChildComponent = class ChildComponent {
             this.onClickResult = $event;
         };
         this.onRatingChange = ($event) => {
-            //console.log('onRatingUpdated $event: ', $event);
             this.onRatingChangeResult = $event;
         };
         this.onHoverRatingChange = ($event) => {
-            //console.log('onHoverRatingChange $event: ', $event);
             this.onHoverRatingChangeResult = $event;
         };
         this.categoryQueryParams = null;

@@ -22,18 +22,15 @@ namespace InstructionIO.Api
             
         }
 
-     
-        
-
         [HttpGet("tag")]
-        public IEnumerable<Tag> getListPopulTags()
+        public IEnumerable<Tag> GetListPopulTags()
         {
             IEnumerable <Tag> populartag= _context.Tags.AsNoTracking().ToList().OrderBy(d => d.Name).Take(6);
             return populartag;
         }
 
         [HttpGet("instruction/popular/category/{category}/{page}")]
-        public IEnumerable<Instruction> getListPopulInstruction(string category, int page)
+        public IEnumerable<Instruction> GetListPopulInstruction(string category, int page)
         {
             if (category == "Full"){
                 _unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.Rating);
@@ -44,7 +41,7 @@ namespace InstructionIO.Api
         }
 
         [HttpGet("instruction/lastchange/category/{category}/{page}")]
-        public IEnumerable<Instruction> getListLastAddInstruction(string category, int page)
+        public IEnumerable<Instruction> GetListLastAddInstruction(string category, int page)
         {
             if (category == "Full"){
                 _unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
@@ -56,14 +53,14 @@ namespace InstructionIO.Api
         }
 
         [HttpGet("categories")]
-        public IEnumerable<Category> getCategories()
+        public IEnumerable<Category> GetCategories()
         {
             IEnumerable<Category> category = _context.Categorys.AsNoTracking().ToList();
             return category;
         }
 
         [HttpGet("instruction/full/category/{category}/{page}")]
-        public IEnumerable<Instruction> getFullListInstruction(string category,int page)
+        public IEnumerable<Instruction> GetFullListInstruction(string category,int page)
         {
             if (category == "Full"){
                 _unstructions = _context.Instructions.Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate); }

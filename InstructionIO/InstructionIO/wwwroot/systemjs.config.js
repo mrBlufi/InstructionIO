@@ -32,7 +32,9 @@
       'angular-l10n': 'npm:angular-l10n/bundles/angular-l10n.umd.js',
       'moment': 'node_modules/moment/moment.js',
       'ngx-bootstrap': 'npm:ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
-      'ngx-swiper-wrapper':'npm:ngx-swiper-wrapper/bundles/ngx-swiper-wrapper.umd.js'
+      'ngx-swiper-wrapper': 'npm:ngx-swiper-wrapper/bundles/ngx-swiper-wrapper.umd.js',
+      'angular2-modal': 'npm:angular2-modal/bundles/angular2-modal.umd.js',
+      'angular2-modal/plugins/bootstrap': 'npm:angular2-modal/bundles/angular2-modal.bootstrap.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

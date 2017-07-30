@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-const UserInfo_1 = require("./model/UserInfo");
 const router_1 = require("@angular/router");
 require("rxjs/add/operator/filter");
 const ProfileService_1 = require("./service/ProfileService");
@@ -20,7 +19,6 @@ let ProfileComponent = class ProfileComponent {
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this._profileservice = _profileservice;
-        this.user = new UserInfo_1.UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
         this.userQueryParams = null;
         this.instructions = null;
     }

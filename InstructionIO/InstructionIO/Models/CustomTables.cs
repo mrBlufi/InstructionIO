@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -43,16 +44,13 @@ namespace InstructionIO.Models
             Comment = new List<Comment>();
             RatingRelation = new List<RatingRelation>();
         }
-
-        
-
-       
     }
 
     public class Step
     {
         public int Id { get; set; }
         [Required]
+        [JsonIgnore]
         public Instruction Instruction { get; set; }
         public int Number { get; set; }
         public string Subtitle { get; set; }
@@ -63,6 +61,7 @@ namespace InstructionIO.Models
     {
         public int Id { get; set; }
         [Required]
+        [JsonIgnore]
         public Step Step { get; set; }
         public string Type { get; set; }
         public string Content { get; set; }
@@ -72,6 +71,7 @@ namespace InstructionIO.Models
     {
         public int Id { get; set; }
         [Required]
+        [JsonIgnore]
         public Instruction Instruction { get; set; }
         public UserInfo Author { get; set; }
         public string Context { get; set; }
@@ -95,6 +95,7 @@ namespace InstructionIO.Models
     {
         public int Id{ get; set; }
         [Required]
+        [JsonIgnore]
         public Instruction Instruction { get; set; }
         [ForeignKey("TagId")]
         public Tag Tag { get; set; }
@@ -113,6 +114,7 @@ namespace InstructionIO.Models
         public int Value { get; set; }
         public UserInfo User { get; set; }
         [Required]
+        [JsonIgnore]
         public Instruction Instruction { get; set; }
 
     }

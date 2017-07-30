@@ -13,13 +13,17 @@ const ngx_swiper_wrapper_1 = require("ngx-swiper-wrapper");
 const core_1 = require("@angular/core");
 const ng2_dragula_1 = require("ng2-dragula");
 const platform_browser_1 = require("@angular/platform-browser");
+const instruction_Service_1 = require("./service/instruction.Service");
 const http_1 = require("@angular/http");
+const Instruction_1 = require("./model/Instruction");
+const Step_1 = require("./model/Step");
 let InstructionEditorComponent = class InstructionEditorComponent {
-    constructor(dragulaService, sanitizer, http) {
+    constructor(dragulaService, sanitizer, http, _instructionservice) {
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
-        this.Steps = [1];
+        this._instructionservice = _instructionservice;
+        this.Inst = new Instruction_1.Instruction();
         this.mainSwiperConfig = {
             direction: 'horizontal',
             slidesPerView: '1',
@@ -34,15 +38,18 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             slideClass: 'slide-mini',
             containerModifierClass: 'miniSwiperContainer'
         };
-        console.log(this.mainSwiper);
+        console.log(this.Inst);
         dragulaService.setOptions('stepD', {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
             }
         });
     }
+    cw(n) {
+        console.log(n);
+    }
     add() {
-        this.Steps.push(Math.random() * 100);
+        this.Inst.step.push(new Step_1.Step(this.Inst.step[this.Inst.step.length - 1].id + 1));
         this.mainSwiper.update();
     }
     del() {
@@ -50,11 +57,15 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         if (this.mainSwiper.isAtLast) {
             this.mainSwiper.prevSlide();
         }
-        this.Steps.pop();
     }
     onIndexChange(event) {
         this.mainSwiper.setIndex(event);
         this.miniSwiper.setIndex(event);
+    }
+    ngOnInit() {
+        this._instructionservice.get('99').subscribe(data => {
+            this.Inst = data;
+        }, err => console.log(err));
     }
     ngOnDestroy() {
         this.dragulaService.destroy('stepD');
@@ -73,7 +84,7 @@ InstructionEditorComponent = __decorate([
         selector: 'instructionEditor',
         templateUrl: '/partial/InstructionEditorComponent'
     }),
-    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http])
+    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService])
 ], InstructionEditorComponent);
 exports.InstructionEditorComponent = InstructionEditorComponent;
 //# sourceMappingURL=instructionEditor.component.js.map

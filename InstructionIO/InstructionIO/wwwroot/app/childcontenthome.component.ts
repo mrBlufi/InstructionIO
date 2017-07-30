@@ -26,12 +26,10 @@ export class ChildComponent implements OnInit {
     };
 
     onRatingChange = ($event: IStarRatingOnRatingChangeEven) => {
-        //console.log('onRatingUpdated $event: ', $event);
         this.onRatingChangeResult = $event;
     };
 
     onHoverRatingChange = ($event: IStarRatingIOnHoverRatingChangeEvent) => {
-        //console.log('onHoverRatingChange $event: ', $event);
         this.onHoverRatingChangeResult = $event;
     };
 

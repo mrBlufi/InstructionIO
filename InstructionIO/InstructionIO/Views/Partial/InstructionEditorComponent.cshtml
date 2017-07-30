@@ -6,8 +6,8 @@
     </div>
     <div class="panel-body">
         <div class="form">
-            <input type="text" class="form-control instForm" placeholder="Instruction name" />
-            <input type="text" class="form-control instForm" placeholder="tags.." />
+            <input type="text" class="form-control instForm" [value]="Inst.name" placeholder="Instruction name" />
+            <input type="text" class="form-control instForm" [value]="Inst.tag" placeholder="tags.." />
         </div>
         <accordion class="previevDropDown">
             <accordion-group>
@@ -26,14 +26,15 @@
 <div class="panel panel-default">
     <div class="panel-body panle_body_main">
         <swiper #mainSwiper [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
-            <my-stepEditor *ngFor="let step of Steps" class="swiper-slide mySlide" style="box-sizing:border-box" [stepName]="step"></my-stepEditor>
+            <my-stepEditor *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></my-stepEditor>
         </swiper>
     </div>
     <div>
         <swiper #miniSwiper [config]="miniSwiperConfig" (indexChange)="onIndexChange($event)">
-            <span style="height:50px;width:50px;background-color:white" [dragula]="'stepD'" *ngFor="let step of Steps" class="swiper-slide miniSlide well">{{step}}</span>
+            <span style="height:50px;width:50px;background-color:white" [dragula]="'stepD'" *ngFor="let step of Inst.step" class="swiper-slide miniSlide well">{{step.subtitle}}</span>
             <div class="swiper-slide miniSlide">
                 <button #btn (click)="add(btn)">add</button>
+                <button #btn (click)="cw(Inst)">info</button>
             </div>
         </swiper>
     </div>

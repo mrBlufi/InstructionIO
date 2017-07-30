@@ -13,7 +13,7 @@ import { Language } from 'angular-l10n';
 })
 export class ProfileComponent implements OnInit,OnDestroy {
     @Language() lang: string;
-    user: UserInfo = new UserInfo(0, 'FullName', new Date(2012,12,12), '', '','');
+    user: UserInfo;
 
     constructor(private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService) {

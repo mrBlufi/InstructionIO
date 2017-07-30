@@ -1,13 +1,15 @@
 ﻿import { UserInfo } from "./UserInfo";
 import { Category } from "./Category";
+import { Step } from './Step';
 
 export class Instruction {
-    id: number;
-    name: string;
-    author: UserInfo;
-    createDate: Date;
-    lastChangedDate: Date;
-    category: Category;
-    rating: number;
-
+    public id: number;
+    public name: string;
+    public author: UserInfo;
+    public createDate: Date;
+    public lastChangedDate: Date;
+    public category: Category;
+    public rating: number;
+    public step: Step[];
+    public tag: string;
 }

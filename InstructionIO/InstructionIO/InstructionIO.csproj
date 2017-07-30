@@ -14,15 +14,25 @@
 
   <ItemGroup>
     <Content Include="wwwroot\app\childcontenthome.component.ts" />
+    <Content Include="wwwroot\app\model\apiModel\CommentFull.ts" />
     <Content Include="wwwroot\app\model\apiModel\ContentFull.ts" />
+    <Content Include="wwwroot\app\model\apiModel\InstructionFull.ts" />
+    <Content Include="wwwroot\app\model\apiModel\SpetFull.ts" />
     <Content Include="wwwroot\app\model\Category.ts" />
+    <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
+    <Content Include="wwwroot\app\model\Step.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
+    <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\service\HomeService.ts" />
+    <Content Include="wwwroot\app\service\instruction.Service.js" />
+    <Content Include="wwwroot\app\service\instruction.Service.js.map" />
+    <Content Include="wwwroot\app\service\instruction.Service.ts" />
     <Content Include="wwwroot\app\service\ProfileService.ts" />
-    <Content Include="wwwroot\app\model\ContentBlock.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
+    <Content Include="wwwroot\app\tools\safeHtml.ts" />
+    <Content Include="wwwroot\app\tools\safeOn.ts" />
     <Content Include="wwwroot\assets\locale-en.json" />
     <Content Include="wwwroot\assets\locale-ru.json" />
     <Content Include="wwwroot\css\AppStyle.css" />

@@ -16,28 +16,28 @@ namespace InstructionIO.Api
         public InstructionFull(Instruction _instruction)
         {
             instruction = _instruction;
-            tags = new List<string>();
+            //tags = new List<string>();
             steps = new List<StepFull>();
-            instruction.Rating = _instruction.RatingRelation.Average(x => x.Value);
-            comments = new List<CommentFull>();
-            for (int i = 0; i < _instruction.TagsRelation.Count; i++)
-            {
-                tags.Add(_instruction.TagsRelation.ElementAt(i).Tag.Name);
-            }
+            //instruction.Rating = _instruction.RatingRelation.Average(x => x.Value);
+           // comments = new List<CommentFull>();
+            //for (int i = 0; i < _instruction.TagsRelation.Count; i++)
+            //{
+            //    tags.Add(_instruction.TagsRelation.ElementAt(i).Tag.Name);
+            //}
             
             for (int i = 0; i < _instruction.Step.Count; i++)
             {
                 steps.Add(new StepFull(_instruction.Step.ElementAt(i)));
             }
 
-            for (int i = 0; i < _instruction.Comment.Count; i++)
-            {
-                comments.Add(new CommentFull(_instruction.Comment.ElementAt(i)));
-            }
-            instruction.TagsRelation = new List<TagsRelation>();
+            //for (int i = 0; i < _instruction.Comment.Count; i++)
+            //{
+            //    comments.Add(new CommentFull(_instruction.Comment.ElementAt(i)));
+            //}
+           // instruction.TagsRelation = new List<TagsRelation>();
             instruction.Step = new List<Step>();
-            instruction.Comment = new List<Comment>();
-            instruction.RatingRelation = new List<RatingRelation>();
+            //instruction.Comment = new List<Comment>();
+            //instruction.RatingRelation = new List<RatingRelation>();
         }
     }
     public class StepFull{

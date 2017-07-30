@@ -1,0 +1,13 @@
+﻿<div class="modal fade" id="videLinckModal" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body form-group" style="display:flex">
+                <input id="videoUrlInput" #videoUrl class="form-control" placeholder="url..." type="text" />
+                <button class="btn" style="margin-left:5px" (click)="videoBoxAdd(videoUrl)">Load</button>
+            </div>
+        </div>
+    </div>
+</div>

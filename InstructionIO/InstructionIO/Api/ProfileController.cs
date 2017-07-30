@@ -29,15 +29,15 @@ namespace instructionsIO.Controllers.Api
             _context = context;
 
         }
-        
+
 
 
         [HttpGet("user/my")]
-        public async Task<UserInfo> getMyProfileAsync(string userparams)
+        public async Task<UserInfo> GetMyProfileAsync(string userparams)
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 
-           var messages = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
+            var messages = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
             messages.User = null;
 
 
@@ -56,15 +56,15 @@ namespace instructionsIO.Controllers.Api
 
 
         [HttpGet("instruction/user/{userID}/{page}")]
-        public IEnumerable<Instruction> getInstructionUserID(int userID, int page)
+        public IEnumerable<Instruction> GetInstructionUserID(int userID, int page)
         {
-            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x =>x.Author.Id==userID).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList();
-           
+            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userID).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList();
+
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
 
         [HttpGet("instruction/user/my/{page}")]
-        public async Task<IEnumerable<Instruction>> getInstructionUserAsync(int page)
+        public async Task<IEnumerable<Instruction>> GetInstructionUserAsync(int page)
         {
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             var userinfo = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
@@ -75,7 +75,7 @@ namespace instructionsIO.Controllers.Api
 
 
         [HttpPost("user/update")]
-        public UserInfo setUserProfile([FromBody]UserInfo userprofile)
+        public UserInfo SetUserProfile([FromBody]UserInfo userprofile)
         {
             var messages = _context.UserInfos.FirstOrDefault(f => f.Id == userprofile.Id);
             messages.FullName = userprofile.FullName;
@@ -87,29 +87,18 @@ namespace instructionsIO.Controllers.Api
             return messages;
         }
 
-       [HttpGet("test")]
-        public IActionResult getTest()
+        [HttpGet("test")]
+        public IActionResult GetTest()
         {
-            var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock)
-                .Include(x=>x.TagsRelation).ThenInclude(x=>x.Tag)
-                .Include(x=>x.Author).Include(x=>x.Category).Include(x => x.RatingRelation)
-                .Include(x=>x.Comment).ToList()
-                .Find(x=>x.Id==1);
-            return new ObjectResult(new InstructionFull(test));
+            //var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock)
+            //    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
+            //    .Include(x => x.Author).Include(x => x.Category).Include(x => x.RatingRelation)
+            //    .Include(x => x.Comment).ToList()
+            //    .Find(x => x.Id == 1);
+            //return new ObjectResult(new InstructionFull(test));
+
+            Instruction test = _context.Instructions.Include(inst => inst.Step).ThenInclude(step => step.ContentBlock).FirstOrDefault();
+            return new ObjectResult(test);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

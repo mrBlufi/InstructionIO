@@ -11,21 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const ng2_dragula_1 = require("ng2-dragula");
-const ContentBlock_1 = require("./model/ContentBlock");
+const ContetnBlock_1 = require("./model/ContetnBlock");
 const platform_browser_1 = require("@angular/platform-browser");
 const http_1 = require("@angular/http");
+const Step_1 = require("./model/Step");
+const angular2_modal_1 = require("angular2-modal");
+const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
+const videoModal_1 = require("./patrialComponent/videoModal");
 let StepEditorComponent = class StepEditorComponent {
-    constructor(dragulaService, sanitizer, http) {
+    constructor(modal, dragulaService, sanitizer, http) {
+        this.modal = modal;
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
-        this.contentBlocks = new Array();
-        this.stepName = this.randomString();
-        dragulaService.setOptions(this.stepName, {
-            moves: function (el, container, handle) {
-                return !(handle.className.includes('delete'));
-            }
-        });
+        this.step = new Step_1.Step('0');
+        //dragulaService.setOptions(this.step.id, {
+        //    moves: function (el: any, container: any, handle: any) {
+        //        return !(handle.className.includes('delete'));
+        //    }
+        //});
         dragulaService.dropModel.subscribe((value) => {
             this.onDropModel(value.slice(1));
         });
@@ -48,47 +52,46 @@ let StepEditorComponent = class StepEditorComponent {
         console.log(n);
     }
     textBoxAdd() {
-        let n = new ContentBlock_1.ContentBlock('text');
-        n.Content = 'sssss';
-        this.contentBlocks.push(n);
+        let n = new ContetnBlock_1.ContentBlock('text', this.sanitizer);
+        this.step.contentBlock.push(n);
     }
     addPictureBox(url) {
-        let n = new ContentBlock_1.ContentBlock('picture');
-        n.Content = url;
-        this.contentBlocks.push(n);
+        let n = new ContetnBlock_1.ContentBlock('img', this.sanitizer);
+        n.content = url;
+        this.step.contentBlock.push(n);
     }
-    redirectToInput() {
-        document.getElementById('fileInput').click();
+    redirectToInput(eleme) {
+        eleme.click();
     }
     videoBoxAdd(input) {
-        let n = new ContentBlock_1.ContentBlock('video');
-        n.Content = input.value.replace('watch?v=', 'embed/');
-        this.contentBlocks.push(n);
+        let n = new ContetnBlock_1.ContentBlock('video', this.sanitizer);
+        n.content = input.value.replace('watch?v=', 'embed/');
+        this.step.contentBlock.push(n);
+    }
+    videoBoxModal() {
+        return this.modal.open(videoModal_1.CustomModal, angular2_modal_1.overlayConfigFactory({ num1: 2, num2: 3 }, bootstrap_1.BSModalContext));
     }
     boxDelete(event) {
-        this.contentBlocks.splice(this.contentBlocks.indexOf(event), 1);
+        this.step.contentBlock.splice(this.step.contentBlock.indexOf(event), 1);
     }
-    safeOn(url) {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    }
-    saveFile(input) {
-        let res;
+    saveFile(event) {
+        let src;
+        let elem = event.srcElement;
         let formData = new FormData();
-        formData.append(input.files[0].name, input.files[0]);
-        console.info(formData);
-        this.http.post('http://localhost:57640/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g, "")));
+        formData.append(elem.files[0].name, elem.files[0]);
+        this.http.post('/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g, "")));
     }
 };
 __decorate([
     core_1.Input(),
-    __metadata("design:type", String)
-], StepEditorComponent.prototype, "stepName", void 0);
+    __metadata("design:type", Step_1.Step)
+], StepEditorComponent.prototype, "step", void 0);
 StepEditorComponent = __decorate([
     core_1.Component({
         selector: 'my-stepEditor',
         templateUrl: '/partial/StepEditorComponent'
     }),
-    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http])
+    __metadata("design:paramtypes", [bootstrap_1.Modal, ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http])
 ], StepEditorComponent);
 exports.StepEditorComponent = StepEditorComponent;
 //# sourceMappingURL=stepeditor.component.js.map

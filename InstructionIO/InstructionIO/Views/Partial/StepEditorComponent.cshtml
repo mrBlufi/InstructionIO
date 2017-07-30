@@ -1,33 +1,34 @@
 ﻿<div class="container contentBody">
+    <span defaultOverlayTarget></span>
     <div class="row step_info">
         <div class="col-xs-12 form-group">
-            <input type="text" class="form-control" placeholder="Step name" value=""/>
+            <input type="text" class="form-control" placeholder="Step name" [value]="step.subtitle"/>
         </div>
     </div>
     <div class="row step_body panel panel-default">
-        <div class="panel-body" [dragula]="stepName" [dragulaModel]="contentBlocks">
-            <div class="row contentBlock" *ngFor="let block of contentBlocks" >
-                <div class="textRow">
+        <div class="panel-body" [dragula]="step.id" [dragulaModel]="contentBlocks">
+            <div class="row contentBlock" *ngFor="let block of step.contentBlock" >
+                <div class="contetnRow">
                     <div class="pull-left" style="margin-left:-16px;">
                         <span class="glyphicon glyphicon-move"></span>
                     </div>
                     <div class="pull-right" style="margin-right:-16px;">
                         <span class="glyphicon glyphicon-remove delete" (click)="boxDelete(block)"></span>
-                    </div> 
-                    <div [ngSwitch]="block.Type">
+                    </div>
+                    <div [ngSwitch]="block.type">
                         <template ngSwitchCase="text">
-                            <div class="content_block_type_text"   [textBox]="block.Content" role="textbox" contenteditable="true" aria-multiline="true">
-                                <p class="textBox"  data-text="blblbla"></p>
+                            <div class="content_block_type_text" [innerHtml]="block.content" role="textbox" contenteditable="true" aria-multiline="true">
+                                <p class="textBox" data-text="blblbla"></p>
                             </div>
                         </template>
-                        <template ngSwitchCase="picture">
-                            <div class="content_block_type_pictire" [id]="block.Id">
-                                <img class="pictireBox" [src]="safeOn(block.Content)"/>
+                        <template ngSwitchCase="img">
+                            <div class="content_block_type_pictire">
+                                <img class="pictireBox" [src]="block.content"/>
                             </div>
                         </template>
                         <template ngSwitchCase="video">
-                            <div class="content_block_type_video" [id]="block.Id">
-                                <iframe [src]="safeOn(block.Content)" frameborder="0" allowfullscreen>
+                            <div class="content_block_type_video">
+                                <iframe [src]="safeOn(block.content)" frameborder="0" allowfullscreen>
                                 </iframe>
                             </div>
                         </template>
@@ -38,24 +39,12 @@
         <div class="row">
             <div class="text-center add_panel">
                 <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-pencil" (click)="textBoxAdd()"></button>
-                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-picture" (click)="redirectToInput()"></button>
-                <a role="button" class="btn btn-default btn-circle btn-lg" href="#videLinckModal" data-toggle="modal" data-target="#videLinckModal"><span class="glyphicon glyphicon-facetime-video" style="vertical-align:middle"></span></a>
-                <input #img id="fileInput" type="file" (change)="saveFile(img)" style="display:none" />
+                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)"></button>
+                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-facetime-video" (click)="videoBoxModal()"></button>
+                <input  #imgInput type="file" (change)="saveFile($event)" style="display:none" />
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="videLinckModal" role="dialog">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body form-group" style="display:flex">
-                <input id="videoUrlInput" #videoUrl class="form-control" placeholder="url..." type="text" />
-                <button class="btn" style="margin-left:5px" (click)="videoBoxAdd(videoUrl)">Load</button>
-            </div>
-        </div>
-    </div>
-</div>
+

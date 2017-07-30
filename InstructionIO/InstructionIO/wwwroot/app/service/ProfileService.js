@@ -18,16 +18,16 @@ let ProfileService = class ProfileService {
     }
     getDataProfile(userparams) {
         console.log(userparams);
-        return this.http.get('https://localhost:44328/api/profile/user/' + userparams).map(res => (res).json());
+        return this.http.get('/api/profile/user/' + userparams).map(res => (res).json());
     }
     getInstructions(userparams, stepSkip) {
         console.log(userparams);
-        return this.http.get('https://localhost:44328/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
+        return this.http.get('/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
     }
     setProfileData(obj) {
         const body = JSON.stringify(obj);
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('https://localhost:44328/api/profile/user/update', body, { headers: headers }).subscribe((data) => {
+        return this.http.post('/api/profile/user/update', body, { headers: headers }).subscribe((data) => {
             console.log('Response received');
             console.log(data);
         }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
