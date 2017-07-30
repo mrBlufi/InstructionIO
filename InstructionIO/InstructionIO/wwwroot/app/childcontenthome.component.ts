@@ -4,7 +4,7 @@ import { OnInit, Component } from '@angular/core';
 import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnHoverRatingChangeEvent } from "angular-star-rating/star-rating-struct";
 import { HomeService } from "./service/HomeService";
 import { Instruction } from "./model/Instruction";
-import { ProfileService } from "./service/ProfileService";
+import { ProfileService } from "./service/Profile.Service";
 import { Language } from 'angular-l10n';
 
 @Component({

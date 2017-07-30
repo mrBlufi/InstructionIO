@@ -13,12 +13,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Account\**" />
+    <Content Remove="Views\Account\**" />
+    <EmbeddedResource Remove="Views\Account\**" />
+    <None Remove="Views\Account\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\app\childcontenthome.component.ts" />
+    <Content Include="wwwroot\app\comment.component.ts" />
     <Content Include="wwwroot\app\model\apiModel\CommentFull.ts" />
     <Content Include="wwwroot\app\model\apiModel\ContentFull.ts" />
     <Content Include="wwwroot\app\model\apiModel\InstructionFull.ts" />
     <Content Include="wwwroot\app\model\apiModel\SpetFull.ts" />
     <Content Include="wwwroot\app\model\Category.ts" />
+    <Content Include="wwwroot\app\model\Comment.ts" />
     <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
     <Content Include="wwwroot\app\model\Step.ts" />
@@ -28,7 +37,9 @@
     <Content Include="wwwroot\app\service\instruction.Service.js" />
     <Content Include="wwwroot\app\service\instruction.Service.js.map" />
     <Content Include="wwwroot\app\service\instruction.Service.ts" />
-    <Content Include="wwwroot\app\service\ProfileService.ts" />
+    <Content Include="wwwroot\app\service\Profile.Service.js" />
+    <Content Include="wwwroot\app\service\Profile.Service.js.map" />
+    <Content Include="wwwroot\app\service\Profile.Service.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
     <Content Include="wwwroot\app\tools\safeHtml.ts" />
@@ -37,6 +48,7 @@
     <Content Include="wwwroot\assets\locale-ru.json" />
     <Content Include="wwwroot\css\AppStyle.css" />
     <Content Include="wwwroot\app\instructionEditor.component.ts" />
+    <Content Include="wwwroot\css\comment.css" />
     <Content Include="wwwroot\css\InstructionEditor.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />
@@ -71,9 +83,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
   </ItemGroup>
 
 </Project>

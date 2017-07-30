@@ -24,7 +24,8 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
-      'rxjs':                      'npm:rxjs',
+      'rxjs': 'npm:rxjs',
+      'angular-froala-wysiwyg': 'npm:angular-froala-wysiwyg/bundles/angular-froala-wysiwyg.umd.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'angular-star-rating': 'npm:angular-star-rating/angular-star-rating.umd.js',
       'angular2-infinite-scroll': 'npm:angular2-infinite-scroll',
@@ -38,6 +39,10 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
+        "ng2-ckeditor": {
+            "main": "lib/index.js",
+            "defaultExtension": "js",
+        },
       app: {
           main: './main.js',
           defaultExtension: 'js'

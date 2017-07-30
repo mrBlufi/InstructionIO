@@ -26,11 +26,14 @@ select{
     display:inline;
 }
 
-.panel{
-    margin-top:10px;
+.panel-default {
+    margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
 }
 
-
+.well {
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
 
 .name{
     font-size:x-large;

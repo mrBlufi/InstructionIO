@@ -8,6 +8,7 @@ const profile_component_1 = require("./profile.component");
 const stepeditor_component_1 = require("./stepeditor.component");
 const instructionEditor_component_1 = require("./instructionEditor.component");
 const childcontenthome_component_1 = require("./childcontenthome.component");
+const comment_component_1 = require("./comment.component");
 const appRoutes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
@@ -25,6 +26,7 @@ const appRoutes = [
         ]
     },
     { path: 'stepeditor', component: stepeditor_component_1.StepEditorComponent, data: { title: 'StepEditor' } },
+    { path: 'comment', component: comment_component_1.CommentComponent },
     { path: 'instructionEditor', component: instructionEditor_component_1.InstructionEditorComponent, data: { title: 'instructionEditor' } }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);

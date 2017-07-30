@@ -5,6 +5,12 @@ body {
 .profile {
 padding-top:20px;
 }
+.panel-default {
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+hr {
+    box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+}
 
 .slim_header {
     font-size: medium;

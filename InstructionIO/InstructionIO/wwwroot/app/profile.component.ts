@@ -3,7 +3,7 @@ import { UserInfo } from './model/UserInfo';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import { Instruction } from "./model/Instruction";
-import { ProfileService } from "./service/ProfileService";
+import { ProfileService } from "./service/Profile.Service";
 import { Language } from 'angular-l10n';
 
 @Component({

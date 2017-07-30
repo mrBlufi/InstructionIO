@@ -13,7 +13,7 @@ const core_1 = require("@angular/core");
 const UserInfo_1 = require("./model/UserInfo");
 const router_1 = require("@angular/router");
 require("rxjs/add/operator/filter");
-const ProfileService_1 = require("./service/ProfileService");
+const Profile_Service_1 = require("./service/Profile.Service");
 const angular_l10n_1 = require("angular-l10n");
 let ProfileComponent = class ProfileComponent {
     constructor(_Activatedroute, _router, _profileservice) {
@@ -79,7 +79,7 @@ ProfileComponent = __decorate([
         styleUrls: ['css/ProfilePage.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        router_1.Router, ProfileService_1.ProfileService])
+        router_1.Router, Profile_Service_1.ProfileService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

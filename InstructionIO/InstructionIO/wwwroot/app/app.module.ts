@@ -11,7 +11,7 @@ import { SwiperModule, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { DragulaModule } from 'ng2-dragula';
 import { HomeService } from "./service/HomeService";
-import { ProfileService } from "./service/ProfileService";
+import { ProfileService } from "./service/Profile.Service";
 import { InstructionService } from "./service/instruction.Service";
 import { AppComponent } from './app.component';
 import { ChildComponent } from './childcontenthome.component';
@@ -20,7 +20,9 @@ import { TranslationModule, LocaleService, TranslationService } from 'angular-l1
 import { SafeHtml } from './tools/safeHtml';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
-import { CustomModal } from './patrialComponent/videoModal'
+import { CustomModal } from './patrialComponent/videoModal';
+import { CommentComponent } from './comment.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -32,13 +34,13 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
     imports:
     [
-        BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(),
+        FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(),
         CarouselModule.forRoot(), SortableModule.forRoot(), AccordionModule.forRoot(),
         SwiperModule.forRoot(SWIPER_CONFIG), InfiniteScrollModule, DragulaModule, TranslationModule.forRoot(),
         ModalModule.forRoot(),
         BootstrapModalModule
     ],
-    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, SafeHtml],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, SafeHtml,CommentComponent],
     providers: [HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })

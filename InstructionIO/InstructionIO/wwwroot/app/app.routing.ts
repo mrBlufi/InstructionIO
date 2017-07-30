@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile.component';
 import { StepEditorComponent } from './stepeditor.component';
 import { InstructionEditorComponent } from './instructionEditor.component';
 import { ChildComponent } from './childcontenthome.component';
+import { CommentComponent } from './comment.component';
 
 
 
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     },
 
     { path: 'stepeditor', component: StepEditorComponent, data: { title: 'StepEditor' } },
+    { path: 'comment', component: CommentComponent},
     { path: 'instructionEditor', component: InstructionEditorComponent, data: { title: 'instructionEditor' } }
 ];
 
