@@ -48,6 +48,7 @@ namespace InstructionIO.Controllers
         public IActionResult IndexComponent() => PartialView();
 
         public IActionResult ProfileComponent() => PartialView();
+
         public IActionResult ContentChildHomeComponent() => PartialView();
 
         public IActionResult StepEditorComponent() => PartialView();

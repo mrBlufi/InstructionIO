@@ -10,6 +10,7 @@ import { CarouselModule, SortableModule, AccordionModule  } from 'ngx-bootstrap'
 import { SwiperModule, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { DragulaModule } from 'ng2-dragula';
+import { CustomModal } from './patrialComponent/videoModal';
 import { HomeService } from "./service/HomeService";
 import { ProfileService } from "./service/ProfileService";
 import { InstructionService } from "./service/instruction.Service";
@@ -20,7 +21,6 @@ import { TranslationModule, LocaleService, TranslationService } from 'angular-l1
 import { SafeHtml } from './tools/safeHtml';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
-import { CustomModal } from './patrialComponent/videoModal'
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -38,10 +38,12 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         ModalModule.forRoot(),
         BootstrapModalModule
     ],
-    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, SafeHtml],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, SafeHtml],
     providers: [HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [CustomModal]
 })
+
 export class AppModule {
     constructor(public locale: LocaleService, public translation: TranslationService) {
         this.locale.addConfiguration()
