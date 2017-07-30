@@ -90,15 +90,14 @@ namespace instructionsIO.Controllers.Api
         [HttpGet("test")]
         public IActionResult GetTest()
         {
-            //var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock)
-            //    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
-            //    .Include(x => x.Author).Include(x => x.Category).Include(x => x.RatingRelation)
-            //    .Include(x => x.Comment).ToList()
-            //    .Find(x => x.Id == 1);
-            //return new ObjectResult(new InstructionFull(test));
-
-            Instruction test = _context.Instructions.Include(inst => inst.Step).ThenInclude(step => step.ContentBlock).FirstOrDefault();
+            var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock)
+                .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
+                .Include(x => x.Author).Include(x => x.Category).Include(x => x.RatingRelation)
+                .Include(x => x.Comment).ToList();
             return new ObjectResult(test);
+
+            //Instruction test = _context.Instructions.Include(inst => inst.Step).ThenInclude(step => step.ContentBlock).FirstOrDefault();
+            //return new ObjectResult(test);
         }
     }
 }

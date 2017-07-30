@@ -63,7 +63,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         this.miniSwiper.setIndex(event);
     }
     ngOnInit() {
-        this._instructionservice.get('99').subscribe(data => {
+        this._instructionservice.get('1').subscribe(data => {
             this.Inst = data;
         }, err => console.log(err));
     }

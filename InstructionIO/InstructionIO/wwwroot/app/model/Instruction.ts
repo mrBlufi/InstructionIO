@@ -1,6 +1,7 @@
 ﻿import { UserInfo } from "./UserInfo";
 import { Category } from "./Category";
 import { Step } from './Step';
+import { Tag } from "./Tag";
 
 export class Instruction {
     public id: number;
@@ -11,5 +12,5 @@ export class Instruction {
     public category: Category;
     public rating: number;
     public step: Step[];
-    public tag: string;
+    public tag: Tag[];
 }

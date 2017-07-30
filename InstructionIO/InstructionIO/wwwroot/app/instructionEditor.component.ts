@@ -69,7 +69,7 @@ export class InstructionEditorComponent {
     }
 
     ngOnInit() {
-        this._instructionservice.get('99').subscribe(
+        this._instructionservice.get('1').subscribe(
             data => {
                 this.Inst = data;
             },

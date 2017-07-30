@@ -11,16 +11,16 @@ import { Language } from 'angular-l10n';
     templateUrl: '/partial/profileComponent',
     styleUrls: ['css/ProfilePage.css']
 })
-export class ProfileComponent implements OnInit,OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy {
     @Language() lang: string;
-    user: UserInfo;
+    user: UserInfo = new UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
 
     constructor(private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService) {
-        
+
     }
 
-   
+
     editDate(id: string) {
         let elem: HTMLElement = document.getElementById(id);
         elem.removeAttribute('disabled');
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
         })
     }
 
-    getDataUser(){
+    getDataUser() {
         this._profileservice.getDataProfile(this.userQueryParams).subscribe(
             data => {
                 this.user = data;
@@ -70,5 +70,5 @@ export class ProfileComponent implements OnInit,OnDestroy {
     }
 
 
-    
+
 }

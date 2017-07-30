@@ -83,6 +83,7 @@ namespace InstructionIO.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Frequency { get; set; }
+        [JsonIgnore]
         public ICollection<TagsRelation> TagsRelation { get; set; }
 
         public Tag()

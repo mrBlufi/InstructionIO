@@ -1,24 +1,24 @@
 ﻿<div class="row">
-    <div class="profile" >
+    <div class="profile">
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="media">
                         <div align="center" id="profile_img">
-                            <img *ngIf="user.avatar"  class="thumbnail img-responsive" src="{{user.avatar}}" >
+                            <img *ngIf="user.avatar" class="thumbnail img-responsive" src="{{user.avatar}}">
                             <img *ngIf="!user.avatar" class="thumbnail img-responsive" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png">
                         </div>
                         <div class="media-body">
                             <hr>
                             <div>
                                 <h3><strong>{{ 'About Me' | translate:lang }}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
-                                <input id="interestsBox" type="text" class="editableTarget" disabled="disabled" [(ngModel)]="user.interests"  style="border:none" [value]="user.interests" />
+                                <input id="interestsBox" type="text" class="editableTarget" disabled="disabled" [(ngModel)]="user.interests" style="border:none" [value]="user.interests" />
                             </div>
                             <hr>
                             <div>
                                 <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
-                                <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" [value]="user.birthday | date:'yyyy-MM-dd'" style="border:none"   (input)="user.birthday=parseDate($event.target.value)"/>
-                                
+                                <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" [value]="user.birthday | date:'yyyy-MM-dd'" style="border:none" (input)="user.birthday=parseDate($event.target.value)" />
+
                             </div>
                         </div>
                     </div>
@@ -48,10 +48,8 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <router-outlet></router-outlet>
             </div>
-            
+
         </div>
     </div>
-    
+
 </div>
-
-

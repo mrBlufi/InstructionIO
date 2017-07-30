@@ -1,3 +1,7 @@
+//import { Injectable } from '@angular/core';
+//import { Http } from '@angular/http';
+//import { UserInfo } from "../model/UserInfo";
+//import { Response, Headers, URLSearchParams } from '@angular/http';
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9,6 +13,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//@Injectable()
+//export class ProfileService {
+//    constructor(private http: Http) { }
+//    getDataProfile(userparams: string) {
+//        console.log(userparams);
+//        return this.http.get('/api/profile/user/' + userparams).map(res => (res).json());
+//    }
+//    getInstructions(userparams: string, stepSkip: number) {
+//        console.log(userparams);
+//        return this.http.get('/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
+//    }
+//    setProfileData(obj: UserInfo) {
+//        const body = JSON.stringify(obj);
+//        let headers = new Headers({ 'Content-Type': 'application/json' });
+//        return this.http.post('/api/profile/user/update', body, { headers: headers }).subscribe(
+//            (data) => {
+//                console.log('Response received');
+//                console.log(data);
+//            },
+//            (err) => { console.log('Error'); },
+//            () => console.log('Authentication Complete')
+//        );
+//    }
+//}
 const core_1 = require("@angular/core");
 const http_1 = require("@angular/http");
 const http_2 = require("@angular/http");
@@ -18,16 +46,16 @@ let ProfileService = class ProfileService {
     }
     getDataProfile(userparams) {
         console.log(userparams);
-        return this.http.get('/api/profile/user/' + userparams).map(res => (res).json());
+        return this.http.get('https://localhost:44328/api/profile/user/' + userparams).map(res => (res).json());
     }
     getInstructions(userparams, stepSkip) {
         console.log(userparams);
-        return this.http.get('/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
+        return this.http.get('https://localhost:44328/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());
     }
     setProfileData(obj) {
         const body = JSON.stringify(obj);
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/profile/user/update', body, { headers: headers }).subscribe((data) => {
+        return this.http.post('https://localhost:44328/api/profile/user/update', body, { headers: headers }).subscribe((data) => {
             console.log('Response received');
             console.log(data);
         }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
