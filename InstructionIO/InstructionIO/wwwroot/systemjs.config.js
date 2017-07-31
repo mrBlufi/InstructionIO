@@ -39,6 +39,8 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
+       
+        
         "ng2-ckeditor": {
             "main": "lib/index.js",
             "defaultExtension": "js",

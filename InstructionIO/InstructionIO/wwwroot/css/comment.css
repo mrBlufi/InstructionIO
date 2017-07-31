@@ -17,16 +17,6 @@ button {
     border: 1px solid #dddddd;
 }
 
-    /*.panel-white .panel-heading {
-        color: #333;
-        background-color: #fff;
-        border-color: #ddd;
-    }*/
-
-    /*.panel-white .panel-footer {
-        background-color: #fff;
-        border-color: #ddd;
-    }*/
 
 .post .post-heading {
     height: 95px;
@@ -59,10 +49,6 @@ button {
  color: #999;
 }
 
-/*.post .post-image .image {
-    width: 100%;
-    height: auto;
-}*/
 
 .post .post-description {
     padding: 15px;
@@ -78,5 +64,15 @@ button {
     padding: 15px;
 }
 
+p{
+    word-break: break-all;
+    white-space: normal;
+}
 
+div {
+    word-wrap: break-word;
+}
+i:hover{
+    color:gray;
+}
 

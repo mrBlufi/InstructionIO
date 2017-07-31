@@ -17,9 +17,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     constructor(private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService) {
-
+        
     }
 
+    autogrow() {
+        let textArea = document.getElementById("interestsBox")
+        textArea.style.overflow = 'hidden';
+        textArea.style.height = '0';
+        textArea.style.height = textArea.scrollHeight + 'px';
+    }
+
+    seth() {
+        let textArea = document.getElementById("interestsBox")
+        textArea.style.overflow = 'hidden';
+        textArea.style.height = '0';
+        textArea.style.height = textArea.scrollHeight + 'px';
+    }
 
     editDate(id: string) {
         let elem: HTMLElement = document.getElementById(id);
@@ -42,10 +55,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
     sub: any;
 
     ngOnInit() {
+        
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
                 this.userQueryParams = params['user'];
                 this.getDataUser();
+                
                 console.log('Query params ', this.userQueryParams)
             }, err => console.log(err));
     }

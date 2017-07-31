@@ -9,5 +9,5 @@ export class Step {
     public id: string;
     public number: number = 0;
     public subtitle: string = "";
-    public contentBlock: ContentBlock[] = new Array<ContentBlock>();
+    public contentBlock: Array<ContentBlock> = new Array<ContentBlock>();
 }

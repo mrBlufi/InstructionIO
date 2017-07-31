@@ -6,6 +6,7 @@ import { HomeService } from "./service/HomeService";
 import { Instruction } from "./model/Instruction";
 import { ProfileService } from "./service/Profile.Service";
 import { Language } from 'angular-l10n';
+import { RatingRelation } from "./model/RatingRelation";
 
 @Component({
     selector: 'child-content',
@@ -21,7 +22,6 @@ export class ChildComponent implements OnInit {
     onRatingChangeResult: IStarRatingOnRatingChangeEven;
 
     onClick = ($event: IStarRatingOnClickEvent) => {
-        //console.log('onClick $event: ', $event);
         this.onClickResult = $event;
     };
 
@@ -50,9 +50,7 @@ export class ChildComponent implements OnInit {
                 this.categoryQueryParams = params['category'];
                 this.sortQueryParams = params['sort'];
                 this.userQueryParams = params['user'];
-                console.log('useruser ', this.userQueryParams);
                 this.getInstructions();
-               
             }, err => console.log(err));
     }
 
@@ -67,11 +65,20 @@ export class ChildComponent implements OnInit {
     }
 
 
+    setrating(ratingRelation: Array<RatingRelation>) {
+        if (ratingRelation.length==0) return 0;
+        let rating=0;
+        for (var i = 0; i < ratingRelation.length; i++) {
+            rating += ratingRelation[i].value;
+        }
+        return  rating / ratingRelation.length;
+
+    }
+
     getInstructionsFullUser() {
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
             this.stepSkip += 1;
-            console.log(this.instructions);
         }, err => console.log(err));
     }
 
@@ -79,7 +86,6 @@ export class ChildComponent implements OnInit {
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
             this.stepSkip += 1;
-            console.log(this.instructions);
         }, err => console.log(err));
     }
     ngOnDestroy() {
@@ -107,7 +113,6 @@ export class ChildComponent implements OnInit {
             }
             let instructionscroll = data;
             this.instructions = this.instructions.concat(instructionscroll);
-            console.log(instructionscroll);
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));
@@ -116,7 +121,6 @@ export class ChildComponent implements OnInit {
     getScrollUserData() {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
-        console.log('scroll');
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             if (data.length == 0) {
                 this.infinitydisable = false;
@@ -124,7 +128,6 @@ export class ChildComponent implements OnInit {
             }
             let instructionscroll = data;
             this.instructions = this.instructions.concat(instructionscroll);
-            console.log('instr1',this.instructions);
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));

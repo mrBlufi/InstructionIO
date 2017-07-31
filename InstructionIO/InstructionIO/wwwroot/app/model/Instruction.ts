@@ -3,6 +3,8 @@ import { Category } from "./Category";
 import { Step } from './Step';
 import { Tag } from "./Tag";
 import { Comment } from "./Comment";
+import { RatingRelation } from "./RatingRelation";
+import { TagsRelation } from "./TagsRelation";
 
 export class Instruction {
     public id: number;
@@ -12,7 +14,8 @@ export class Instruction {
     public lastChangedDate: Date;
     public category: Category;
     public rating: number;
-    public step: Step[];
-    public tag: Tag[];
-    public comment: Comment[];
+    public step: Array<Step>;
+    public tagsRelation: Array<TagsRelation>;
+    public comment: Array< Comment>;
+    public ratingRelation: Array<RatingRelation>;
 }

@@ -2,6 +2,13 @@
 body {
     font-family: 'Nunito', sans-serif;
 }
+textarea {
+    border: none;
+    background-color: white;
+    height: auto;
+    resize: none;
+}
+
 .profile {
 padding-top:20px;
 }
@@ -11,7 +18,10 @@ padding-top:20px;
 hr {
     box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
 }
-
+.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding-left: 0;
+    padding-right: 0;
+}
 .slim_header {
     font-size: medium;
     word-wrap: break-word;

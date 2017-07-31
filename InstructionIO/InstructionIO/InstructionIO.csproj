@@ -22,17 +22,19 @@
   <ItemGroup>
     <Content Include="wwwroot\app\childcontenthome.component.ts" />
     <Content Include="wwwroot\app\comment.component.ts" />
-    <Content Include="wwwroot\app\model\apiModel\CommentFull.ts" />
-    <Content Include="wwwroot\app\model\apiModel\ContentFull.ts" />
-    <Content Include="wwwroot\app\model\apiModel\InstructionFull.ts" />
-    <Content Include="wwwroot\app\model\apiModel\SpetFull.ts" />
     <Content Include="wwwroot\app\model\Category.ts" />
     <Content Include="wwwroot\app\model\Comment.ts" />
     <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
+    <Content Include="wwwroot\app\model\RatingRelathion.ts" />
+    <Content Include="wwwroot\app\model\RatingRelation.js" />
+    <Content Include="wwwroot\app\model\RatingRelation.js.map" />
+    <Content Include="wwwroot\app\model\RatingRelation.ts" />
     <Content Include="wwwroot\app\model\Step.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
+    <Content Include="wwwroot\app\model\TagsRelation.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
+    <Content Include="wwwroot\app\Rating.ts" />
     <Content Include="wwwroot\app\service\HomeService.ts" />
     <Content Include="wwwroot\app\service\instruction.Service.js" />
     <Content Include="wwwroot\app\service\instruction.Service.js.map" />

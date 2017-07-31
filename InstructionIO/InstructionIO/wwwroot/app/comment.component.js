@@ -10,9 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
+const Comment_1 = require("./model/Comment");
+const http_1 = require("@angular/http");
+const http_2 = require("@angular/http");
 let CommentComponent = class CommentComponent {
-    constructor() {
+    constructor(http) {
+        this.http = http;
         this.editorContent = 'My Document\'s Title';
+        this.getComment();
+    }
+    getComment() {
+        this.http.get('/api/comment/test/comments').map(res => (res).json()).subscribe(date => {
+            this.comments = date;
+            console.log(this.comments);
+        });
+    }
+    submit() {
+        let com = new Comment_1.Comment();
+        com.context = this.editorContent;
+        com.datecreate = new Date(2017, 7, 31);
+        this.addComment(com);
+    }
+    addComment(obj) {
+        const body = JSON.stringify(obj);
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('/api/comment/test/comments/post', body, { headers: headers }).subscribe((data) => {
+            console.log('Response received');
+            console.log(data);
+            this.getComment();
+        }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
+    }
+    delcomment(id) {
+        console.log(id);
+        if (id)
+            this.http.get('/api/comment/test/comments/del/' + id).map(res => (res).json()).subscribe(date => {
+                this.comments = date;
+                console.log(this.comments);
+            });
     }
 };
 __decorate([
@@ -24,7 +58,8 @@ CommentComponent = __decorate([
         selector: 'comment',
         templateUrl: '/partial/commentComponent',
         styleUrls: ['css/comment.css']
-    })
+    }),
+    __metadata("design:paramtypes", [http_1.Http])
 ], CommentComponent);
 exports.CommentComponent = CommentComponent;
 //# sourceMappingURL=comment.component.js.map

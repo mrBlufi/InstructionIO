@@ -22,7 +22,6 @@ let ChildComponent = class ChildComponent {
         this.homeservice = homeservice;
         this.profileservice = profileservice;
         this.onClick = ($event) => {
-            //console.log('onClick $event: ', $event);
             this.onClickResult = $event;
         };
         this.onRatingChange = ($event) => {
@@ -45,7 +44,6 @@ let ChildComponent = class ChildComponent {
             this.categoryQueryParams = params['category'];
             this.sortQueryParams = params['sort'];
             this.userQueryParams = params['user'];
-            console.log('useruser ', this.userQueryParams);
             this.getInstructions();
         }, err => console.log(err));
     }
@@ -61,18 +59,25 @@ let ChildComponent = class ChildComponent {
             this.getInstructionsFullUser();
         }
     }
+    setrating(ratingRelation) {
+        if (ratingRelation.length == 0)
+            return 0;
+        let rating = 0;
+        for (var i = 0; i < ratingRelation.length; i++) {
+            rating += ratingRelation[i].value;
+        }
+        return rating / ratingRelation.length;
+    }
     getInstructionsFullUser() {
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
             this.stepSkip += 1;
-            console.log(this.instructions);
         }, err => console.log(err));
     }
     getInstructionsUser() {
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
             this.stepSkip += 1;
-            console.log(this.instructions);
         }, err => console.log(err));
     }
     ngOnDestroy() {
@@ -98,7 +103,6 @@ let ChildComponent = class ChildComponent {
             }
             let instructionscroll = data;
             this.instructions = this.instructions.concat(instructionscroll);
-            console.log(instructionscroll);
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));
@@ -107,7 +111,6 @@ let ChildComponent = class ChildComponent {
         if (this.infinitydisable)
             return;
         this.infinitydisable = true;
-        console.log('scroll');
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             if (data.length == 0) {
                 this.infinitydisable = false;
@@ -115,7 +118,6 @@ let ChildComponent = class ChildComponent {
             }
             let instructionscroll = data;
             this.instructions = this.instructions.concat(instructionscroll);
-            console.log('instr1', this.instructions);
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));

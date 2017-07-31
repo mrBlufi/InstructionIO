@@ -19,7 +19,10 @@ namespace InstructionIO.Models
         public string Avatar { get; set; }
         public string Interests { get; set; }
 
-       
+        public static implicit operator UserInfo(ApplicationUser v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Instruction
@@ -31,7 +34,8 @@ namespace InstructionIO.Models
         public DateTime CreateDate { get; set; }
         public DateTime LastChangedDate { get; set; }
         public Category Category { get; set; }
-        public double Rating { get; set; }
+        public double Rating { get;
+            set; }
         public ICollection<TagsRelation> TagsRelation { get; set; }
         public ICollection<Step> Step { get; set; }
         public ICollection<Comment> Comment { get; set; }

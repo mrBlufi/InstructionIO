@@ -71,3 +71,8 @@ span {
     padding-left: 0;
     padding-right: 0;
 }
+
+.profile-link:hover {
+    cursor:pointer;
+    color: black;
+}

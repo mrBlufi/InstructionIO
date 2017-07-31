@@ -7,12 +7,15 @@
                         <div align="center" id="profile_img">
                             <img *ngIf="user.avatar" class="thumbnail img-responsive" src="{{user.avatar}}">
                             <img *ngIf="!user.avatar" class="thumbnail img-responsive" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png">
+                            <button>Load img</button>
                         </div>
                         <div class="media-body">
                             <hr>
                             <div>
                                 <h3><strong>{{ 'About Me' | translate:lang }}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
-                                <input id="interestsBox" type="text" class="editableTarget" disabled="disabled" [(ngModel)]="user.interests" style="border:none" [value]="user.interests" />
+                                @*<input id="interestsBox" type="text" class="editableTarget" disabled="disabled" [(ngModel)]="user.interests" style="border:none" [value]="user.interests" />*@
+                                <textarea (change)="autogrow()" (keyup)="autogrow()" class="my-textarea" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
+                                
                             </div>
                             <hr>
                             <div>
