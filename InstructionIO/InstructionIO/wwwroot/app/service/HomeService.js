@@ -16,16 +16,19 @@ let HomeService = class HomeService {
         this.http = http;
     }
     getPopularTags() {
-        return this.http.get('https://localhost:44328/api/datahome/tag').map(res => (res).json());
+        return this.http.get('/api/datahome/tag').map(res => (res).json());
     }
     getCategories() {
-        return this.http.get('https://localhost:44328/api/datahome/categories').map(res => (res).json());
+        return this.http.get('/api/datahome/categories').map(res => (res).json());
     }
     getInstructionsFull(sort, category, stepSkip) {
-        return this.http.get('https://localhost:44328/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(res => (res).json());
+        return this.http.get('/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(res => (res).json());
     }
     getInstructionsUser(stepSkip) {
-        return this.http.get('https://localhost:44328/api/datahome/instruction/user/' + stepSkip).map(res => (res).json());
+        return this.http.get('/api/datahome/instruction/user/' + stepSkip).map(res => (res).json());
+    }
+    getInstructionsSearch(stepSkip, page) {
+        return this.http.get('/api/datahome/instruction/search/' + stepSkip + '/' + page).map(res => (res).json());
     }
 };
 HomeService = __decorate([

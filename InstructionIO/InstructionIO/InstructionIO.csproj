@@ -35,6 +35,7 @@
     <Content Include="wwwroot\app\model\TagsRelation.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\Rating.ts" />
+    <Content Include="wwwroot\app\search.component.ts" />
     <Content Include="wwwroot\app\service\HomeService.ts" />
     <Content Include="wwwroot\app\service\instruction.Service.js" />
     <Content Include="wwwroot\app\service\instruction.Service.js.map" />

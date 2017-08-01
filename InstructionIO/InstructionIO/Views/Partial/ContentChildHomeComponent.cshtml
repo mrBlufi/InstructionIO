@@ -2,14 +2,19 @@
 <p>onClickResult: {{onClickResult | json}}</p>
 <p>onRatingChangeResult: {{onRatingChangeResult | json}}</p>*@
 
+<div *ngIf="searchQueryParams">
+    <h2 >No results for...</h2>
+</div>
+
 <div infinite-scroll
      [infiniteScrollDisabled]='infinitydisable'
          [infiniteScrollDistance]="2"
          [infiniteScrollThrottle]="300"
          (scrolled)="onScroll()">
+    <div *ngIf="instructions">
+        <h2 *ngIf="instructions.length==0 && !searchQueryParams">No instruction...</h2>
+    </div>
     <div *ngFor="let instruction of instructions">
-        
-        
         <div class="panel panel-default">
             <div class="panel-header">
                 <div class="row">
@@ -52,7 +57,6 @@
                 <small class="text-muted text-left">{{ 'Last updated' | translate:lang }} {{instruction.lastChangedDate  | date:'MM/dd/yyyy'}}</small>
                 <a class="btn btn-default right">{{ 'Read more' | translate:lang }}</a>
             </div>
-
         </div>
     </div>
 </div>

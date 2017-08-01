@@ -1,6 +1,6 @@
 ﻿import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/filter';
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, Input } from '@angular/core';
 import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnHoverRatingChangeEvent } from "angular-star-rating/star-rating-struct";
 import { HomeService } from "./service/HomeService";
 import { Instruction } from "./model/Instruction";
@@ -38,8 +38,10 @@ export class ChildComponent implements OnInit {
     categoryQueryParams: string=null;
     sortQueryParams: string = null;
     userQueryParams: string = null;
+    searchQueryParams: string = null;
     instructions: Array<Instruction> = null;
     stepSkip = 0;
+    @Input() search: boolean;
     constructor(private _Activatedroute: ActivatedRoute,
         private _router: Router, private homeservice: HomeService,private profileservice:ProfileService) {
     }
@@ -50,16 +52,22 @@ export class ChildComponent implements OnInit {
                 this.categoryQueryParams = params['category'];
                 this.sortQueryParams = params['sort'];
                 this.userQueryParams = params['user'];
+                this.searchQueryParams = params['q']
+                console.log('query params', params);
                 this.getInstructions();
             }, err => console.log(err));
     }
 
     private getInstructions() {
+        if (this.searchQueryParams != null) {
+            this.getInstructionsSearch();
+        }
+        else
         if (this.userQueryParams != null) {
             this.getInstructionsUser();
-        } else {
-            if (this.sortQueryParams == null) this.sortQueryParams = 'popular';
-            if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
+        }
+        else
+        {
             this.getInstructionsFullUser();
         }
     }
@@ -76,8 +84,11 @@ export class ChildComponent implements OnInit {
     }
 
     getInstructionsFullUser() {
+        if (this.sortQueryParams == null) this.sortQueryParams = 'popular';
+        if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
+            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -85,9 +96,19 @@ export class ChildComponent implements OnInit {
     getInstructionsUser() {
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
+            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
+
+    getInstructionsSearch() {
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
+            this.instructions = data;
+            console.log('get search data', this.instructions);
+            this.stepSkip += 1;
+        }, err => console.log(err));
+    }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
@@ -107,7 +128,7 @@ export class ChildComponent implements OnInit {
         this.infinitydisable = true;
         console.log('scroll');
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
-            if (data.length == 0) {
+            if (data) {
                 this.infinitydisable = false;
                 return;
             }
@@ -122,7 +143,24 @@ export class ChildComponent implements OnInit {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
-            if (data.length == 0) {
+            if (data) {
+                this.infinitydisable = false;
+                return;
+            }
+            let instructionscroll = data;
+            this.instructions = this.instructions.concat(instructionscroll);
+            this.stepSkip += 1;
+            this.infinitydisable = false;
+        }, err => console.log(err));
+
+    }
+
+    getScrollSearchData() {
+        if (this.infinitydisable) return;
+        this.infinitydisable = true;
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
+            if (data) {
+                
                 this.infinitydisable = false;
                 return;
             }

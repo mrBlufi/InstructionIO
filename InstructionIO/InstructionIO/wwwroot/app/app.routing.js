@@ -9,6 +9,7 @@ const stepeditor_component_1 = require("./stepeditor.component");
 const instructionEditor_component_1 = require("./instructionEditor.component");
 const childcontenthome_component_1 = require("./childcontenthome.component");
 const comment_component_1 = require("./comment.component");
+const search_component_1 = require("./search.component");
 const appRoutes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
@@ -18,6 +19,12 @@ const appRoutes = [
         ]
     },
     { path: 'about', component: about_component_1.AboutComponent, data: { title: 'About' } },
+    {
+        path: 'search', component: search_component_1.SearchComponent, data: { title: 'Search' }, children: [
+            { path: '', redirectTo: 'child-content', pathMatch: 'full' },
+            { path: 'child-content', component: childcontenthome_component_1.ChildComponent }
+        ]
+    },
     { path: 'contact', component: contact_component_1.ContactComponent, data: { title: 'Contact' } },
     {
         path: 'profile', component: profile_component_1.ProfileComponent, children: [
@@ -30,5 +37,5 @@ const appRoutes = [
     { path: 'instructionEditor', component: instructionEditor_component_1.InstructionEditorComponent, data: { title: 'instructionEditor' } }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
-exports.routedComponents = [about_component_1.AboutComponent, index_component_1.IndexComponent, contact_component_1.ContactComponent, profile_component_1.ProfileComponent, stepeditor_component_1.StepEditorComponent, instructionEditor_component_1.InstructionEditorComponent];
+exports.routedComponents = [about_component_1.AboutComponent, index_component_1.IndexComponent, contact_component_1.ContactComponent, profile_component_1.ProfileComponent, stepeditor_component_1.StepEditorComponent, instructionEditor_component_1.InstructionEditorComponent, search_component_1.SearchComponent];
 //# sourceMappingURL=app.routing.js.map

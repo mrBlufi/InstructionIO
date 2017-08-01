@@ -9,6 +9,8 @@ import { LocaleService, Language } from 'angular-l10n';
     styleUrls: ['css/site_nav.css']
 })
 export class AppComponent implements OnInit {
+    searchQueryParams: any;
+
     public constructor(private titleService: Title, public locale: LocaleService) {
 
     }

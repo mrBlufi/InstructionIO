@@ -14,7 +14,7 @@
                             <div>
                                 <h3><strong>{{ 'About Me' | translate:lang }}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
                                 @*<input id="interestsBox" type="text" class="editableTarget" disabled="disabled" [(ngModel)]="user.interests" style="border:none" [value]="user.interests" />*@
-                                <textarea (change)="autogrow()" (keyup)="autogrow()" class="my-textarea" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
+                                <textarea (change)="autogrow()" (keyup)="autogrow()"  class=" editableTarget" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
                                 
                             </div>
                             <hr>

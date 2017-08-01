@@ -70,6 +70,19 @@ namespace InstructionIO.Api
             return _unstructions.Skip(page* _stepTake).Take(_stepTake);
         }
 
+        [HttpGet("instruction/search/{search}/{page}")]
+        public IEnumerable<Instruction> GetSearchInstruction(string search,int page)
+        {
+
+            _unstructions = _context.Instructions.Where(x => x.Name.Contains(search) || x.TagsRelation.Any(xs => xs.Tag.Name.Contains(search)))
+                .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+           .ThenInclude(x => x.Tag).Include(t => t.Author)
+           .Include(t => t.Category).ToList();
+
+           
+            return _unstructions.Skip(page * _stepTake).Take(_stepTake);
+        }
+
        
 
     }

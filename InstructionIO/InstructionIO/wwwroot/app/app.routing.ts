@@ -7,6 +7,7 @@ import { StepEditorComponent } from './stepeditor.component';
 import { InstructionEditorComponent } from './instructionEditor.component';
 import { ChildComponent } from './childcontenthome.component';
 import { CommentComponent } from './comment.component';
+import { SearchComponent } from "./search.component";
 
 
 
@@ -19,6 +20,11 @@ const appRoutes: Routes = [
         ]
     },
     { path: 'about', component: AboutComponent, data: { title: 'About' } },
+    {
+        path: 'search', component: SearchComponent, data: { title: 'Search' }, children: [
+            { path: '', redirectTo: 'child-content', pathMatch: 'full' },
+            { path: 'child-content', component: ChildComponent }
+        ] },
     { path: 'contact', component: ContactComponent, data: { title: 'Contact' } },
     
     {
@@ -35,4 +41,4 @@ const appRoutes: Routes = [
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [AboutComponent, IndexComponent, ContactComponent, ProfileComponent, StepEditorComponent, InstructionEditorComponent];
+export const routedComponents = [AboutComponent, IndexComponent, ContactComponent, ProfileComponent, StepEditorComponent, InstructionEditorComponent,SearchComponent];

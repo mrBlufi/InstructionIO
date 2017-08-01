@@ -43,8 +43,9 @@
                     <div class="well">
                     <ul class="nav ">
                         <li class="nav-header">{{ 'Popular tag' | translate:lang }}</li>
-                        <li *ngFor="let tag of tags; let i = index">
-                            <a href="#">#{{tag.name}}</a> 
+                        <li  *ngFor="let tag of tags; let i = index">
+                            <a [routerLink]="['../search']"
+                       [queryParams]="{'q':tag.name}">#{{tag.name}}</a> 
                         </li>
                         
                     </ul>

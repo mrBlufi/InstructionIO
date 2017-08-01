@@ -67,8 +67,10 @@
             <form  class="navbar-form">
                 <div class="form-group" style="display:inline;">
                     <div class="input-group" style="display:table;">
-                        <input class="form-control" name="search" placeholder="Search for" autocomplete="off" autofocus="autofocus" type="text">
-                        <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
+                        <input class="form-control" [(ngModel)]="searchQueryParams" name="search" placeholder="Search for" autocomplete="off" autofocus="autofocus" type="text">
+                        <a *ngIf="searchQueryParams" [routerLink]="['search']"
+                       [queryParams]="{'q':searchQueryParams}" class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></a>
+                        <a *ngIf="!searchQueryParams"  class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></a>
                     </div>
                 </div>
             </form>

@@ -95,11 +95,17 @@ namespace instructionsIO.Controllers.Api
                 .Include(x => x.Author).Include(x => x.Category).Include(x => x.RatingRelation)
                 .Include(x => x.Comment).ToList();
             return new ObjectResult(test);
-
-            //Instruction test = _context.Instructions.Include(inst => inst.Step).ThenInclude(step => step.ContentBlock).FirstOrDefault();
-            //return new ObjectResult(test);
         }
 
-        
+        [HttpGet("test12")]
+        public async Task<IActionResult> GetTest12Async()
+        {
+            bool roles = false;
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+                roles = await _userManager.IsInRoleAsync(user,"User");
+           
+            return new ObjectResult(roles);
+        }
     }
 }

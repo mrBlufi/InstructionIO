@@ -30,49 +30,7 @@ namespace InstructionIO.Controllers
             _signInManager = signInManager;
             _context = context;
         }
-
-        //static UserInfo info = new UserInfo()
-        //{
-        //    Birthday = new DateTime(1992, 3, 20),
-        //    Interests = "bla bla lba",
-        //    FirstName = "Firstname",
-        //    LastName = "Lastname",
-
-        //};
-        //ApplicationDbContext db ;
-
-        //public async Task<IActionResult> ProfilePage()
-        //{
-
-        //    ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-
-        //    var messages = db.UserInfos.Where(f => f.User.Id == user.Id);
-        //    if (messages.ToList().Count == 0)
-        //    {
-
-
-        //        UserInfo usercreate = new UserInfo() {
-        //            Birthday = new DateTime(1992, 3, 20),
-        //            Interests = "Click on the pencil to edit" ,
-        //            FirstName = "FirstName",
-        //            LastName = "LastName",
-        //            User = user
-
-        //        };
-        //        db.UserInfos.Add(usercreate);
-        //        db.SaveChanges();
-        //        return View(usercreate);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //}
-        //
-
-        //
-        // POST: /Account/Logout
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -81,21 +39,16 @@ namespace InstructionIO.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        //
-        // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
-            // Request a redirect to the external login provider.
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
-
-        //
-        // GET: /Account/ExternalLoginCallback
+        
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
@@ -126,7 +79,7 @@ namespace InstructionIO.Controllers
                 var result1 = await _userManager.CreateAsync(user);
                 var userinfo = new UserInfo()
                 {
-                    FullName = "Full Name",
+                    FullName = "Nickname",
                     Birthday = new DateTime(),
                     Interests = "Interests",
                     User = user
@@ -137,6 +90,7 @@ namespace InstructionIO.Controllers
                     result1 = await _userManager.AddLoginAsync(user, info);
                     if (result1.Succeeded)
                     {
+                        await _userManager.AddToRoleAsync(user, "User");
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return RedirectToAction(nameof(HomeController.Index), "Home");
                     }

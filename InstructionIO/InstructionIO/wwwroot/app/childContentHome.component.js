@@ -33,6 +33,7 @@ let ChildComponent = class ChildComponent {
         this.categoryQueryParams = null;
         this.sortQueryParams = null;
         this.userQueryParams = null;
+        this.searchQueryParams = null;
         this.instructions = null;
         this.stepSkip = 0;
         this.infinitydisable = false;
@@ -44,18 +45,19 @@ let ChildComponent = class ChildComponent {
             this.categoryQueryParams = params['category'];
             this.sortQueryParams = params['sort'];
             this.userQueryParams = params['user'];
+            this.searchQueryParams = params['q'];
+            console.log('query params', params);
             this.getInstructions();
         }, err => console.log(err));
     }
     getInstructions() {
-        if (this.userQueryParams != null) {
+        if (this.searchQueryParams != null) {
+            this.getInstructionsSearch();
+        }
+        else if (this.userQueryParams != null) {
             this.getInstructionsUser();
         }
         else {
-            if (this.sortQueryParams == null)
-                this.sortQueryParams = 'popular';
-            if (this.categoryQueryParams == null)
-                this.categoryQueryParams = 'Full';
             this.getInstructionsFullUser();
         }
     }
@@ -69,14 +71,27 @@ let ChildComponent = class ChildComponent {
         return rating / ratingRelation.length;
     }
     getInstructionsFullUser() {
+        if (this.sortQueryParams == null)
+            this.sortQueryParams = 'popular';
+        if (this.categoryQueryParams == null)
+            this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
+            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
     getInstructionsUser() {
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
+            console.log('get search data', this.instructions);
+            this.stepSkip += 1;
+        }, err => console.log(err));
+    }
+    getInstructionsSearch() {
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
+            this.instructions = data;
+            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -97,7 +112,7 @@ let ChildComponent = class ChildComponent {
         this.infinitydisable = true;
         console.log('scroll');
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
-            if (data.length == 0) {
+            if (data) {
                 this.infinitydisable = false;
                 return;
             }
@@ -112,7 +127,22 @@ let ChildComponent = class ChildComponent {
             return;
         this.infinitydisable = true;
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
-            if (data.length == 0) {
+            if (data) {
+                this.infinitydisable = false;
+                return;
+            }
+            let instructionscroll = data;
+            this.instructions = this.instructions.concat(instructionscroll);
+            this.stepSkip += 1;
+            this.infinitydisable = false;
+        }, err => console.log(err));
+    }
+    getScrollSearchData() {
+        if (this.infinitydisable)
+            return;
+        this.infinitydisable = true;
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
+            if (data) {
                 this.infinitydisable = false;
                 return;
             }
@@ -127,6 +157,10 @@ __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
 ], ChildComponent.prototype, "lang", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], ChildComponent.prototype, "search", void 0);
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',
