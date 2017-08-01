@@ -7,19 +7,19 @@
                         <div align="center" id="profile_img">
                             <img *ngIf="user.avatar" class="thumbnail img-responsive" src="{{user.avatar}}">
                             <img *ngIf="!user.avatar" class="thumbnail img-responsive" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png">
-                            <button>Load img</button>
+                            <button *ngIf="roleinfo.id==user.id || roleinfo.adminRole" type="button" class="btn btn-default  glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)"> Load Image</button>
+                            <input *ngIf="roleinfo.id==user.id || roleinfo.adminRole" #imgInput type="file" (change)="saveFile($event)" style="display:none" />
                         </div>
                         <div class="media-body">
                             <hr>
                             <div>
-                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
-                                @*<input id="interestsBox" type="text" class="editableTarget" disabled="disabled" [(ngModel)]="user.interests" style="border:none" [value]="user.interests" />*@
+                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
                                 <textarea (change)="autogrow()" (keyup)="autogrow()"  class=" editableTarget" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
                                 
                             </div>
                             <hr>
                             <div>
-                                <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
+                                <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" [value]="user.birthday | date:'yyyy-MM-dd'" style="border:none" (input)="user.birthday=parseDate($event.target.value)" />
 
                             </div>
@@ -32,7 +32,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div>
-                        <div><span class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('nameBox')"></span></div>
+                        <div><span  *ngIf="roleinfo.id==user.id || roleinfo.adminRole"class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('nameBox')"></span></div>
                         <input id="nameBox" type="text" class="editableTarget pull-left h1Input" disabled="disabled" [(ngModel)]="user.fullName" style="border:none" [value]="user.fullName" />
                     </div>
                     <br><br>

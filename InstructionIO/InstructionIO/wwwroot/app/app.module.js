@@ -20,7 +20,8 @@ const ngx_bootstrap_1 = require("ngx-bootstrap");
 const ngx_swiper_wrapper_1 = require("ngx-swiper-wrapper");
 const angular2_infinite_scroll_1 = require("angular2-infinite-scroll");
 const ng2_dragula_1 = require("ng2-dragula");
-const HomeService_1 = require("./service/HomeService");
+const Home_Service_1 = require("./service/Home.Service");
+const Role_Service_1 = require("./service/Role.Service");
 const Profile_Service_1 = require("./service/Profile.Service");
 const instruction_Service_1 = require("./service/instruction.Service");
 const app_component_1 = require("./app.component");
@@ -61,7 +62,7 @@ AppModule = __decorate([
             bootstrap_1.BootstrapModalModule
         ],
         declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, safeHtml_1.SafeHtml, comment_component_1.CommentComponent],
-        providers: [HomeService_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        providers: [Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent]
     }),
     __metadata("design:paramtypes", [angular_l10n_1.LocaleService, angular_l10n_1.TranslationService])

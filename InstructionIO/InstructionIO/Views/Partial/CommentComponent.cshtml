@@ -26,7 +26,7 @@
                             </div>
                             <h6 class="text-muted date">{{com.dateCreate | date:'MM/dd/yyyy'}}</h6>
                         </div>
-                        <div class="pull-right meta">
+                        <div *ngIf="roleinfo.id==com.author.id" class="pull-right meta">
                             
                             <i (click)="delcomment(com.id)" class="glyphicon glyphicon-remove"></i>
                         </div>

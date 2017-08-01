@@ -32,17 +32,17 @@ namespace instructionsIO.Controllers.Api
 
 
 
-        [HttpGet("user/my")]
-        public async Task<UserInfo> GetMyProfileAsync(string userparams)
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+        //[HttpGet("user/my")]
+        //public async Task<UserInfo> GetMyProfileAsync(string userparams)
+        //{
+        //    ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 
-            var messages = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
-            messages.User = null;
+        //    var messages = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
+        //    messages.User = null;
 
 
-            return messages;
-        }
+        //    return messages;
+        //}
 
         [HttpGet("user/{userparams}")]
         public UserInfo GetUserProfile(string userparams)
@@ -63,15 +63,15 @@ namespace instructionsIO.Controllers.Api
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
 
-        [HttpGet("instruction/user/my/{page}")]
-        public async Task<IEnumerable<Instruction>> GetInstructionUserAsync(int page)
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var userinfo = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
-            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userinfo.Id).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList();
+        //[HttpGet("instruction/user/my/{page}")]
+        //public async Task<IEnumerable<Instruction>> GetInstructionUserAsync(int page)
+        //{
+        //    ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+        //    var userinfo = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
+        //    IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userinfo.Id).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList();
 
-            return _unstructions.Skip(page * _stepTake).Take(_stepTake);
-        }
+        //    return _unstructions.Skip(page * _stepTake).Take(_stepTake);
+        //}
 
 
         [HttpPost("user/update")]
@@ -97,15 +97,45 @@ namespace instructionsIO.Controllers.Api
             return new ObjectResult(test);
         }
 
-        [HttpGet("test12")]
+        [HttpGet("userimage/{id}")]
+        public IActionResult GetImageProfile(int id)
+        {
+            var test = _context.UserInfos.Find(id).Avatar;
+            return new ObjectResult(test);
+        }
+
+        [HttpGet("roleinfo")]
         public async Task<IActionResult> GetTest12Async()
         {
-            bool roles = false;
             ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
             if (user != null)
-                roles = await _userManager.IsInRoleAsync(user,"User");
-           
-            return new ObjectResult(roles);
+                return new ObjectResult(new UserInformation()
+                {
+                    Id = _context.UserInfos.Where(x => x.User.Id == user.Id).First().Id,
+                    UserRole = await _userManager.IsInRoleAsync(user, "User"),
+                    AdminRole = await _userManager.IsInRoleAsync(user, "Admin")
+                });
+            else
+            return new ObjectResult(getDefault());
+        }
+
+        private UserInformation getDefault()
+        {
+            UserInformation userinf = new UserInformation()
+            {
+                Id = -1,
+                UserRole = false,
+                AdminRole = false
+            };
+            return userinf;
+        }
+        
+
+        class UserInformation
+        {
+            public int Id { get; set; }
+            public bool UserRole { get; set; }
+            public bool AdminRole { get; set; }
         }
     }
 }

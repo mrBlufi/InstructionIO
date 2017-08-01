@@ -3,6 +3,8 @@ import { Comment } from './model/Comment'
 import { ProfileService } from "./service/Profile.Service";
 import { Http } from '@angular/http';
 import { Response, Headers, URLSearchParams } from '@angular/http';
+import { RoleData } from "./model/RoleData";
+import { RoleService } from "./service/Role.Service";
 
 @Component({
     selector: 'comment',
@@ -13,7 +15,12 @@ import { Response, Headers, URLSearchParams } from '@angular/http';
 export class CommentComponent {
 
     @Input() comment: Comment[];
-    constructor(private http: Http) {
+    roleinfo: RoleData = new RoleData(-1, false, false);
+    constructor(private roleservice: RoleService, private http: Http) {
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            console.log(this.roleinfo);
+        });
         this.getComment();
     }
 

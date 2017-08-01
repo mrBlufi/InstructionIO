@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
-const HomeService_1 = require("./service/HomeService");
+const Home_Service_1 = require("./service/Home.Service");
 const angular_l10n_1 = require("angular-l10n");
 let IndexComponent = class IndexComponent {
     constructor(homeservice) {
@@ -46,7 +46,7 @@ IndexComponent = __decorate([
         templateUrl: '/partial/indexComponent',
         styleUrls: ['css/blog-home.css']
     }),
-    __metadata("design:paramtypes", [HomeService_1.HomeService])
+    __metadata("design:paramtypes", [Home_Service_1.HomeService])
 ], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map

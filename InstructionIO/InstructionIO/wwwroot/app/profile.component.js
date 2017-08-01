@@ -15,14 +15,24 @@ const router_1 = require("@angular/router");
 require("rxjs/add/operator/filter");
 const Profile_Service_1 = require("./service/Profile.Service");
 const angular_l10n_1 = require("angular-l10n");
+const RoleData_1 = require("./model/RoleData");
+const Role_Service_1 = require("./service/Role.Service");
+const http_1 = require("@angular/http");
 let ProfileComponent = class ProfileComponent {
-    constructor(_Activatedroute, _router, _profileservice) {
+    constructor(_Activatedroute, _router, _profileservice, roleservice, http) {
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this._profileservice = _profileservice;
+        this.roleservice = roleservice;
+        this.http = http;
         this.user = new UserInfo_1.UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
+        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.userQueryParams = null;
         this.instructions = null;
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            console.log(this.roleinfo);
+        });
     }
     autogrow() {
         let textArea = document.getElementById("interestsBox");
@@ -54,7 +64,6 @@ let ProfileComponent = class ProfileComponent {
             .subscribe(params => {
             this.userQueryParams = params['user'];
             this.getDataUser();
-            console.log('Query params ', this.userQueryParams);
         }, err => console.log(err));
     }
     ngOnDestroy() {
@@ -72,6 +81,16 @@ let ProfileComponent = class ProfileComponent {
     }
     beforeUnload(event) {
         this._profileservice.setProfileData(this.user);
+    }
+    redirectToInput(eleme) {
+        eleme.click();
+    }
+    saveFile(event) {
+        let src;
+        let elem = event.srcElement;
+        let formData = new FormData();
+        formData.append(elem.files[0].name, elem.files[0]);
+        this.http.post('/api/StepEditor/Upload', formData).subscribe(data => { this.user.avatar = data["_body"].replace(/"/g, ""); });
     }
 };
 __decorate([
@@ -91,7 +110,7 @@ ProfileComponent = __decorate([
         styleUrls: ['css/ProfilePage.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        router_1.Router, Profile_Service_1.ProfileService])
+        router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

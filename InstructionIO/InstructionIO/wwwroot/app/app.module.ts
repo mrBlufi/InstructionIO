@@ -10,7 +10,8 @@ import { CarouselModule, SortableModule, AccordionModule  } from 'ngx-bootstrap'
 import { SwiperModule, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { DragulaModule } from 'ng2-dragula';
-import { HomeService } from "./service/HomeService";
+import { HomeService } from "./service/Home.Service";
+import { RoleService } from "./service/Role.Service";
 import { ProfileService } from "./service/Profile.Service";
 import { InstructionService } from "./service/instruction.Service";
 import { AppComponent } from './app.component';
@@ -41,7 +42,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         BootstrapModalModule
     ],
     declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, SafeHtml,CommentComponent],
-    providers: [HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
+    providers: [RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

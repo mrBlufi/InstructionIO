@@ -84,10 +84,11 @@ namespace InstructionIO.Controllers
                     Interests = "Interests",
                     User = user
                 };
-                _context.UserInfos.Add(userinfo);
+       
                 if (result1.Succeeded)
                 {
                     result1 = await _userManager.AddLoginAsync(user, info);
+                    _context.UserInfos.Add(userinfo);
                     if (result1.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, "User");

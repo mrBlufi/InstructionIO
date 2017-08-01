@@ -13,10 +13,18 @@ const core_1 = require("@angular/core");
 const Comment_1 = require("./model/Comment");
 const http_1 = require("@angular/http");
 const http_2 = require("@angular/http");
+const RoleData_1 = require("./model/RoleData");
+const Role_Service_1 = require("./service/Role.Service");
 let CommentComponent = class CommentComponent {
-    constructor(http) {
+    constructor(roleservice, http) {
+        this.roleservice = roleservice;
         this.http = http;
+        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.editorContent = 'My Document\'s Title';
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            console.log(this.roleinfo);
+        });
         this.getComment();
     }
     getComment() {
@@ -59,7 +67,7 @@ CommentComponent = __decorate([
         templateUrl: '/partial/commentComponent',
         styleUrls: ['css/comment.css']
     }),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [Role_Service_1.RoleService, http_1.Http])
 ], CommentComponent);
 exports.CommentComponent = CommentComponent;
 //# sourceMappingURL=comment.component.js.map

@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const router_1 = require("@angular/router");
-const about_component_1 = require("./about.component");
 const index_component_1 = require("./index.component");
 const contact_component_1 = require("./contact.component");
 const profile_component_1 = require("./profile.component");
@@ -18,7 +17,6 @@ const appRoutes = [
             { path: 'child-content', component: childcontenthome_component_1.ChildComponent }
         ]
     },
-    { path: 'about', component: about_component_1.AboutComponent, data: { title: 'About' } },
     {
         path: 'search', component: search_component_1.SearchComponent, data: { title: 'Search' }, children: [
             { path: '', redirectTo: 'child-content', pathMatch: 'full' },
@@ -37,5 +35,5 @@ const appRoutes = [
     { path: 'instructionEditor', component: instructionEditor_component_1.InstructionEditorComponent, data: { title: 'instructionEditor' } }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
-exports.routedComponents = [about_component_1.AboutComponent, index_component_1.IndexComponent, contact_component_1.ContactComponent, profile_component_1.ProfileComponent, stepeditor_component_1.StepEditorComponent, instructionEditor_component_1.InstructionEditorComponent, search_component_1.SearchComponent];
+exports.routedComponents = [index_component_1.IndexComponent, contact_component_1.ContactComponent, profile_component_1.ProfileComponent, stepeditor_component_1.StepEditorComponent, instructionEditor_component_1.InstructionEditorComponent, search_component_1.SearchComponent];
 //# sourceMappingURL=app.routing.js.map

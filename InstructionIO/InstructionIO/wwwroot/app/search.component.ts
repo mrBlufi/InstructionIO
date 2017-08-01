@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { HomeService } from "./service/HomeService";
+import { HomeService } from "./service/Home.Service";
 import { Tag } from "./model/Tag";
 import { Category } from "./model/Category";
 import { Language } from 'angular-l10n';

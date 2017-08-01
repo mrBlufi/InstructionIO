@@ -1,110 +1,118 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a (click)="setTitle('Home')" routerLink="/home" routerLinkActive="active" class="navbar-brand">LOGO</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+﻿<body [(ngClass)]="theme">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a (click)="setTitle('Home')" routerLink="/home" routerLinkActive="active" class="navbar-brand">LOGO</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 
-            <ul class="nav navbar-nav navbar-right">
-               <li>
-                @if(SignInManager.IsSignedIn(User))
-                {
-            <form ngNoForm asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" >
+                <ul class="nav navbar-nav navbar-right">
 
-                <ul class="nav  navbar-right navbar-brand">
-                    <li class="dropdown ">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img class="" id="img_prof" src="https://st2.depositphotos.com/1063693/10677/v/950/depositphotos_106775558-stock-illustration-flete-guy-man-woman-avatar.jpg" /> <b class="caret"></b></a>
+
+                    <li *ngIf="roleinfo.id!=-1">
+                        <p class="navbar-btn">
+                            <a class="btn btn-glyphicon btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
+                        </p>
+                    </li>
+                    <li *ngIf="roleinfo.id!=-1">
+                        <form ngNoForm asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+
+                            <ul class="nav  navbar-right navbar-brand">
+                                <li class="dropdown ">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img *ngIf="!imageprofile" class="" id="img_prof" src="https://st2.depositphotos.com/1063693/10677/v/950/depositphotos_106775558-stock-illustration-flete-guy-man-woman-avatar.jpg" />
+                                        <img *ngIf="imageprofile" class="" id="img_prof" src="{{imageprofile}}" />
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a (click)="setTitle('Profile')" [routerLink]="['profile']" [queryParams]="{'user':roleinfo.id}">{{ 'Your Profile' | translate:lang }}</a></li>
+                                        <li class="divider"></li>
+                                        <li><a onclick="document.getElementById('logoutForm').submit()">{{ 'Log out' | translate:lang }}<span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </form>
+
+                    </li>
+                    <li *ngIf="roleinfo.id==-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span>{{ 'Log in' | translate:lang }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'Language' | translate:lang }}<b class="caret"></b></a>
+
                         <ul class="dropdown-menu">
-                            <li><a (click)="setTitle('Profile')" [routerLink]="['profile']" [queryParams]="{'user':'my'}" >{{ 'Your Profile' | translate:lang }}</a></li>
-                            <li class="divider"></li>
-                            <li><a  onclick="document.getElementById('logoutForm').submit()">{{ 'Log out' | translate:lang }}<span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+                            <li>
+                                <a (click)="selectLanguage('en');">English</a>
+                            </li>
+                            <li>
+                                <a (click)="selectLanguage('ru');">Русский</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">theme<b class="caret"></b></a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a (click)="settheme('light');">light</a>
+                            </li>
+                            <li>
+                                <a (click)="settheme('dark');">dark</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
-            </form>
-        }
-        else
-        {
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span>{{ 'Log in' | translate:lang }}</a></li>
-            </ul>
-        }</li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'Language' | translate:lang }}<b class="caret"></b></a>
 
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a (click)="selectLanguage('en');">English</a>
-                        </li>
-                        <li>
-                            <a (click)="selectLanguage('ru');">Русский</a>
-                        </li>
-
-                    </ul>
-                </li>
-            </ul>
-
-          
-            <ul class="nav navbar-nav navbar-right">
-                
-               
-                <li>
-                    <p class="navbar-btn">
-                        <a class="btn btn-glyphicon btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
-                    </p>
-                </li>
-              
-            </ul>
-
-            <form  class="navbar-form">
-                <div class="form-group" style="display:inline;">
-                    <div class="input-group" style="display:table;">
-                        <input class="form-control" [(ngModel)]="searchQueryParams" name="search" placeholder="Search for" autocomplete="off" autofocus="autofocus" type="text">
-                        <a *ngIf="searchQueryParams" [routerLink]="['search']"
-                       [queryParams]="{'q':searchQueryParams}" class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></a>
-                        <a *ngIf="!searchQueryParams"  class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</nav>
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">{{ 'Log in' | translate:lang }}</h4>
-            </div>
-            <div class="modal-body">
-                <form ngNoForm asp-controller="Account" asp-action="ExternalLogin" method="post" class="form-horizontal">
-                    <div class="row">
-                        <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="fa fa-facebook"></i></button></div>
-                        <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-twitter" name="provider" value="Twitter" title="Log in using your Twitter account"><i class="fa fa-twitter"></i></button></div>
-                        <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-google" name="provider" value="Google" title="Log in using your Google account"><i class="fa fa-google"></i></button></div>
-                        <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-vk" name="provider" value="Vkontakte" title="Log in using your Vkontakte account"><i class="fa fa-vk"></i></button></div>
+                <form class="navbar-form">
+                    <div class="form-group" style="display:inline;">
+                        <div class="input-group" style="display:table;">
+                            <input class="form-control" [(ngModel)]="searchQueryParams" name="search" placeholder="Search for" autocomplete="off" autofocus="autofocus" type="text">
+                            <a *ngIf="searchQueryParams" [routerLink]="['search']"
+                               [queryParams]="{'q':searchQueryParams}" class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></a>
+                            <a *ngIf="!searchQueryParams" class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></a>
+                        </div>
                     </div>
                 </form>
-
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Close' | translate:lang }}</button>
+        </div>
+    </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{ 'Log in' | translate:lang }}</h4>
+                </div>
+                <div class="modal-body">
+                    <form ngNoForm asp-controller="Account" asp-action="ExternalLogin" method="post" class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-facebook" name="provider" value="Facebook" title="Log in using your Facebook account"><i class="fa fa-facebook"></i></button></div>
+                            <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-twitter" name="provider" value="Twitter" title="Log in using your Twitter account"><i class="fa fa-twitter"></i></button></div>
+                            <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-google" name="provider" value="Google" title="Log in using your Google account"><i class="fa fa-google"></i></button></div>
+                            <div class="col-md-6 col-xs-6 col-sm-6"><button type="submit" class="btn btn-primary social-login-btn social-vk" name="provider" value="Vkontakte" title="Log in using your Vkontakte account"><i class="fa fa-vk"></i></button></div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Close' | translate:lang }}</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container body-content">
-    
-    <router-outlet></router-outlet>
-    <footer>
-</footer>
-</div>
+    <div class="container body-content">
+
+        <router-outlet></router-outlet>
+        <footer></footer>
+    </div>
+</body>

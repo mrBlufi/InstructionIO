@@ -13,11 +13,31 @@ const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
 require("rxjs/add/operator/map");
 const angular_l10n_1 = require("angular-l10n");
+const Role_Service_1 = require("./service/Role.Service");
+const RoleData_1 = require("./model/RoleData");
+const Profile_Service_1 = require("./service/Profile.Service");
 let AppComponent = class AppComponent {
-    constructor(titleService, locale) {
+    constructor(titleService, locale, roleservice, profileservice) {
         this.titleService = titleService;
         this.locale = locale;
+        this.roleservice = roleservice;
+        this.profileservice = profileservice;
+        this.theme = 'light';
+        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.angularClientSideData = 'Angular';
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            if (this.roleinfo.id != -1) {
+                profileservice.getProfileImage(this.roleinfo.id).subscribe(data => {
+                    this.imageprofile = data["_body"];
+                    console.log(this.imageprofile);
+                });
+            }
+            console.log(this.roleinfo);
+        });
+    }
+    settheme(theme) {
+        this.theme = theme;
     }
     setTitle(newTitle) {
         this.titleService.setTitle(newTitle);
@@ -35,9 +55,9 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         templateUrl: '/partial/appComponent',
-        styleUrls: ['css/site_nav.css']
+        styleUrls: ['css/site_nav.css', 'css/theme.css']
     }),
-    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService])
+    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService, Role_Service_1.RoleService, Profile_Service_1.ProfileService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

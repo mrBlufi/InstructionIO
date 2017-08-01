@@ -12,15 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const router_1 = require("@angular/router");
 require("rxjs/add/operator/filter");
 const core_1 = require("@angular/core");
-const HomeService_1 = require("./service/HomeService");
+const Home_Service_1 = require("./service/Home.Service");
 const Profile_Service_1 = require("./service/Profile.Service");
 const angular_l10n_1 = require("angular-l10n");
+const RoleData_1 = require("./model/RoleData");
+const Role_Service_1 = require("./service/Role.Service");
 let ChildComponent = class ChildComponent {
-    constructor(_Activatedroute, _router, homeservice, profileservice) {
+    constructor(_Activatedroute, _router, homeservice, profileservice, roleservice) {
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this.homeservice = homeservice;
         this.profileservice = profileservice;
+        this.roleservice = roleservice;
         this.onClick = ($event) => {
             this.onClickResult = $event;
         };
@@ -36,7 +39,12 @@ let ChildComponent = class ChildComponent {
         this.searchQueryParams = null;
         this.instructions = null;
         this.stepSkip = 0;
+        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.infinitydisable = false;
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            console.log(this.roleinfo);
+        });
     }
     ngOnInit() {
         this.sub = this._Activatedroute.queryParams
@@ -46,7 +54,6 @@ let ChildComponent = class ChildComponent {
             this.sortQueryParams = params['sort'];
             this.userQueryParams = params['user'];
             this.searchQueryParams = params['q'];
-            console.log('query params', params);
             this.getInstructions();
         }, err => console.log(err));
     }
@@ -77,21 +84,18 @@ let ChildComponent = class ChildComponent {
             this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
     getInstructionsUser() {
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
     getInstructionsSearch() {
         this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -157,10 +161,6 @@ __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
 ], ChildComponent.prototype, "lang", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], ChildComponent.prototype, "search", void 0);
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',
@@ -168,7 +168,7 @@ ChildComponent = __decorate([
         styleUrls: ['css/blog-home.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        router_1.Router, HomeService_1.HomeService, Profile_Service_1.ProfileService])
+        router_1.Router, Home_Service_1.HomeService, Profile_Service_1.ProfileService, Role_Service_1.RoleService])
 ], ChildComponent);
 exports.ChildComponent = ChildComponent;
 //# sourceMappingURL=childcontenthome.component.js.map

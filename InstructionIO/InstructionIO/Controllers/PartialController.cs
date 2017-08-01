@@ -9,7 +9,7 @@ namespace InstructionIO.Controllers
     {
       
 
-        public IActionResult AboutComponent() => PartialView();
+       
 
         public IActionResult AppComponent() => PartialView();
 

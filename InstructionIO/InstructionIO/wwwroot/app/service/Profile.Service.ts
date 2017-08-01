@@ -13,6 +13,10 @@ export class ProfileService {
         return this.http.get('/api/profile/user/' + userparams).map(res => (res).json());
     }
 
+    getProfileImage(userparams: number) {
+        return this.http.get('/api/profile/userimage/' + userparams);
+    }
+
     getInstructions(userparams: string, stepSkip: number) {
         console.log(userparams);
         return this.http.get('/api/profile/instruction/user/' + userparams + '/' + stepSkip).map(res => (res).json());

@@ -30,13 +30,16 @@
     <Content Include="wwwroot\app\model\RatingRelation.js" />
     <Content Include="wwwroot\app\model\RatingRelation.js.map" />
     <Content Include="wwwroot\app\model\RatingRelation.ts" />
+    <Content Include="wwwroot\app\model\RoleData.ts" />
     <Content Include="wwwroot\app\model\Step.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
     <Content Include="wwwroot\app\model\TagsRelation.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\Rating.ts" />
     <Content Include="wwwroot\app\search.component.ts" />
-    <Content Include="wwwroot\app\service\HomeService.ts" />
+    <Content Include="wwwroot\app\service\Home.Service.js" />
+    <Content Include="wwwroot\app\service\Home.Service.js.map" />
+    <Content Include="wwwroot\app\service\Home.Service.ts" />
     <Content Include="wwwroot\app\service\instruction.Service.js" />
     <Content Include="wwwroot\app\service\instruction.Service.js.map" />
     <Content Include="wwwroot\app\service\instruction.Service.ts" />
@@ -44,6 +47,7 @@
     <Content Include="wwwroot\app\service\Profile.Service.js.map" />
     <Content Include="wwwroot\app\service\Profile.Service.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
+    <Content Include="wwwroot\app\service\Role.Service.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
     <Content Include="wwwroot\app\tools\safeHtml.ts" />
     <Content Include="wwwroot\app\tools\safeOn.ts" />
@@ -55,6 +59,11 @@
     <Content Include="wwwroot\css\InstructionEditor.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />
+    <Content Include="wwwroot\css\theme.css" />
+    <Content Include="wwwroot\css\themelight.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\css\themedark.css" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Brik.Security.VkontakteMiddleware" Version="1.0.2" />

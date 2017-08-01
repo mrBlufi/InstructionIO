@@ -2,11 +2,13 @@
 import 'rxjs/add/operator/filter';
 import { OnInit, Component, Input } from '@angular/core';
 import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnHoverRatingChangeEvent } from "angular-star-rating/star-rating-struct";
-import { HomeService } from "./service/HomeService";
+import { HomeService } from "./service/Home.Service";
 import { Instruction } from "./model/Instruction";
 import { ProfileService } from "./service/Profile.Service";
 import { Language } from 'angular-l10n';
 import { RatingRelation } from "./model/RatingRelation";
+import { RoleData } from "./model/RoleData";
+import { RoleService } from "./service/Role.Service";
 
 @Component({
     selector: 'child-content',
@@ -41,9 +43,14 @@ export class ChildComponent implements OnInit {
     searchQueryParams: string = null;
     instructions: Array<Instruction> = null;
     stepSkip = 0;
-    @Input() search: boolean;
+
+    roleinfo: RoleData = new RoleData(-1, false, false);
     constructor(private _Activatedroute: ActivatedRoute,
-        private _router: Router, private homeservice: HomeService,private profileservice:ProfileService) {
+        private _router: Router, private homeservice: HomeService, private profileservice: ProfileService, private roleservice: RoleService) {
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            console.log(this.roleinfo);
+        });
     }
     ngOnInit() {
         this.sub = this._Activatedroute.queryParams
@@ -53,7 +60,6 @@ export class ChildComponent implements OnInit {
                 this.sortQueryParams = params['sort'];
                 this.userQueryParams = params['user'];
                 this.searchQueryParams = params['q']
-                console.log('query params', params);
                 this.getInstructions();
             }, err => console.log(err));
     }
@@ -88,7 +94,6 @@ export class ChildComponent implements OnInit {
         if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -96,7 +101,6 @@ export class ChildComponent implements OnInit {
     getInstructionsUser() {
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -104,7 +108,6 @@ export class ChildComponent implements OnInit {
     getInstructionsSearch() {
         this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log('get search data', this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }

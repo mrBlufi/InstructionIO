@@ -1,5 +1,4 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about.component';
 import { IndexComponent } from './index.component';
 import { ContactComponent } from './contact.component';
 import { ProfileComponent } from './profile.component';
@@ -19,7 +18,7 @@ const appRoutes: Routes = [
             { path: 'child-content', component: ChildComponent }
         ]
     },
-    { path: 'about', component: AboutComponent, data: { title: 'About' } },
+    
     {
         path: 'search', component: SearchComponent, data: { title: 'Search' }, children: [
             { path: '', redirectTo: 'child-content', pathMatch: 'full' },
@@ -41,4 +40,4 @@ const appRoutes: Routes = [
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [AboutComponent, IndexComponent, ContactComponent, ProfileComponent, StepEditorComponent, InstructionEditorComponent,SearchComponent];
+export const routedComponents = [ IndexComponent, ContactComponent, ProfileComponent, StepEditorComponent, InstructionEditorComponent,SearchComponent];

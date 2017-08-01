@@ -1,0 +1,29 @@
+﻿.dark {
+    background-color: #252839;
+    color: #f2b632;
+}
+    .dark .navbar {
+        background-color: #677077;
+        color: #f2b632;
+    }
+    
+        
+
+
+.light {
+    background-color: #feffff;
+    color: #daad86;
+}
+
+    .light .navbar {
+        background-color: #312c32;
+    }
+
+body {
+    min-height: 100%;
+    font-family: 'Nunito', sans-serif;
+}
+
+form:hover{
+    background-color:none;
+}
