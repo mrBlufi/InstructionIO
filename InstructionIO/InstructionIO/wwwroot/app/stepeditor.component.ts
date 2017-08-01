@@ -10,7 +10,7 @@ import { SafeHtml } from './tools/safeHtml';
 import { Pipe, PipeTransform } from '@angular/core';
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
-import { CustomModal, CustomModalContext } from './patrialComponent/videoModal'
+import { CustomModal, VideoModalContext } from './patrialComponent/videoModal'
 
 
 @Component({
@@ -19,10 +19,6 @@ import { CustomModal, CustomModalContext } from './patrialComponent/videoModal'
 })
 export class StepEditorComponent {
     @Input() step: Step = new Step('0');
-
-    randomString(): string {
-        return (Math.random() * 100).toString();
-    }
 
     constructor(public modal: Modal,private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http) {
         //dragulaService.setOptions(this.step.id, {
@@ -53,12 +49,12 @@ export class StepEditorComponent {
     }
 
     textBoxAdd() {
-        let n: ContentBlock = new ContentBlock('text', this.sanitizer);
+        let n: ContentBlock = new ContentBlock('text')//, this.sanitizer);
         this.step.contentBlock.push(n);
     }
 
     addPictureBox(url: string) {
-        let n: ContentBlock = new ContentBlock('img', this.sanitizer);
+        let n: ContentBlock = new ContentBlock('img')//, this.sanitizer);
         n.content = url;
         this.step.contentBlock.push(n);
     }
@@ -67,14 +63,18 @@ export class StepEditorComponent {
         eleme.click();
     }
 
-    videoBoxAdd(input: HTMLInputElement) {
-        let n: ContentBlock = new ContentBlock('video', this.sanitizer);
-        n.content = input.value.replace('watch?v=', 'embed/');
+    videoBoxAdd(src: string) {
+        let n: ContentBlock = new ContentBlock('video')//, this.sanitizer);
+        n.content = 'https://www.youtube.com/embed/' + src.slice(src.indexOf('/'));
         this.step.contentBlock.push(n);
     }
 
     videoBoxModal() {
-        return this.modal.open(CustomModal, overlayConfigFactory({ num1: 2, num2: 3 }, BSModalContext));
+        return this.modal.open(CustomModal, overlayConfigFactory({ src: "" }, BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(
+                () => this.videoBoxAdd(resultPromise.context.src));
+        });
     }
 
     boxDelete(event: ContentBlock) {

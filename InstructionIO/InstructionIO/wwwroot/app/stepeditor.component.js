@@ -37,9 +37,6 @@ let StepEditorComponent = class StepEditorComponent {
             this.onRemoveModel(value.slice(1));
         });
     }
-    randomString() {
-        return (Math.random() * 100).toString();
-    }
     onDropModel(args) {
         let [el, target, source] = args;
         // do something else
@@ -52,24 +49,27 @@ let StepEditorComponent = class StepEditorComponent {
         console.log(n);
     }
     textBoxAdd() {
-        let n = new ContetnBlock_1.ContentBlock('text', this.sanitizer);
+        let n = new ContetnBlock_1.ContentBlock('text'); //, this.sanitizer);
         this.step.contentBlock.push(n);
     }
     addPictureBox(url) {
-        let n = new ContetnBlock_1.ContentBlock('img', this.sanitizer);
+        let n = new ContetnBlock_1.ContentBlock('img'); //, this.sanitizer);
         n.content = url;
         this.step.contentBlock.push(n);
     }
     redirectToInput(eleme) {
         eleme.click();
     }
-    videoBoxAdd(input) {
-        let n = new ContetnBlock_1.ContentBlock('video', this.sanitizer);
-        n.content = input.value.replace('watch?v=', 'embed/');
+    videoBoxAdd(src) {
+        let n = new ContetnBlock_1.ContentBlock('video'); //, this.sanitizer);
+        n.content = 'https://www.youtube.com/embed/' + src.slice(src.indexOf('/'));
         this.step.contentBlock.push(n);
     }
     videoBoxModal() {
-        return this.modal.open(videoModal_1.CustomModal, angular2_modal_1.overlayConfigFactory({ num1: 2, num2: 3 }, bootstrap_1.BSModalContext));
+        return this.modal.open(videoModal_1.CustomModal, angular2_modal_1.overlayConfigFactory({ src: "" }, bootstrap_1.BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(() => this.videoBoxAdd(resultPromise.context.src));
+        });
     }
     boxDelete(event) {
         this.step.contentBlock.splice(this.step.contentBlock.indexOf(event), 1);

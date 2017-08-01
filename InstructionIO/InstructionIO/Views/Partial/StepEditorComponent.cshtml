@@ -28,7 +28,7 @@
                         </template>
                         <template ngSwitchCase="video">
                             <div class="content_block_type_video">
-                                <iframe [src]="safeOn(block.content)" frameborder="0" allowfullscreen>
+                                <iframe [src]="block.content" frameborder="0" allowfullscreen>
                                 </iframe>
                             </div>
                         </template>

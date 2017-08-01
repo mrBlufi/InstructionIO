@@ -3,21 +3,25 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 export class ContentBlock {
 
-    safe: Safe;
+    //safe: Safe;
 
-    constructor(type: string, private sanitizer: DomSanitizer) {
+    //constructor(type: string, private sanitizer: DomSanitizer) {
+    //    this.type = type;
+    //    this.safe = new Safe(sanitizer);
+    //}
+
+    constructor(type: string) {
         this.type = type;
-        this.safe = new Safe(sanitizer);
     }
 
     public id: number;
-    public _content: any;
+    public content: any;
     public type: string;
 
-    get content(): any {
-        return this.type == 'text' ? this.safe.safeOnHtml(this._content) : this.safe.safeOnUrl(this._content);
-    }
-    set content(content: any) {
-        this._content = content;
-    }
+    //get content(): any {
+    //    return this.type == 'text' ? this.safe.safeOnHtml(this._content) : this.safe.safeOnUrl(this._content);
+    //}
+    //set content(content: any) {
+    //    this._content = content;
+    //}
 }

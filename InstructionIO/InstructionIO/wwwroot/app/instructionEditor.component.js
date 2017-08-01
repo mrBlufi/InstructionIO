@@ -38,18 +38,14 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             slideClass: 'slide-mini',
             containerModifierClass: 'miniSwiperContainer'
         };
-        console.log(this.Inst);
         dragulaService.setOptions('stepD', {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
             }
         });
     }
-    cw(n) {
-        console.log(n);
-    }
     add() {
-        this.Inst.step.push(new Step_1.Step(this.Inst.step[this.Inst.step.length - 1].id + 1));
+        this.Inst.step.push(new Step_1.Step());
         this.mainSwiper.update();
     }
     del() {
@@ -63,12 +59,16 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         this.miniSwiper.setIndex(event);
     }
     ngOnInit() {
-        this._instructionservice.get('99').subscribe(data => {
+        this._instructionservice.get().subscribe(data => {
             this.Inst = data;
         }, err => console.log(err));
     }
     ngOnDestroy() {
         this.dragulaService.destroy('stepD');
+    }
+    saveInst() {
+        console.log(this.Inst);
+        this._instructionservice.create(this.Inst);
     }
 };
 __decorate([

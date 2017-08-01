@@ -14,10 +14,6 @@
 
   <ItemGroup>
     <Content Include="wwwroot\app\childcontenthome.component.ts" />
-    <Content Include="wwwroot\app\model\apiModel\CommentFull.ts" />
-    <Content Include="wwwroot\app\model\apiModel\ContentFull.ts" />
-    <Content Include="wwwroot\app\model\apiModel\InstructionFull.ts" />
-    <Content Include="wwwroot\app\model\apiModel\SpetFull.ts" />
     <Content Include="wwwroot\app\model\Category.ts" />
     <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />

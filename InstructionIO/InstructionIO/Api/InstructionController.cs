@@ -51,10 +51,12 @@ namespace InstructionIO.Controllers.Api {
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateInstructionAsync([FromBody]Instruction instruction)
+        public IActionResult CreateInstructionAsync([FromBody]Instruction instruction)
         {
-            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-            instruction.Author.User = user;
+            context.Entry(instruction).State = EntityState.Added;
+            instruction.Id = 0;
+            var n = context.Users.Find(userManager.GetUserId(HttpContext.User));
+            instruction.Author = context.UserInfos.Where(User => User.User == n).ToArray()[0];
             var result = context.Instructions.Add(instruction);
             context.SaveChanges();
             return Ok();

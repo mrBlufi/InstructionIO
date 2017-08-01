@@ -24,7 +24,6 @@ export class InstructionEditorComponent {
     Inst: Instruction = new Instruction();
 
     constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService) {
-        console.log(this.Inst);
         dragulaService.setOptions('stepD', {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
@@ -48,11 +47,8 @@ export class InstructionEditorComponent {
         containerModifierClass:'miniSwiperContainer'
     }
 
-    cw(n: any) {
-        console.log(n);
-    }
     add(): void {
-        this.Inst.step.push(new Step(this.Inst.step[this.Inst.step.length-1].id + 1));
+        this.Inst.step.push(new Step());
         this.mainSwiper.update();
     }
 
@@ -69,14 +65,19 @@ export class InstructionEditorComponent {
     }
 
     ngOnInit() {
-        this._instructionservice.get('99').subscribe(
+        this._instructionservice.get().subscribe(
             data => {
-                this.Inst = data;
+                this.Inst = data as Instruction;
             },
             err => console.log(err));
     }
 
     ngOnDestroy() {
         this.dragulaService.destroy('stepD');
+    }
+
+    saveInst() {
+        console.log(this.Inst);
+        this._instructionservice.create(this.Inst);
     }
 }
