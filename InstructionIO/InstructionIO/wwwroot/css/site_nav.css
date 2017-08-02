@@ -1,9 +1,15 @@
 ﻿body {
-    padding-top: 25px;
+    padding-top: 50px;
 }
-body,html {
+html, body {
     height: 100%;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
 }
+/*body {
+    overflow: auto;  добавить полосу прокрутки 
+}*/
+      
 a.dropdown-toggle {
     padding-right: 0;
 }

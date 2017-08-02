@@ -24,21 +24,13 @@ let ChildComponent = class ChildComponent {
         this.homeservice = homeservice;
         this.profileservice = profileservice;
         this.roleservice = roleservice;
-        this.onClick = ($event) => {
-            this.onClickResult = $event;
-        };
-        this.onRatingChange = ($event) => {
-            this.onRatingChangeResult = $event;
-        };
-        this.onHoverRatingChange = ($event) => {
-            this.onHoverRatingChangeResult = $event;
-        };
         this.categoryQueryParams = null;
         this.sortQueryParams = null;
         this.userQueryParams = null;
         this.searchQueryParams = null;
         this.instructions = null;
         this.stepSkip = 0;
+        this.tagsearch = false;
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.infinitydisable = false;
         roleservice.getDataRole().subscribe(data => {
@@ -46,6 +38,15 @@ let ChildComponent = class ChildComponent {
             console.log(this.roleinfo);
         });
     }
+    onClick($event, idI) {
+        this.onClickResult = $event;
+        if (this.roleinfo.id != -1)
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
+                console.log(data);
+            });
+        console.log($event);
+    }
+    ;
     ngOnInit() {
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
@@ -54,6 +55,7 @@ let ChildComponent = class ChildComponent {
             this.sortQueryParams = params['sort'];
             this.userQueryParams = params['user'];
             this.searchQueryParams = params['q'];
+            this.tagsearch = params['tag'];
             this.getInstructions();
         }, err => console.log(err));
     }
@@ -84,6 +86,7 @@ let ChildComponent = class ChildComponent {
             this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
+            console.log(this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -94,7 +97,7 @@ let ChildComponent = class ChildComponent {
         }, err => console.log(err));
     }
     getInstructionsSearch() {
-        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip, this.tagsearch).subscribe(data => {
             this.instructions = data;
             this.stepSkip += 1;
         }, err => console.log(err));
@@ -103,7 +106,10 @@ let ChildComponent = class ChildComponent {
         this.sub.unsubscribe();
     }
     onScroll() {
-        if (this.userQueryParams != null) {
+        if (this.searchQueryParams != null) {
+            this.getScrollSearchData();
+        }
+        else if (this.userQueryParams != null) {
             this.getScrollUserData();
         }
         else {
@@ -116,11 +122,12 @@ let ChildComponent = class ChildComponent {
         this.infinitydisable = true;
         console.log('scroll');
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
-            if (data) {
+            if (!data) {
                 this.infinitydisable = false;
                 return;
             }
             let instructionscroll = data;
+            console.log(data);
             this.instructions = this.instructions.concat(instructionscroll);
             this.stepSkip += 1;
             this.infinitydisable = false;
@@ -131,7 +138,7 @@ let ChildComponent = class ChildComponent {
             return;
         this.infinitydisable = true;
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
-            if (data) {
+            if (!data) {
                 this.infinitydisable = false;
                 return;
             }
@@ -145,8 +152,8 @@ let ChildComponent = class ChildComponent {
         if (this.infinitydisable)
             return;
         this.infinitydisable = true;
-        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
-            if (data) {
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip, this.tagsearch).subscribe(data => {
+            if (!data) {
                 this.infinitydisable = false;
                 return;
             }
@@ -165,7 +172,7 @@ ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',
         templateUrl: '/partial/contentChildHomeComponent',
-        styleUrls: ['css/blog-home.css']
+        styleUrls: ['css/blog-home.css', 'css/theme.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router, Home_Service_1.HomeService, Profile_Service_1.ProfileService, Role_Service_1.RoleService])

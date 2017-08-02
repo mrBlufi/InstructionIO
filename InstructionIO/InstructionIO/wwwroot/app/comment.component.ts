@@ -1,9 +1,10 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Comment } from './model/Comment'
 import { ProfileService } from "./service/Profile.Service";
 import { Http } from '@angular/http';
 import { Response, Headers, URLSearchParams } from '@angular/http';
 import { RoleData } from "./model/RoleData";
+import { Observable, Subscription } from 'rxjs/Rx';
 import { RoleService } from "./service/Role.Service";
 
 @Component({
@@ -40,7 +41,7 @@ export class CommentComponent {
         const body = JSON.stringify(obj);
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/test/comments/post', body, { headers: headers }).subscribe(
+        return this.http.post('/api/comment/test/comments/post/', body, { headers: headers }).subscribe(
             (data) => {
                 console.log('Response received');
                 console.log(data);
@@ -62,5 +63,8 @@ export class CommentComponent {
         });
     }
     comments: Array<Comment>;
-    public editorContent: string = 'My Document\'s Title';
+    public editorContent: string = 'Comment Text';
+
+   
+   
 }

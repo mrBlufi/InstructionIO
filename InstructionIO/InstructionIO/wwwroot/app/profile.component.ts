@@ -8,11 +8,12 @@ import { Language } from 'angular-l10n';
 import { RoleData } from "./model/RoleData";
 import { RoleService } from "./service/Role.Service";
 import { Http } from "@angular/http";
+import { ThemeService } from "./service/Theme.Service";
 
 @Component({
     selector: 'my-profile',
     templateUrl: '/partial/profileComponent',
-    styleUrls: ['css/ProfilePage.css']
+    styleUrls: ['css/ProfilePage.css', 'css/theme.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     @Language() lang: string;
@@ -23,7 +24,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     sub: any;
 
     constructor(private _Activatedroute: ActivatedRoute,
-        private _router: Router, private _profileservice: ProfileService, private roleservice: RoleService,private http: Http) {
+        private _router: Router, private _profileservice: ProfileService, private roleservice: RoleService, private http: Http, private themeservice: ThemeService) {
+        
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -63,6 +65,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     
 
     ngOnInit() {
+        let theme = this.themeservice.getTheme();
+        console.log(theme);
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
                 this.userQueryParams = params['user'];

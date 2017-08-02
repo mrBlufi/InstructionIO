@@ -12,6 +12,7 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { DragulaModule } from 'ng2-dragula';
 import { HomeService } from "./service/Home.Service";
 import { RoleService } from "./service/Role.Service";
+import { ThemeService } from "./service/Theme.Service";
 import { ProfileService } from "./service/Profile.Service";
 import { InstructionService } from "./service/instruction.Service";
 import { AppComponent } from './app.component';
@@ -42,7 +43,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         BootstrapModalModule
     ],
     declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, SafeHtml,CommentComponent],
-    providers: [RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
+    providers: [ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

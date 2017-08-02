@@ -44,7 +44,7 @@ IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',
         templateUrl: '/partial/indexComponent',
-        styleUrls: ['css/blog-home.css']
+        styleUrls: ['css/blog-home.css', 'css/theme.css']
     }),
     __metadata("design:paramtypes", [Home_Service_1.HomeService])
 ], IndexComponent);

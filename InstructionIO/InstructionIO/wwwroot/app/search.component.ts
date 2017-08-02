@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
     selector: 'my-search',
     templateUrl: '/partial/searchComponent',
-    styleUrls: ['css/blog-home.css']
+    styleUrls: ['css/blog-home.css', 'css/theme.css']
 })
 
 export class SearchComponent implements OnInit {

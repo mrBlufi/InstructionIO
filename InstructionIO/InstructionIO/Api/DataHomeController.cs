@@ -6,6 +6,7 @@ using InstructionIO.Models;
 using InstructionIO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using System.Threading.Tasks;
 
 namespace InstructionIO.Api
 {
@@ -23,33 +24,42 @@ namespace InstructionIO.Api
         }
 
         [HttpGet("tag")]
-        public IEnumerable<Tag> GetListPopulTags()
+        public IEnumerable<Tag> getListPopulTags()
         {
-            IEnumerable <Tag> populartag= _context.Tags.AsNoTracking().ToList().OrderBy(d => d.Name).Take(6);
+            IEnumerable <Tag> populartag= _context.Tags.AsNoTracking().ToList().OrderBy(d => d.Frequency).Take(6);
             return populartag;
         }
 
         [HttpGet("instruction/popular/category/{category}/{page}")]
-        public IEnumerable<Instruction> GetListPopulInstruction(string category, int page)
+        public IEnumerable<Instruction> getListPopulInstruction(string category, int page)
         {
-            if (category == "Full"){
-                _unstructions = _context.Instructions.Include(x => x.RatingRelation).Include(x=>x.TagsRelation).ThenInclude(x=>x.Tag).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.Rating);
-             } else{
-                _unstructions = _context.Instructions.Where(x => x.Category.Name == category).Include(x => x.RatingRelation).Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.Rating);
-             }
-            return _unstructions.Skip(page * _stepTake).Take(_stepTake);
+           
+            return getInstruction(category).OrderByDescending(x => x.Rating).Skip(page * _stepTake).Take(_stepTake);
         }
 
         [HttpGet("instruction/lastchange/category/{category}/{page}")]
-        public IEnumerable<Instruction> GetListLastAddInstruction(string category, int page)
+        public IEnumerable<Instruction> getListLastAddInstruction(string category, int page)
         {
-            if (category == "Full"){
-                _unstructions = _context.Instructions.Include(x => x.RatingRelation).Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
-            }else {
-                _unstructions = _context.Instructions.Where(x => x.Category.Name == category).Include(x => x.RatingRelation).Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
-            }
-            return _unstructions.Skip(page * _stepTake).Take(_stepTake);
+               return getInstruction(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
 
+        }
+
+        private IEnumerable<Instruction> getInstruction(string category)
+        {
+            if (category == "Full")
+            {
+                _unstructions = _context.Instructions.Include(x => x.RatingRelation)
+                    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author)
+                    .Include(t => t.Category).ToArray();
+            }
+            else
+            {
+                _unstructions = _context.Instructions.Where(x => x.Category.Name == category)
+                    .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+                    .ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category)
+                    .ToArray();
+            }
+            return _unstructions;
         }
 
         [HttpGet("categories")]
@@ -59,31 +69,75 @@ namespace InstructionIO.Api
             return category;
         }
 
+        [HttpGet("instr")]
+        public IEnumerable<Instruction> GetTest12()
+        {
+            IEnumerable<Instruction> category = _context.Instructions.Include(x => x.RatingRelation)
+                .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
+                .Include(t => t.Author).Include(t => t.Category).ToArray();
+            return category;
+        }
+
         [HttpGet("instruction/full/category/{category}/{page}")]
         public IEnumerable<Instruction> GetFullListInstruction(string category,int page)
         {
-            if (category == "Full"){
-                _unstructions = _context.Instructions.Include(x => x.RatingRelation).Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate); }
-            else {
-                _unstructions = _context.Instructions.Where(x => x.Category.Name ==category).Include(x => x.RatingRelation).Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList().OrderByDescending(x => x.LastChangedDate);
-             }
-            return _unstructions.Skip(page* _stepTake).Take(_stepTake);
+            return getInstruction(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
         }
 
-        [HttpGet("instruction/search/{search}/{page}")]
-        public IEnumerable<Instruction> GetSearchInstruction(string search,int page)
+        [HttpGet("instruction/search/{search}/{page}/{tag}")]
+        public IEnumerable<Instruction> GetSearchInstruction(string search,int page,bool tag)
         {
-
-            _unstructions = _context.Instructions.Where(x => x.Name.Contains(search) || x.TagsRelation.Any(xs => xs.Tag.Name.Contains(search)))
-                .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
-           .ThenInclude(x => x.Tag).Include(t => t.Author)
-           .Include(t => t.Category).ToList();
+            if (tag)
+            {
+                _unstructions = _context.Instructions.Where(x => x.TagsRelation.Any(xs => xs.Tag.Name==(search)))
+                               .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+                          .ThenInclude(x => x.Tag).Include(t => t.Author)
+                          .Include(t => t.Category).ToList();
+            }
+            else
+            {
+                _unstructions = _context.Instructions
+                    .Where(x => x.Name.Contains(search) || x.TagsRelation.Any(xs => xs.Tag.Name.Contains(search)))
+                    .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+               .ThenInclude(x => x.Tag).Include(t => t.Author)
+               .Include(t => t.Category).ToList();
+            }
 
            
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
 
-       
+
+        [HttpGet("instruction/setrating/{idI}/{idU}/{rating}")]
+        public async Task<IActionResult> SetRating(int idI,int idU,int rating)
+        {
+            var instr = _context.Instructions.FirstOrDefault(x => x.Id == idI);
+            var ratingr = _context.RatingRelations.FirstOrDefault(x => x.Instruction.Id == instr.Id && x.User.Id == idU);
+            if (ratingr != null)
+            {
+                ratingr.Value = rating;
+                _context.RatingRelations.Update(ratingr);
+
+
+            }
+            else
+            {
+                RatingRelation ratingrelation = new RatingRelation()
+                {
+                    Instruction = instr,
+                    User = await _context.UserInfos.FindAsync(idU),
+                    Value = rating
+                };
+                await _context.RatingRelations.AddAsync(ratingrelation);
+            }
+            _context.SaveChanges();
+            instr.Rating = _context.RatingRelations.Where(x => x.Instruction.Id == instr.Id).Average(x => x.Value);
+            _context.Instructions.Update(instr);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+
 
     }
 }

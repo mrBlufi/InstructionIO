@@ -44,7 +44,7 @@ SearchComponent = __decorate([
     core_1.Component({
         selector: 'my-search',
         templateUrl: '/partial/searchComponent',
-        styleUrls: ['css/blog-home.css']
+        styleUrls: ['css/blog-home.css', 'css/theme.css']
     }),
     __metadata("design:paramtypes", [Home_Service_1.HomeService, router_1.ActivatedRoute])
 ], SearchComponent);

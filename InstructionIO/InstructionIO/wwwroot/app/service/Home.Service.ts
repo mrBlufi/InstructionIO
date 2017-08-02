@@ -22,7 +22,11 @@ export class HomeService {
         return this.http.get('/api/datahome/instruction/user/' + stepSkip).map(res => (res).json());
     }
 
-    getInstructionsSearch(stepSkip: string,page:number) {
-        return this.http.get('/api/datahome/instruction/search/' + stepSkip+'/'+page).map(res => (res).json());
+    getInstructionsSearch(stepSkip: string, page: number, tag: boolean) {
+        return this.http.get('/api/datahome/instruction/search/' + stepSkip+'/'+page+'/'+tag).map(res => (res).json());
+    }
+
+    setRating(idI: number, idU: number, rating: number) {
+        return this.http.get('/api/datahome/instruction/setrating/'+idI+'/'+idU+'/'+rating);
     }
 }

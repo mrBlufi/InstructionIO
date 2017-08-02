@@ -27,8 +27,11 @@ let HomeService = class HomeService {
     getInstructionsUser(stepSkip) {
         return this.http.get('/api/datahome/instruction/user/' + stepSkip).map(res => (res).json());
     }
-    getInstructionsSearch(stepSkip, page) {
-        return this.http.get('/api/datahome/instruction/search/' + stepSkip + '/' + page).map(res => (res).json());
+    getInstructionsSearch(stepSkip, page, tag) {
+        return this.http.get('/api/datahome/instruction/search/' + stepSkip + '/' + page + '/' + tag).map(res => (res).json());
+    }
+    setRating(idI, idU, rating) {
+        return this.http.get('/api/datahome/instruction/setrating/' + idI + '/' + idU + '/' + rating);
     }
 };
 HomeService = __decorate([

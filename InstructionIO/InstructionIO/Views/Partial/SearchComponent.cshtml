@@ -23,7 +23,7 @@
                     <li class="nav-header">{{ 'Popular tag' | translate:lang }}</li>
                     <li *ngFor="let tag of tags; let i = index">
                         <a [routerLink]="['../search']"
-                       [queryParams]="{'q':tag.name}">#{{tag.name}}</a>
+                       [queryParams]="{'q':tag.name,'tag':true}">#{{tag.name}}</a>
                     </li>
 
                 </ul>

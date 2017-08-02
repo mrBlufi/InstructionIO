@@ -48,6 +48,8 @@
     <Content Include="wwwroot\app\service\Profile.Service.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\service\Role.Service.ts" />
+    <Content Include="wwwroot\app\service\Theme.Service.ts" />
+    <Content Include="wwwroot\app\service\ThemeService.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
     <Content Include="wwwroot\app\tools\safeHtml.ts" />
     <Content Include="wwwroot\app\tools\safeOn.ts" />

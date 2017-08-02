@@ -20,7 +20,7 @@ let CommentComponent = class CommentComponent {
         this.roleservice = roleservice;
         this.http = http;
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
-        this.editorContent = 'My Document\'s Title';
+        this.editorContent = 'Comment Text';
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -42,7 +42,7 @@ let CommentComponent = class CommentComponent {
     addComment(obj) {
         const body = JSON.stringify(obj);
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/test/comments/post', body, { headers: headers }).subscribe((data) => {
+        return this.http.post('/api/comment/test/comments/post/', body, { headers: headers }).subscribe((data) => {
             console.log('Response received');
             console.log(data);
             this.getComment();

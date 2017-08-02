@@ -16,28 +16,40 @@ const angular_l10n_1 = require("angular-l10n");
 const Role_Service_1 = require("./service/Role.Service");
 const RoleData_1 = require("./model/RoleData");
 const Profile_Service_1 = require("./service/Profile.Service");
+const Theme_Service_1 = require("./service/Theme.Service");
+const router_1 = require("@angular/router");
 let AppComponent = class AppComponent {
-    constructor(titleService, locale, roleservice, profileservice) {
+    constructor(titleService, locale, roleservice, profileservice, themeservice, router) {
         this.titleService = titleService;
         this.locale = locale;
         this.roleservice = roleservice;
         this.profileservice = profileservice;
-        this.theme = 'light';
+        this.themeservice = themeservice;
+        this.router = router;
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.angularClientSideData = 'Angular';
+        themeservice.setTheme('light');
+        this.theme = themeservice.getTheme();
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            if (this.roleinfo.id != -1) {
-                profileservice.getProfileImage(this.roleinfo.id).subscribe(data => {
-                    this.imageprofile = data["_body"];
-                    console.log(this.imageprofile);
-                });
-            }
+            this.getImageProfile();
             console.log(this.roleinfo);
         });
     }
+    enterClick() {
+        this.router.navigate(['search'], { queryParams: { 'q': this.searchQueryParams } });
+    }
+    getImageProfile() {
+        if (this.roleinfo.id != -1) {
+            this.profileservice.getProfileImage(this.roleinfo.id).subscribe(data => {
+                this.imageprofile = data["_body"];
+                console.log(this.imageprofile);
+            });
+        }
+    }
     settheme(theme) {
         this.theme = theme;
+        this.themeservice.setTheme(theme);
     }
     setTitle(newTitle) {
         this.titleService.setTitle(newTitle);
@@ -57,7 +69,7 @@ AppComponent = __decorate([
         templateUrl: '/partial/appComponent',
         styleUrls: ['css/site_nav.css', 'css/theme.css']
     }),
-    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService, Role_Service_1.RoleService, Profile_Service_1.ProfileService])
+    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService, Role_Service_1.RoleService, Profile_Service_1.ProfileService, Theme_Service_1.ThemeService, router_1.Router])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

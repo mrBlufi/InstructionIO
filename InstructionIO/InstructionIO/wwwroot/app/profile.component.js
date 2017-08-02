@@ -18,13 +18,15 @@ const angular_l10n_1 = require("angular-l10n");
 const RoleData_1 = require("./model/RoleData");
 const Role_Service_1 = require("./service/Role.Service");
 const http_1 = require("@angular/http");
+const Theme_Service_1 = require("./service/Theme.Service");
 let ProfileComponent = class ProfileComponent {
-    constructor(_Activatedroute, _router, _profileservice, roleservice, http) {
+    constructor(_Activatedroute, _router, _profileservice, roleservice, http, themeservice) {
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this._profileservice = _profileservice;
         this.roleservice = roleservice;
         this.http = http;
+        this.themeservice = themeservice;
         this.user = new UserInfo_1.UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.userQueryParams = null;
@@ -60,6 +62,8 @@ let ProfileComponent = class ProfileComponent {
         }, err => console.log('Get me user error'));
     }
     ngOnInit() {
+        let theme = this.themeservice.getTheme();
+        console.log(theme);
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
             this.userQueryParams = params['user'];
@@ -107,10 +111,10 @@ ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
         templateUrl: '/partial/profileComponent',
-        styleUrls: ['css/ProfilePage.css']
+        styleUrls: ['css/ProfilePage.css', 'css/theme.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http])
+        router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http, Theme_Service_1.ThemeService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map

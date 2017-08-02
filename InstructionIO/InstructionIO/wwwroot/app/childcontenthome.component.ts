@@ -10,30 +10,31 @@ import { RatingRelation } from "./model/RatingRelation";
 import { RoleData } from "./model/RoleData";
 import { RoleService } from "./service/Role.Service";
 
+
 @Component({
     selector: 'child-content',
     templateUrl: '/partial/contentChildHomeComponent',
-    styleUrls: ['css/blog-home.css']
+    styleUrls: ['css/blog-home.css',  'css/theme.css']
 })
 
 
 export class ChildComponent implements OnInit {
     
     onClickResult: IStarRatingOnClickEvent;
-    onHoverRatingChangeResult: IStarRatingIOnHoverRatingChangeEvent;
-    onRatingChangeResult: IStarRatingOnRatingChangeEven;
 
-    onClick = ($event: IStarRatingOnClickEvent) => {
+    onClick($event: IStarRatingOnClickEvent, idI: number) {
         this.onClickResult = $event;
+        if (this.roleinfo.id != -1)
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
+                console.log(data);
+            });
+       
+        console.log($event);
     };
 
-    onRatingChange = ($event: IStarRatingOnRatingChangeEven) => {
-        this.onRatingChangeResult = $event;
-    };
+    
 
-    onHoverRatingChange = ($event: IStarRatingIOnHoverRatingChangeEvent) => {
-        this.onHoverRatingChangeResult = $event;
-    };
+    
 
     sub: any;
     @Language() lang: string;
@@ -43,6 +44,7 @@ export class ChildComponent implements OnInit {
     searchQueryParams: string = null;
     instructions: Array<Instruction> = null;
     stepSkip = 0;
+    tagsearch: boolean = false;
 
     roleinfo: RoleData = new RoleData(-1, false, false);
     constructor(private _Activatedroute: ActivatedRoute,
@@ -60,6 +62,7 @@ export class ChildComponent implements OnInit {
                 this.sortQueryParams = params['sort'];
                 this.userQueryParams = params['user'];
                 this.searchQueryParams = params['q']
+                this.tagsearch = params['tag'];
                 this.getInstructions();
             }, err => console.log(err));
     }
@@ -94,6 +97,7 @@ export class ChildComponent implements OnInit {
         if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
+            console.log(this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -106,7 +110,7 @@ export class ChildComponent implements OnInit {
     }
 
     getInstructionsSearch() {
-        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip, this.tagsearch).subscribe(data => {
             this.instructions = data;
             this.stepSkip += 1;
         }, err => console.log(err));
@@ -118,6 +122,10 @@ export class ChildComponent implements OnInit {
 
     infinitydisable = false;
     onScroll() {
+        if (this.searchQueryParams != null) {
+            this.getScrollSearchData()
+        }
+        else
         if (this.userQueryParams != null) {
             this.getScrollUserData();
         } else {
@@ -131,11 +139,12 @@ export class ChildComponent implements OnInit {
         this.infinitydisable = true;
         console.log('scroll');
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
-            if (data) {
+            if (!data) {
                 this.infinitydisable = false;
                 return;
             }
             let instructionscroll = data;
+            console.log(data);
             this.instructions = this.instructions.concat(instructionscroll);
             this.stepSkip += 1;
             this.infinitydisable = false;
@@ -146,7 +155,7 @@ export class ChildComponent implements OnInit {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
         this.profileservice.getInstructions(this.userQueryParams, this.stepSkip).subscribe(data => {
-            if (data) {
+            if (!data) {
                 this.infinitydisable = false;
                 return;
             }
@@ -161,8 +170,8 @@ export class ChildComponent implements OnInit {
     getScrollSearchData() {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
-        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip).subscribe(data => {
-            if (data) {
+        this.homeservice.getInstructionsSearch(this.searchQueryParams, this.stepSkip,this.tagsearch).subscribe(data => {
+            if (!data) {
                 
                 this.infinitydisable = false;
                 return;

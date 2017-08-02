@@ -7,7 +7,7 @@ import { Language } from 'angular-l10n';
 @Component({
     selector: 'my-index',
     templateUrl: '/partial/indexComponent',
-    styleUrls: ['css/blog-home.css']
+    styleUrls: ['css/blog-home.css', 'css/theme.css']
 })
 
 export class IndexComponent implements OnInit {

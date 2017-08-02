@@ -2,7 +2,8 @@
 <p>onClickResult: {{onClickResult | json}}</p>
 <p>onRatingChangeResult: {{onRatingChangeResult | json}}</p>*@
 
-<div *ngIf="searchQueryParams">
+
+<div *ngIf="instructions &&instructions.length==0 && searchQueryParams">
     <h2 >No results for...</h2>
 </div>
 
@@ -11,6 +12,7 @@
          [infiniteScrollDistance]="2"
          [infiniteScrollThrottle]="300"
          (scrolled)="onScroll()">
+
     <div *ngIf="instructions">
         <h2 *ngIf="instructions.length==0 && !searchQueryParams">No instruction...</h2>
     </div>
@@ -19,36 +21,33 @@
             <div class="panel-header">
                 <div class="row">
                     <span class="name col-md-8 col-lg-9 col-sm-7 col-xs-6">{{instruction.name}}  <small class="text-muted"> {{instruction.category.name}}</small></span>
-                    <div class="rating col-md-4 col-lg-3 col-sm-5 col-xs-6">
-                        <star-rating-comp class="hidden-xs" [starType]="'svg'"
+                    <div   class="rating col-md-4 col-lg-3 col-sm-5 col-xs-6">
+                        <star-rating-comp  class="hidden-xs" [starType]="'svg'"
                                           [step]="0.5"
                                           [speed]="'slow'"
                                           [size]="'large'"
                                           [rating]="setrating(instruction.ratingRelation)"
                                           [staticColor]="'default'"
                                           [hoverEnabled]="true"
-                                          (onClick)="onClick($event)"
-                                          (onRatingChange)="onRatingChange($event)"
-                                          (onHoverRatingChange)="onHoverRatingChange($event)">
+                                          [showHalfStars]="true"
+                                          (onClick)="onClick($event,instruction.id)">
                         </star-rating-comp>
-                        <star-rating-comp class="visible-xs" [starType]="'svg'"
+                        @*<star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
                                           [step]="0.5"
                                           [speed]="'slow'"
                                           [staticColor]="'default'"
                                           [hoverEnabled]="true"
                                           [rating]="setrating(instruction.ratingRelation)"
-                                          (onClick)="onClick($event)"
-                                          (onRatingChange)="onRatingChange($event)"
-                                          (onHoverRatingChange)="onHoverRatingChange($event)">
-                        </star-rating-comp>
+                                          (onClick)="onClick($event,instruction.id)">
+                        </star-rating-comp>*@
 
                     </div>
                 </div>
                 <div class="tag" style="display:inline;">
                 <span class="glyphicon glyphicon-cloud"></span>
                 <small class="text-muted " *ngFor="let tag of instruction.tagsRelation">
-                    <a [routerLink]="['../search']"
-                         [queryParams]="{'q':tag.tag.name}">#{{tag.tag.name}}</a></small>
+                    <a [routerLink]="['../../search']"
+                         [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}}</a></small>
                 </div>
             </div>
             <div class="panel-body">

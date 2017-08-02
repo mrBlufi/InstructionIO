@@ -2,9 +2,12 @@
     background-color: #252839;
     color: #f2b632;
 }
-    .dark .navbar {
+    .dark > .navbar {
         background-color: #677077;
         color: #f2b632;
+    }
+    .dark .well{
+        background:red;
     }
     
         
@@ -19,9 +22,8 @@
         background-color: #312c32;
     }
 
-body {
-    min-height: 100%;
-    font-family: 'Nunito', sans-serif;
+div.dark{
+    min-height:100%;
 }
 
 form:hover{

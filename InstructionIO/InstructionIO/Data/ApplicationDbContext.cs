@@ -32,6 +32,7 @@ namespace InstructionIO.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<TagsRelation> TagsRelations { get; set; }
+        public DbSet<RatingRelation> RatingRelations { get; set; }
         public DbSet<Category> Categorys { get; set; }
     }
 }

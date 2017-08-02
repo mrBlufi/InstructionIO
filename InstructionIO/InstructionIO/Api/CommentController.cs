@@ -30,13 +30,13 @@ namespace InstructionIO.Api
         [HttpGet("test/comments")]
         public IActionResult GetTest1()
         {
-            var test = _context.Comments.Where(x => x.Instruction.Id == 1).Include(x => x.Author).ToList();
+            var test = _context.Comments.Where(x => x.Instruction.Id == 4).Include(x => x.Author).ToList();
             return new ObjectResult(test);
         }
         [HttpPost("test/comments/post")]
         public async Task<IActionResult> GetTest2Async([FromBody] Comment comment)
         {
-            var instruction = _context.Instructions.Find(1);
+            var instruction = _context.Instructions.Find(4);
             var user = await _userManager.GetUserAsync(HttpContext.User);
             comment.Author = _context.UserInfos.FirstOrDefault(x => x.User.Id == user.Id);
             instruction.Comment.Add(comment);
