@@ -45,21 +45,27 @@ namespace InstructionIO.Controllers.Api {
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)
         {
-            var result = context.Instructions.Update(instruction);
-            context.SaveChanges();
-            return Ok();
+            context.Remove(context.Instructions.Find(instruction.Id));
+            instruction.Id = 0;
+            foreach (var step in instruction.Step)
+            {
+                step.Id = 0;
+                foreach (var contentBlock in step.ContentBlock)
+                {
+                    contentBlock.Id = 0;
+                }
+            }
+            return CreateInstruction(instruction);
         }
 
         [HttpPost("create")]
-        public IActionResult CreateInstructionAsync([FromBody]Instruction instruction)
+        public IActionResult CreateInstruction([FromBody]Instruction instruction)
         {
-            context.Entry(instruction).State = EntityState.Added;
-            instruction.Id = 0;
             var n = context.Users.Find(userManager.GetUserId(HttpContext.User));
             instruction.Author = context.UserInfos.Where(User => User.User == n).ToArray()[0];
             var result = context.Instructions.Add(instruction);
             context.SaveChanges();
-            return Ok();
+            return Ok(instruction.Id);
         }
     }
 }

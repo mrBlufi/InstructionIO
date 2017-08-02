@@ -20,6 +20,9 @@ let TextBoxTemplate = class TextBoxTemplate {
         console.log(element.innerHTML);
         this.textBox = element.innerHTML;
     }
+    get getInnerHtml() {
+        return this.textBox;
+    }
 };
 __decorate([
     core_1.Input(),
@@ -31,6 +34,11 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], TextBoxTemplate.prototype, "onkeyUp", null);
+__decorate([
+    core_1.HostBinding('innerHtml'),
+    __metadata("design:type", Object),
+    __metadata("design:paramtypes", [])
+], TextBoxTemplate.prototype, "getInnerHtml", null);
 TextBoxTemplate = __decorate([
     core_1.Directive({
         selector: '[textBox]'

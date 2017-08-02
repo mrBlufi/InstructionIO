@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const ngx_swiper_wrapper_1 = require("ngx-swiper-wrapper");
 const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
 const ng2_dragula_1 = require("ng2-dragula");
 const platform_browser_1 = require("@angular/platform-browser");
 const instruction_Service_1 = require("./service/instruction.Service");
@@ -18,11 +19,13 @@ const http_1 = require("@angular/http");
 const Instruction_1 = require("./model/Instruction");
 const Step_1 = require("./model/Step");
 let InstructionEditorComponent = class InstructionEditorComponent {
-    constructor(dragulaService, sanitizer, http, _instructionservice) {
+    constructor(dragulaService, sanitizer, http, _instructionservice, _ActivatedRoute, router) {
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
         this._instructionservice = _instructionservice;
+        this._ActivatedRoute = _ActivatedRoute;
+        this.router = router;
         this.Inst = new Instruction_1.Instruction();
         this.mainSwiperConfig = {
             direction: 'horizontal',
@@ -54,12 +57,18 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             this.mainSwiper.prevSlide();
         }
     }
+    cw() {
+        console.log(this.Inst);
+    }
     onIndexChange(event) {
         this.mainSwiper.setIndex(event);
         this.miniSwiper.setIndex(event);
     }
     ngOnInit() {
-        this._instructionservice.get().subscribe(data => {
+        let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
+            this._id = parmas['id'];
+        });
+        this._instructionservice.get(this._id).subscribe(data => {
             this.Inst = data;
         }, err => console.log(err));
     }
@@ -67,8 +76,14 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         this.dragulaService.destroy('stepD');
     }
     saveInst() {
-        console.log(this.Inst);
-        this._instructionservice.create(this.Inst);
+        this._instructionservice.create(this.Inst).subscribe(data => {
+            this.router.navigate(['instructionEditor'], { queryParams: { 'id': data['_body'] } });
+        });
+    }
+    updateInst() {
+        this._instructionservice.update(this.Inst).subscribe(data => {
+            this.router.navigate(['instructionEditor'], { queryParams: { 'id': data['_body'] } });
+        });
     }
 };
 __decorate([
@@ -84,7 +99,8 @@ InstructionEditorComponent = __decorate([
         selector: 'instructionEditor',
         templateUrl: '/partial/InstructionEditorComponent'
     }),
-    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService])
+    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService,
+        router_1.ActivatedRoute, router_1.Router])
 ], InstructionEditorComponent);
 exports.InstructionEditorComponent = InstructionEditorComponent;
 //# sourceMappingURL=instructionEditor.component.js.map

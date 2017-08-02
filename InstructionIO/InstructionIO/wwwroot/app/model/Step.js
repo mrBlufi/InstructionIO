@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Step {
     constructor(id) {
+        this.id = '';
         this.number = 0;
         this.subtitle = "";
         this.contentBlock = new Array();

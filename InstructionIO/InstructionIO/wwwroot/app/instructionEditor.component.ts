@@ -1,5 +1,6 @@
 ﻿import { SwiperConfigInterface, SwiperComponent, SwiperEvents } from "ngx-swiper-wrapper";
 import { Component, Input, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DragulaService } from "ng2-dragula";
 import { ContentBlock } from './model/ContetnBlock';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
@@ -23,7 +24,10 @@ export class InstructionEditorComponent {
 
     Inst: Instruction = new Instruction();
 
-    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService) {
+    private _id: string;
+    
+    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService,
+        private _ActivatedRoute: ActivatedRoute, private router: Router) {
         dragulaService.setOptions('stepD', {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
@@ -59,13 +63,20 @@ export class InstructionEditorComponent {
         }
     }
 
+    cw() {
+        console.log(this.Inst);
+    }
+
     onIndexChange(event: number) {
         this.mainSwiper.setIndex(event);
         this.miniSwiper.setIndex(event);
     }
 
     ngOnInit() {
-        this._instructionservice.get().subscribe(
+        let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
+            this._id = parmas['id'];
+        });
+        this._instructionservice.get(this._id).subscribe(
             data => {
                 this.Inst = data as Instruction;
             },
@@ -77,7 +88,14 @@ export class InstructionEditorComponent {
     }
 
     saveInst() {
-        console.log(this.Inst);
-        this._instructionservice.create(this.Inst);
+        this._instructionservice.create(this.Inst).subscribe(data => {
+            this.router.navigate(['instructionEditor'], { queryParams: { 'id': data['_body'] } });
+        });
+    }
+
+    updateInst() {
+        this._instructionservice.update(this.Inst).subscribe(data => {
+            this.router.navigate(['instructionEditor'], { queryParams: { 'id': data['_body'] } });
+        });
     }
 }

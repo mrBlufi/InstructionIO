@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Route } from '@angular/router'
 import { Instruction } from "../model/Instruction";
 import { Response, Headers, URLSearchParams } from '@angular/http';
 import { Observable } from "rxjs/Observable";
@@ -20,11 +21,11 @@ export class InstructionService {
         return this.http.get('api/Instruction/get', { params: params }).map(res => (res).json());
     }
 
-    update(instruction: Instruction) {
-        this.http.post('api/Instruction/update', instruction).subscribe(); 
+    update(instruction: Instruction): Observable<Response> {
+        return this.http.post('api/Instruction/update', instruction); 
     }
 
-    create(instruction: Instruction) {
-        this.http.post('api/Instruction/create', instruction).subscribe();
+    create(instruction: Instruction): Observable<Response> {
+        return this.http.post('api/Instruction/create', instruction);
     }
 }

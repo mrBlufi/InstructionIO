@@ -27,10 +27,10 @@ let InstructionService = class InstructionService {
         return this.http.get('api/Instruction/get', { params: params }).map(res => (res).json());
     }
     update(instruction) {
-        this.http.post('api/Instruction/update', instruction).subscribe();
+        return this.http.post('api/Instruction/update', instruction);
     }
     create(instruction) {
-        this.http.post('api/Instruction/create', instruction).subscribe();
+        return this.http.post('api/Instruction/create', instruction);
     }
 };
 InstructionService = __decorate([

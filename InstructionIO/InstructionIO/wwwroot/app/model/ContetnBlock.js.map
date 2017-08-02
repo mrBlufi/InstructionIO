@@ -1,1 +1,1 @@
-{"version":3,"file":"ContetnBlock.js","sourceRoot":"","sources":["ContetnBlock.ts"],"names":[],"mappings":";;AAGA;IAEI,aAAa;IAEb,8DAA8D;IAC9D,uBAAuB;IACvB,sCAAsC;IACtC,GAAG;IAEH,YAAY,IAAY;QACpB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;CAYJ;AAvBD,oCAuBC"}
+{"version":3,"file":"ContetnBlock.js","sourceRoot":"","sources":["ContetnBlock.ts"],"names":[],"mappings":";;AAGA;IAEI,YAAY,IAAY;QAIjB,OAAE,GAAW,CAAC,CAAC;QACf,YAAO,GAAW,EAAE,CAAC;QACrB,SAAI,GAAW,EAAE,CAAC;QALrB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;CAKJ;AATD,oCASC"}

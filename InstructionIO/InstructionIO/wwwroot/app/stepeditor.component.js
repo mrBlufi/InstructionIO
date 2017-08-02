@@ -60,6 +60,13 @@ let StepEditorComponent = class StepEditorComponent {
     redirectToInput(eleme) {
         eleme.click();
     }
+    loadTextBox(n) {
+        console.log(n);
+    }
+    textBoxKeyup(n, block) {
+        let _block = block;
+        _block.content = n.srcElement.innerHTML;
+    }
     videoBoxAdd(src) {
         let n = new ContetnBlock_1.ContentBlock('video'); //, this.sanitizer);
         n.content = 'https://www.youtube.com/embed/' + src.slice(src.indexOf('/'));
