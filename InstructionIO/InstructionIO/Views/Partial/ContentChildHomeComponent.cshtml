@@ -2,7 +2,6 @@
 <p>onClickResult: {{onClickResult | json}}</p>
 <p>onRatingChangeResult: {{onRatingChangeResult | json}}</p>*@
 
-
 <div *ngIf="instructions &&instructions.length==0 && searchQueryParams">
     <h2 >No results for...</h2>
 </div>
@@ -16,7 +15,7 @@
     <div *ngIf="instructions">
         <h2 *ngIf="instructions.length==0 && !searchQueryParams">No instruction...</h2>
     </div>
-    <div *ngFor="let instruction of instructions">
+    <div  *ngFor="let instruction of instructions">
         <div class="panel panel-default">
             <div class="panel-header">
                 <div class="row">
@@ -28,18 +27,17 @@
                                           [size]="'large'"
                                           [rating]="setrating(instruction.ratingRelation)"
                                           [staticColor]="'default'"
-                                          [hoverEnabled]="true"
                                           [showHalfStars]="true"
                                           (onClick)="onClick($event,instruction.id)">
                         </star-rating-comp>
-                        @*<star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
+                        <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
                                           [step]="0.5"
                                           [speed]="'slow'"
                                           [staticColor]="'default'"
-                                          [hoverEnabled]="true"
                                           [rating]="setrating(instruction.ratingRelation)"
+                                          [showHalfStars]="true"
                                           (onClick)="onClick($event,instruction.id)">
-                        </star-rating-comp>*@
+                        </star-rating-comp>
 
                     </div>
                 </div>
@@ -51,9 +49,10 @@
                 </div>
             </div>
             <div class="panel-body">
-                <img class="img-responsive" src="http://minionomaniya.ru/wp-content/uploads/2015/10/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8-%D0%B8%D0%B7-%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%D0%B0-%D0%BC%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD%D1%8B-2015.jpg">
+                 <img class="img-responsive" src="http://minionomaniya.ru/wp-content/uploads/2015/10/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8-%D0%B8%D0%B7-%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D1%84%D0%B8%D0%BB%D1%8C%D0%BC%D0%B0-%D0%BC%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD%D1%8B-2015.jpg">
+               
                 <div class="paneltextbody">
-                    <p class="lead">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <span id="foo" class="lead">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</span>
                     <p><small class="text-muted ">{{ 'Create date' | translate:lang }}: {{instruction.createDate | date:'MM/dd/yyyy'}}  Author:<span class="profile-link" [routerLink]="['../../profile']" [queryParams]="{'user':instruction.author.id}"> {{instruction.author.fullName}}</span></small></p>
                 </div>
             </div>

@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     constructor(private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService, private roleservice: RoleService, private http: Http, private themeservice: ThemeService) {
-        
+       
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -39,14 +39,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         textArea.style.height = textArea.scrollHeight + 'px';
     }
 
-    seth() {
-        let textArea = document.getElementById("interestsBox")
-        textArea.style.overflow = 'hidden';
-        textArea.style.height = '0';
-        textArea.style.height = textArea.scrollHeight + 'px';
-    }
+   
 
     editDate(id: string) {
+        this.autogrow();
         let elem: HTMLElement = document.getElementById(id);
         elem.removeAttribute('disabled');
         elem.focus();
@@ -71,7 +67,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
             .subscribe(params => {
                 this.userQueryParams = params['user'];
                 this.getDataUser();
+                
             }, err => console.log(err));
+       
     }
     ngOnDestroy() {
         console.log('destroy and user', this.user);

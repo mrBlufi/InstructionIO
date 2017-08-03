@@ -42,13 +42,8 @@ let ProfileComponent = class ProfileComponent {
         textArea.style.height = '0';
         textArea.style.height = textArea.scrollHeight + 'px';
     }
-    seth() {
-        let textArea = document.getElementById("interestsBox");
-        textArea.style.overflow = 'hidden';
-        textArea.style.height = '0';
-        textArea.style.height = textArea.scrollHeight + 'px';
-    }
     editDate(id) {
+        this.autogrow();
         let elem = document.getElementById(id);
         elem.removeAttribute('disabled');
         elem.focus();

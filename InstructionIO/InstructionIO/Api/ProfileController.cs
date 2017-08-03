@@ -29,21 +29,6 @@ namespace instructionsIO.Controllers.Api
             _context = context;
 
         }
-
-
-
-        //[HttpGet("user/my")]
-        //public async Task<UserInfo> GetMyProfileAsync(string userparams)
-        //{
-        //    ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-
-        //    var messages = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
-        //    messages.User = null;
-
-
-        //    return messages;
-        //}
-
         [HttpGet("user/{userparams}")]
         public UserInfo GetUserProfile(string userparams)
         {
@@ -58,22 +43,13 @@ namespace instructionsIO.Controllers.Api
         [HttpGet("instruction/user/{userID}/{page}")]
         public IEnumerable<Instruction> GetInstructionUserID(int userID, int page)
         {
-            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userID).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList();
+            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userID).Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+               .ThenInclude(x => x.Tag).Include(t => t.Author)
+               .Include(t => t.Category).ToList();
 
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
-
-        //[HttpGet("instruction/user/my/{page}")]
-        //public async Task<IEnumerable<Instruction>> GetInstructionUserAsync(int page)
-        //{
-        //    ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-        //    var userinfo = _context.UserInfos.FirstOrDefault(f => f.User.Id == user.Id);
-        //    IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userinfo.Id).Include(t => t.Author).Include(t => t.Category).AsNoTracking().ToList();
-
-        //    return _unstructions.Skip(page * _stepTake).Take(_stepTake);
-        //}
-
-
+        
         [HttpPost("user/update")]
         public UserInfo SetUserProfile([FromBody]UserInfo userprofile)
         {

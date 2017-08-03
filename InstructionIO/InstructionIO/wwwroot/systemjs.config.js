@@ -55,7 +55,10 @@
       'angular2-infinite-scroll': {
           main: 'angular2-infinite-scroll.js',
           defaultExtension: 'js'
-      }
+      },
+      
+      
+
     }
   });
 })(this);

@@ -10,7 +10,6 @@ import { RatingRelation } from "./model/RatingRelation";
 import { RoleData } from "./model/RoleData";
 import { RoleService } from "./service/Role.Service";
 
-
 @Component({
     selector: 'child-content',
     templateUrl: '/partial/contentChildHomeComponent',
@@ -33,7 +32,7 @@ export class ChildComponent implements OnInit {
     };
 
     
-
+   
     
 
     sub: any;

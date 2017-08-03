@@ -7,7 +7,6 @@ import { RoleData } from "./model/RoleData";
 import { ProfileService } from "./service/Profile.Service";
 import { ThemeService } from "./service/Theme.Service";
 import { Router } from "@angular/router";
-
 @Component({
     selector: 'my-app',
     templateUrl: '/partial/appComponent',

@@ -1,5 +1,18 @@
 ﻿<div class="row">
+   
     <div class="profile">
+            <div id="adminPanel" *ngIf="roleinfo.adminRole" class="col-lg-12 col-md-12 ">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Admin Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button>Delete User</button>
+                        <button>Set Role Admin</button>
+                    </div>
+                </div>
+            </div>
+        
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -8,16 +21,16 @@
                             <img *ngIf="user.avatar" class="thumbnail img-responsive" src="{{user.avatar}}">
                             <img *ngIf="!user.avatar" class="thumbnail img-responsive" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png">
                             <button *ngIf="roleinfo.id==user.id || roleinfo.adminRole" type="button" class="btn btn-default  glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)"> Load Image</button>
-                            <input *ngIf="roleinfo.id==user.id || roleinfo.adminRole" #imgInput type="file" (change)="saveFile($event)" style="display:none" />
+                            <input #imgInput type="file" (change)="saveFile($event)" style="display:none" />
                         </div>
                         <div class="media-body">
                             <hr>
                             <div>
                                 <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
-                                <textarea (change)="autogrow()" (keyup)="autogrow()"  class=" editableTarget" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
-                                
+                                <textarea   (change)="autogrow()" (keyup)="autogrow()"  class="col-md-10 editableTarget" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
+                               
                             </div>
-                            <hr>
+                            <hr class="col-md-12">
                             <div>
                                 <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" [value]="user.birthday | date:'yyyy-MM-dd'" style="border:none" (input)="user.birthday=parseDate($event.target.value)" />
@@ -32,7 +45,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div>
-                        <div><span  *ngIf="roleinfo.id==user.id || roleinfo.adminRole"class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('nameBox')"></span></div>
+                        <div><span  *ngIf="roleinfo.id==user.id || roleinfo.adminRole"class="pull-right s glyphicon glyphicon-pencil editable" (click)="editDate('nameBox')"></span></div>
                         <input id="nameBox" type="text" class="editableTarget pull-left h1Input" disabled="disabled" [(ngModel)]="user.fullName" style="border:none" [value]="user.fullName" />
                     </div>
                     <br><br>
