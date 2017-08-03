@@ -19,16 +19,15 @@ namespace InstructionIO.Models
         public string Avatar { get; set; }
         public string Interests { get; set; }
 
-        public static implicit operator UserInfo(ApplicationUser v)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 
     public class Instruction
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string PreviewImage { get; set; }
+        public string PreviewText { get; set; }
         [Required]
         public UserInfo Author { get; set; }
         public DateTime CreateDate { get; set; }

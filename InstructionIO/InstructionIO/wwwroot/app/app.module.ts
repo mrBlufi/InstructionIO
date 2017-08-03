@@ -14,6 +14,7 @@ import { HomeService } from "./service/Home.Service";
 import { RoleService } from "./service/Role.Service";
 import { ThemeService } from "./service/Theme.Service";
 import { ProfileService } from "./service/Profile.Service";
+import { CustomModal } from './patrialComponent/videoModal';
 import { InstructionService } from "./service/instruction.Service";
 import { AppComponent } from './app.component';
 import { ChildComponent } from './childcontenthome.component';
@@ -42,9 +43,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         ModalModule.forRoot(),
         BootstrapModalModule
     ],
-    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, SafeHtml,CommentComponent],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, SafeHtml,CommentComponent],
     providers: [ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [CustomModal]
 })
 export class AppModule {
     constructor(public locale: LocaleService, public translation: TranslationService) {

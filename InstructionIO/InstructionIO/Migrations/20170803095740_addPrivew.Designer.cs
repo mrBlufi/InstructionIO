@@ -8,9 +8,10 @@ using InstructionIO.Data;
 namespace InstructionIO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170803095740_addPrivew")]
+    partial class addPrivew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -165,7 +166,7 @@ namespace InstructionIO.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("RatingRelations");
+                    b.ToTable("RatingRelation");
                 });
 
             modelBuilder.Entity("InstructionIO.Models.Step", b =>

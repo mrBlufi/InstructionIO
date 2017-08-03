@@ -2,7 +2,7 @@
     <span defaultOverlayTarget></span>
     <div class="row step_info">
         <div class="col-xs-12 form-group">
-            <input type="text" class="form-control" placeholder="Step name" [value]="step.subtitle"/>
+            <input type="text" class="form-control" placeholder="Step name" [(ngModel)]="step.subtitle"/>
         </div>
     </div>
     <div class="row step_body panel panel-default">
@@ -17,18 +17,17 @@
                     </div>
                     <div [ngSwitch]="block.type">
                         <template ngSwitchCase="text">
-                            <div class="content_block_type_text" [innerHtml]="block.content" role="textbox" contenteditable="true" aria-multiline="true">
-                                <p class="textBox" data-text="blblbla"></p>
+                            <div class="content_block_type_text textBox" [innerHTML]="block.content" (focusout)="textBoxKeyup($event,block)" role="textbox" contenteditable="true" aria-multiline="true">
                             </div>
                         </template>
                         <template ngSwitchCase="img">
                             <div class="content_block_type_pictire">
-                                <img class="pictireBox" [src]="block.content"/>
+                                <img class="pictireBox" [(src)]="block.content"/>
                             </div>
                         </template>
                         <template ngSwitchCase="video">
                             <div class="content_block_type_video">
-                                <iframe [src]="safeOn(block.content)" frameborder="0" allowfullscreen>
+                                <iframe [(src)]="block.content" frameborder="0" allowfullscreen>
                                 </iframe>
                             </div>
                         </template>

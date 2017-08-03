@@ -12,31 +12,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
-class CustomModalContext extends bootstrap_1.BSModalContext {
+class VideoModalContext extends bootstrap_1.BSModalContext {
 }
-exports.CustomModalContext = CustomModalContext;
+exports.VideoModalContext = VideoModalContext;
 let CustomModal = class CustomModal {
     constructor(dialog) {
         this.dialog = dialog;
         this.context = dialog.context;
-        this.wrongAnswer = true;
         dialog.setCloseGuard(this);
     }
-    onKeyUp(value) {
-        this.wrongAnswer = value != 5;
+    load(elem) {
+        console.log(elem);
+        let input = elem;
+        this.context.src = input.value;
+        this.dialog.close();
+    }
+    modalClose() {
         this.dialog.close();
     }
     beforeDismiss() {
         return true;
     }
     beforeClose() {
-        return this.wrongAnswer;
+        return false;
     }
 };
 CustomModal = __decorate([
     core_1.Component({
         selector: 'modal-content',
-        template: '/partial/VideoModalComponent'
+        templateUrl: '/partial/VideoModalComponent'
     }),
     __metadata("design:paramtypes", [angular2_modal_1.DialogRef])
 ], CustomModal);

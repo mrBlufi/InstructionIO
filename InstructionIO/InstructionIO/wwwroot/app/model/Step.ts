@@ -6,7 +6,7 @@ export class Step {
         this.id = id;
     }
 
-    public id: string;
+    public id: string = '';
     public number: number = 0;
     public subtitle: string = "";
     public contentBlock: Array<ContentBlock> = new Array<ContentBlock>();

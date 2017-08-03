@@ -1,39 +1,40 @@
 ﻿import { Component } from '@angular/core';
-
 import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
 
-export class CustomModalContext extends BSModalContext {
-    public num1: number;
-    public num2: number;
+export class VideoModalContext extends BSModalContext {
+    public src: string;
 }
 
 @Component({
     selector: 'modal-content',
-    template: '/partial/VideoModalComponent'
+    templateUrl: '/partial/VideoModalComponent'
 })
-export class CustomModal implements CloseGuard, ModalComponent<CustomModalContext> {
-    context: CustomModalContext;
 
-    public wrongAnswer: boolean;
+export class CustomModal implements CloseGuard, ModalComponent<VideoModalContext> {
+    context: VideoModalContext;
 
-    constructor(public dialog: DialogRef<CustomModalContext>) {
+    constructor(public dialog: DialogRef<VideoModalContext>) {
         this.context = dialog.context;
-        this.wrongAnswer = true;
         dialog.setCloseGuard(this);
     }
 
-    onKeyUp(value: any) {
-        this.wrongAnswer = value != 5;
+    load(elem: HTMLElement) {
+        console.log(elem);
+        let input: HTMLInputElement = elem as HTMLInputElement;
+        this.context.src = input.value;
         this.dialog.close();
     }
 
+    modalClose() {
+        this.dialog.close();
+    }
 
     beforeDismiss(): boolean {
         return true;
     }
 
     beforeClose(): boolean {
-        return this.wrongAnswer;
+        return false;
     }
 }

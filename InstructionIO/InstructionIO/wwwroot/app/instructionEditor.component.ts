@@ -1,5 +1,6 @@
 ﻿import { SwiperConfigInterface, SwiperComponent, SwiperEvents } from "ngx-swiper-wrapper";
 import { Component, Input, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DragulaService } from "ng2-dragula";
 import { ContentBlock } from './model/ContetnBlock';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate'
@@ -23,8 +24,10 @@ export class InstructionEditorComponent {
 
     Inst: Instruction = new Instruction();
 
-    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService) {
-        console.log(this.Inst);
+    private _id: string;
+    
+    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService,
+        private _ActivatedRoute: ActivatedRoute, private router: Router) {
         dragulaService.setOptions('stepD', {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
@@ -48,11 +51,8 @@ export class InstructionEditorComponent {
         containerModifierClass:'miniSwiperContainer'
     }
 
-    cw(n: any) {
-        console.log(n);
-    }
     add(): void {
-        this.Inst.step.push(new Step(this.Inst.step[this.Inst.step.length-1].id + 1));
+        this.Inst.step.push(new Step());
         this.mainSwiper.update();
     }
 
@@ -63,20 +63,54 @@ export class InstructionEditorComponent {
         }
     }
 
+    cw() {
+        console.log(this.Inst);
+    }
+
     onIndexChange(event: number) {
         this.mainSwiper.setIndex(event);
         this.miniSwiper.setIndex(event);
     }
 
     ngOnInit() {
-        this._instructionservice.get('1').subscribe(
+        let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
+            this._id = parmas['id'];
+        });
+        this._instructionservice.get(this._id).subscribe(
             data => {
-                this.Inst = data;
+                this.Inst = data as Instruction;
             },
             err => console.log(err));
     }
 
     ngOnDestroy() {
         this.dragulaService.destroy('stepD');
+    }
+
+    saveInst() {
+        this._instructionservice.create(this.Inst).subscribe(data => {
+            this.router.navigate(['instructioneditor'], { queryParams: { 'id': data['_body'] } });
+        });
+    }
+
+    updateInst() {
+        this._instructionservice.update(this.Inst).subscribe(data => {
+            this.router.navigate(['instructioneditor'], { queryParams: { 'id': data['_body'] } });
+        });
+    }
+
+    saveFile(event: Event) {
+        let src: string;
+        let elem: HTMLInputElement = event.srcElement as HTMLInputElement;
+        let formData: FormData = new FormData();
+        formData.append(elem.files[0].name, elem.files[0]);
+        this.http.post('/api/StepEditor/Upload', formData).subscribe((data) =>
+        {
+            this.Inst.previewImage = data["_body"].replace(/"/g, "")
+        });
+    }
+
+    previwKeyup(n: KeyboardEvent) {
+        this.Inst.previewText = n.srcElement.innerHTML;
     }
 }

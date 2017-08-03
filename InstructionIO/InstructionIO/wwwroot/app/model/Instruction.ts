@@ -9,6 +9,8 @@ import { TagsRelation } from "./TagsRelation";
 export class Instruction {
     public id: number;
     public name: string;
+    public previewImage: string;
+    public previewText: string ;
     public author: UserInfo;
     public createDate: Date;
     public lastChangedDate: Date;

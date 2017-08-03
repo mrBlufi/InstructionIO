@@ -6,8 +6,8 @@
     </div>
     <div class="panel-body">
         <div class="form">
-            <input type="text" class="form-control instForm" [value]="Inst.name" placeholder="Instruction name" />
-            <input type="text" class="form-control instForm" [value]="Inst.tag" placeholder="tags.." />
+            <input type="text" class="form-control instForm" [(ngModel)]="Inst.name" placeholder="Instruction name" />
+            <input type="text" class="form-control instForm" [(ngModel)]="Inst.tag" placeholder="tags.." />
         </div>
         <accordion class="previevDropDown">
             <accordion-group>
@@ -16,7 +16,8 @@
                     <i class="pull-right float-xs-right glyphicon"
                        [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
                 </div>
-                <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
+                <input type="file" (change)="saveFile($event)" />
+                <div class="content_block_type_text" [(innerHTML)]="Inst.previewText"  (focusout)="previwKeyup($event)" role="textbox" contenteditable="true" aria-multiline="true">
                     <p class="textBox" data-text="about"></p>
                 </div>
             </accordion-group>
@@ -37,6 +38,10 @@
                 <button #btn (click)="cw(Inst)">info</button>
             </div>
         </swiper>
+        <div>
+            <button (click)="saveInst()">Save</button>
+            <button (click)="updateInst()">Update</button>
+        </div>
     </div>
 </div>
 

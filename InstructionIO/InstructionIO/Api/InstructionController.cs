@@ -37,7 +37,6 @@ namespace InstructionIO.Controllers.Api {
                     .Include(inst => inst.Comment)
                     .Include(inst => inst.TagsRelation)
                     .FirstOrDefault();
-
             }
             return new ObjectResult(instruction);
         }
@@ -45,19 +44,27 @@ namespace InstructionIO.Controllers.Api {
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)
         {
-            var result = context.Instructions.Update(instruction);
-            context.SaveChanges();
-            return Ok();
+            context.Remove(context.Instructions.Find(instruction.Id));
+            instruction.Id = 0;
+            foreach (var step in instruction.Step)
+            {
+                step.Id = 0;
+                foreach (var contentBlock in step.ContentBlock)
+                {
+                    contentBlock.Id = 0;
+                }
+            }
+            return CreateInstruction(instruction);
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateInstructionAsync([FromBody]Instruction instruction)
+        public IActionResult CreateInstruction([FromBody]Instruction instruction)
         {
-            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-            instruction.Author.User = user;
+            var n = context.Users.Find(userManager.GetUserId(HttpContext.User));
+            instruction.Author = context.UserInfos.Where(User => User.User == n).ToArray()[0];
             var result = context.Instructions.Add(instruction);
             context.SaveChanges();
-            return Ok();
+            return Ok(instruction.Id);
         }
     }
 }
