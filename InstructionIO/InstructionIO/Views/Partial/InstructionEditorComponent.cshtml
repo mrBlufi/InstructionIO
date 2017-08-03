@@ -6,8 +6,8 @@
     </div>
     <div class="panel-body">
         <div class="form">
-            <input type="text" class="form-control instForm" [value]="Inst.name" placeholder="Instruction name" />
-            <input type="text" class="form-control instForm" [value]="Inst.tag" placeholder="tags.." />
+            <input type="text" class="form-control instForm" [(ngModel)]="Inst.name" placeholder="Instruction name" />
+            <input type="text" class="form-control instForm" [(ngModel)]="Inst.tag" placeholder="tags.." />
         </div>
         <accordion class="previevDropDown">
             <accordion-group>

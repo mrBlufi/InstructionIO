@@ -2,7 +2,7 @@
     <span defaultOverlayTarget></span>
     <div class="row step_info">
         <div class="col-xs-12 form-group">
-            <input type="text" class="form-control" placeholder="Step name" [value]="step.subtitle"/>
+            <input type="text" class="form-control" placeholder="Step name" [(ngModel)]="step.subtitle"/>
         </div>
     </div>
     <div class="row step_body panel panel-default">
@@ -17,7 +17,7 @@
                     </div>
                     <div [ngSwitch]="block.type">
                         <template ngSwitchCase="text">
-                            <div class="content_block_type_text" (keypress)="textBoxKeyup($event,block)" role="textbox" contenteditable="true" aria-multiline="true">
+                            <div class="content_block_type_text"  (focusout)="textBoxKeyup($event,block)" role="textbox" contenteditable="true" aria-multiline="true">
                             </div>
                         </template>
                         <template ngSwitchCase="img">
