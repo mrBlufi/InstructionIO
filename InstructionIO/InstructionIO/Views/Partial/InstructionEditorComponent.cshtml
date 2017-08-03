@@ -16,7 +16,8 @@
                     <i class="pull-right float-xs-right glyphicon"
                        [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
                 </div>
-                <div class="content_block_type_text" role="textbox" contenteditable="true" aria-multiline="true">
+                <input type="file" (change)="saveFile($event)" />
+                <div class="content_block_type_text" [(innerHTML)]="Inst.previewText"  (focusout)="previwKeyup($event)" role="textbox" contenteditable="true" aria-multiline="true">
                     <p class="textBox" data-text="about"></p>
                 </div>
             </accordion-group>

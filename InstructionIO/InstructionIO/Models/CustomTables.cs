@@ -18,14 +18,14 @@ namespace InstructionIO.Models
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
         public string Interests { get; set; }
-
-       
     }
 
     public class Instruction
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string PreviewImage { get; set; }
+        public string PreviewText { get; set; }
         [Required]
         public UserInfo Author { get; set; }
         public DateTime CreateDate { get; set; }

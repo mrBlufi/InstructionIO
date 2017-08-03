@@ -37,7 +37,6 @@ namespace InstructionIO.Controllers.Api {
                     .Include(inst => inst.Comment)
                     .Include(inst => inst.TagsRelation)
                     .FirstOrDefault();
-
             }
             return new ObjectResult(instruction);
         }

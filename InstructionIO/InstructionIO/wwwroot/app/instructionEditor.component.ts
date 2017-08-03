@@ -89,13 +89,28 @@ export class InstructionEditorComponent {
 
     saveInst() {
         this._instructionservice.create(this.Inst).subscribe(data => {
-            this.router.navigate(['instructionEditor'], { queryParams: { 'id': data['_body'] } });
+            this.router.navigate(['instructioneditor'], { queryParams: { 'id': data['_body'] } });
         });
     }
 
     updateInst() {
         this._instructionservice.update(this.Inst).subscribe(data => {
-            this.router.navigate(['instructionEditor'], { queryParams: { 'id': data['_body'] } });
+            this.router.navigate(['instructioneditor'], { queryParams: { 'id': data['_body'] } });
         });
+    }
+
+    saveFile(event: Event) {
+        let src: string;
+        let elem: HTMLInputElement = event.srcElement as HTMLInputElement;
+        let formData: FormData = new FormData();
+        formData.append(elem.files[0].name, elem.files[0]);
+        this.http.post('/api/StepEditor/Upload', formData).subscribe((data) =>
+        {
+            this.Inst.previewImage = data["_body"].replace(/"/g, "")
+        });
+    }
+
+    previwKeyup(n: KeyboardEvent) {
+        this.Inst.previewText = n.srcElement.innerHTML;
     }
 }
