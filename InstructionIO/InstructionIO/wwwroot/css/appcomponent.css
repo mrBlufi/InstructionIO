@@ -1,0 +1,23 @@
+﻿@media screen and (max-width: 768px) {
+    li.point {
+        list-style-type:circle;
+    }
+    #profile_img {
+        text-align: center;
+    }
+}
+a{
+    color:white;
+}
+a:hover{
+    color:#e4e3e3;
+}
+span{
+    color:white;
+    font-weight:bold;
+}
+li{
+    padding-left:10px;
+
+}
+

@@ -1,7 +1,4 @@
 ﻿
-body {
-    font-family: 'Nunito', sans-serif;
-}
 textarea {
     border: none;
     background-color: white;
@@ -18,28 +15,12 @@ padding-top:20px;
 hr {
     box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
 }
-.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+.col-md-12, .col-lg-12 {
     padding-left: 0;
     padding-right: 0;
 }
-.slim_header {
-    font-size: medium;
-    word-wrap: break-word;
-    background-color: #DEE5EB;
-    position: unset;
-    padding: 5px 7px;
-    margin-top: -1px;
-    margin-bottom: 0px;
-    color: #657e9b;
-    font-family: 'Exo 2', sans-serif;
-    font-weight: bold;
-}
 
-.avatar {
-    padding: initial;
-    margin-left: 5px;
-    margin-right: 5px;
-}
+
 
 .about {
     padding: initial;
@@ -83,7 +64,30 @@ input[disabled].editableTarget {
     font-weight: 500;
     line-height: 1.1;
 }
-.col-lg-3, .col-md-3{
-    padding-left:0;
+
+.deleteuser {
+    float:right;
+}
+.deleteuser>i{
+    color:red;
+}
+    .deleteuser > span {
+        color: #000000;
+    }
+
+.deleteuser:hover {
+    color: #900101;
 }
 
+
+
+.admin{
+    height:40px;
+}
+
+@media screen and (max-width: 768px) {
+  
+    #profile_img{
+        text-align:center;
+    }
+}

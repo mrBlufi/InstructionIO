@@ -34,6 +34,7 @@
     <Content Include="wwwroot\app\model\Step.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
     <Content Include="wwwroot\app\model\TagsRelation.ts" />
+    <Content Include="wwwroot\app\patrialComponent\deleteUserModal.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\Rating.ts" />
     <Content Include="wwwroot\app\search.component.ts" />
@@ -55,7 +56,7 @@
     <Content Include="wwwroot\app\tools\safeOn.ts" />
     <Content Include="wwwroot\assets\locale-en.json" />
     <Content Include="wwwroot\assets\locale-ru.json" />
-    <Content Include="wwwroot\css\AppStyle.css" />
+    <Content Include="wwwroot\css\appcomponent.css" />
     <Content Include="wwwroot\app\instructionEditor.component.ts" />
     <Content Include="wwwroot\css\comment.css" />
     <Content Include="wwwroot\css\InstructionEditor.css" />
@@ -66,6 +67,14 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot\css\themedark.css" />
+    <Content Include="wwwroot\images\giphy.gif" />
+    <Content Include="wwwroot\images\Rolling.gif" />
+    <Content Include="wwwroot\lib\js\file.js" />
+    <Content Include="wwwroot\lib\js\file.js.map" />
+    <Content Include="wwwroot\lib\js\file.ts" />
+    <Content Include="wwwroot\lib\js\ProfilePage.js" />
+    <Content Include="wwwroot\lib\js\site.js" />
+    <Content Include="wwwroot\lib\js\site.min.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Brik.Security.VkontakteMiddleware" Version="1.0.2" />

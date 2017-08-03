@@ -13,9 +13,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 
-                <ul class="nav navbar-nav navbar-right">
-
-
+                <ul class="nav navbar-nav navbar-right hidden-xs">
                     <li *ngIf="roleinfo.id!=-1">
                         <p class="navbar-btn">
                             <a class="btn btn-glyphicon btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
@@ -70,6 +68,43 @@
                             </li>
                         </ul>
                     </li>
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right visible-xs">
+                    <li *ngIf="roleinfo.id!=-1">
+                        <p>
+                            <img *ngIf="!imageprofile" class="" id="img_prof" src="https://st2.depositphotos.com/1063693/10677/v/950/depositphotos_106775558-stock-illustration-flete-guy-man-woman-avatar.jpg" />
+                            <img *ngIf="imageprofile" class="" id="img_prof" src="{{imageprofile}}" />
+                            <span class="navbar-btn">
+                                <a class="btn btn-glyphicon btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
+                            </span>
+                        </p>
+                    </li>
+                    <li *ngIf="roleinfo.id!=-1">
+                        <form ngNoForm asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                            <p><a (click)="setTitle('Profile')" [routerLink]="['profile']" [queryParams]="{'user':roleinfo.id}">{{ 'Your Profile' | translate:lang }}</a></p>
+                            <p> <a onclick="document.getElementById('logoutForm').submit()">{{ 'Log out' | translate:lang }}</a></p>
+                          </form>
+                    </li>
+                    <li *ngIf="roleinfo.id==-1">
+                   
+                            <a href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span>{{ 'Log in' | translate:lang }}</a>
+                    </li>
+                     <li><span>{{ 'Language' | translate:lang }}:</span></li>
+                    <li class="point">
+                      <a (click)="selectLanguage('en');">English</a>
+                     </li>
+                     <li class="point">
+                      <a (click)="selectLanguage('ru');">Русский</a>
+                     </li>
+                      <li><span>theme:</span></li>
+                      <li class="point">
+                      <a (click)="settheme('light');">light</a>
+                      </li>
+                      <li class="point">
+                       <a (click)="settheme('dark');">dark</a>
+                       </li>
                 </ul>
 
                 <form class="navbar-form">

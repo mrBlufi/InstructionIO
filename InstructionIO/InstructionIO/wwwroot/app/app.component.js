@@ -67,7 +67,7 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         templateUrl: '/partial/appComponent',
-        styleUrls: ['css/site_nav.css', 'css/theme.css']
+        styleUrls: ['css/site_nav.css', 'css/theme.css', 'css/appcomponent.css']
     }),
     __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService, Role_Service_1.RoleService, Profile_Service_1.ProfileService, Theme_Service_1.ThemeService, router_1.Router])
 ], AppComponent);

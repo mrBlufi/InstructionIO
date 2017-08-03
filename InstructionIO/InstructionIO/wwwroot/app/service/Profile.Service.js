@@ -35,6 +35,9 @@ let ProfileService = class ProfileService {
             console.log(data);
         }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
     }
+    deleteUserById(id) {
+        return this.http.get('/api/profile/deleteuser/' + id).subscribe();
+    }
 };
 ProfileService = __decorate([
     core_1.Injectable(),

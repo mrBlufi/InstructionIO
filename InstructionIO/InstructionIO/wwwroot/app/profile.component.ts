@@ -9,21 +9,25 @@ import { RoleData } from "./model/RoleData";
 import { RoleService } from "./service/Role.Service";
 import { Http } from "@angular/http";
 import { ThemeService } from "./service/Theme.Service";
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { ModalCustom } from "./patrialComponent/deleteUserModal";
+import { Overlay, overlayConfigFactory } from 'angular2-modal';
+import { CustomModal } from "./patrialComponent/videoModal";
 
 @Component({
     selector: 'my-profile',
     templateUrl: '/partial/profileComponent',
-    styleUrls: ['css/ProfilePage.css', 'css/theme.css']
+    styleUrls: ['css/ProfilePage.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     @Language() lang: string;
-    user: UserInfo = new UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
+    user: UserInfo = new UserInfo();
     roleinfo: RoleData = new RoleData(-1, false, false);
     userQueryParams: string = null;
     instructions: Array<Instruction> = null;
     sub: any;
 
-    constructor(private _Activatedroute: ActivatedRoute,
+    constructor(public modal: Modal,private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService, private roleservice: RoleService, private http: Http, private themeservice: ThemeService) {
        
         roleservice.getDataRole().subscribe(data => {
@@ -39,7 +43,25 @@ export class ProfileComponent implements OnInit, OnDestroy {
         textArea.style.height = textArea.scrollHeight + 'px';
     }
 
-   
+    deleteUserModal() {
+        return this.modal.open(ModalCustom, overlayConfigFactory({ delete: false}, BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(
+                () => console.log('dasd'));
+        });
+    }
+    videoBoxModal() {
+        return this.modal.open(CustomModal, overlayConfigFactory({ src: "" }, BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(
+                () => console.log('dasd'));
+        });
+    }
+
+
+    deluser(tag: boolean) {
+        console.log(tag);
+    }
 
     editDate(id: string) {
         this.autogrow();

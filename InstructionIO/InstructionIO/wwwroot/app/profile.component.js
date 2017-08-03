@@ -19,15 +19,20 @@ const RoleData_1 = require("./model/RoleData");
 const Role_Service_1 = require("./service/Role.Service");
 const http_1 = require("@angular/http");
 const Theme_Service_1 = require("./service/Theme.Service");
+const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
+const deleteUserModal_1 = require("./patrialComponent/deleteUserModal");
+const angular2_modal_1 = require("angular2-modal");
+const videoModal_1 = require("./patrialComponent/videoModal");
 let ProfileComponent = class ProfileComponent {
-    constructor(_Activatedroute, _router, _profileservice, roleservice, http, themeservice) {
+    constructor(modal, _Activatedroute, _router, _profileservice, roleservice, http, themeservice) {
+        this.modal = modal;
         this._Activatedroute = _Activatedroute;
         this._router = _router;
         this._profileservice = _profileservice;
         this.roleservice = roleservice;
         this.http = http;
         this.themeservice = themeservice;
-        this.user = new UserInfo_1.UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
+        this.user = new UserInfo_1.UserInfo();
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.userQueryParams = null;
         this.instructions = null;
@@ -41,6 +46,21 @@ let ProfileComponent = class ProfileComponent {
         textArea.style.overflow = 'hidden';
         textArea.style.height = '0';
         textArea.style.height = textArea.scrollHeight + 'px';
+    }
+    deleteUserModal() {
+        return this.modal.open(deleteUserModal_1.ModalCustom, angular2_modal_1.overlayConfigFactory({ delete: false }, bootstrap_1.BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(() => console.log('dasd'));
+        });
+    }
+    videoBoxModal() {
+        return this.modal.open(videoModal_1.CustomModal, angular2_modal_1.overlayConfigFactory({ src: "" }, bootstrap_1.BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(() => console.log('dasd'));
+        });
+    }
+    deluser(tag) {
+        console.log(tag);
     }
     editDate(id) {
         this.autogrow();
@@ -106,9 +126,9 @@ ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
         templateUrl: '/partial/profileComponent',
-        styleUrls: ['css/ProfilePage.css', 'css/theme.css']
+        styleUrls: ['css/ProfilePage.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+    __metadata("design:paramtypes", [bootstrap_1.Modal, router_1.ActivatedRoute,
         router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http, Theme_Service_1.ThemeService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;

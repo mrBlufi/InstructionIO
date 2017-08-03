@@ -34,33 +34,43 @@ namespace InstructionIO.Api
         public IEnumerable<Instruction> getListPopulInstruction(string category, int page)
         {
            
-            return getInstruction(category).OrderByDescending(x => x.Rating).Skip(page * _stepTake).Take(_stepTake);
+            return getInstructionsCategory(category).OrderByDescending(x => x.Rating).Skip(page * _stepTake).Take(_stepTake);
         }
 
         [HttpGet("instruction/lastchange/category/{category}/{page}")]
         public IEnumerable<Instruction> getListLastAddInstruction(string category, int page)
         {
-               return getInstruction(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
+               return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
 
         }
+        [HttpGet("instruction/full/category/{category}/{page}")]
+        public IEnumerable<Instruction> GetFullListInstruction(string category, int page)
+        {
+            return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
+        }
 
-        private IEnumerable<Instruction> getInstruction(string category)
+        private IEnumerable<Instruction> getInstructionsCategory(string category)
         {
             if (category == "Full")
             {
-                _unstructions = _context.Instructions.Include(x => x.RatingRelation)
-                    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author)
-                    .Include(t => t.Category).ToArray();
+                return getInstructions();
             }
             else
             {
-                _unstructions = _context.Instructions.Where(x => x.Category.Name == category)
-                    .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
-                    .ThenInclude(x => x.Tag).Include(t => t.Author).Include(t => t.Category)
-                    .ToArray();
+                return getInstructions().Where(x => x.Category.Name == category);
+              
             }
-            return _unstructions;
         }
+
+        private IEnumerable<Instruction> getInstructions()
+        {
+            return _unstructions = _context.Instructions.Include(x => x.RatingRelation)
+                    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author)
+                    .Include(t => t.Category).ToArray();
+        }
+
+
+
 
         [HttpGet("categories")]
         public IEnumerable<Category> GetCategories()
@@ -78,11 +88,7 @@ namespace InstructionIO.Api
             return category;
         }
 
-        [HttpGet("instruction/full/category/{category}/{page}")]
-        public IEnumerable<Instruction> GetFullListInstruction(string category,int page)
-        {
-            return getInstruction(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
-        }
+       
 
         [HttpGet("instruction/search/{search}/{page}/{tag}")]
         public IEnumerable<Instruction> GetSearchInstruction(string search,int page,bool tag)

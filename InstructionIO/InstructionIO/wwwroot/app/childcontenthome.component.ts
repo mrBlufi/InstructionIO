@@ -30,11 +30,6 @@ export class ChildComponent implements OnInit {
        
         console.log($event);
     };
-
-    
-   
-    
-
     sub: any;
     @Language() lang: string;
     categoryQueryParams: string=null;

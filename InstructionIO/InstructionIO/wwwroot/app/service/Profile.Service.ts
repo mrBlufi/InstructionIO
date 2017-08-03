@@ -38,5 +38,10 @@ export class ProfileService {
     }
 
 
+    deleteUserById(id: number) {
+        return this.http.get('/api/profile/deleteuser/' + id).subscribe();
+    }
+
+
 
 }
