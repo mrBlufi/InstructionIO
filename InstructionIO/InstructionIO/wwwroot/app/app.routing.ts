@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     },
 
     { path: 'stepeditor', component: StepEditorComponent, data: { title: 'StepEditor' } },
-    { path: 'instructionEditor', component: InstructionEditorComponent, data: { title: 'instructionEditor' } }
+    { path: 'instructioneditor', component: InstructionEditorComponent, data: { title: 'instructionEditor' } }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

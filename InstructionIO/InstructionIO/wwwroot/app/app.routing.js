@@ -25,7 +25,7 @@ const appRoutes = [
         ]
     },
     { path: 'stepeditor', component: stepeditor_component_1.StepEditorComponent, data: { title: 'StepEditor' } },
-    { path: 'instructionEditor', component: instructionEditor_component_1.InstructionEditorComponent, data: { title: 'instructionEditor' } }
+    { path: 'instructioneditor', component: instructionEditor_component_1.InstructionEditorComponent, data: { title: 'instructionEditor' } }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
 exports.routedComponents = [about_component_1.AboutComponent, index_component_1.IndexComponent, contact_component_1.ContactComponent, profile_component_1.ProfileComponent, stepeditor_component_1.StepEditorComponent, instructionEditor_component_1.InstructionEditorComponent];

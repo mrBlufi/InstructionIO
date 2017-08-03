@@ -59,7 +59,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         this.miniSwiper.setIndex(event);
     }
     ngOnInit() {
-        this._instructionservice.get().subscribe(data => {
+        this._instructionservice.get('3').subscribe(data => {
             this.Inst = data;
         }, err => console.log(err));
     }
@@ -69,6 +69,10 @@ let InstructionEditorComponent = class InstructionEditorComponent {
     saveInst() {
         console.log(this.Inst);
         this._instructionservice.create(this.Inst);
+    }
+    updateInst() {
+        console.log(this.Inst);
+        this._instructionservice.update(this.Inst);
     }
 };
 __decorate([

@@ -28,7 +28,7 @@ namespace InstructionIO.Controllers.Api {
         [HttpGet("get")]
         public IActionResult GetInstruction(int? id)
         {
-            Instruction instruction = new Instruction();
+            Instruction instruction = null;
             if (id != null)
             {
                 instruction = context.Instructions.Where(instruct => instruct.Id == id)
@@ -39,25 +39,30 @@ namespace InstructionIO.Controllers.Api {
                     .FirstOrDefault();
 
             }
+            instruction = instruction ?? new Instruction();
             return new ObjectResult(instruction);
         }
 
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)
         {
-            var result = context.Instructions.Update(instruction);
-            context.SaveChanges();
-            return Ok();
+            Instruction oldInstruction = context.Instructions.Find(instruction.Id);
+            if (oldInstruction != null)
+            {
+                context.Instructions.Remove(oldInstruction);
+                context.SaveChanges();
+            }
+            return Ok(this.CreateInstruction(instruction));
         }
 
         [HttpPost("create")]
-        public IActionResult CreateInstructionAsync([FromBody]Instruction instruction)
+        public IActionResult CreateInstruction([FromBody]Instruction instruction)
         {
             context.Entry(instruction).State = EntityState.Added;
-            instruction.Id = 0;
             var n = context.Users.Find(userManager.GetUserId(HttpContext.User));
             instruction.Author = context.UserInfos.Where(User => User.User == n).ToArray()[0];
-            var result = context.Instructions.Add(instruction);
+            context.Instructions.Add(instruction);
+            context.Instructions.Update(instruction);
             context.SaveChanges();
             return Ok();
         }

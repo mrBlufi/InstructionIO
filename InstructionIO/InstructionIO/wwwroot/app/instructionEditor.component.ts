@@ -65,7 +65,7 @@ export class InstructionEditorComponent {
     }
 
     ngOnInit() {
-        this._instructionservice.get().subscribe(
+        this._instructionservice.get('3').subscribe(
             data => {
                 this.Inst = data as Instruction;
             },
@@ -79,5 +79,10 @@ export class InstructionEditorComponent {
     saveInst() {
         console.log(this.Inst);
         this._instructionservice.create(this.Inst);
+    }
+
+    updateInst() {
+        console.log(this.Inst);
+        this._instructionservice.update(this.Inst);
     }
 }
