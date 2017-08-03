@@ -24,7 +24,6 @@ const Home_Service_1 = require("./service/Home.Service");
 const Role_Service_1 = require("./service/Role.Service");
 const Theme_Service_1 = require("./service/Theme.Service");
 const Profile_Service_1 = require("./service/Profile.Service");
-const videoModal_1 = require("./patrialComponent/videoModal");
 const instruction_Service_1 = require("./service/instruction.Service");
 const app_component_1 = require("./app.component");
 const childcontenthome_component_1 = require("./childcontenthome.component");
@@ -33,8 +32,9 @@ const angular_l10n_1 = require("angular-l10n");
 const safeHtml_1 = require("./tools/safeHtml");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
-const comment_component_1 = require("./comment.component");
+const videoModal_1 = require("./patrialComponent/videoModal");
 const angular_froala_wysiwyg_1 = require("angular-froala-wysiwyg");
+const comment_component_1 = require("./comment.component");
 const SWIPER_CONFIG = {
     direction: 'horizontal',
     slidesPerView: '2',
@@ -63,8 +63,8 @@ AppModule = __decorate([
             angular2_modal_1.ModalModule.forRoot(),
             bootstrap_1.BootstrapModalModule
         ],
-           declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, safeHtml_1.SafeHtml, comment_component_1.CommentComponent],
-        providers: [Theme_Service_1.ThemeService, Role_Service_1.RoleService, HomeService_1.HomeService, ProfileService_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, safeHtml_1.SafeHtml, comment_component_1.CommentComponent],
+        providers: [Theme_Service_1.ThemeService, Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent],
         entryComponents: [videoModal_1.CustomModal]
     }),

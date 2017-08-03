@@ -14,7 +14,6 @@ import { HomeService } from "./service/Home.Service";
 import { RoleService } from "./service/Role.Service";
 import { ThemeService } from "./service/Theme.Service";
 import { ProfileService } from "./service/Profile.Service";
-import { CustomModal } from './patrialComponent/videoModal';
 import { InstructionService } from "./service/instruction.Service";
 import { AppComponent } from './app.component';
 import { ChildComponent } from './childcontenthome.component';
@@ -24,8 +23,8 @@ import { SafeHtml } from './tools/safeHtml';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { CustomModal } from './patrialComponent/videoModal';
-import { CommentComponent } from './comment.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { CommentComponent } from './comment.component';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',

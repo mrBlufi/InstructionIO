@@ -39,8 +39,6 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
-       
-        
         "ng2-ckeditor": {
             "main": "lib/index.js",
             "defaultExtension": "js",
@@ -55,10 +53,7 @@
       'angular2-infinite-scroll': {
           main: 'angular2-infinite-scroll.js',
           defaultExtension: 'js'
-      },
-      
-      
-
+      }
     }
   });
 })(this);
