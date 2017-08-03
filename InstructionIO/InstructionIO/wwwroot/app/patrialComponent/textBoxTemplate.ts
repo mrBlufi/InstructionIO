@@ -15,4 +15,8 @@ export class TextBoxTemplate {
         console.log(element.innerHTML);
         this.textBox = element.innerHTML;
     }
+
+    @HostBinding('innerHtml') get getInnerHtml() {
+        return this.textBox;
+    }
 }

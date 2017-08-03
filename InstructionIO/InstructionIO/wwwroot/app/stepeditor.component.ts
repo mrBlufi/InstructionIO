@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit } from '@angular/core';
+﻿import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DragulaService } from "ng2-dragula";
 import { ContentBlock } from './model/ContetnBlock';
 import { SafeResourceUrl } from "@angular/platform-browser/src/platform-browser";
@@ -61,6 +61,15 @@ export class StepEditorComponent {
 
     redirectToInput(eleme: HTMLElement) {
         eleme.click();
+    }
+
+    loadTextBox(n: any) {
+        console.log(n);
+    }
+
+    textBoxKeyup(n: KeyboardEvent, block: any) {
+        let _block = block as ContentBlock;
+        _block.content = n.srcElement.innerHTML;
     }
 
     videoBoxAdd(src: string) {

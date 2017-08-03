@@ -28,7 +28,7 @@ namespace InstructionIO.Controllers.Api {
         [HttpGet("get")]
         public IActionResult GetInstruction(int? id)
         {
-            Instruction instruction = null;
+            Instruction instruction = new Instruction();
             if (id != null)
             {
                 instruction = context.Instructions.Where(instruct => instruct.Id == id)
@@ -39,32 +39,33 @@ namespace InstructionIO.Controllers.Api {
                     .FirstOrDefault();
 
             }
-            instruction = instruction ?? new Instruction();
             return new ObjectResult(instruction);
         }
 
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)
         {
-            Instruction oldInstruction = context.Instructions.Find(instruction.Id);
-            if (oldInstruction != null)
+            context.Remove(context.Instructions.Find(instruction.Id));
+            instruction.Id = 0;
+            foreach (var step in instruction.Step)
             {
-                context.Instructions.Remove(oldInstruction);
-                context.SaveChanges();
+                step.Id = 0;
+                foreach (var contentBlock in step.ContentBlock)
+                {
+                    contentBlock.Id = 0;
+                }
             }
-            return Ok(this.CreateInstruction(instruction));
+            return CreateInstruction(instruction);
         }
 
         [HttpPost("create")]
         public IActionResult CreateInstruction([FromBody]Instruction instruction)
         {
-            context.Entry(instruction).State = EntityState.Added;
             var n = context.Users.Find(userManager.GetUserId(HttpContext.User));
             instruction.Author = context.UserInfos.Where(User => User.User == n).ToArray()[0];
-            context.Instructions.Add(instruction);
-            context.Instructions.Update(instruction);
+            var result = context.Instructions.Add(instruction);
             context.SaveChanges();
-            return Ok();
+            return Ok(instruction.Id);
         }
     }
 }

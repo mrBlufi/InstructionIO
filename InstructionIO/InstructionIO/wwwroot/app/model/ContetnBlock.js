@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class ContentBlock {
-    //safe: Safe;
-    //constructor(type: string, private sanitizer: DomSanitizer) {
-    //    this.type = type;
-    //    this.safe = new Safe(sanitizer);
-    //}
     constructor(type) {
+        this.id = 0;
+        this.content = '';
+        this.type = '';
         this.type = type;
     }
 }
