@@ -40,6 +40,23 @@ namespace InstructionIO.Controllers.Api {
             }
             return new ObjectResult(instruction);
         }
+        [HttpGet("getfull")]
+        public IActionResult GetInstructionfull(int? id)
+        {
+            Instruction instruction = new Instruction();
+            if (id != null)
+            {
+                instruction = context.Instructions.Where(instruct => instruct.Id == id)
+                    .Include(inst => inst.Author)
+                    .Include(inst => inst.Step).ThenInclude(step => step.ContentBlock)
+                    .Include(inst => inst.Comment)
+                    .Include(inst => inst.TagsRelation).ThenInclude(tag=>tag.Tag)
+                    .Include(inst=>inst.RatingRelation)
+                    .Include(inst=>inst.Category)
+                    .FirstOrDefault();
+            }
+            return new ObjectResult(instruction);
+        }
 
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)

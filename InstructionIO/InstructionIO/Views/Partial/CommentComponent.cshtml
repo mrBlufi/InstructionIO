@@ -1,10 +1,9 @@
-﻿<div class="block"><p>sdfsdf</p></div>
+﻿    <hr />
     <div class="container-fluid">
-        @*<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">*@
         <div class="row">
             <div *ngIf="roleinfo.id!=-1"
                  class="cl-md-12 addcomment panel panel-white post panel-shadow">
-                <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
+                <h4><i class="fa fa-paper-plane-o"></i> {{ 'Leave a Comment' | translate:lang }}:</h4>
                 <div id="editor" [froalaEditor] [(froalaModel)]="editorContent"></div>
 
                 <div class="submit">
@@ -13,7 +12,7 @@
             </div>
           
         
-            <div class="col-md-12" *ngFor="let com of comments">
+            <div class="col-md-12" *ngFor="let com of comment">
                 <div class="panel panel-white post panel-shadow">
                     <div class="post-heading">
                         <div class="pull-left image">
@@ -25,7 +24,7 @@
                             <div class="title h5">
                                 <a href="#"><b>{{com.author.fullName}}</b></a>
                             </div>
-                            <h6 class="text-muted date">{{com.dateCreate | date:'MM/dd/yyyy'}}</h6>
+                            <h6 class="text-muted date">{{com.dateCreate }}</h6>
                         </div>
                         <div *ngIf="roleinfo.id==com.author.id || roleinfo.adminRole" class="pull-right meta">
                             

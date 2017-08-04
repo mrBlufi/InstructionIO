@@ -80,7 +80,7 @@ namespace InstructionIO.Controllers
                 var userinfo = new UserInfo()
                 {
                     FullName = "Nickname",
-                    Birthday = new DateTime(),
+                    Birthday = new DateTime().Date,
                     Interests = "Interests",
                     User = user
                 };

@@ -20,6 +20,13 @@ export class InstructionService {
         }
         return this.http.get('api/Instruction/get', { params: params }).map(res => (res).json());
     }
+    getfull(id?: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        if (id) {
+            params.set('id', id);
+        }
+        return this.http.get('api/Instruction/getfull', { params: params }).map(res => (res).json());
+    }
 
     update(instruction: Instruction): Observable<Response> {
         return this.http.post('api/Instruction/update', instruction); 

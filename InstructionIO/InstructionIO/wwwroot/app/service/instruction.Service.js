@@ -26,6 +26,13 @@ let InstructionService = class InstructionService {
         }
         return this.http.get('api/Instruction/get', { params: params }).map(res => (res).json());
     }
+    getfull(id) {
+        let params = new http_2.URLSearchParams();
+        if (id) {
+            params.set('id', id);
+        }
+        return this.http.get('api/Instruction/getfull', { params: params }).map(res => (res).json());
+    }
     update(instruction) {
         return this.http.post('api/Instruction/update', instruction);
     }

@@ -16,54 +16,60 @@ import { LocaleService, Language } from 'angular-l10n';
 
 export class CommentComponent {
     @Language() lang: string;
-    @Input() comment: Comment[];
+    @Input() comment: Comment[] = new Array<Comment>();
+    @Input() idInstruction: number;
     roleinfo: RoleData = new RoleData(-1, false, false);
     constructor(private roleservice: RoleService, private http: Http) {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
         });
-        this.getComment();
-    }
-
-    getComment() {
-        this.http.get('/api/comment/test/comments').map(res => (res).json()).subscribe(date => {
-            this.comments = date;
-            console.log(this.comments);
-        });
     }
     submit() {
         let com = new Comment();
         com.context = this.editorContent;
-        com.datecreate = new Date(2017, 7, 31);
+        com.datecreate =new Date();
         this.addComment(com);
+    }
+
+    getComment() {
+        this.http.get('/api/comment/instruction/' + this.idInstruction ).map(res => (res).json()).subscribe(date => {
+            this.comment = date;
+            console.log(this.comment);
+        });
     }
     addComment(obj: Comment) {
         const body = JSON.stringify(obj);
 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/test/comments/post/', body, { headers: headers }).subscribe(
+        return this.http.post('/api/comment/instruction/' + this.idInstruction + '/push/', body, { headers: headers }).subscribe(
             (data) => {
-                console.log('Response received');
+                console.log('push Complit');
                 console.log(data);
                 this.getComment();
             },
-            (err) => { console.log('Error'); },
-            () => console.log('Authentication Complete')
+            (err) => { console.log('Error'); }
         );
         
     }
 
 
     delcomment(id: number) {
-        console.log(id);
-        if(id)
-        this.http.get('/api/comment/test/comments/del/'+id).map(res => (res).json()).subscribe(date => {
-            this.comments = date;
-            console.log(this.comments);
-        });
+        
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+       
+        if (id)
+            return this.http.post('/api/comment/instruction/' + this.idInstruction +'/del/', id, { headers: headers }).subscribe(
+                (data) => {
+                    console.log('push Complit');
+                    console.log(data);
+                    this.getComment();
+                },
+                (err) => { console.log('Error'); }
+            );
+           
     }
-    comments: Array<Comment>;
     public editorContent: string = 'Comment Text';
 
    

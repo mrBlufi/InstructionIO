@@ -14,7 +14,6 @@
   "Popular": "Popular",
   "Popular tag": "Popular tag",
   "Last Update": "Last updated",
-
   "DeleteUser": "Delete User",
   "TextDeleteUser": "You really want to delete this user. And also all the data associated with it.",
   "Search for result": "Search for result ",
@@ -23,5 +22,7 @@
   "Yes": "Yes",
   "No": "No",
   "Load": "Load",
-  "Search for": "Search for"
+  "Search for": "Search for",
+  "Leave a Comment": "Leave a Comment",
+
 }

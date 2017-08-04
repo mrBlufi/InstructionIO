@@ -20,42 +20,43 @@ let CommentComponent = class CommentComponent {
     constructor(roleservice, http) {
         this.roleservice = roleservice;
         this.http = http;
+        this.comment = new Array();
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.editorContent = 'Comment Text';
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
         });
-        this.getComment();
-    }
-    getComment() {
-        this.http.get('/api/comment/test/comments').map(res => (res).json()).subscribe(date => {
-            this.comments = date;
-            console.log(this.comments);
-        });
     }
     submit() {
         let com = new Comment_1.Comment();
         com.context = this.editorContent;
-        com.datecreate = new Date(2017, 7, 31);
+        com.datecreate = new Date();
         this.addComment(com);
+    }
+    getComment() {
+        this.http.get('/api/comment/instruction/' + this.idInstruction).map(res => (res).json()).subscribe(date => {
+            this.comment = date;
+            console.log(this.comment);
+        });
     }
     addComment(obj) {
         const body = JSON.stringify(obj);
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/test/comments/post/', body, { headers: headers }).subscribe((data) => {
-            console.log('Response received');
+        return this.http.post('/api/comment/instruction/' + this.idInstruction + '/push/', body, { headers: headers }).subscribe((data) => {
+            console.log('push Complit');
             console.log(data);
             this.getComment();
-        }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
+        }, (err) => { console.log('Error'); });
     }
     delcomment(id) {
-        console.log(id);
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
         if (id)
-            this.http.get('/api/comment/test/comments/del/' + id).map(res => (res).json()).subscribe(date => {
-                this.comments = date;
-                console.log(this.comments);
-            });
+            return this.http.post('/api/comment/instruction/' + this.idInstruction + '/del/', id, { headers: headers }).subscribe((data) => {
+                console.log('push Complit');
+                console.log(data);
+                this.getComment();
+            }, (err) => { console.log('Error'); });
     }
 };
 __decorate([
@@ -66,6 +67,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Array)
 ], CommentComponent.prototype, "comment", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], CommentComponent.prototype, "idInstruction", void 0);
 CommentComponent = __decorate([
     core_1.Component({
         selector: 'comment',

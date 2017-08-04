@@ -1,8 +1,86 @@
 ﻿<div class="panel-body">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="text-uppercase">{{instruction.name}}</h2>
-            <span>tag,tag,tag</span>
+            @*<h2 class="text-uppercase">{{instruction.name}}</h2>
+            <div class="text-right">
+                <star-rating-comp class="hidden-xs" [starType]="'svg'"
+                                  [step]="0.1"
+                                  [speed]="'slow'"
+                                  [size]="'large'"
+                                  [rating]="setrating(instruction.ratingRelation)"
+                                  [staticColor]="'default'"
+                                  [showHalfStars]="true"
+                                  (onClick)="onClick($event,instruction.id)">
+                </star-rating-comp>
+                <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
+                                  [step]="0.1"
+                                  [speed]="'slow'"
+                                  [staticColor]="'default'"
+                                  [rating]="setrating(instruction.ratingRelation)"
+                                  [showHalfStars]="true"
+                                  (onClick)="onClick($event,instruction.id)">
+                </star-rating-comp>
+            </div>*@
+            <span class="name col-md-8 col-lg-9 col-sm-7 col-xs-6">{{instruction.name}} </span>
+            <div class="rating col-md-4 col-lg-3 col-sm-5 col-xs-6">
+                <star-rating-comp class="hidden-xs" [starType]="'svg'"
+                                  [step]="0.1"
+                                  [speed]="'slow'"
+                                  [size]="'large'"
+                                  [rating]="setrating(instruction.ratingRelation)"
+                                  [staticColor]="'default'"
+                                  [showHalfStars]="true"
+                                  (onClick)="onClick($event,instruction.id)">
+                </star-rating-comp>
+                <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
+                                  [step]="0.1"
+                                  [speed]="'slow'"
+                                  [staticColor]="'default'"
+                                  [rating]="setrating(instruction.ratingRelation)"
+                                  [showHalfStars]="true"
+                                  (onClick)="onClick($event,instruction.id)">
+                </star-rating-comp>
+
+            </div>
+            <div class="tag" style="display:inline;">
+                <span class="glyphicon glyphicon-cloud"></span>
+                <small class="text-muted " *ngFor="let tag of instruction.tagsRelation">
+                    <a [routerLink]="['../search']"
+                       [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}}</a>
+                </small>
+            </div>
+            @*<div class="row">
+                <span class="name col-md-8 col-lg-9 col-sm-7 col-xs-6">{{instruction.name}} 
+                <small class="text-muted"> {{instruction.category.name}}</small>
+                </span>
+                <div class="rating col-md-4 col-lg-3 col-sm-5 col-xs-6">
+                    <star-rating-comp class="hidden-xs" [starType]="'svg'"
+                                      [step]="0.1"
+                                      [speed]="'slow'"
+                                      [size]="'large'"
+                                      [rating]="setrating(instruction.ratingRelation)"
+                                      [staticColor]="'default'"
+                                      [showHalfStars]="true"
+                                      (onClick)="onClick($event,instruction.id)">
+                    </star-rating-comp>
+                    <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
+                                      [step]="0.1"
+                                      [speed]="'slow'"
+                                      [staticColor]="'default'"
+                                      [rating]="setrating(instruction.ratingRelation)"
+                                      [showHalfStars]="true"
+                                      (onClick)="onClick($event,instruction.id)">
+                    </star-rating-comp>
+
+                </div>
+            </div>
+            <div class="tag" style="display:inline;">
+                <span class="glyphicon glyphicon-cloud"></span>
+                <small class="text-muted " *ngFor="let tag of instruction.tagsRelation">
+                    <a [routerLink]="['../../search']"
+                       [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}}</a>
+                </small>
+            </div>*@
         </div>
         <div class="panel-body">
             <swiper #mainSwiper (indexChange)="onIndexChange($event)" [config]="mainViewSiper">
@@ -19,3 +97,4 @@
         </div>
     </div>    
 </div>
+<comment [comment]="instruction.comment" [idInstruction]="instruction.id"></comment>
