@@ -15,15 +15,17 @@ const router_1 = require("@angular/router");
 const ng2_dragula_1 = require("ng2-dragula");
 const platform_browser_1 = require("@angular/platform-browser");
 const instruction_Service_1 = require("./service/instruction.Service");
+const Home_Service_1 = require("./service/Home.Service");
 const http_1 = require("@angular/http");
 const Instruction_1 = require("./model/Instruction");
 const Step_1 = require("./model/Step");
 let InstructionEditorComponent = class InstructionEditorComponent {
-    constructor(dragulaService, sanitizer, http, _instructionservice, _ActivatedRoute, router) {
+    constructor(dragulaService, sanitizer, http, _instructionservice, _homeservice, _ActivatedRoute, router) {
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
         this._instructionservice = _instructionservice;
+        this._homeservice = _homeservice;
         this._ActivatedRoute = _ActivatedRoute;
         this.router = router;
         this.Inst = new Instruction_1.Instruction();
@@ -59,6 +61,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
     }
     cw() {
         console.log(this.Inst);
+        console.log(this.categories);
     }
     onIndexChange(event) {
         this.mainSwiper.setIndex(event);
@@ -70,6 +73,9 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         });
         this._instructionservice.get(this._id).subscribe(data => {
             this.Inst = data;
+        }, err => console.log(err));
+        this._homeservice.getCategories().subscribe(data => {
+            this.categories = data;
         }, err => console.log(err));
     }
     ngOnDestroy() {
@@ -111,7 +117,7 @@ InstructionEditorComponent = __decorate([
         selector: 'instructionEditor',
         templateUrl: '/partial/InstructionEditorComponent'
     }),
-    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService,
+    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService, Home_Service_1.HomeService,
         router_1.ActivatedRoute, router_1.Router])
 ], InstructionEditorComponent);
 exports.InstructionEditorComponent = InstructionEditorComponent;

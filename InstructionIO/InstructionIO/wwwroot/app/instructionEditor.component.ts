@@ -8,9 +8,12 @@ import { SafeResourceUrl } from "@angular/platform-browser/src/platform-browser"
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from "rxjs/Observable";
 import { InstructionService } from "./service/instruction.Service";
+import { HomeService } from './service/Home.Service'
 import { RequestOptions, Http, Headers } from "@angular/http";
 import { Instruction } from './model/Instruction'
 import { Step } from './model/Step'
+import { Category } from './model/Category'
+import { TagInputModule } from 'ng2-tag-input'
 
 @Component({
     selector: 'instructionEditor',
@@ -23,10 +26,11 @@ export class InstructionEditorComponent {
     @ViewChild('miniSwiper') miniSwiper: SwiperComponent;
 
     Inst: Instruction = new Instruction();
+    categories: Category[];// = new Array<Category>();
 
     private _id: string;
-    
-    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService,
+
+    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService, private _homeservice: HomeService,
         private _ActivatedRoute: ActivatedRoute, private router: Router) {
         dragulaService.setOptions('stepD', {
             moves: function (el: any, container: any, handle: any) {
@@ -65,6 +69,7 @@ export class InstructionEditorComponent {
 
     cw() {
         console.log(this.Inst);
+        console.log(this.categories);
     }
 
     onIndexChange(event: number) {
@@ -81,6 +86,9 @@ export class InstructionEditorComponent {
                 this.Inst = data as Instruction;
             },
             err => console.log(err));
+        this._homeservice.getCategories().subscribe(data => {
+            this.categories = data;
+        }, err => console.log(err));
     }
 
     ngOnDestroy() {

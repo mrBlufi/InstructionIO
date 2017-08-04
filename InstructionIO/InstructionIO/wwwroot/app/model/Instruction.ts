@@ -12,9 +12,9 @@ export class Instruction {
     public previewImage: string;
     public previewText: string;
     public author: UserInfo = new UserInfo();
-    public createDate: Date;
-    public lastChangedDate: Date;
-    public category: Category;
+    public createDate: Date = new Date(Date.now());
+    public lastChangedDate: Date = new Date(Date.now());;
+    public category: Category = new Category();
     public rating: number;
     public step: Array<Step>;
     public tagsRelation: Array<TagsRelation>;

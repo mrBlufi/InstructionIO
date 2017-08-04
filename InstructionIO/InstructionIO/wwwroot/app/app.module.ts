@@ -1,6 +1,7 @@
 import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routing, routedComponents } from './app.routing';
 import { APP_BASE_HREF, Location } from '@angular/common';
 import { HttpModule } from '@angular/http';
@@ -26,6 +27,8 @@ import { CustomModal } from './patrialComponent/videoModal';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { CommentComponent } from './comment.component';
 import { ModalCustom } from "./patrialComponent/deleteUserModal";
+import { TagInputModule } from 'ng2-tag-input';
+
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -37,10 +40,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 @NgModule({
     imports:
     [
-        FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(),
+        BrowserAnimationsModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),BrowserModule, routing, HttpModule, FormsModule, StarRatingModule.forRoot(),
         CarouselModule.forRoot(), SortableModule.forRoot(), AccordionModule.forRoot(),
         SwiperModule.forRoot(SWIPER_CONFIG), InfiniteScrollModule, DragulaModule, TranslationModule.forRoot(),
-        ModalModule.forRoot(),
+        ModalModule.forRoot(), TagInputModule,
         BootstrapModalModule
     ],
     declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, ModalCustom, SafeHtml,CommentComponent],

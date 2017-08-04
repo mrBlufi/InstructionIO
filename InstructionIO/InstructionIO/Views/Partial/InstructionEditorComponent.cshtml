@@ -7,7 +7,11 @@
     <div class="panel-body">
         <div class="form">
             <input type="text" class="form-control instForm" [(ngModel)]="Inst.name" placeholder="Instruction name" />
-            <input type="text" class="form-control instForm" [(ngModel)]="Inst.tag" placeholder="tags.." />
+            <input type="text" class="form-control instForm" [(ngModel)]="Inst.tag" placeholder="tags.."/>
+            <tag-input [(ngModel)]='Inst.tags'></tag-input>
+            <select [(ngModel)]="Inst.category" class="form-control instForm">
+                <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+            </select>
         </div>
         <accordion class="previevDropDown">
             <accordion-group>

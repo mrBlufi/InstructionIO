@@ -22,8 +22,12 @@
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+      '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
+      '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
+      '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
 
       // other libraries
+      'ng2-material-dropdown':'npm:ng2-material-dropdown/dist/ng2-dropdown.bundle.js',
       'rxjs': 'npm:rxjs',
       'angular-froala-wysiwyg': 'npm:angular-froala-wysiwyg/bundles/angular-froala-wysiwyg.umd.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
@@ -35,13 +39,14 @@
       'ngx-bootstrap': 'npm:ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
       'ngx-swiper-wrapper': 'npm:ngx-swiper-wrapper/bundles/ngx-swiper-wrapper.umd.js',
       'angular2-modal': 'npm:angular2-modal/bundles/angular2-modal.umd.js',
-      'angular2-modal/plugins/bootstrap': 'npm:angular2-modal/bundles/angular2-modal.bootstrap.umd.js'
+      'angular2-modal/plugins/bootstrap': 'npm:angular2-modal/bundles/angular2-modal.bootstrap.umd.js',
+      'ng2-tag-input':'npm:ng2-tag-input/dist/ng2-tag-input.bundle.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
         "ng2-ckeditor": {
             "main": "lib/index.js",
-            "defaultExtension": "js",
+            "defaultExtension": "js"
         },
       app: {
           main: './main.js',

@@ -36,10 +36,8 @@ export class IndexComponent implements OnInit {
     private getCategories() {
         this.homeservice.getCategories().subscribe(data => {
             this.categories = data;
-            console.log(this.categories);
         }, err => console.log(err));
-        
-        
+      
     }
 
     
