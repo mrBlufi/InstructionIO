@@ -25,9 +25,14 @@ namespace InstructionIO.Controllers
 
         public IActionResult InstructionEditorComponent() => PartialView();
 
+        public IActionResult InstructionView() => PartialView();
+
         public IActionResult VideoModalComponent() => PartialView();
 
         public IActionResult CommentComponent() => PartialView();
+
         public IActionResult SearchComponent() => PartialView();
+
+        public IActionResult StepComponent() => PartialView();
     }
 }

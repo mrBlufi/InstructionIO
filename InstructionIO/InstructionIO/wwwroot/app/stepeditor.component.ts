@@ -54,7 +54,7 @@ export class StepEditorComponent {
     }
 
     addPictureBox(url: string) {
-        let n: ContentBlock = new ContentBlock('img')//, this.sanitizer);
+        let n: ContentBlock = new ContentBlock('img')
         n.content = url;
         this.step.contentBlock.push(n);
     }
@@ -73,7 +73,7 @@ export class StepEditorComponent {
     }
 
     videoBoxAdd(src: string) {
-        let n: ContentBlock = new ContentBlock('video')//, this.sanitizer);
+        let n: ContentBlock = new ContentBlock('video');
         n.content = 'https://www.youtube.com/embed/' + src.slice(src.indexOf('/'));
         this.step.contentBlock.push(n);
     }

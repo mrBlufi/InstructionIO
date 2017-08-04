@@ -1,0 +1,21 @@
+﻿<div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="text-uppercase">{{instruction.name}}</h2>
+            <span>tag,tag,tag</span>
+        </div>
+        <div class="panel-body">
+            <swiper #mainSwiper (indexChange)="onIndexChange($event)" [config]="mainViewSiper">
+                <stepView *ngFor="let step of instruction.step" [step]="step"></stepView>
+            </swiper>
+        </div>
+        <div class="panel-footer">
+            <swiper #miniSwiper (indexChange)="onIndexChange($event)" [config]="miniSwiperConfig">
+                <span style="height:50px;width:50px;background-color:white" *ngFor="let step of instruction.step" class="swiper-slide miniSlide well">{{step.subtitle}}</span>
+            </swiper>
+            <div style="text-align:right">
+                <span class="">create by {{instruction.author.fullName}}</span>
+            </div>
+        </div>
+    </div>    
+</div>

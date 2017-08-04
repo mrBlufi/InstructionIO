@@ -17,7 +17,7 @@ import { ThemeService } from "./service/Theme.Service";
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     @Language() lang: string;
-    user: UserInfo = new UserInfo(0, 'FullName', new Date(2012, 12, 12), '', '', '');
+    user: UserInfo = new UserInfo();
     roleinfo: RoleData = new RoleData(-1, false, false);
     userQueryParams: string = null;
     instructions: Array<Instruction> = null;

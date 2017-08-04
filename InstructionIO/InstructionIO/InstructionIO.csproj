@@ -22,10 +22,14 @@
   <ItemGroup>
     <Content Include="wwwroot\app\childcontenthome.component.ts" />
     <Content Include="wwwroot\app\comment.component.ts" />
+    <Content Include="wwwroot\app\instructionview.component.ts" />
     <Content Include="wwwroot\app\model\Category.ts" />
     <Content Include="wwwroot\app\model\Comment.ts" />
     <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
+    <Content Include="wwwroot\app\model\Rating.js" />
+    <Content Include="wwwroot\app\model\Rating.js.map" />
+    <Content Include="wwwroot\app\model\Rating.ts" />
     <Content Include="wwwroot\app\model\RatingRelathion.ts" />
     <Content Include="wwwroot\app\model\RatingRelation.js" />
     <Content Include="wwwroot\app\model\RatingRelation.js.map" />
@@ -35,7 +39,6 @@
     <Content Include="wwwroot\app\model\Tag.ts" />
     <Content Include="wwwroot\app\model\TagsRelation.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
-    <Content Include="wwwroot\app\Rating.ts" />
     <Content Include="wwwroot\app\search.component.ts" />
     <Content Include="wwwroot\app\service\Home.Service.js" />
     <Content Include="wwwroot\app\service\Home.Service.js.map" />
@@ -50,7 +53,10 @@
     <Content Include="wwwroot\app\service\Role.Service.ts" />
     <Content Include="wwwroot\app\service\Theme.Service.ts" />
     <Content Include="wwwroot\app\service\ThemeService.ts" />
+    <Content Include="wwwroot\app\step.component.js" />
+    <Content Include="wwwroot\app\step.component.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
+    <Content Include="wwwroot\app\stepView.component.ts" />
     <Content Include="wwwroot\app\tools\safeHtml.ts" />
     <Content Include="wwwroot\app\tools\safeOn.ts" />
     <Content Include="wwwroot\assets\locale-en.json" />
@@ -59,6 +65,7 @@
     <Content Include="wwwroot\app\instructionEditor.component.ts" />
     <Content Include="wwwroot\css\comment.css" />
     <Content Include="wwwroot\css\InstructionEditor.css" />
+    <Content Include="wwwroot\css\instructionView.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />
     <Content Include="wwwroot\css\theme.css" />

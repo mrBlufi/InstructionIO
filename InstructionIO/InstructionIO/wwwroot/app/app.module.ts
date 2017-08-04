@@ -47,6 +47,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     bootstrap: [AppComponent],
     entryComponents: [CustomModal]
 })
+
 export class AppModule {
     constructor(public locale: LocaleService, public translation: TranslationService) {
         this.locale.addConfiguration()

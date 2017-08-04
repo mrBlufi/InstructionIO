@@ -7,6 +7,9 @@ import { InstructionEditorComponent } from './instructionEditor.component';
 import { ChildComponent } from './childcontenthome.component';
 import { CommentComponent } from './comment.component';
 import { SearchComponent } from "./search.component";
+import { InstructionView } from "./instructionview.component"
+import { StepView } from "./stepview.component"
+
 
 
 
@@ -35,9 +38,11 @@ const appRoutes: Routes = [
 
     { path: 'stepeditor', component: StepEditorComponent, data: { title: 'StepEditor' } },
     { path: 'comment', component: CommentComponent},
-    { path: 'instructionEditor', component: InstructionEditorComponent, data: { title: 'instructionEditor' } }
+    { path: 'instructioneditor', component: InstructionEditorComponent, data: { title: 'instructionEditor' } },
+    { path: 'instruction', component: InstructionView, data: { title: 'instruction' } },
+    { path: 'step', component: StepView, data: { title: 'step' } }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
 
-export const routedComponents = [ IndexComponent, ContactComponent, ProfileComponent, StepEditorComponent, InstructionEditorComponent,SearchComponent];
+export const routedComponents = [IndexComponent, ContactComponent, ProfileComponent, StepEditorComponent, InstructionEditorComponent, SearchComponent, InstructionView, StepView];
