@@ -39,7 +39,11 @@ export class ProfileService {
 
 
     deleteUserById(id: number) {
-        return this.http.get('/api/profile/deleteuser/' + id).subscribe();
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('/api/profile/deleteuser', id, { headers: headers }).subscribe(data => {
+            console.log(data);
+        });
     }
 
 

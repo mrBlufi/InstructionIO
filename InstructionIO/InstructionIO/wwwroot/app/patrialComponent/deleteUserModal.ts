@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
-
+import { LocaleService, Language } from 'angular-l10n';
 export class DeleteUserModalContext extends BSModalContext {
     public delete: boolean=false;
 }
@@ -13,14 +13,13 @@ export class DeleteUserModalContext extends BSModalContext {
 
 export class ModalCustom implements CloseGuard, ModalComponent<DeleteUserModalContext> {
     context: DeleteUserModalContext;
-
+    @Language() lang: string;
     constructor(public dialog: DialogRef<DeleteUserModalContext>) {
         this.context = dialog.context;
         dialog.setCloseGuard(this);
     }
 
     load(elem: boolean) {
-        console.log(elem);
         this.context.delete = elem;
         this.dialog.close();
     }

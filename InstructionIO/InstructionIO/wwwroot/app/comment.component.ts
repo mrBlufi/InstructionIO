@@ -6,6 +6,7 @@ import { Response, Headers, URLSearchParams } from '@angular/http';
 import { RoleData } from "./model/RoleData";
 import { Observable, Subscription } from 'rxjs/Rx';
 import { RoleService } from "./service/Role.Service";
+import { LocaleService, Language } from 'angular-l10n';
 
 @Component({
     selector: 'comment',
@@ -14,7 +15,7 @@ import { RoleService } from "./service/Role.Service";
 })
 
 export class CommentComponent {
-
+    @Language() lang: string;
     @Input() comment: Comment[];
     roleinfo: RoleData = new RoleData(-1, false, false);
     constructor(private roleservice: RoleService, private http: Http) {
@@ -50,7 +51,7 @@ export class CommentComponent {
             (err) => { console.log('Error'); },
             () => console.log('Authentication Complete')
         );
-
+        
     }
 
 

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
+const angular_l10n_1 = require("angular-l10n");
 class DeleteUserModalContext extends bootstrap_1.BSModalContext {
     constructor() {
         super(...arguments);
@@ -26,7 +27,6 @@ let ModalCustom = class ModalCustom {
         dialog.setCloseGuard(this);
     }
     load(elem) {
-        console.log(elem);
         this.context.delete = elem;
         this.dialog.close();
     }
@@ -40,6 +40,10 @@ let ModalCustom = class ModalCustom {
         return false;
     }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], ModalCustom.prototype, "lang", void 0);
 ModalCustom = __decorate([
     core_1.Component({
         selector: 'modal-content1',

@@ -47,20 +47,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
         return this.modal.open(ModalCustom, overlayConfigFactory({ delete: false}, BSModalContext)).then(resultPromise => {
             return resultPromise.result
                 .then(
-                () => console.log('dasd'));
+                () => this.deluser(resultPromise.context.delete));
         });
     }
-    videoBoxModal() {
-        return this.modal.open(CustomModal, overlayConfigFactory({ src: "" }, BSModalContext)).then(resultPromise => {
-            return resultPromise.result
-                .then(
-                () => console.log('dasd'));
-        });
-    }
+   
 
 
     deluser(tag: boolean) {
-        console.log(tag);
+        if (tag) {
+            console.log(this.user.id);
+            this._profileservice.deleteUserById(this.user.id);
+        }
     }
 
     editDate(id: string) {
@@ -76,6 +73,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getDataUser() {
         this._profileservice.getDataProfile(this.userQueryParams).subscribe(
             data => {
+                if (!data) {
+                    this.user = null;
+                    this._router.navigate(['home']);
+                    
+                }
                 this.user = data;
             }, err => console.log('Get me user error'));
 
@@ -95,6 +97,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         console.log('destroy and user', this.user);
+        if (this.user)
         this._profileservice.setProfileData(this.user);
         this.sub.unsubscribe();
     }
@@ -109,7 +112,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     @HostListener('window:beforeunload', ['$event'])
     public beforeUnload(event: any) {
-        this._profileservice.setProfileData(this.user);
+        if (this.user) {
+            console.log('log1');
+            this._profileservice.setProfileData(this.user);
+        }
 
     }
 

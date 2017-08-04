@@ -36,7 +36,10 @@ let ProfileService = class ProfileService {
         }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
     }
     deleteUserById(id) {
-        return this.http.get('/api/profile/deleteuser/' + id).subscribe();
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('/api/profile/deleteuser', id, { headers: headers }).subscribe(data => {
+            console.log(data);
+        });
     }
 };
 ProfileService = __decorate([

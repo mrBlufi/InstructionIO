@@ -15,6 +15,7 @@ const http_1 = require("@angular/http");
 const http_2 = require("@angular/http");
 const RoleData_1 = require("./model/RoleData");
 const Role_Service_1 = require("./service/Role.Service");
+const angular_l10n_1 = require("angular-l10n");
 let CommentComponent = class CommentComponent {
     constructor(roleservice, http) {
         this.roleservice = roleservice;
@@ -57,6 +58,10 @@ let CommentComponent = class CommentComponent {
             });
     }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], CommentComponent.prototype, "lang", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Array)

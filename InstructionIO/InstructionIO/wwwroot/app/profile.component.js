@@ -22,7 +22,6 @@ const Theme_Service_1 = require("./service/Theme.Service");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 const deleteUserModal_1 = require("./patrialComponent/deleteUserModal");
 const angular2_modal_1 = require("angular2-modal");
-const videoModal_1 = require("./patrialComponent/videoModal");
 let ProfileComponent = class ProfileComponent {
     constructor(modal, _Activatedroute, _router, _profileservice, roleservice, http, themeservice) {
         this.modal = modal;
@@ -50,17 +49,14 @@ let ProfileComponent = class ProfileComponent {
     deleteUserModal() {
         return this.modal.open(deleteUserModal_1.ModalCustom, angular2_modal_1.overlayConfigFactory({ delete: false }, bootstrap_1.BSModalContext)).then(resultPromise => {
             return resultPromise.result
-                .then(() => console.log('dasd'));
-        });
-    }
-    videoBoxModal() {
-        return this.modal.open(videoModal_1.CustomModal, angular2_modal_1.overlayConfigFactory({ src: "" }, bootstrap_1.BSModalContext)).then(resultPromise => {
-            return resultPromise.result
-                .then(() => console.log('dasd'));
+                .then(() => this.deluser(resultPromise.context.delete));
         });
     }
     deluser(tag) {
-        console.log(tag);
+        if (tag) {
+            console.log(this.user.id);
+            this._profileservice.deleteUserById(this.user.id);
+        }
     }
     editDate(id) {
         this.autogrow();
@@ -73,6 +69,10 @@ let ProfileComponent = class ProfileComponent {
     }
     getDataUser() {
         this._profileservice.getDataProfile(this.userQueryParams).subscribe(data => {
+            if (!data) {
+                this.user = null;
+                this._router.navigate(['home']);
+            }
             this.user = data;
         }, err => console.log('Get me user error'));
     }
@@ -87,7 +87,8 @@ let ProfileComponent = class ProfileComponent {
     }
     ngOnDestroy() {
         console.log('destroy and user', this.user);
-        this._profileservice.setProfileData(this.user);
+        if (this.user)
+            this._profileservice.setProfileData(this.user);
         this.sub.unsubscribe();
     }
     parseDate(dateString) {
@@ -99,7 +100,10 @@ let ProfileComponent = class ProfileComponent {
         }
     }
     beforeUnload(event) {
-        this._profileservice.setProfileData(this.user);
+        if (this.user) {
+            console.log('log1');
+            this._profileservice.setProfileData(this.user);
+        }
     }
     redirectToInput(eleme) {
         eleme.click();

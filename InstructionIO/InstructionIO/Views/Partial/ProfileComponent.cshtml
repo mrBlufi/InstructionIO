@@ -3,7 +3,7 @@
     <div class="profile">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="panel panel-default">
-                <div *ngIf="roleinfo.adminRole" class="admin panel-heading">
+                <div *ngIf="roleinfo.adminRole && roleinfo.id!=user.id" class="admin panel-heading">
                     
                     <a class="deleteuser" (click)="deleteUserModal()"><i class="glyphicon glyphicon-remove"></i><span> Delete User</span></a>
                 </div>

@@ -8,5 +8,6 @@ namespace InstructionIO.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        internal readonly string id;
     }
 }

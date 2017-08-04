@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
+const angular_l10n_1 = require("angular-l10n");
 class VideoModalContext extends bootstrap_1.BSModalContext {
 }
 exports.VideoModalContext = VideoModalContext;
@@ -37,6 +38,10 @@ let CustomModal = class CustomModal {
         return false;
     }
 };
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], CustomModal.prototype, "lang", void 0);
 CustomModal = __decorate([
     core_1.Component({
         selector: 'modal-content',

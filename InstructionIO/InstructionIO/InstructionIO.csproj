@@ -34,7 +34,13 @@
     <Content Include="wwwroot\app\model\Step.ts" />
     <Content Include="wwwroot\app\model\Tag.ts" />
     <Content Include="wwwroot\app\model\TagsRelation.ts" />
+    <Content Include="wwwroot\app\model\UserInfo.js" />
+    <Content Include="wwwroot\app\model\UserInfo.js.map" />
+    <Content Include="wwwroot\app\model\UserInfo.ts" />
     <Content Include="wwwroot\app\patrialComponent\deleteUserModal.ts" />
+    <Content Include="wwwroot\app\patrialComponent\UserInfo.js" />
+    <Content Include="wwwroot\app\patrialComponent\UserInfo.js.map" />
+    <Content Include="wwwroot\app\patrialComponent\UserInfo.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\Rating.ts" />
     <Content Include="wwwroot\app\search.component.ts" />
