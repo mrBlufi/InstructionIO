@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 @Component({
     selector: 'my-app',
     templateUrl: '/partial/appComponent',
-    styleUrls: ['css/site_nav.css','css/theme.css']
+    styleUrls: ['css/site_nav.css', 'css/theme.css', 'css/appcomponent.css']
 })
 export class AppComponent implements OnInit {
     searchQueryParams: any;

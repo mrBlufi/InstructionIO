@@ -9,11 +9,15 @@ import { RoleData } from "./model/RoleData";
 import { RoleService } from "./service/Role.Service";
 import { Http } from "@angular/http";
 import { ThemeService } from "./service/Theme.Service";
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { ModalCustom } from "./patrialComponent/deleteUserModal";
+import { Overlay, overlayConfigFactory } from 'angular2-modal';
+import { CustomModal } from "./patrialComponent/videoModal";
 
 @Component({
     selector: 'my-profile',
     templateUrl: '/partial/profileComponent',
-    styleUrls: ['css/ProfilePage.css', 'css/theme.css']
+    styleUrls: ['css/ProfilePage.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     @Language() lang: string;
@@ -23,7 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     instructions: Array<Instruction> = null;
     sub: any;
 
-    constructor(private _Activatedroute: ActivatedRoute,
+    constructor(public modal: Modal,private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService, private roleservice: RoleService, private http: Http, private themeservice: ThemeService) {
        
         roleservice.getDataRole().subscribe(data => {
@@ -39,7 +43,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
         textArea.style.height = textArea.scrollHeight + 'px';
     }
 
+    deleteUserModal() {
+        return this.modal.open(ModalCustom, overlayConfigFactory({ delete: false}, BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(
+                () => this.deluser(resultPromise.context.delete));
+        });
+    }
    
+
+
+    deluser(tag: boolean) {
+        if (tag) {
+            console.log(this.user.id);
+            this._profileservice.deleteUserById(this.user.id);
+        }
+    }
 
     editDate(id: string) {
         this.autogrow();
@@ -54,6 +73,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getDataUser() {
         this._profileservice.getDataProfile(this.userQueryParams).subscribe(
             data => {
+                if (!data) {
+                    this.user = null;
+                    this._router.navigate(['home']);
+                    
+                }
                 this.user = data;
             }, err => console.log('Get me user error'));
 
@@ -73,6 +97,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         console.log('destroy and user', this.user);
+        if (this.user)
         this._profileservice.setProfileData(this.user);
         this.sub.unsubscribe();
     }
@@ -87,7 +112,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     @HostListener('window:beforeunload', ['$event'])
     public beforeUnload(event: any) {
-        this._profileservice.setProfileData(this.user);
+        if (this.user) {
+            console.log('log1');
+            this._profileservice.setProfileData(this.user);
+        }
 
     }
 

@@ -29,13 +29,25 @@ namespace instructionsIO.Controllers.Api
             _context = context;
 
         }
+
+        [HttpPost("deleteuser/")]
+        public async Task<IActionResult> DeleteUserByIdAsync([FromBody]int id)
+        {
+            var test = _context.UserInfos.Where(x => x.Id == id).Include(x => x.User).First();
+            _context.Users.Remove(test.User);
+
+            _context.SaveChanges();
+            return Ok();
+        }
+
         [HttpGet("user/{userparams}")]
         public UserInfo GetUserProfile(string userparams)
         {
             var messages = _context.UserInfos.FirstOrDefault(f => f.Id == Convert.ToInt32(userparams));
-            messages.User = null;
-
-
+            if (messages != null)
+            {
+                messages.User = null;
+            }
             return messages;
         }
 

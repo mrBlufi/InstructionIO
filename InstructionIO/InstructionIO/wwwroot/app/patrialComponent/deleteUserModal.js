@@ -13,19 +13,21 @@ const core_1 = require("@angular/core");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 const angular_l10n_1 = require("angular-l10n");
-class VideoModalContext extends bootstrap_1.BSModalContext {
+class DeleteUserModalContext extends bootstrap_1.BSModalContext {
+    constructor() {
+        super(...arguments);
+        this.delete = false;
+    }
 }
-exports.VideoModalContext = VideoModalContext;
-let CustomModal = class CustomModal {
+exports.DeleteUserModalContext = DeleteUserModalContext;
+let ModalCustom = class ModalCustom {
     constructor(dialog) {
         this.dialog = dialog;
         this.context = dialog.context;
         dialog.setCloseGuard(this);
     }
     load(elem) {
-        console.log(elem);
-        let input = elem;
-        this.context.src = input.value;
+        this.context.delete = elem;
         this.dialog.close();
     }
     modalClose() {
@@ -41,13 +43,13 @@ let CustomModal = class CustomModal {
 __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
-], CustomModal.prototype, "lang", void 0);
-CustomModal = __decorate([
+], ModalCustom.prototype, "lang", void 0);
+ModalCustom = __decorate([
     core_1.Component({
-        selector: 'modal-content',
-        templateUrl: '/partial/VideoModalComponent'
+        selector: 'modal-content1',
+        templateUrl: '/partial/DeleteUserModalComponent'
     }),
     __metadata("design:paramtypes", [angular2_modal_1.DialogRef])
-], CustomModal);
-exports.CustomModal = CustomModal;
-//# sourceMappingURL=videoModal.js.map
+], ModalCustom);
+exports.ModalCustom = ModalCustom;
+//# sourceMappingURL=deleteUserModal.js.map

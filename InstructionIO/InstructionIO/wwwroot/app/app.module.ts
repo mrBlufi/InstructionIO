@@ -25,6 +25,7 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { CustomModal } from './patrialComponent/videoModal';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { CommentComponent } from './comment.component';
+import { ModalCustom } from "./patrialComponent/deleteUserModal";
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -42,10 +43,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         ModalModule.forRoot(),
         BootstrapModalModule
     ],
-    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, SafeHtml,CommentComponent],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, ModalCustom, SafeHtml,CommentComponent],
     providers: [ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent],
-    entryComponents: [CustomModal]
+    entryComponents: [CustomModal, ModalCustom]
 })
 
 export class AppModule {

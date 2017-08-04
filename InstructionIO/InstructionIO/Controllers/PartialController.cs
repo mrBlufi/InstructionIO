@@ -29,6 +29,8 @@ namespace InstructionIO.Controllers
 
         public IActionResult VideoModalComponent() => PartialView();
 
+        public IActionResult DeleteUserModalComponent() => PartialView();
+
         public IActionResult CommentComponent() => PartialView();
 
         public IActionResult SearchComponent() => PartialView();

@@ -35,6 +35,12 @@ let ProfileService = class ProfileService {
             console.log(data);
         }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
     }
+    deleteUserById(id) {
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('/api/profile/deleteuser', id, { headers: headers }).subscribe(data => {
+            console.log(data);
+        });
+    }
 };
 ProfileService = __decorate([
     core_1.Injectable(),

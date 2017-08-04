@@ -2,27 +2,25 @@
 import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { LocaleService, Language } from 'angular-l10n';
-export class VideoModalContext extends BSModalContext {
-    public src: string;
+export class DeleteUserModalContext extends BSModalContext {
+    public delete: boolean=false;
 }
 
 @Component({
-    selector: 'modal-content',
-    templateUrl: '/partial/VideoModalComponent'
+    selector: 'modal-content1',
+    templateUrl: '/partial/DeleteUserModalComponent'
 })
 
-export class CustomModal implements CloseGuard, ModalComponent<VideoModalContext> {
-    context: VideoModalContext;
+export class ModalCustom implements CloseGuard, ModalComponent<DeleteUserModalContext> {
+    context: DeleteUserModalContext;
     @Language() lang: string;
-    constructor(public dialog: DialogRef<VideoModalContext>) {
+    constructor(public dialog: DialogRef<DeleteUserModalContext>) {
         this.context = dialog.context;
         dialog.setCloseGuard(this);
     }
 
-    load(elem: HTMLElement) {
-        console.log(elem);
-        let input: HTMLInputElement = elem as HTMLInputElement;
-        this.context.src = input.value;
+    load(elem: boolean) {
+        this.context.delete = elem;
         this.dialog.close();
     }
 
