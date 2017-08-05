@@ -35,6 +35,7 @@ let ProfileComponent = class ProfileComponent {
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.userQueryParams = null;
         this.instructions = null;
+        this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -74,11 +75,16 @@ let ProfileComponent = class ProfileComponent {
                 this._router.navigate(['home']);
             }
             this.user = data;
+            this.getstatistics();
         }, err => console.log('Get me user error'));
     }
+    getstatistics() {
+        this._profileservice.getstatistics(this.userQueryParams).subscribe(data => {
+            console.log(data);
+            this.statisticsuser = data;
+        });
+    }
     ngOnInit() {
-        let theme = this.themeservice.getTheme();
-        console.log(theme);
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
             this.userQueryParams = params['user'];
@@ -121,6 +127,10 @@ __decorate([
     __metadata("design:type", String)
 ], ProfileComponent.prototype, "lang", void 0);
 __decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ProfileComponent.prototype, "theme", void 0);
+__decorate([
     core_1.HostListener('window:beforeunload', ['$event']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -130,7 +140,7 @@ ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
         templateUrl: '/partial/profileComponent',
-        styleUrls: ['css/ProfilePage.css']
+        styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css']
     }),
     __metadata("design:paramtypes", [bootstrap_1.Modal, router_1.ActivatedRoute,
         router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http, Theme_Service_1.ThemeService])

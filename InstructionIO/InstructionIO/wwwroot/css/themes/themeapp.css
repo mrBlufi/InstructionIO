@@ -1,0 +1,38 @@
+﻿.dark {
+    background-color: #252839;
+    color: #f2b632;
+}
+    .dark > .navbar {
+        background-color: #677077;
+        color: #f2b632;
+    }
+
+.light .glyphicon-search {
+    color:black;
+}
+
+
+
+.light {
+    background-color: #f5f6ff;
+}
+
+    .light .navbar {
+        background-color: #252839;
+        color:white;
+    }
+    /*.light .navbar >ul>li:hover{
+        color:lightgray;
+    }*/
+    .light .navbar-brand:hover {
+        background-color:none;
+    }
+    
+    
+    div.light {
+        min-height: 100%;
+    }
+
+form:hover{
+    background-color:none;
+}

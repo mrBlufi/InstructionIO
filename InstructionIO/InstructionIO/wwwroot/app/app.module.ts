@@ -12,6 +12,7 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { DragulaModule } from 'ng2-dragula';
 import { HomeService } from "./service/Home.Service";
 import { RoleService } from "./service/Role.Service";
+import { CommentService } from "./service/Comment.Service";
 import { ThemeService } from "./service/Theme.Service";
 import { ProfileService } from "./service/Profile.Service";
 import { InstructionService } from "./service/instruction.Service";
@@ -26,6 +27,8 @@ import { CustomModal } from './patrialComponent/videoModal';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { CommentComponent } from './comment.component';
 import { ModalCustom } from "./patrialComponent/deleteUserModal";
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -44,7 +47,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         BootstrapModalModule
     ],
     declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, ModalCustom, SafeHtml,CommentComponent],
-    providers: [ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
+    providers: [CommentService,CookieService,ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent],
     entryComponents: [CustomModal, ModalCustom]
 })

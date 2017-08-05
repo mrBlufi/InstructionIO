@@ -22,6 +22,7 @@ const angular2_infinite_scroll_1 = require("angular2-infinite-scroll");
 const ng2_dragula_1 = require("ng2-dragula");
 const Home_Service_1 = require("./service/Home.Service");
 const Role_Service_1 = require("./service/Role.Service");
+const Comment_Service_1 = require("./service/Comment.Service");
 const Theme_Service_1 = require("./service/Theme.Service");
 const Profile_Service_1 = require("./service/Profile.Service");
 const instruction_Service_1 = require("./service/instruction.Service");
@@ -36,6 +37,7 @@ const videoModal_1 = require("./patrialComponent/videoModal");
 const angular_froala_wysiwyg_1 = require("angular-froala-wysiwyg");
 const comment_component_1 = require("./comment.component");
 const deleteUserModal_1 = require("./patrialComponent/deleteUserModal");
+const cookies_service_1 = require("angular2-cookie/services/cookies.service");
 const SWIPER_CONFIG = {
     direction: 'horizontal',
     slidesPerView: '2',
@@ -65,7 +67,7 @@ AppModule = __decorate([
             bootstrap_1.BootstrapModalModule
         ],
         declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, deleteUserModal_1.ModalCustom, safeHtml_1.SafeHtml, comment_component_1.CommentComponent],
-        providers: [Theme_Service_1.ThemeService, Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        providers: [Comment_Service_1.CommentService, cookies_service_1.CookieService, Theme_Service_1.ThemeService, Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent],
         entryComponents: [videoModal_1.CustomModal, deleteUserModal_1.ModalCustom]
     }),

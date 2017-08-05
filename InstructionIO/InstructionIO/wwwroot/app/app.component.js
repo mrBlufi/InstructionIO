@@ -28,12 +28,17 @@ let AppComponent = class AppComponent {
         this.router = router;
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.angularClientSideData = 'Angular';
-        themeservice.setTheme('light');
-        this.theme = themeservice.getTheme();
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             this.getImageProfile();
             console.log(this.roleinfo);
+        });
+        this.theme = this.themeservice.getCookie('theme');
+        this.router.events.subscribe((val) => {
+            if (val instanceof router_1.NavigationEnd) {
+                //update the shared data when this page is being navigated to
+                this.theme = this.themeservice.getCookie('theme');
+            }
         });
     }
     enterClick() {
@@ -48,13 +53,14 @@ let AppComponent = class AppComponent {
         }
     }
     settheme(theme) {
-        this.theme = theme;
-        this.themeservice.setTheme(theme);
+        this.themeservice.setcookie(theme);
+        window.location.reload();
     }
     setTitle(newTitle) {
         this.titleService.setTitle(newTitle);
     }
-    ngOnInit() { }
+    ngOnInit() {
+    }
     selectLanguage(language) {
         this.locale.setCurrentLanguage(language);
     }
@@ -67,9 +73,11 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         templateUrl: '/partial/appComponent',
-        styleUrls: ['css/site_nav.css', 'css/theme.css', 'css/appcomponent.css']
+        styleUrls: ['css/site_nav.css', 'css/themes/themeapp.css', 'css/appcomponent.css']
     }),
-    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService, Role_Service_1.RoleService, Profile_Service_1.ProfileService, Theme_Service_1.ThemeService, router_1.Router])
+    __metadata("design:paramtypes", [platform_browser_1.Title, angular_l10n_1.LocaleService,
+        Role_Service_1.RoleService, Profile_Service_1.ProfileService,
+        Theme_Service_1.ThemeService, router_1.Router])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

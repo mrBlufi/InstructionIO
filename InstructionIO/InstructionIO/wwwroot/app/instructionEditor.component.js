@@ -106,10 +106,15 @@ __decorate([
     core_1.ViewChild('miniSwiper'),
     __metadata("design:type", ngx_swiper_wrapper_1.SwiperComponent)
 ], InstructionEditorComponent.prototype, "miniSwiper", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], InstructionEditorComponent.prototype, "theme", void 0);
 InstructionEditorComponent = __decorate([
     core_1.Component({
         selector: 'instructionEditor',
-        templateUrl: '/partial/InstructionEditorComponent'
+        templateUrl: '/partial/InstructionEditorComponent',
+        styleUrls: ['css/themes/themeInstructionEditor.css']
     }),
     __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService,
         router_1.ActivatedRoute, router_1.Router])

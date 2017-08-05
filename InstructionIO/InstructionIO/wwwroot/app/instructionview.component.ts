@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Instruction } from './model/Instruction'
 import { InstructionService } from "./service/instruction.Service";
 import { UserInfo } from "./model/UserInfo"
@@ -10,17 +10,31 @@ import { HomeService } from "./service/Home.Service";
 import { RoleService } from "./service/Role.Service";
 import { RoleData } from "./model/RoleData";
 import { RatingRelation } from "./model/RatingRelation";
+import { ThemeService } from "./service/Theme.Service";
 
 @Component({
     selector: 'InstructionView',
     templateUrl: '/partial/InstructionView',
-    styleUrls: ['./css/instructionView.css','https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css']
+    styleUrls: ['./css/instructionView.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
 })
 
 export class InstructionView {
 
     @ViewChild('mainSwiper') mainSwiper: SwiperComponent;
     @ViewChild('miniSwiper') miniSwiper: SwiperComponent;
+
+    
+    roleinfo: RoleData = new RoleData(-1, false, false);
+    @Input() theme: string;
+    constructor(private _instructionservice: InstructionService,
+        private _ActivatedRoute: ActivatedRoute, private homeservice: HomeService,
+        private roleservice: RoleService,private themeservice:ThemeService) {
+        this.theme = this.themeservice.getCookie('theme');
+        roleservice.getDataRole().subscribe(data => {
+            this.roleinfo = data;
+            console.log(this.roleinfo);
+        });
+    }
 
     onClickResult: IStarRatingOnClickEvent;
 
@@ -51,13 +65,6 @@ export class InstructionView {
         keyboardControl: false,
         slideActiveClass: 'slide_activMin'
     }
-    roleinfo: RoleData = new RoleData(-1, false, false);
-    constructor(private _instructionservice: InstructionService,
-        private _ActivatedRoute: ActivatedRoute, private homeservice: HomeService, private roleservice: RoleService) {
-        roleservice.getDataRole().subscribe(data => {
-            this.roleinfo = data;
-            console.log(this.roleinfo);
-        });}
 
     setrating(ratingRelation: Array<RatingRelation>) {
         if (!ratingRelation || ratingRelation.length == 0) return 0;

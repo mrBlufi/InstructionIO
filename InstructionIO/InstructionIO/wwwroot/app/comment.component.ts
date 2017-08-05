@@ -7,19 +7,22 @@ import { RoleData } from "./model/RoleData";
 import { Observable, Subscription } from 'rxjs/Rx';
 import { RoleService } from "./service/Role.Service";
 import { LocaleService, Language } from 'angular-l10n';
+import { CommentService } from "./service/Comment.Service";
 
 @Component({
     selector: 'comment',
     templateUrl: '/partial/commentComponent',
-    styleUrls: ['css/comment.css']
+    styleUrls: ['css/comment.css' , 'css/themes/themeComment.css']
 })
 
 export class CommentComponent {
     @Language() lang: string;
     @Input() comment: Comment[] = new Array<Comment>();
     @Input() idInstruction: number;
+    @Input() theme: string;
     roleinfo: RoleData = new RoleData(-1, false, false);
-    constructor(private roleservice: RoleService, private http: Http) {
+  
+    constructor(private roleservice: RoleService, private http: Http,private commentservice:CommentService) {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -33,42 +36,21 @@ export class CommentComponent {
     }
 
     getComment() {
-        this.http.get('/api/comment/instruction/' + this.idInstruction ).map(res => (res).json()).subscribe(date => {
+        this.commentservice.getComment(this.idInstruction).subscribe(date => {
             this.comment = date;
             console.log(this.comment);
         });
     }
     addComment(obj: Comment) {
-        const body = JSON.stringify(obj);
-
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/instruction/' + this.idInstruction + '/push/', body, { headers: headers }).subscribe(
-            (data) => {
-                console.log('push Complit');
-                console.log(data);
-                this.getComment();
-            },
-            (err) => { console.log('Error'); }
-        );
+        this.commentservice.addComment(obj, this.idInstruction);
+        this.getComment();
         
     }
 
 
     delcomment(id: number) {
-        
-
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-       
-        if (id)
-            return this.http.post('/api/comment/instruction/' + this.idInstruction +'/del/', id, { headers: headers }).subscribe(
-                (data) => {
-                    console.log('push Complit');
-                    console.log(data);
-                    this.getComment();
-                },
-                (err) => { console.log('Error'); }
-            );
-           
+        this.commentservice.delcomment(id, this.idInstruction);
+        this.getComment();
     }
     public editorContent: string = 'Comment Text';
 

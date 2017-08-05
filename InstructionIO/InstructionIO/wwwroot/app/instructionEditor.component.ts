@@ -14,7 +14,8 @@ import { Step } from './model/Step'
 
 @Component({
     selector: 'instructionEditor',
-    templateUrl: '/partial/InstructionEditorComponent'
+    templateUrl: '/partial/InstructionEditorComponent',
+    styleUrls: ['css/themes/themeInstructionEditor.css']
 })
 
 export class InstructionEditorComponent {
@@ -25,7 +26,7 @@ export class InstructionEditorComponent {
     Inst: Instruction = new Instruction();
 
     private _id: string;
-    
+    @Input() theme: string;
     constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService,
         private _ActivatedRoute: ActivatedRoute, private router: Router) {
         dragulaService.setOptions('stepD', {

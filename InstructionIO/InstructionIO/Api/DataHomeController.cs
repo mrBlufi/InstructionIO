@@ -20,7 +20,6 @@ namespace InstructionIO.Api
         public DataHomeController(ApplicationDbContext context)
         {
             _context = context;
-            
         }
 
         [HttpGet("tag")]
@@ -34,19 +33,22 @@ namespace InstructionIO.Api
         public IEnumerable<Instruction> getListPopulInstruction(string category, int page)
         {
            
-            return getInstructionsCategory(category).OrderByDescending(x => x.Rating).Skip(page * _stepTake).Take(_stepTake);
+            return getInstructionsCategory(category).OrderByDescending(x => x.Rating)
+                .Skip(page * _stepTake).Take(_stepTake);
         }
 
         [HttpGet("instruction/lastchange/category/{category}/{page}")]
         public IEnumerable<Instruction> getListLastAddInstruction(string category, int page)
         {
-               return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
+               return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate)
+                .Skip(page * _stepTake).Take(_stepTake);
 
         }
         [HttpGet("instruction/full/category/{category}/{page}")]
         public IEnumerable<Instruction> GetFullListInstruction(string category, int page)
         {
-            return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate).Skip(page * _stepTake).Take(_stepTake);
+            return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate)
+                .Skip(page * _stepTake).Take(_stepTake);
         }
 
         private IEnumerable<Instruction> getInstructionsCategory(string category)
@@ -58,19 +60,16 @@ namespace InstructionIO.Api
             else
             {
                 return getInstructions().Where(x => x.Category.Name == category);
-              
             }
         }
 
         private IEnumerable<Instruction> getInstructions()
         {
-            return _unstructions = _context.Instructions.Include(x => x.RatingRelation)
-                    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag).Include(t => t.Author)
+            return  _context.Instructions.Include(x => x.RatingRelation)
+                    .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
+                    .Include(t => t.Author)
                     .Include(t => t.Category).ToArray();
         }
-
-
-
 
         [HttpGet("categories")]
         public IEnumerable<Category> GetCategories()
@@ -82,7 +81,8 @@ namespace InstructionIO.Api
         [HttpGet("instr")]
         public IEnumerable<Instruction> GetTest12()
         {
-            IEnumerable<Instruction> category = _context.Instructions.Include(x => x.RatingRelation)
+            IEnumerable<Instruction> category = _context.Instructions
+                .Include(x => x.RatingRelation)
                 .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
                 .Include(t => t.Author).Include(t => t.Category).ToArray();
             return category;
@@ -93,58 +93,83 @@ namespace InstructionIO.Api
         [HttpGet("instruction/search/{search}/{page}/{tag}")]
         public IEnumerable<Instruction> GetSearchInstruction(string search,int page,bool tag)
         {
+            search = search.ToLower();
             if (tag)
             {
-                _unstructions = _context.Instructions.Where(x => x.TagsRelation.Any(xs => xs.Tag.Name==(search)))
-                               .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
-                          .ThenInclude(x => x.Tag).Include(t => t.Author)
-                          .Include(t => t.Category).ToList();
+                _unstructions = GetTagSearch(search);
             }
             else
             {
-                _unstructions = _context.Instructions
-                    .Where(x => x.Name.Contains(search) || x.TagsRelation.Any(xs => xs.Tag.Name.Contains(search)))
-                    .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
-               .ThenInclude(x => x.Tag).Include(t => t.Author)
-               .Include(t => t.Category).ToList();
+                _unstructions = GetFullSearch(search);
             }
-
-           
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
 
 
+        private IEnumerable<Instruction> GetTagSearch(string search)
+        {
+            return _context.Instructions.Where(x => x.TagsRelation.Any(xs => xs.Tag.Name.ToLower() == (search)))
+                          .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+                          .ThenInclude(x => x.Tag).Include(t => t.Author)
+                          .Include(t => t.Category).ToList();
+        }
+
+        private IEnumerable<Instruction> GetFullSearch(string search)
+        {
+            return _context.Instructions.Where(x => x.Name.ToLower().Contains(search)
+            || x.TagsRelation.Any(xs => xs.Tag.Name.ToLower().Contains(search))
+            || x.PreviewText.ToLower().Contains(search) 
+            || x.Category.Name.ToLower().Contains(search))
+            .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+            .ThenInclude(x => x.Tag).Include(t => t.Author)
+            .Include(t => t.Category).ToList();
+        }
+
+
         [HttpGet("instruction/setrating/{idI}/{idU}/{rating}")]
-        public async Task<IActionResult> SetRating(int idI,int idU,int rating)
+        public async Task<IActionResult> SetRatingAsync(int idI, int idU, int rating)
         {
             var instr = _context.Instructions.FirstOrDefault(x => x.Id == idI);
             var ratingr = _context.RatingRelations.FirstOrDefault(x => x.Instruction.Id == instr.Id && x.User.Id == idU);
             if (ratingr != null)
-            {
-                ratingr.Value = rating;
-                _context.RatingRelations.Update(ratingr);
-
-
-            }
+                UpdateRating(ratingr, rating);
             else
-            {
-                RatingRelation ratingrelation = new RatingRelation()
-                {
-                    Instruction = instr,
-                    User = await _context.UserInfos.FindAsync(idU),
-                    Value = rating
-                };
-                await _context.RatingRelations.AddAsync(ratingrelation);
-            }
+                await AddRatingAsync(instr, idU, rating);
+            return Ok();
+        }
+
+        private void UpdateRating(RatingRelation ratingr, int rating)
+        {
+            ratingr.Value = rating;
+            _context.RatingRelations.Update(ratingr);
             _context.SaveChanges();
+
+        }
+
+        private async Task AddRatingAsync(Instruction instr, int idU, int rating)
+        {
+            RatingRelation ratingrelation = new RatingRelation()
+            {
+                Instruction = instr,
+                User = await _context.UserInfos.FindAsync(idU),
+                Value = rating
+            };
+            await _context.RatingRelations.AddAsync(ratingrelation);
+        }
+
+
+        private void SetInstructionRating(Instruction instr)
+        {
             instr.Rating = _context.RatingRelations.Where(x => x.Instruction.Id == instr.Id).Average(x => x.Value);
             _context.Instructions.Update(instr);
             _context.SaveChanges();
-            return Ok();
         }
+
+
 
 
 
     }
 }
+
 

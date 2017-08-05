@@ -27,7 +27,7 @@
 <div class="panel panel-default">
     <div class="panel-body panle_body_main">
         <swiper #mainSwiper [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
-            <my-stepEditor *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></my-stepEditor>
+            <my-stepEditor [theme]="theme" *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></my-stepEditor>
         </swiper>
     </div>
     <div>

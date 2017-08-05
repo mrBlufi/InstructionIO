@@ -38,15 +38,6 @@ let ChildComponent = class ChildComponent {
             console.log(this.roleinfo);
         });
     }
-    onClick($event, idI) {
-        this.onClickResult = $event;
-        if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
-                console.log(data);
-            });
-        console.log($event);
-    }
-    ;
     ngOnInit() {
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
@@ -59,6 +50,15 @@ let ChildComponent = class ChildComponent {
             this.getInstructions();
         }, err => console.log(err));
     }
+    onClick($event, idI) {
+        this.onClickResult = $event;
+        if (this.roleinfo.id != -1)
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
+                console.log(data);
+            });
+        console.log($event);
+    }
+    ;
     getInstructions() {
         if (this.searchQueryParams != null) {
             this.getInstructionsSearch();
@@ -168,14 +168,19 @@ __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
 ], ChildComponent.prototype, "lang", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ChildComponent.prototype, "theme", void 0);
 ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',
         templateUrl: '/partial/contentChildHomeComponent',
-        styleUrls: ['css/blog-home.css', 'css/theme.css']
+        styleUrls: ['css/blog-home.css', 'css/themes/themeChildContent.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
-        router_1.Router, Home_Service_1.HomeService, Profile_Service_1.ProfileService, Role_Service_1.RoleService])
+        router_1.Router, Home_Service_1.HomeService,
+        Profile_Service_1.ProfileService, Role_Service_1.RoleService])
 ], ChildComponent);
 exports.ChildComponent = ChildComponent;
 //# sourceMappingURL=childcontenthome.component.js.map

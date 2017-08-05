@@ -1,4 +1,4 @@
-﻿import { Router, ActivatedRoute, Params } from '@angular/router';
+﻿import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import { OnInit, Component, Input } from '@angular/core';
 import { IStarRatingOnClickEvent, IStarRatingOnRatingChangeEven, IStarRatingIOnHoverRatingChangeEvent } from "angular-star-rating/star-rating-struct";
@@ -13,23 +13,13 @@ import { RoleService } from "./service/Role.Service";
 @Component({
     selector: 'child-content',
     templateUrl: '/partial/contentChildHomeComponent',
-    styleUrls: ['css/blog-home.css',  'css/theme.css']
+    styleUrls: ['css/blog-home.css','css/themes/themeChildContent.css']
 })
 
 
 export class ChildComponent implements OnInit {
     
     onClickResult: IStarRatingOnClickEvent;
-
-    onClick($event: IStarRatingOnClickEvent, idI: number) {
-        this.onClickResult = $event;
-        if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
-                console.log(data);
-            });
-       
-        console.log($event);
-    };
     sub: any;
     @Language() lang: string;
     categoryQueryParams: string=null;
@@ -39,10 +29,12 @@ export class ChildComponent implements OnInit {
     instructions: Array<Instruction> = null;
     stepSkip = 0;
     tagsearch: boolean = false;
-
     roleinfo: RoleData = new RoleData(-1, false, false);
+    @Input() theme: string;
+
     constructor(private _Activatedroute: ActivatedRoute,
-        private _router: Router, private homeservice: HomeService, private profileservice: ProfileService, private roleservice: RoleService) {
+        private _router: Router, private homeservice: HomeService,
+        private profileservice: ProfileService, private roleservice: RoleService) {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -60,6 +52,17 @@ export class ChildComponent implements OnInit {
                 this.getInstructions();
             }, err => console.log(err));
     }
+
+
+    onClick($event: IStarRatingOnClickEvent, idI: number) {
+        this.onClickResult = $event;
+        if (this.roleinfo.id != -1)
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
+                console.log(data);
+            });
+
+        console.log($event);
+    };
 
     private getInstructions() {
         if (this.searchQueryParams != null) {

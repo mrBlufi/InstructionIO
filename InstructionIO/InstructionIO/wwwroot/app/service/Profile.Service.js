@@ -41,6 +41,9 @@ let ProfileService = class ProfileService {
             console.log(data);
         });
     }
+    getstatistics(id) {
+        return this.http.get('/api/profile/getstatistics/' + id).map(res => (res).json());
+    }
 };
 ProfileService = __decorate([
     core_1.Injectable(),

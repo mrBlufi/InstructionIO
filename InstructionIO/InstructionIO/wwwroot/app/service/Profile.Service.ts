@@ -46,6 +46,11 @@ export class ProfileService {
         });
     }
 
+    getstatistics(id: string) {
+        
+        return this.http.get('/api/profile/getstatistics/' + id).map(res => (res).json());
+    }
+
 
 
 }

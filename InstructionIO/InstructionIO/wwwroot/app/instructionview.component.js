@@ -17,12 +17,15 @@ const router_1 = require("@angular/router");
 const Home_Service_1 = require("./service/Home.Service");
 const Role_Service_1 = require("./service/Role.Service");
 const RoleData_1 = require("./model/RoleData");
+const Theme_Service_1 = require("./service/Theme.Service");
 let InstructionView = class InstructionView {
-    constructor(_instructionservice, _ActivatedRoute, homeservice, roleservice) {
+    constructor(_instructionservice, _ActivatedRoute, homeservice, roleservice, themeservice) {
         this._instructionservice = _instructionservice;
         this._ActivatedRoute = _ActivatedRoute;
         this.homeservice = homeservice;
         this.roleservice = roleservice;
+        this.themeservice = themeservice;
+        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.instruction = new Instruction_1.Instruction();
         this.mainViewSiper = {
             direction: 'horizontal',
@@ -37,7 +40,7 @@ let InstructionView = class InstructionView {
             keyboardControl: false,
             slideActiveClass: 'slide_activMin'
         };
-        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
+        this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
@@ -87,14 +90,19 @@ __decorate([
     core_1.ViewChild('miniSwiper'),
     __metadata("design:type", ngx_swiper_wrapper_1.SwiperComponent)
 ], InstructionView.prototype, "miniSwiper", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], InstructionView.prototype, "theme", void 0);
 InstructionView = __decorate([
     core_1.Component({
         selector: 'InstructionView',
         templateUrl: '/partial/InstructionView',
-        styleUrls: ['./css/instructionView.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css']
+        styleUrls: ['./css/instructionView.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
     }),
     __metadata("design:paramtypes", [instruction_Service_1.InstructionService,
-        router_1.ActivatedRoute, Home_Service_1.HomeService, Role_Service_1.RoleService])
+        router_1.ActivatedRoute, Home_Service_1.HomeService,
+        Role_Service_1.RoleService, Theme_Service_1.ThemeService])
 ], InstructionView);
 exports.InstructionView = InstructionView;
 //# sourceMappingURL=instructionview.component.js.map

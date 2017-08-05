@@ -1,0 +1,32 @@
+﻿.light .sidebar-nav-fixed > .well {
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.84);
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+.light .sidebar-nav-fixed > .well>ul>li.nav-header {
+   font-weight:bold;
+
+}
+    .light .sidebar-nav-fixed > .well > ul > li>a {
+       color:black;
+    }
+    .light .sidebar-nav-fixed > .well > ul > li > a:hover {
+        color: black;
+    }
+
+.light .nav-tabs {
+    border-bottom: 1px solid #808080;
+    font-weight:bold;
+    color:#001387;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    border: 1px solid #808080;
+    border-bottom: 1px solid #f5f6ff;
+    background-color: #f5f6ff;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+    background-color:#dbdbdb;
+}

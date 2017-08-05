@@ -9,6 +9,10 @@ button {
  text-align: right;
 }
 
+div.panel-body {
+    padding:0px;
+}
+
 .panel-shadow {
     box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
 }

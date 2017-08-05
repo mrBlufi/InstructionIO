@@ -24,7 +24,6 @@ namespace InstructionIO.Api
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
-
         }
         
         [HttpPost("instruction/{idI}/push")]
@@ -44,7 +43,7 @@ namespace InstructionIO.Api
             var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
             if (comment != null)
             {
-                 _context.Comments.Remove(comment);
+                _context.Comments.Remove(comment);
                 _context.SaveChanges();
             }
             return Ok();
@@ -53,7 +52,10 @@ namespace InstructionIO.Api
         [HttpGet("instruction/{idI}")]
         public IActionResult GetComments(int idI)
         {
-            var comments = _context.Comments.Where(x => x.Instruction.Id == idI).Include(x => x.Author).OrderBy(x=>x.DateCreate).ToList();
+            var comments = _context.Comments.Where(x => x.Instruction.Id == idI)
+                .Include(x => x.Author)
+                .OrderBy(x=>x.DateCreate)
+                .ToList();
             return new ObjectResult(comments);
         }
 

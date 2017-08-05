@@ -10,20 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
+const core_2 = require("angular2-cookie/core");
 let ThemeService = class ThemeService {
-    constructor() {
+    constructor(_cookieService) {
+        this._cookieService = _cookieService;
         this.theme = 'light';
     }
-    setTheme(theme) {
-        this.theme = theme;
+    setcookie(value) {
+        let key = 'theme';
+        let opts = {
+            expires: new Date('2030-07-19')
+        };
+        this.put(key, value, opts);
     }
-    getTheme() {
-        return this.theme;
+    getCookie(key) {
+        let cookie = this._cookieService.get(key);
+        if (!cookie)
+            return 'light';
+        else
+            return cookie;
+    }
+    put(key, value, options) {
+        this._cookieService.put(key, value, options);
     }
 };
 ThemeService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [core_2.CookieService])
 ], ThemeService);
 exports.ThemeService = ThemeService;
 //# sourceMappingURL=Theme.Service.js.map
