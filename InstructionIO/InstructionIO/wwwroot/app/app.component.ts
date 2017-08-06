@@ -6,24 +6,35 @@ import { RoleService } from "./service/Role.Service";
 import { RoleData } from "./model/RoleData";
 import { ProfileService } from "./service/Profile.Service";
 import { ThemeService } from "./service/Theme.Service";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
+
 @Component({
     selector: 'my-app',
     templateUrl: '/partial/appComponent',
-    styleUrls: ['css/site_nav.css', 'css/theme.css', 'css/appcomponent.css']
+    styleUrls: ['css/site_nav.css', 'css/themes/themeapp.css', 'css/appcomponent.css']
 })
+
 export class AppComponent implements OnInit {
     searchQueryParams: any;
     public theme: string;
     roleinfo: RoleData = new RoleData(-1,false,false);
     imageprofile: any;
-    public constructor(private titleService: Title, public locale: LocaleService, private roleservice: RoleService, private profileservice: ProfileService, private themeservice: ThemeService,private router:Router) {
-        themeservice.setTheme('light');
-        this.theme = themeservice.getTheme();
+
+    public constructor(private titleService: Title, public locale: LocaleService,
+        private roleservice: RoleService, private profileservice: ProfileService,
+        private themeservice: ThemeService, private router: Router) {
+        
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             this.getImageProfile();
             console.log(this.roleinfo);
+        });
+        this.theme = this.themeservice.getCookie('theme');
+        this.router.events.subscribe((val) => {
+            if (val instanceof NavigationEnd) {
+                //update the shared data when this page is being navigated to
+                this.theme = this.themeservice.getCookie('theme');
+            }
         });
     }
 
@@ -40,9 +51,9 @@ export class AppComponent implements OnInit {
         }
     }
     settheme(theme: string) {
-        this.theme = theme;
-        this.themeservice.setTheme(theme);
-}
+        this.themeservice.setcookie(theme);
+        window.location.reload();
+    }
 
     angularClientSideData = 'Angular';
 
@@ -51,7 +62,9 @@ export class AppComponent implements OnInit {
     }
 
     @Language() lang: string;
-    ngOnInit():void {}
+    ngOnInit(): void {
+        
+    }
 
     selectLanguage(language: string): void {
         this.locale.setCurrentLanguage(language);

@@ -7,7 +7,9 @@ footer {
     margin: 50px 0;
 }
 
-
+.navbar-brand {
+    padding-top:10px;
+}
 
 .categories {
     padding-top: 15px;
@@ -22,26 +24,20 @@ select{
     display:inline;
 }
 
-.modal-header{
-    display:inline;
-}
 
 .panel-default {
     margin-top: 10px;
-    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+   
 }
 
-.well {
-   
-    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
-}
+
 
 .name{
-    font-size:x-large;
+    font-size:xx-large;
     left:10px;
-
 }
 .tag {
+
     margin-left:10px;
 }
 .rating {

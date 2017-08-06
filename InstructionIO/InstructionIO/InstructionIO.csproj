@@ -40,12 +40,16 @@
     <Content Include="wwwroot\app\model\UserInfo.js" />
     <Content Include="wwwroot\app\model\UserInfo.js.map" />
     <Content Include="wwwroot\app\model\UserInfo.ts" />
+    <Content Include="wwwroot\app\model\UserStatistics.ts" />
     <Content Include="wwwroot\app\patrialComponent\deleteUserModal.ts" />
     <Content Include="wwwroot\app\patrialComponent\UserInfo.js" />
     <Content Include="wwwroot\app\patrialComponent\UserInfo.js.map" />
     <Content Include="wwwroot\app\patrialComponent\UserInfo.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\search.component.ts" />
+    <Content Include="wwwroot\app\service\Comment.Service.js" />
+    <Content Include="wwwroot\app\service\Comment.Service.js.map" />
+    <Content Include="wwwroot\app\service\Comment.Service.ts" />
     <Content Include="wwwroot\app\service\Home.Service.js" />
     <Content Include="wwwroot\app\service\Home.Service.js.map" />
     <Content Include="wwwroot\app\service\Home.Service.ts" />
@@ -57,10 +61,7 @@
     <Content Include="wwwroot\app\service\Profile.Service.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\service\Role.Service.ts" />
-    <Content Include="wwwroot\app\service\Theme.Service.ts" />
     <Content Include="wwwroot\app\service\ThemeService.ts" />
-    <Content Include="wwwroot\app\step.component.js" />
-    <Content Include="wwwroot\app\step.component.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
     <Content Include="wwwroot\app\stepView.component.ts" />
     <Content Include="wwwroot\app\tools\safeHtml.ts" />
@@ -74,11 +75,21 @@
     <Content Include="wwwroot\css\instructionView.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />
-    <Content Include="wwwroot\css\theme.css" />
-    <Content Include="wwwroot\css\themelight.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\css\themedark.css" />
+    <Content Include="wwwroot\css\themeapp.css" />
+    <Content Include="wwwroot\css\themeChildContent.css" />
+    <Content Include="wwwroot\css\themeComment.css" />
+    <Content Include="wwwroot\css\themeIndexAndSearch.css" />
+    <Content Include="wwwroot\css\themeInstructionEditor.css" />
+    <Content Include="wwwroot\css\themes\stepEditor.css" />
+    <Content Include="wwwroot\css\themes\themeapp.css" />
+    <Content Include="wwwroot\css\themes\themeChildContent.css" />
+    <Content Include="wwwroot\css\themes\themeComment.css" />
+    <Content Include="wwwroot\css\themes\themeIndexAndSearch.css" />
+    <Content Include="wwwroot\css\themes\themeInstructionEditor.css" />
+    <Content Include="wwwroot\css\themes\themeInstructionView.css" />
+    <Content Include="wwwroot\css\themes\themeProfile.css" />
+    <Content Include="wwwroot\css\themes\themeStepEditor.css" />
+    <Content Include="wwwroot\css\themes\themeStepView.css" />
     <Content Include="wwwroot\images\giphy.gif" />
     <Content Include="wwwroot\images\Rolling.gif" />
     <Content Include="wwwroot\lib\js\file.js" />

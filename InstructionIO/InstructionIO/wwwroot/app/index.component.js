@@ -12,16 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const Home_Service_1 = require("./service/Home.Service");
 const angular_l10n_1 = require("angular-l10n");
+const router_1 = require("@angular/router");
+const Theme_Service_1 = require("./service/Theme.Service");
 let IndexComponent = class IndexComponent {
-    constructor(homeservice) {
+    constructor(homeservice, route, themeservice) {
         this.homeservice = homeservice;
+        this.route = route;
+        this.themeservice = themeservice;
         this.tags = null;
         this.categories = null;
         this.categoryQueryParams = 'Full';
     }
     ngOnInit() {
+        this.theme = this.themeservice.getCookie('theme');
         this.getTags();
         this.getCategories();
+    }
+    ngOnDestroy() {
     }
     getTags() {
         this.homeservice.getPopularTags().subscribe(data => {
@@ -39,13 +46,17 @@ __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
 ], IndexComponent.prototype, "lang", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], IndexComponent.prototype, "theme", void 0);
 IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',
         templateUrl: '/partial/indexComponent',
-        styleUrls: ['css/blog-home.css', 'css/theme.css']
+        styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css']
     }),
-    __metadata("design:paramtypes", [Home_Service_1.HomeService])
+    __metadata("design:paramtypes", [Home_Service_1.HomeService, router_1.ActivatedRoute, Theme_Service_1.ThemeService])
 ], IndexComponent);
 exports.IndexComponent = IndexComponent;
 //# sourceMappingURL=index.component.js.map

@@ -12,50 +12,42 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const Comment_1 = require("./model/Comment");
 const http_1 = require("@angular/http");
-const http_2 = require("@angular/http");
 const RoleData_1 = require("./model/RoleData");
 const Role_Service_1 = require("./service/Role.Service");
 const angular_l10n_1 = require("angular-l10n");
+const Comment_Service_1 = require("./service/Comment.Service");
 let CommentComponent = class CommentComponent {
-    constructor(roleservice, http) {
+    constructor(roleservice, http, commentservice) {
         this.roleservice = roleservice;
         this.http = http;
+        this.commentservice = commentservice;
+        this.comment = new Array();
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.editorContent = 'Comment Text';
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
         });
-        this.getComment();
-    }
-    getComment() {
-        this.http.get('/api/comment/test/comments').map(res => (res).json()).subscribe(date => {
-            this.comments = date;
-            console.log(this.comments);
-        });
     }
     submit() {
         let com = new Comment_1.Comment();
         com.context = this.editorContent;
-        com.datecreate = new Date(2017, 7, 31);
+        com.datecreate = new Date();
         this.addComment(com);
     }
+    getComment() {
+        this.commentservice.getComment(this.idInstruction).subscribe(date => {
+            this.comment = date;
+            console.log(this.comment);
+        });
+    }
     addComment(obj) {
-        const body = JSON.stringify(obj);
-        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/test/comments/post/', body, { headers: headers }).subscribe((data) => {
-            console.log('Response received');
-            console.log(data);
-            this.getComment();
-        }, (err) => { console.log('Error'); }, () => console.log('Authentication Complete'));
+        this.commentservice.addComment(obj, this.idInstruction);
+        this.getComment();
     }
     delcomment(id) {
-        console.log(id);
-        if (id)
-            this.http.get('/api/comment/test/comments/del/' + id).map(res => (res).json()).subscribe(date => {
-                this.comments = date;
-                console.log(this.comments);
-            });
+        this.commentservice.delcomment(id, this.idInstruction);
+        this.getComment();
     }
 };
 __decorate([
@@ -66,13 +58,21 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Array)
 ], CommentComponent.prototype, "comment", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], CommentComponent.prototype, "idInstruction", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], CommentComponent.prototype, "theme", void 0);
 CommentComponent = __decorate([
     core_1.Component({
         selector: 'comment',
         templateUrl: '/partial/commentComponent',
-        styleUrls: ['css/comment.css']
+        styleUrls: ['css/comment.css', 'css/themes/themeComment.css']
     }),
-    __metadata("design:paramtypes", [Role_Service_1.RoleService, http_1.Http])
+    __metadata("design:paramtypes", [Role_Service_1.RoleService, http_1.Http, Comment_Service_1.CommentService])
 ], CommentComponent);
 exports.CommentComponent = CommentComponent;
 //# sourceMappingURL=comment.component.js.map

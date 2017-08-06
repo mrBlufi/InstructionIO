@@ -36,11 +36,9 @@ let StepEditorComponent = class StepEditorComponent {
     }
     onDropModel(args) {
         let [el, target, source] = args;
-        // do something else
     }
     onRemoveModel(args) {
         let [el, source] = args;
-        // do something else
     }
     cw(n) {
         console.log(n);
@@ -90,12 +88,18 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Step_1.Step)
 ], StepEditorComponent.prototype, "step", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], StepEditorComponent.prototype, "theme", void 0);
 StepEditorComponent = __decorate([
     core_1.Component({
         selector: 'my-stepEditor',
-        templateUrl: '/partial/StepEditorComponent'
+        templateUrl: '/partial/StepEditorComponent',
+        styleUrls: ['css/themes/themeStepEditor.css']
     }),
-    __metadata("design:paramtypes", [bootstrap_1.Modal, ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http])
+    __metadata("design:paramtypes", [bootstrap_1.Modal, ng2_dragula_1.DragulaService,
+        platform_browser_1.DomSanitizer, http_1.Http])
 ], StepEditorComponent);
 exports.StepEditorComponent = StepEditorComponent;
 //# sourceMappingURL=stepeditor.component.js.map

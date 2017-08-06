@@ -3,7 +3,8 @@ import { Step } from './model/Step'
 
 @Component({
     selector: 'stepView',
-    templateUrl: '/partial/StepComponent'
+    templateUrl: '/partial/StepComponent',
+    styleUrls: ['css/themes/themeStepView.css']
 })
 
 export class StepView {

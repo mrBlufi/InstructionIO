@@ -1,9 +1,34 @@
-﻿<div class="panel-body">
+﻿
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="text-uppercase">{{instruction.name}}</h2>
-            <span>tag,tag,tag</span>
-            <span class="pull-right glyphicon glyphicon-pencil" (click)="goToEdit()"></span>
+            <span class="name col-md-9 col-lg-10 col-sm-8 col-xs-7">{{instruction.name}} </span>
+            <div class="rating col-md-3 col-lg-2 col-sm-4 col-xs-5">
+                <star-rating-comp class="hidden-xs" [starType]="'svg'"
+                                  [step]="0.1"
+                                  [speed]="'slow'"
+                                  [rating]="setrating(instruction.ratingRelation)"
+                                  [staticColor]="'default'"
+                                  [showHalfStars]="true"
+                                  (onClick)="onClick($event,instruction.id)">
+                </star-rating-comp>
+                <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
+                                  [step]="0.1"
+                                  [speed]="'slow'"
+                                  [staticColor]="'default'"
+                                  [rating]="setrating(instruction.ratingRelation)"
+                                  [showHalfStars]="true"
+                                  (onClick)="onClick($event,instruction.id)">
+                </star-rating-comp>
+
+            </div>
+            <div class="tag" style="display:inline;">
+                <span class="glyphicon glyphicon-cloud"></span>
+                <small class="text-muted " *ngFor="let tag of instruction.tagsRelation">
+                    <a [routerLink]="['../search']"
+                       [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}}</a>
+                </small>
+            </div>
+            
         </div>
         <div class="panel-body">
             <swiper #mainSwiper (indexChange)="onIndexChange($event)" [config]="mainViewSiper">
@@ -19,4 +44,5 @@
             </div>
         </div>
     </div>    
-</div>
+
+<comment [comment]="instruction.comment" [idInstruction]="instruction.id" [theme]="theme"></comment>

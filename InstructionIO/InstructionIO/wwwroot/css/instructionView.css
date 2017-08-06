@@ -1,8 +1,16 @@
-﻿body {
+﻿
+.name {
+    font-size: x-large;
+  
 }
 
+.tag {
+    margin-left: 10px;
+}
 
-
+.rating {
+    padding-top: 10px;
+}
 .slide_activMin{
     border-color:blue;
 } 

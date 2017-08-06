@@ -24,37 +24,39 @@ namespace InstructionIO.Api
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
-
         }
-
-        [HttpGet("test/comments")]
-        public IActionResult GetTest1()
+        
+        [HttpPost("instruction/{idI}/push")]
+        public async Task<IActionResult> GetTest2Async(int idI,[FromBody] Comment comment)
         {
-            var test = _context.Comments.Where(x => x.Instruction.Id == 4).Include(x => x.Author).ToList();
-            return new ObjectResult(test);
-        }
-        [HttpPost("test/comments/post")]
-        public async Task<IActionResult> GetTest2Async([FromBody] Comment comment)
-        {
-            var instruction = _context.Instructions.Find(4);
+            var instruction = _context.Instructions.Find(idI);
             var user = await _userManager.GetUserAsync(HttpContext.User);
             comment.Author = _context.UserInfos.FirstOrDefault(x => x.User.Id == user.Id);
             instruction.Comment.Add(comment);
             _context.SaveChanges();
-            return new ObjectResult(comment);
+            return Ok();
         }
 
-        [HttpGet("test/comments/del/{id}")]
-        public async Task<IActionResult> GetDelCommentAsync(int id)
+        [HttpPost("instruction/{idI}/del")]
+        public async Task<IActionResult> GetDelCommentAsync(int idI,[FromBody]int id)
         {
             var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
             if (comment != null)
             {
-                 _context.Comments.Remove(comment);
+                _context.Comments.Remove(comment);
                 _context.SaveChanges();
             }
-            var test = _context.Comments.Include(x => x.Author).ToList();
-            return new ObjectResult(test);
+            return Ok();
+        }
+
+        [HttpGet("instruction/{idI}")]
+        public IActionResult GetComments(int idI)
+        {
+            var comments = _context.Comments.Where(x => x.Instruction.Id == idI)
+                .Include(x => x.Author)
+                .OrderBy(x=>x.DateCreate)
+                .ToList();
+            return new ObjectResult(comments);
         }
 
     }

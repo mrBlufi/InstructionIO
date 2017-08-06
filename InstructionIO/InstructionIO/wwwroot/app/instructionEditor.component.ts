@@ -20,10 +20,9 @@ import { TagsRelation } from "./model/TagsRelation";
 
 @Component({
     selector: 'instructionEditor',
-    templateUrl: '/partial/InstructionEditorComponent'
+    templateUrl: '/partial/InstructionEditorComponent',
+    styleUrls: ['css/themes/themeInstructionEditor.css']
 })
-
-
 
 export class InstructionEditorComponent {
 
@@ -36,7 +35,7 @@ export class InstructionEditorComponent {
     instvalidate: InstructionValidate = new InstructionValidate();
 
     private _id: string;
-
+    @Input() theme: string;
     constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService, private _homeservice: HomeService,
         private _ActivatedRoute: ActivatedRoute, private router: Router) {
         dragulaService.setOptions('stepD', {
@@ -191,4 +190,3 @@ class InstructionValidate {
     public Category: boolean = false;
     public PrevievText: boolean = false;
 }
-

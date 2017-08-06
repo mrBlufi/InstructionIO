@@ -12,15 +12,16 @@ import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { CustomModal, VideoModalContext } from './patrialComponent/videoModal'
 
-
 @Component({
     selector: 'my-stepEditor',
-    templateUrl: '/partial/StepEditorComponent'
+    templateUrl: '/partial/StepEditorComponent',
+    styleUrls: [ 'css/themes/themeStepEditor.css']
 })
 export class StepEditorComponent {
     @Input() step: Step = new Step('0');
-
-    constructor(public modal: Modal,private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http) {
+    @Input() theme: string;
+    constructor(public modal: Modal, private dragulaService: DragulaService,
+        private sanitizer: DomSanitizer, private http: Http) {
         dragulaService.dropModel.subscribe((value: any) => {
             console.log(value);
             this.onDropModel(value.slice(1));
@@ -34,12 +35,10 @@ export class StepEditorComponent {
 
     private onDropModel(args: any) {
         let [el, target, source] = args;
-        // do something else
     }
 
     private onRemoveModel(args: any) {
         let [el, source] = args;
-        // do something else
     }
     
     cw(n: any) {

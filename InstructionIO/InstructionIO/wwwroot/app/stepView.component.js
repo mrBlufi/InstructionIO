@@ -23,7 +23,8 @@ __decorate([
 StepView = __decorate([
     core_1.Component({
         selector: 'stepView',
-        templateUrl: '/partial/StepComponent'
+        templateUrl: '/partial/StepComponent',
+        styleUrls: ['css/themes/themeStepView.css']
     })
 ], StepView);
 exports.StepView = StepView;

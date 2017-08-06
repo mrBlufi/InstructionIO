@@ -27,15 +27,13 @@ namespace instructionsIO.Controllers.Api
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
-
         }
 
         [HttpPost("deleteuser/")]
-        public async Task<IActionResult> DeleteUserByIdAsync([FromBody]int id)
+        public IActionResult DeleteUserById([FromBody]int id)
         {
             var test = _context.UserInfos.Where(x => x.Id == id).Include(x => x.User).First();
             _context.Users.Remove(test.User);
-
             _context.SaveChanges();
             return Ok();
         }
@@ -45,9 +43,7 @@ namespace instructionsIO.Controllers.Api
         {
             var messages = _context.UserInfos.FirstOrDefault(f => f.Id == Convert.ToInt32(userparams));
             if (messages != null)
-            {
                 messages.User = null;
-            }
             return messages;
         }
 
@@ -55,10 +51,10 @@ namespace instructionsIO.Controllers.Api
         [HttpGet("instruction/user/{userID}/{page}")]
         public IEnumerable<Instruction> GetInstructionUserID(int userID, int page)
         {
-            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userID).Include(x => x.RatingRelation).Include(x => x.TagsRelation)
-               .ThenInclude(x => x.Tag).Include(t => t.Author)
-               .Include(t => t.Category).ToList();
-
+            IEnumerable<Instruction> _unstructions = _context.Instructions.Where(x => x.Author.Id == userID)
+                .Include(x => x.RatingRelation).Include(x => x.TagsRelation)
+                .ThenInclude(x => x.Tag).Include(t => t.Author)
+                .Include(t => t.Category).ToList();
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
         
@@ -117,13 +113,34 @@ namespace instructionsIO.Controllers.Api
             };
             return userinf;
         }
-        
 
-        class UserInformation
+        [HttpGet("getstatistics/{id}")]
+        public IActionResult GetStatisticsUser(int id)
         {
-            public int Id { get; set; }
-            public bool UserRole { get; set; }
-            public bool AdminRole { get; set; }
+            UserStatistics statisc = new UserStatistics();
+            statisc.CountInstructions = _context.Instructions.Where(x => x.Author.Id == id).Count();
+            statisc.CountComment = _context.Comments.Where(x => x.Author.Id == id).Count();
+            statisc.AverageRating = _context.Instructions.Where(x => x.Author.Id == id).Average(x=>x.RatingRelation.Average(xs=>xs.Value));
+            return new ObjectResult(statisc);
         }
+
+
+
+
+
+    }
+    public class UserInformation
+    {
+        public int Id { get; set; }
+        public bool UserRole { get; set; }
+        public bool AdminRole { get; set; }
+    }
+
+
+    public class UserStatistics
+    {
+        public int CountInstructions { get; set; }
+        public int CountComment { get; set; }
+        public double AverageRating { get; set; }
     }
 }

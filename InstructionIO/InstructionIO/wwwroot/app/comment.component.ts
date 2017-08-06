@@ -7,63 +7,51 @@ import { RoleData } from "./model/RoleData";
 import { Observable, Subscription } from 'rxjs/Rx';
 import { RoleService } from "./service/Role.Service";
 import { LocaleService, Language } from 'angular-l10n';
+import { CommentService } from "./service/Comment.Service";
 
 @Component({
     selector: 'comment',
     templateUrl: '/partial/commentComponent',
-    styleUrls: ['css/comment.css']
+    styleUrls: ['css/comment.css' , 'css/themes/themeComment.css']
 })
 
 export class CommentComponent {
     @Language() lang: string;
-    @Input() comment: Comment[];
+    @Input() comment: Comment[] = new Array<Comment>();
+    @Input() idInstruction: number;
+    @Input() theme: string;
     roleinfo: RoleData = new RoleData(-1, false, false);
-    constructor(private roleservice: RoleService, private http: Http) {
+  
+    constructor(private roleservice: RoleService, private http: Http,private commentservice:CommentService) {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             console.log(this.roleinfo);
-        });
-        this.getComment();
-    }
-
-    getComment() {
-        this.http.get('/api/comment/test/comments').map(res => (res).json()).subscribe(date => {
-            this.comments = date;
-            console.log(this.comments);
         });
     }
     submit() {
         let com = new Comment();
         com.context = this.editorContent;
-        com.datecreate = new Date(2017, 7, 31);
+        com.datecreate =new Date();
         this.addComment(com);
     }
-    addComment(obj: Comment) {
-        const body = JSON.stringify(obj);
 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/test/comments/post/', body, { headers: headers }).subscribe(
-            (data) => {
-                console.log('Response received');
-                console.log(data);
-                this.getComment();
-            },
-            (err) => { console.log('Error'); },
-            () => console.log('Authentication Complete')
-        );
+    getComment() {
+        this.commentservice.getComment(this.idInstruction).subscribe(date => {
+            this.comment = date;
+            console.log(this.comment);
+        });
+    }
+    addComment(obj: Comment) {
+        this.commentservice.addComment(obj, this.idInstruction);
+        this.getComment();
         
     }
 
 
     delcomment(id: number) {
-        console.log(id);
-        if(id)
-        this.http.get('/api/comment/test/comments/del/'+id).map(res => (res).json()).subscribe(date => {
-            this.comments = date;
-            console.log(this.comments);
-        });
+        this.commentservice.delcomment(id, this.idInstruction);
+        this.getComment();
     }
-    comments: Array<Comment>;
     public editorContent: string = 'Comment Text';
 
    
