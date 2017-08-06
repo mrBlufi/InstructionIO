@@ -33,7 +33,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
 
@@ -65,12 +64,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     editDate(id: string) {
-        this.autogrow();
         let elem: HTMLElement = document.getElementById(id);
+        elem.contentEditable = 'true';
         elem.removeAttribute('disabled');
         elem.focus();
         elem.addEventListener('focusout', function () {
             elem.setAttribute('disabled', 'disabled');
+            elem.contentEditable = 'false';
         })
     }
 
@@ -84,7 +84,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.user = data;
                 this.getstatistics();
             }, err => console.log('Get me user error'));
-
     }
 
     getstatistics() {
@@ -93,7 +92,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.statisticsuser = data;
         });
     }
-    
 
     ngOnInit() {
         this.sub = this._Activatedroute.queryParams
@@ -101,12 +99,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 this.userQueryParams = params['user'];
                 this.getDataUser();
             }, err => console.log(err));
-       
-    }
+    } 
+
     ngOnDestroy() {
-        console.log('destroy and user', this.user);
-        if (this.user)
-        this._profileservice.setProfileData(this.user);
+        if (this.user) {
+            this.user.interests = document.getElementById('interestsSpan').innerHTML;
+            this._profileservice.setProfileData(this.user);
+        }
         this.sub.unsubscribe();
     }
 
@@ -121,7 +120,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     @HostListener('window:beforeunload', ['$event'])
     public beforeUnload(event: any) {
         if (this.user) {
-            console.log('log1');
+            this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
         }
 
