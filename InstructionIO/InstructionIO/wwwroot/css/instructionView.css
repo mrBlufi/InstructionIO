@@ -13,4 +13,7 @@
 }
 .slide_activMin{
     border-color:blue;
-} 
+}
+.container-fluid{
+    padding-top:15px;
+}

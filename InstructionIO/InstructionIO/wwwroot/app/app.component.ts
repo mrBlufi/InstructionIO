@@ -30,12 +30,6 @@ export class AppComponent implements OnInit {
             console.log(this.roleinfo);
         });
         this.theme = this.themeservice.getCookie('theme');
-        this.router.events.subscribe((val) => {
-            if (val instanceof NavigationEnd) {
-                //update the shared data when this page is being navigated to
-                this.theme = this.themeservice.getCookie('theme');
-            }
-        });
     }
 
     enterClick() {

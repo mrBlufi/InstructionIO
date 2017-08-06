@@ -97,6 +97,7 @@ namespace InstructionIO.Controllers.Api {
                 tagsRelation.Tag = context.Tags.Find(tagsRelation.Tag.Id) ?? tagsRelation.Tag;
             }
             context.Entry(instruction.Category).State = EntityState.Modified;
+            context.Entry(instruction.Comment).State = EntityState.Modified;
             context.Instructions.Add(instruction);          
             context.SaveChanges();
             return Ok(instruction.Id);

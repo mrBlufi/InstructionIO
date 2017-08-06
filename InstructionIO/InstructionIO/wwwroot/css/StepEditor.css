@@ -24,7 +24,7 @@
 
 .textBox:not(:focus):empty:after {
     content: attr(data-text);
-    color: lightgray
+    color: lightgray;
 }
 
 .btn-circle {
@@ -49,11 +49,17 @@
     margin-top: 5px;
 }
 
+/*.textBox>div{
+    margin: 5px;
+    border-bottom: solid;
+    border-width: thin;
+    border-bottom-color: gray;
+}*/
 .textBox {
     margin: 5px;
     border-bottom: solid;
     border-width: thin;
-    border-bottom-color: #f5f5f5;
+    border-bottom-color: gray;
 }
 
 .btn-circle:focus {

@@ -42,12 +42,16 @@ let CommentComponent = class CommentComponent {
         });
     }
     addComment(obj) {
-        this.commentservice.addComment(obj, this.idInstruction);
-        this.getComment();
+        this.commentservice.addComment(obj, this.idInstruction).subscribe((data) => {
+            console.log('push Complit');
+            this.getComment();
+        }, (err) => { console.log('Error'); });
     }
     delcomment(id) {
-        this.commentservice.delcomment(id, this.idInstruction);
-        this.getComment();
+        this.commentservice.delcomment(id, this.idInstruction).subscribe((data) => {
+            console.log('del Complit');
+            this.getComment();
+        }, (err) => { console.log('Error'); });
     }
 };
 __decorate([

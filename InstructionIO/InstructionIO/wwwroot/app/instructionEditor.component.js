@@ -20,8 +20,9 @@ const http_1 = require("@angular/http");
 const Instruction_1 = require("./model/Instruction");
 const Step_1 = require("./model/Step");
 const TagsRelation_1 = require("./model/TagsRelation");
+const Theme_Service_1 = require("./service/Theme.Service");
 let InstructionEditorComponent = class InstructionEditorComponent {
-    constructor(dragulaService, sanitizer, http, _instructionservice, _homeservice, _ActivatedRoute, router) {
+    constructor(dragulaService, sanitizer, http, _instructionservice, _homeservice, _ActivatedRoute, router, themeservice) {
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
@@ -29,6 +30,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         this._homeservice = _homeservice;
         this._ActivatedRoute = _ActivatedRoute;
         this.router = router;
+        this.themeservice = themeservice;
         this.Inst = new Instruction_1.Instruction();
         this.tagsArray = new Array();
         this.instvalidate = new InstructionValidate();
@@ -42,13 +44,14 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             direction: 'horizontal',
             slidesPerView: '3',
             centeredSlides: true,
-            keyboardControl: true,
+            keyboardControl: false,
             slideActiveClass: 'slide-activMini'
         };
         this.requestAutocompleteItems = (text) => {
             console.log(text);
             return this._instructionservice.tags(text);
         };
+        this.theme = this.themeservice.getCookie('theme');
         dragulaService.setOptions('stepD', {
             moves: function (el, container, handle) {
                 return !(handle.className.includes('delete'));
@@ -176,7 +179,7 @@ InstructionEditorComponent = __decorate([
         styleUrls: ['css/themes/themeInstructionEditor.css']
     }),
     __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService, Home_Service_1.HomeService,
-        router_1.ActivatedRoute, router_1.Router])
+        router_1.ActivatedRoute, router_1.Router, Theme_Service_1.ThemeService])
 ], InstructionEditorComponent);
 exports.InstructionEditorComponent = InstructionEditorComponent;
 class InstructionValidate {

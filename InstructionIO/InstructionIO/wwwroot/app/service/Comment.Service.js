@@ -22,17 +22,12 @@ let CommentService = class CommentService {
     addComment(obj, id) {
         const body = JSON.stringify(obj);
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/comment/instruction/' + id + '/push/', body, { headers: headers }).subscribe((data) => {
-            console.log('push Complit');
-        }, (err) => { console.log('Error'); });
+        return this.http.post('/api/comment/instruction/' + id + '/push/', body, { headers: headers });
     }
     delcomment(idC, idI) {
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
         if (idC)
-            return this.http.post('/api/comment/instruction/' + idI + '/del/', idC, { headers: headers }).subscribe((data) => {
-                console.log('push Complit');
-                console.log(data);
-            }, (err) => { console.log('Error'); });
+            return this.http.post('/api/comment/instruction/' + idI + '/del/', idC, { headers: headers });
     }
 };
 CommentService = __decorate([
