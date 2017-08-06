@@ -91,12 +91,14 @@ export class InstructionEditorComponent {
     mainSwiperConfig: SwiperConfigInterface = {
         direction: 'horizontal',
         slidesPerView: '1',
-        keyboardControl: true
+        keyboardControl: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
     };
 
     miniSwiperConfig: SwiperConfigInterface = {
         direction: 'horizontal',
-        slidesPerView: '3',
+        slidesPerView: '5',
         centeredSlides: true,
         keyboardControl: false,
         slideActiveClass: 'slide-activMini'

@@ -73,8 +73,10 @@ namespace InstructionIO.Controllers.Api {
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)
         {
+            var comments = context.Comments.Where(x => x.Instruction.Id == instruction.Id).ToList();
+            var ratings = context.RatingRelations.Where(x => x.Instruction.Id == instruction.Id).ToList();
             context.Remove(context.Instructions.Find(instruction.Id));
-            instruction.Id = 0;
+            instruction.Id = -1;
             foreach (var step in instruction.Step)
             {
                 step.Id = 0;
@@ -83,6 +85,8 @@ namespace InstructionIO.Controllers.Api {
                     contentBlock.Id = 0;
                 }
             }
+            instruction.Comment = comments;
+            instruction.RatingRelation = ratings;
             return CreateInstruction(instruction);
         }
 
@@ -96,8 +100,11 @@ namespace InstructionIO.Controllers.Api {
                 tagsRelation.Id = 0;
                 tagsRelation.Tag = context.Tags.Find(tagsRelation.Tag.Id) ?? tagsRelation.Tag;
             }
+            foreach (var item in instruction.Comment)
+            {
+                context.Entry(item).State = EntityState.Modified;
+            }
             context.Entry(instruction.Category).State = EntityState.Modified;
-            context.Entry(instruction.Comment).State = EntityState.Modified;
             context.Instructions.Add(instruction);          
             context.SaveChanges();
             return Ok(instruction.Id);

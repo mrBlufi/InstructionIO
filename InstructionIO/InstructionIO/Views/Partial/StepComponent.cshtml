@@ -1,19 +1,21 @@
-﻿<div [(ngClass)]="theme" class="contentBlock" *ngFor="let block of step.contentBlock">
-    <div class="contetnRow">
-        <div [ngSwitch]="block.type">
-            <template ngSwitchCase="text">
-                <span class="content_block_type_text" [innerHTML]="block.content" aria-multiline="true" style="word-break:break-word"></span>
-            </template>
-            <template ngSwitchCase="img">
-                <div class="content_block_type_pictire">
-                    <img class="img-responsive pictireBox" [(src)]="block.content" />
-                </div>
-            </template>
-            <template ngSwitchCase="video">
-                <div class="content_block_type_video">
-                    <iframe [(src)]="block.content" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </template>
+﻿<div class="contentBody">
+    <div [(ngClass)]="theme" class="contentBlock" *ngFor="let block of step.contentBlock">
+        <div class="contetnRow">
+            <div [ngSwitch]="block.type">
+                <template ngSwitchCase="text">
+                    <span class="content_block_type_text" [innerHTML]="block.content" aria-multiline="true" style="word-break:break-word"></span>
+                </template>
+                <template ngSwitchCase="img">
+                    <div class="content_block_type_pictire">
+                        <img class="img-responsive pictireBox" [(src)]="block.content" />
+                    </div>
+                </template>
+                <template ngSwitchCase="video">
+                    <div class="content_block_type_video">
+                        <iframe [(src)]="block.content" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </template>
+            </div>
         </div>
     </div>
 </div>

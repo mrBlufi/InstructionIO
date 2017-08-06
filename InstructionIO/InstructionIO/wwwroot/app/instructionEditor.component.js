@@ -38,11 +38,13 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         this.mainSwiperConfig = {
             direction: 'horizontal',
             slidesPerView: '1',
-            keyboardControl: true
+            keyboardControl: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev'
         };
         this.miniSwiperConfig = {
             direction: 'horizontal',
-            slidesPerView: '3',
+            slidesPerView: '5',
             centeredSlides: true,
             keyboardControl: false,
             slideActiveClass: 'slide-activMini'

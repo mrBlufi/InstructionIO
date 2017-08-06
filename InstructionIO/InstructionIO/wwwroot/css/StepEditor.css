@@ -8,16 +8,7 @@
 }
 
 .contentBody {
-    margin: 0px;
-    padding-right: 78px;
-    padding-left: 10px;
-}
-
-@media(max-width:750px) {
-    .contentBody {
-        margin: unset;
-        padding: unset;
-    }
+    margin: 35px;
 }
 
 
@@ -57,6 +48,8 @@
 }*/
 .textBox {
     margin: 5px;
+    margin-left:-12px;
+    margin-right:-12px;
     border-bottom: solid;
     border-width: thin;
     border-bottom-color: gray;
