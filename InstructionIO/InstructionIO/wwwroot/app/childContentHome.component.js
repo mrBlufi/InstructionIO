@@ -35,7 +35,6 @@ let ChildComponent = class ChildComponent {
         this.infinitydisable = false;
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
     ngOnInit() {
@@ -53,10 +52,7 @@ let ChildComponent = class ChildComponent {
     onClick($event, idI) {
         this.onClickResult = $event;
         if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
-                console.log(data);
-            });
-        console.log($event);
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
     }
     ;
     getInstructions() {
@@ -86,7 +82,6 @@ let ChildComponent = class ChildComponent {
             this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log(this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -120,14 +115,12 @@ let ChildComponent = class ChildComponent {
         if (this.infinitydisable)
             return;
         this.infinitydisable = true;
-        console.log('scroll');
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             if (!data) {
                 this.infinitydisable = false;
                 return;
             }
             let instructionscroll = data;
-            console.log(data);
             this.instructions = this.instructions.concat(instructionscroll);
             this.stepSkip += 1;
             this.infinitydisable = false;

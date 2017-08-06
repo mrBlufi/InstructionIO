@@ -8,7 +8,6 @@ import { Step } from './model/Step'
 })
 
 export class StepView {
-
     @Input() step: Step = new Step('0');
     @Input() theme: string;
 }

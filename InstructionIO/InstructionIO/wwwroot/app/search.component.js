@@ -32,7 +32,6 @@ let SearchComponent = class SearchComponent {
     getTags() {
         this.homeservice.getPopularTags().subscribe(data => {
             this.tags = data;
-            console.log(this.tags);
         }, err => console.log(err));
     }
     ngOnDestroy() {

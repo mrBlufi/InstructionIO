@@ -13,19 +13,18 @@ import { ThemeService } from "./service/Theme.Service";
 })
 
 export class SearchComponent implements OnInit {
+
     @Language() lang: string;
     tags: Array<Tag> = null;
     searchyQueryParams: any;
     @Input() theme: string;
+    sub: any;
+
     constructor(private homeservice: HomeService, private _Activatedroute: ActivatedRoute, private themeservice: ThemeService) {
         this.theme = this.themeservice.getCookie('theme');
     }
 
-   
-    sub: any;
-
     ngOnInit() {
-       
         this.getTags();
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
@@ -36,16 +35,10 @@ export class SearchComponent implements OnInit {
     private getTags() {
         this.homeservice.getPopularTags().subscribe(data => {
             this.tags = data;
-            console.log(this.tags);
         }, err => console.log(err));
     }
-
-    
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
-
-
-
 }

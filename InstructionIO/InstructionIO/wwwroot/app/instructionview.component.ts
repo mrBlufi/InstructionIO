@@ -22,8 +22,10 @@ export class InstructionView {
 
     @ViewChild('mainSwiper') mainSwiper: SwiperComponent;
     @ViewChild('miniSwiper') miniSwiper: SwiperComponent;
+    instruction: Instruction = new Instruction();
+    _id: string;
+    onClickResult: IStarRatingOnClickEvent;
 
-    
     roleinfo: RoleData = new RoleData(-1, false, false);
     @Input() theme: string;
     constructor(private _instructionservice: InstructionService,
@@ -32,25 +34,15 @@ export class InstructionView {
         this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
-
-    onClickResult: IStarRatingOnClickEvent;
 
     onClick($event: IStarRatingOnClickEvent, idI: number) {
         this.onClickResult = $event;
         if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
-                console.log(data);
-            });
-
-        console.log($event);
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
     };
 
-    instruction: Instruction = new Instruction();
-    _id: string;
-    
     mainViewSiper: SwiperConfigInterface = {
         direction: 'horizontal',
         slidesPerView: '1',
@@ -76,18 +68,17 @@ export class InstructionView {
             rating += ratingRelation[i].value;
         }
         return rating / ratingRelation.length;
-
     }
 
     onIndexChange(event: number) {
         this.mainSwiper.setIndex(event);
         this.miniSwiper.setIndex(event);
-        console.log('kek');
     }
 
     goToEdit() {
         this.router.navigate(['instructioneditor'], { queryParams: { 'id': this._id } });
     }
+
     ngOnInit() {
         let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
             this._id = parmas['id'];
@@ -95,7 +86,6 @@ export class InstructionView {
         this._instructionservice.getfull(this._id).subscribe(
             data => {
                 this.instruction = data;
-                console.log(this.instruction);
             },
             err => console.log(err));
     }

@@ -21,8 +21,6 @@ namespace InstructionIO.Data
            .HasIndex(u => u.Name)
            .IsUnique();
             base.OnModelCreating(builder);
-
-            
         }
 
         public DbSet<UserInfo> UserInfos { get; set; }

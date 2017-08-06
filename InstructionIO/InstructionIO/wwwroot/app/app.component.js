@@ -27,11 +27,9 @@ let AppComponent = class AppComponent {
         this.themeservice = themeservice;
         this.router = router;
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
-        this.angularClientSideData = 'Angular';
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             this.getImageProfile();
-            console.log(this.roleinfo);
         });
         this.theme = this.themeservice.getCookie('theme');
     }
@@ -42,7 +40,6 @@ let AppComponent = class AppComponent {
         if (this.roleinfo.id != -1) {
             this.profileservice.getProfileImage(this.roleinfo.id).subscribe(data => {
                 this.imageprofile = data["_body"];
-                console.log(this.imageprofile);
             });
         }
     }

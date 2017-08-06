@@ -9,9 +9,6 @@ import { SearchComponent } from "./search.component";
 import { InstructionView } from "./instructionview.component"
 import { StepView } from "./stepview.component"
 
-
-
-
 const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {path: 'home', component: IndexComponent},

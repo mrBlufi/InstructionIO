@@ -16,7 +16,6 @@ import { RoleService } from "./service/Role.Service";
     styleUrls: ['css/blog-home.css','css/themes/themeChildContent.css']
 })
 
-
 export class ChildComponent implements OnInit {
     
     onClickResult: IStarRatingOnClickEvent;
@@ -37,9 +36,9 @@ export class ChildComponent implements OnInit {
         private profileservice: ProfileService, private roleservice: RoleService) {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
+
     ngOnInit() {
         this.sub = this._Activatedroute.queryParams
             .subscribe(params => {
@@ -53,15 +52,10 @@ export class ChildComponent implements OnInit {
             }, err => console.log(err));
     }
 
-
     onClick($event: IStarRatingOnClickEvent, idI: number) {
         this.onClickResult = $event;
         if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
-                console.log(data);
-            });
-
-        console.log($event);
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
     };
 
     private getInstructions() {
@@ -78,7 +72,6 @@ export class ChildComponent implements OnInit {
         }
     }
 
-
     setrating(ratingRelation: Array<RatingRelation>) {
         if (ratingRelation.length==0) return 0;
         let rating=0;
@@ -86,7 +79,6 @@ export class ChildComponent implements OnInit {
             rating += ratingRelation[i].value;
         }
         return  rating / ratingRelation.length;
-
     }
 
     getInstructionsFullUser() {
@@ -94,7 +86,6 @@ export class ChildComponent implements OnInit {
         if (this.categoryQueryParams == null) this.categoryQueryParams = 'Full';
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             this.instructions = data;
-            console.log(this.instructions);
             this.stepSkip += 1;
         }, err => console.log(err));
     }
@@ -134,20 +125,18 @@ export class ChildComponent implements OnInit {
     getScrollFullData() {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
-        console.log('scroll');
         this.homeservice.getInstructionsFull(this.sortQueryParams, this.categoryQueryParams, this.stepSkip).subscribe(data => {
             if (!data) {
                 this.infinitydisable = false;
                 return;
             }
             let instructionscroll = data;
-            console.log(data);
             this.instructions = this.instructions.concat(instructionscroll);
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));
-
     }
+
     getScrollUserData() {
         if (this.infinitydisable) return;
         this.infinitydisable = true;
@@ -161,7 +150,6 @@ export class ChildComponent implements OnInit {
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));
-
     }
 
     getScrollSearchData() {
@@ -178,7 +166,5 @@ export class ChildComponent implements OnInit {
             this.stepSkip += 1;
             this.infinitydisable = false;
         }, err => console.log(err));
-
     }
-
 }

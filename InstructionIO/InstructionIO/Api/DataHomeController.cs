@@ -32,7 +32,6 @@ namespace InstructionIO.Api
         [HttpGet("instruction/popular/category/{category}/{page}")]
         public IEnumerable<Instruction> getListPopulInstruction(string category, int page)
         {
-           
             return getInstructionsCategory(category).OrderByDescending(x => x.Rating)
                 .Skip(page * _stepTake).Take(_stepTake);
         }
@@ -42,8 +41,8 @@ namespace InstructionIO.Api
         {
                return getInstructionsCategory(category).OrderByDescending(x => x.LastChangedDate)
                 .Skip(page * _stepTake).Take(_stepTake);
-
         }
+
         [HttpGet("instruction/full/category/{category}/{page}")]
         public IEnumerable<Instruction> GetFullListInstruction(string category, int page)
         {
@@ -88,8 +87,6 @@ namespace InstructionIO.Api
             return category;
         }
 
-       
-
         [HttpGet("instruction/search/{search}/{page}/{tag}")]
         public IEnumerable<Instruction> GetSearchInstruction(string search,int page,bool tag)
         {
@@ -104,7 +101,6 @@ namespace InstructionIO.Api
             }
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
-
 
         private IEnumerable<Instruction> GetTagSearch(string search)
         {
@@ -125,7 +121,6 @@ namespace InstructionIO.Api
             .Include(t => t.Category).ToList();
         }
 
-
         [HttpGet("instruction/setrating/{idI}/{idU}/{rating}")]
         public async Task<IActionResult> SetRatingAsync(int idI, int idU, int rating)
         {
@@ -145,7 +140,6 @@ namespace InstructionIO.Api
             ratingr.Value = rating;
             _context.RatingRelations.Update(ratingr);
             _context.SaveChanges();
-
         }
 
         private async Task AddRatingAsync(Instruction instr, int idU, int rating)
@@ -167,11 +161,6 @@ namespace InstructionIO.Api
             _context.Instructions.Update(instr);
             _context.SaveChanges();
         }
-
-
-
-
-
     }
 }
 

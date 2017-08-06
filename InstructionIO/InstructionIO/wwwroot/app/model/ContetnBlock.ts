@@ -1,5 +1,4 @@
-﻿import { Safe } from '../tools/safeOn'
-import { DomSanitizer } from "@angular/platform-browser";
+﻿import { DomSanitizer } from "@angular/platform-browser";
 
 export class ContentBlock {
 

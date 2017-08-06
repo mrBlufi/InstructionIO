@@ -7,10 +7,6 @@ namespace InstructionIO.Controllers
 {
     public class PartialController : Controller
     {
-      
-
-       
-
         public IActionResult AppComponent() => PartialView();
 
         public IActionResult ContactComponent() => PartialView();

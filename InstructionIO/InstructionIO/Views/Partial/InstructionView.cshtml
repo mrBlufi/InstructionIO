@@ -22,7 +22,6 @@
                                   [showHalfStars]="true"
                                   (onClick)="onClick($event,instruction.id)">
                 </star-rating-comp>
-
             </div>
             <div class="tag" style="display:inline;">
                 <span class="pull-left glyphicon glyphicon-cloud">
@@ -33,7 +32,6 @@
                 </span>
                 <span class="pull-right" (click)="goToEdit()"><i class="glyphicon glyphicon-pencil"></i></span>
             </div>
-
         </div>
         <div class="panel-body">
             <swiper #mainSwiper (indexChange)="onIndexChange($event)" [config]="mainViewSiper">
@@ -49,7 +47,5 @@
             </div>
         </div>
     </div>
-
     <comment [comment]="instruction.comment" [idInstruction]="instruction.id" [theme]="theme"></comment>
-
 </div>

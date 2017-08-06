@@ -134,21 +134,15 @@ namespace instructionsIO.Controllers.Api
                 statisc.AverageRating = 0;
             }
             return new ObjectResult(statisc);
-
         }
-
-
-
-
-
     }
+
     public class UserInformation
     {
         public int Id { get; set; }
         public bool UserRole { get; set; }
         public bool AdminRole { get; set; }
     }
-
 
     public class UserStatistics
     {

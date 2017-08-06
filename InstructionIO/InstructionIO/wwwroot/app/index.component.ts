@@ -20,18 +20,13 @@ export class IndexComponent implements OnInit {
     categoryQueryParams: any;
     @Input() theme: string;
     constructor(private homeservice: HomeService, private route: ActivatedRoute,private themeservice:ThemeService) {
-        
         this.categoryQueryParams = 'Full';
-       
     }
 
     ngOnInit() {
         this.theme = this.themeservice.getCookie('theme');
         this.getTags();
         this.getCategories();
-
-    }
-    ngOnDestroy() {
     }
 
     private getTags() {
@@ -45,7 +40,5 @@ export class IndexComponent implements OnInit {
         this.homeservice.getCategories().subscribe(data => {
             this.categories = data;
         }, err => console.log(err));
-        
-        
     }
 }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using InstructionIO.Models;
-using InstructionIO.Services;
 using InstructionIO.Data;
 
 namespace InstructionIO.Controllers
@@ -59,16 +58,13 @@ namespace InstructionIO.Controllers
 
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
-           
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
-                
             }
             else
             {
-
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
                 var user = new ApplicationUser
@@ -96,16 +92,9 @@ namespace InstructionIO.Controllers
                         return RedirectToAction(nameof(HomeController.Index), "Home");
                     }
                 }
-
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
-
-
-
-
-
-
         #region Helpers
 
         private void AddErrors(IdentityResult result)

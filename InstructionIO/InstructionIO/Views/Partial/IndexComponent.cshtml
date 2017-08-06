@@ -1,49 +1,45 @@
-﻿
-<div [(ngClass)]="theme" class="row">
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-             <div class="categories">
-                <p>
-                    <span>{{ 'Categories' | translate:lang }} </span>
-
-                    <select id="categories"  class="form-control"  [(ngModel)]="categoryQueryParams">
-                        <option [value]="'Full'" ng-selected="selected">{{ 'Full' | translate:lang }}</option>
-                        <option *ngFor="let category of categories" [value]="category.name" >
-                            {{category.name}}
-                        </option>
-                    </select>
-                </p>
-            </div>
-            <ul style="visibility: visible;" class="nav nav-tabs ">
-                <li data-toggle="tab" class="active">
-                    <a [routerLink]="['../home']"
-                       [queryParams]="{'category':categoryQueryParams, 'sort':'popular'}" >{{ 'Popular' | translate:lang }}</a>
-                </li>
-
-                <li data-toggle="tab" class="">
-                    <a [routerLink]="['../home']"
-                       [queryParams]="{'category':categoryQueryParams, 'sort':'lastchange'}">{{ 'Last Update' | translate:lang }}</a>
-                </li>
-                <li data-toggle="tab" class="">
-                    <a [routerLink]="['../home']"
-                       [queryParams]="{'category':categoryQueryParams, 'sort':'full'}">{{ 'Full' | translate:lang }}</a>
-                </li>
-            </ul>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <child-content [theme]="theme"></child-content>
-            </div>
+﻿<div [(ngClass)]="theme" class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="categories">
+            <p>
+                <span>{{ 'Categories' | translate:lang }} </span>
+                <select id="categories" class="form-control" [(ngModel)]="categoryQueryParams">
+                    <option [value]="'Full'" ng-selected="selected">{{ 'Full' | translate:lang }}</option>
+                    <option *ngFor="let category of categories" [value]="category.name">
+                        {{category.name}}
+                    </option>
+                </select>
+            </p>
         </div>
-        <div  class="col-lg-3 col-md-3 hidden-xs hidden-sm">
-            <div id="sidebar" class="sidebar-nav-fixed  pull-right affix">
-                    <div class="well">
-                    <ul class="nav ">
-                        <li class="nav-header">{{ 'Popular tag' | translate:lang }}:</li>
-                        <li  *ngFor="let tag of tags; let i = index">
-                            <a [routerLink]="['../search']"
-                       [queryParams]="{'q':tag.name,'tag':true}">#{{tag.name}}</a> 
-                        </li>
-                        
-                    </ul>
-                </div>
+        <ul style="visibility: visible;" class="nav nav-tabs ">
+            <li data-toggle="tab" class="active">
+                <a [routerLink]="['../home']"
+                   [queryParams]="{'category':categoryQueryParams, 'sort':'popular'}">{{ 'Popular' | translate:lang }}</a>
+            </li>
+            <li data-toggle="tab" class="">
+                <a [routerLink]="['../home']"
+                   [queryParams]="{'category':categoryQueryParams, 'sort':'lastchange'}">{{ 'Last Update' | translate:lang }}</a>
+            </li>
+            <li data-toggle="tab" class="">
+                <a [routerLink]="['../home']"
+                   [queryParams]="{'category':categoryQueryParams, 'sort':'full'}">{{ 'Full' | translate:lang }}</a>
+            </li>
+        </ul>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <child-content [theme]="theme"></child-content>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 hidden-xs hidden-sm">
+        <div id="sidebar" class="sidebar-nav-fixed  pull-right affix">
+            <div class="well">
+                <ul class="nav ">
+                    <li class="nav-header">{{ 'Popular tag' | translate:lang }}:</li>
+                    <li *ngFor="let tag of tags; let i = index">
+                        <a [routerLink]="['../search']"
+                           [queryParams]="{'q':tag.name,'tag':true}">#{{tag.name}}</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>

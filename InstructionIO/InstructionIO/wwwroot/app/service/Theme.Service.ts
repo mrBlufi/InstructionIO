@@ -2,10 +2,11 @@
 import { CookieService } from 'angular2-cookie/core';
 import { CookieOptionsArgs } from "angular2-cookie/services";
 @Injectable()
-export class    ThemeService {
-    public theme: string = 'light';
-    constructor(private _cookieService: CookieService) {
+export class ThemeService {
 
+    public theme: string = 'light';
+
+    constructor(private _cookieService: CookieService){
     }
     
     setcookie(value: string) {
@@ -16,7 +17,6 @@ export class    ThemeService {
         this.put(key, value, opts);
     }
     
-
     getCookie(key: string) {
         let cookie = this._cookieService.get(key);
         if (!cookie) return 'light';
@@ -27,6 +27,4 @@ export class    ThemeService {
     put(key: string, value: string, options?: CookieOptionsArgs): void {
         this._cookieService.put(key, value, options);
     }
-
-
 }

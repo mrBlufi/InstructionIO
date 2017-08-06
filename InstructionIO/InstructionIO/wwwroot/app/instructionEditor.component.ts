@@ -22,7 +22,7 @@ import { ThemeService } from "./service/Theme.Service";
 @Component({
     selector: 'instructionEditor',
     templateUrl: '/partial/InstructionEditorComponent',
-    styleUrls: ['css/themes/themeInstructionEditor.css']
+    styleUrls: ['css/themes/themeInstructionEditor.css','css/InstructionEditor.css'] 
 })
 
 export class InstructionEditorComponent {
@@ -34,6 +34,7 @@ export class InstructionEditorComponent {
     categories: Category[];
     tagsArray: Tag[] = new Array<Tag>();
     instvalidate: InstructionValidate = new InstructionValidate();
+    viewS: boolean = true;
 
     private _id: string;
     @Input() theme: string;
@@ -69,9 +70,7 @@ export class InstructionEditorComponent {
         return state;
     }
 
-    viewS: boolean = true;
-
-    nn(event: Event) {
+    swapMode(event: Event) {
         this.viewS = !this.viewS;
         if (this.viewS) {
             event.srcElement.classList.add('glyphicon-eye-open');
@@ -105,8 +104,6 @@ export class InstructionEditorComponent {
     }
 
     add(): void {
-        console.log(this.Inst);
-
         this.Inst.step.push(new Step());
         this.mainSwiper.update();
     }
@@ -144,7 +141,6 @@ export class InstructionEditorComponent {
     }
 
     public requestAutocompleteItems = (text: string): Observable<Response> => {
-        console.log(text);
         return this._instructionservice.tags(text);
     };
 
@@ -154,10 +150,8 @@ export class InstructionEditorComponent {
 
     saveInst() {
         for (let tag of this.tagsArray) {
-            console.log(tag);
             this.Inst.tagsRelation.push(new TagsRelation(tag));
         }
-        console.log(this.Inst)
         this._instructionservice.create(this.Inst).subscribe(data => {
             this.router.navigate(['instruction'], { queryParams: { 'id': data['_body'] } });
         });
@@ -180,7 +174,7 @@ export class InstructionEditorComponent {
         });
     }
 
-    previwKeyup(n: KeyboardEvent) {
+    textBoxFocusOut(n: Event) {
         this.Inst.previewText = n.srcElement.innerHTML;
     }
 
@@ -188,6 +182,7 @@ export class InstructionEditorComponent {
         eleme.click();
     }
 }
+
 class InstructionValidate {
     public Name: boolean = false;
     public Tag: boolean = false;

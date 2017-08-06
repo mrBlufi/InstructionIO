@@ -108,7 +108,6 @@ namespace InstructionIO.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
     }
 
     public class RatingRelation
@@ -119,7 +118,5 @@ namespace InstructionIO.Models
         [Required]
         [JsonIgnore]
         public Instruction Instruction { get; set; }
-
     }
-
 }

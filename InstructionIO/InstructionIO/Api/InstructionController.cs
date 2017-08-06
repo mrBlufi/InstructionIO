@@ -30,7 +30,6 @@ namespace InstructionIO.Controllers.Api {
         {
             Instruction instruction = new Instruction()
             {
-                PreviewText = "...",
                 CreateDate = DateTime.Now,
                 LastChangedDate = DateTime.Now
             };
@@ -42,10 +41,10 @@ namespace InstructionIO.Controllers.Api {
                     .Include(inst => inst.Comment)
                     .Include(inst => inst.TagsRelation).ThenInclude(tag => tag.Tag)
                     .FirstOrDefault();
-                //test default
             }
             return new ObjectResult(instruction);
         }
+
         [HttpGet("getfull")]
         public IActionResult GetInstructionfull(int? id)
         {

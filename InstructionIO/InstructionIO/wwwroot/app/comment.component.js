@@ -26,7 +26,6 @@ let CommentComponent = class CommentComponent {
         this.editorContent = 'Comment Text';
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
     submit() {
@@ -38,18 +37,15 @@ let CommentComponent = class CommentComponent {
     getComment() {
         this.commentservice.getComment(this.idInstruction).subscribe(date => {
             this.comment = date;
-            console.log(this.comment);
         });
     }
     addComment(obj) {
         this.commentservice.addComment(obj, this.idInstruction).subscribe((data) => {
-            console.log('push Complit');
             this.getComment();
         }, (err) => { console.log('Error'); });
     }
     delcomment(id) {
         this.commentservice.delcomment(id, this.idInstruction).subscribe((data) => {
-            console.log('del Complit');
             this.getComment();
         }, (err) => { console.log('Error'); });
     }

@@ -26,8 +26,8 @@ let InstructionView = class InstructionView {
         this.roleservice = roleservice;
         this.themeservice = themeservice;
         this.router = router;
-        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.instruction = new Instruction_1.Instruction();
+        this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.mainViewSiper = {
             direction: 'horizontal',
             slidesPerView: '1',
@@ -47,16 +47,12 @@ let InstructionView = class InstructionView {
         this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
     onClick($event, idI) {
         this.onClickResult = $event;
         if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => {
-                console.log(data);
-            });
-        console.log($event);
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
     }
     ;
     setrating(ratingRelation) {
@@ -71,7 +67,6 @@ let InstructionView = class InstructionView {
     onIndexChange(event) {
         this.mainSwiper.setIndex(event);
         this.miniSwiper.setIndex(event);
-        console.log('kek');
     }
     goToEdit() {
         this.router.navigate(['instructioneditor'], { queryParams: { 'id': this._id } });
@@ -82,7 +77,6 @@ let InstructionView = class InstructionView {
         });
         this._instructionservice.getfull(this._id).subscribe(data => {
             this.instruction = data;
-            console.log(this.instruction);
         }, err => console.log(err));
     }
 };

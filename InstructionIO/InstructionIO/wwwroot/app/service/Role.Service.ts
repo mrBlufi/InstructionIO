@@ -7,13 +7,9 @@ export class RoleService {
     public roleinfo: RoleData;
 
     constructor(private http: Http) {
-        
     }
 
     getDataRole() {
-        
         return this.http.get('/api/profile/roleinfo').map(res => (res).json());
     }
-
-    
 }

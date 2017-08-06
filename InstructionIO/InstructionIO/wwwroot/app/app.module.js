@@ -31,7 +31,6 @@ const app_component_1 = require("./app.component");
 const childcontenthome_component_1 = require("./childcontenthome.component");
 const textBoxTemplate_1 = require("./patrialComponent/textBoxTemplate");
 const angular_l10n_1 = require("angular-l10n");
-const safeHtml_1 = require("./tools/safeHtml");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 const videoModal_1 = require("./patrialComponent/videoModal");
@@ -45,7 +44,7 @@ const SWIPER_CONFIG = {
     slidesPerView: '2',
     keyboardControl: true
 };
-// enableProdMode();
+core_1.enableProdMode();
 let AppModule = class AppModule {
     constructor(locale, translation) {
         this.locale = locale;
@@ -68,8 +67,8 @@ AppModule = __decorate([
             angular2_modal_1.ModalModule.forRoot(), ng2_tag_input_1.TagInputModule,
             bootstrap_1.BootstrapModalModule
         ],
-        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, deleteUserModal_1.ModalCustom, safeHtml_1.SafeHtml, comment_component_1.CommentComponent],
-        providers: [Comment_Service_1.CommentService, cookies_service_1.CookieService, Theme_Service_1.ThemeService, Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, safeHtml_1.SafeHtml, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
+        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, deleteUserModal_1.ModalCustom, comment_component_1.CommentComponent],
+        providers: [Comment_Service_1.CommentService, cookies_service_1.CookieService, Theme_Service_1.ThemeService, Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent],
         entryComponents: [videoModal_1.CustomModal, deleteUserModal_1.ModalCustom]
     }),

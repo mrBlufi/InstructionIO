@@ -15,6 +15,7 @@ import { Router, NavigationEnd } from "@angular/router";
 })
 
 export class AppComponent implements OnInit {
+
     searchQueryParams: any;
     public theme: string;
     roleinfo: RoleData = new RoleData(-1,false,false);
@@ -22,34 +23,31 @@ export class AppComponent implements OnInit {
 
     public constructor(private titleService: Title, public locale: LocaleService,
         private roleservice: RoleService, private profileservice: ProfileService,
-        private themeservice: ThemeService, private router: Router) {
-        
+        private themeservice: ThemeService, private router: Router)
+    {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
             this.getImageProfile();
-            console.log(this.roleinfo);
         });
         this.theme = this.themeservice.getCookie('theme');
     }
 
     enterClick() {
         this.router.navigate(['search'], { queryParams: { 'q': this.searchQueryParams } });
-
     }
+
     getImageProfile() {
         if (this.roleinfo.id != -1) {
             this.profileservice.getProfileImage(this.roleinfo.id).subscribe(data => {
                 this.imageprofile = data["_body"];
-                console.log(this.imageprofile);
             });
         }
     }
+
     settheme(theme: string) {
         this.themeservice.setcookie(theme);
         window.location.reload();
     }
-
-    angularClientSideData = 'Angular';
 
     public setTitle(newTitle: string) {
         this.titleService.setTitle(newTitle);
@@ -57,11 +55,9 @@ export class AppComponent implements OnInit {
 
     @Language() lang: string;
     ngOnInit(): void {
-        
     }
 
     selectLanguage(language: string): void {
         this.locale.setCurrentLanguage(language);
     }
-
 }

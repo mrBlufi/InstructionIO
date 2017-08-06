@@ -28,8 +28,6 @@ let IndexComponent = class IndexComponent {
         this.getTags();
         this.getCategories();
     }
-    ngOnDestroy() {
-    }
     getTags() {
         this.homeservice.getPopularTags().subscribe(data => {
             this.tags = data;

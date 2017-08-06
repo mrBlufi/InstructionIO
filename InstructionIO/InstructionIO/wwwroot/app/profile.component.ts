@@ -19,7 +19,9 @@ import { Overlay, overlayConfigFactory } from 'angular2-modal';
     templateUrl: '/partial/profileComponent',
     styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css']
 })
+
 export class ProfileComponent implements OnInit, OnDestroy {
+
     @Language() lang: string;
     user: UserInfo = new UserInfo();
     roleinfo: RoleData = new RoleData(-1, false, false);
@@ -28,6 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     sub: any;
     @Input() theme: string;
     statisticsuser: UserStatistics;
+
     constructor(public modal: Modal, private _Activatedroute: ActivatedRoute,
         private _router: Router, private _profileservice: ProfileService, private roleservice: RoleService, private http: Http, private themeservice: ThemeService) {
         this.theme = this.themeservice.getCookie('theme');
@@ -51,11 +54,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         });
     }
    
-
-
     deluser(tag: boolean) {
         if (tag) {
-            console.log(this.user.id);
             this._profileservice.deleteUserById(this.user.id).subscribe(data => {
                 this.user = null;
                 this._router.navigate(['home']);
@@ -123,7 +123,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
         }
-
     }
 
     redirectToInput(eleme: HTMLElement) {
@@ -137,7 +136,4 @@ export class ProfileComponent implements OnInit, OnDestroy {
         formData.append(elem.files[0].name, elem.files[0]);
         this.http.post('/api/StepEditor/Upload', formData).subscribe(data => { this.user.avatar = data["_body"].replace(/"/g, "") });
     }
-
-
-
 }

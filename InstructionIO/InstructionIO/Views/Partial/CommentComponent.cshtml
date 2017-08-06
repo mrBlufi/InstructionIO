@@ -1,46 +1,38 @@
-﻿    <div class="container-fluid">
-        <div class="row">
-            <div *ngIf="roleinfo.id!=-1"
-                 class="cl-md-12 addcomment panel panel-white post panel-shadow">
-                <div class="panel-footer"><h4><i class="fa fa-paper-plane-o"></i> {{ 'Leave a Comment' | translate:lang }}:</h4></div>
-                <div class="panel-body edit">
-                    <div id="editor" [froalaEditor] [(froalaModel)]="editorContent"></div>
-                </div>
-                
-                <div class="submit panel-footer">
-                    <button (click)="submit()" type="submit" name="say" value="" class="btn"><i class="fa fa-reply"></i> {{ 'Submit' | translate:lang }}</button>
-                </div>
+﻿<div class="container-fluid">
+    <div class="row">
+        <div *ngIf="roleinfo.id!=-1"
+             class="cl-md-12 addcomment panel panel-white post panel-shadow">
+            <div class="panel-footer"><h4><i class="fa fa-paper-plane-o"></i> {{ 'Leave a Comment' | translate:lang }}:</h4></div>
+            <div class="panel-body edit">
+                <div id="editor" [froalaEditor] [(froalaModel)]="editorContent"></div>
             </div>
-
-            <h3 *ngIf="comment">{{comment.length}} {{ 'Comments' | translate:lang }}</h3>
-            <hr />
-        
-            <div [(ngClass)]="theme" class="col-md-12" *ngFor="let com of comment">
-                <div class="panel panel-white post panel-shadow">
-                    <div class=" panel-header post-heading">
-                        <div class="pull-left image">
-                            <img *ngIf="!com.author.avatar" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png" class="img-circle avatar" alt="user profile image">
-                            <img *ngIf="com.author.avatar" src="{{com.author.avatar}}" class="img-circle avatar" alt="user profile image">
-                        </div>
-                        <div class="pull-left meta">
-                            <div class="title h5">
-                                <a href="#"><b>{{com.author.fullName}}</b></a>
-                            </div>
-                            <h6 class="text-muted date">{{com.dateCreate }}</h6>
-                        </div>
-                        <div *ngIf="roleinfo.id==com.author.id || roleinfo.adminRole" class="pull-right meta">
-                            
-                            <i (click)="delcomment(com.id)" class="glyphicon glyphicon-remove"></i>
-                        </div>
-                    </div>
-                    <div class="post-description" >
-                        <div [froalaView]="com.context"></div>
-                       
-                    </div>
-                </div>
+            <div class="submit panel-footer">
+                <button (click)="submit()" type="submit" name="say" value="" class="btn"><i class="fa fa-reply"></i> {{ 'Submit' | translate:lang }}</button>
             </div>
-           
-           
         </div>
-
+        <h3 *ngIf="comment">{{comment.length}} {{ 'Comments' | translate:lang }}</h3>
+        <hr />
+        <div [(ngClass)]="theme" class="col-md-12" *ngFor="let com of comment">
+            <div class="panel panel-white post panel-shadow">
+                <div class=" panel-header post-heading">
+                    <div class="pull-left image">
+                        <img *ngIf="!com.author.avatar" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png" class="img-circle avatar" alt="user profile image">
+                        <img *ngIf="com.author.avatar" src="{{com.author.avatar}}" class="img-circle avatar" alt="user profile image">
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="#"><b>{{com.author.fullName}}</b></a>
+                        </div>
+                        <h6 class="text-muted date">{{com.dateCreate }}</h6>
+                    </div>
+                    <div *ngIf="roleinfo.id==com.author.id || roleinfo.adminRole" class="pull-right meta">
+                        <i (click)="delcomment(com.id)" class="glyphicon glyphicon-remove"></i>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <div [froalaView]="com.context"></div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>

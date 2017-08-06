@@ -6,7 +6,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from "rxjs/Observable";
 import { RequestOptions, Http, Headers } from "@angular/http";
 import { Step } from './model/Step';
-import { SafeHtml } from './tools/safeHtml';
 import { Pipe, PipeTransform } from '@angular/core';
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
@@ -17,18 +16,16 @@ import { CustomModal, VideoModalContext } from './patrialComponent/videoModal'
     templateUrl: '/partial/StepEditorComponent',
     styleUrls: [ 'css/themes/themeStepEditor.css']
 })
+
 export class StepEditorComponent {
     @Input() step: Step = new Step('0');
     @Input() theme: string;
     constructor(public modal: Modal, private dragulaService: DragulaService,
         private sanitizer: DomSanitizer, private http: Http) {
         dragulaService.dropModel.subscribe((value: any) => {
-            console.log(value);
             this.onDropModel(value.slice(1));
         });
         dragulaService.removeModel.subscribe((value: any) => {
-            console.log(value);
-
             this.onRemoveModel(value.slice(1));
         });
     }
@@ -39,10 +36,6 @@ export class StepEditorComponent {
 
     private onRemoveModel(args: any) {
         let [el, source] = args;
-    }
-    
-    cw(n: any) {
-        console.log(n);
     }
 
     textBoxAdd() {
@@ -58,10 +51,6 @@ export class StepEditorComponent {
 
     redirectToInput(eleme: HTMLElement) {
         eleme.click();
-    }
-
-    loadTextBox(n: any) {
-        console.log(n);
     }
 
     textBoxKeyup(n: KeyboardEvent, block: any) {

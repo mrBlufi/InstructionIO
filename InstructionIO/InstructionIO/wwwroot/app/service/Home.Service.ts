@@ -9,6 +9,7 @@ export class HomeService {
     getPopularTags() {
         return this.http.get('/api/datahome/tag').map(res => (res).json());
     }
+
     getCategories() {
         return this.http.get('/api/datahome/categories').map(res => (res).json());
     }
@@ -16,7 +17,6 @@ export class HomeService {
     getInstructionsFull(sort: string, category: string, stepSkip: number) {
         return this.http.get('/api/datahome/instruction/' + sort + '/category/' + category + '/' + stepSkip).map(res => (res).json());
     }
-
 
     getInstructionsUser(stepSkip: number) {
         return this.http.get('/api/datahome/instruction/user/' + stepSkip).map(res => (res).json());

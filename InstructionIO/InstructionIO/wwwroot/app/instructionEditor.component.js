@@ -50,7 +50,6 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             slideActiveClass: 'slide-activMini'
         };
         this.requestAutocompleteItems = (text) => {
-            console.log(text);
             return this._instructionservice.tags(text);
         };
         this.theme = this.themeservice.getCookie('theme');
@@ -81,7 +80,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         }
         return state;
     }
-    nn(event) {
+    swapMode(event) {
         this.viewS = !this.viewS;
         if (this.viewS) {
             event.srcElement.classList.add('glyphicon-eye-open');
@@ -98,7 +97,6 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             this.miniSwiper.prevSlide();
     }
     add() {
-        console.log(this.Inst);
         this.Inst.step.push(new Step_1.Step());
         this.mainSwiper.update();
     }
@@ -133,10 +131,8 @@ let InstructionEditorComponent = class InstructionEditorComponent {
     }
     saveInst() {
         for (let tag of this.tagsArray) {
-            console.log(tag);
             this.Inst.tagsRelation.push(new TagsRelation_1.TagsRelation(tag));
         }
-        console.log(this.Inst);
         this._instructionservice.create(this.Inst).subscribe(data => {
             this.router.navigate(['instruction'], { queryParams: { 'id': data['_body'] } });
         });
@@ -155,7 +151,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             this.Inst.previewImage = data["_body"].replace(/"/g, "");
         });
     }
-    previwKeyup(n) {
+    textBoxFocusOut(n) {
         this.Inst.previewText = n.srcElement.innerHTML;
     }
     redirectToInput(eleme) {

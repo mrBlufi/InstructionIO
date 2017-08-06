@@ -5,12 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using InstructionIO.Data;
 using InstructionIO.Models;
-using InstructionIO.Services;
 using Newtonsoft.Json.Serialization;
 using Brik.Security.VkontakteMiddleware;
 using Microsoft.Extensions.Options;
@@ -28,13 +26,11 @@ namespace InstructionIO
                  .SetBasePath(env.ContentRootPath)
                  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                  .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
-
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -62,23 +58,15 @@ namespace InstructionIO
             {
                 options.User.RequireUniqueEmail = false;
             });
-
-            // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             app.UseDeveloperExceptionPage();
-
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
-
             app.UseIdentity();
-
-
             app.UseFacebookAuthentication(new FacebookOptions
             {
                 AppId = "1759352080772434",
@@ -89,14 +77,11 @@ namespace InstructionIO
                 ConsumerKey = "KHEPZW0ZGGbvmgP5V9XltcPcb",
                 ConsumerSecret = "ryrlys72XFXCdQIrmAaqjfEMRh1dNSTy9GUwrGZb1SOAC18TFj"
             });
-
             app.UseGoogleAuthentication(new GoogleOptions()
             {
                 ClientId = "699427373806-f40rmrjidlkpjnqaaehg9rogvf2mt0nq.apps.googleusercontent.com",
                 ClientSecret = "Sla1zfZRk6InvNx3Iiap9Mm9"
             });
-
-
             app.UseVkontakteAuthentication(new VkontakteOptions
             {
                 ClientId = "6116045",
@@ -104,8 +89,6 @@ namespace InstructionIO
                 SaveTokens = true
 
             });
-
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions
@@ -113,7 +96,6 @@ namespace InstructionIO
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
                 RequestPath = "/node_modules"
             });
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -124,7 +106,6 @@ namespace InstructionIO
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
             await CreateRoles(serviceProvider);
-            
         }
    
 

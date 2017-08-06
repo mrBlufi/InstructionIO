@@ -26,11 +26,9 @@ let StepEditorComponent = class StepEditorComponent {
         this.http = http;
         this.step = new Step_1.Step('0');
         dragulaService.dropModel.subscribe((value) => {
-            console.log(value);
             this.onDropModel(value.slice(1));
         });
         dragulaService.removeModel.subscribe((value) => {
-            console.log(value);
             this.onRemoveModel(value.slice(1));
         });
     }
@@ -39,9 +37,6 @@ let StepEditorComponent = class StepEditorComponent {
     }
     onRemoveModel(args) {
         let [el, source] = args;
-    }
-    cw(n) {
-        console.log(n);
     }
     textBoxAdd() {
         let n = new ContetnBlock_1.ContentBlock('text');
@@ -54,9 +49,6 @@ let StepEditorComponent = class StepEditorComponent {
     }
     redirectToInput(eleme) {
         eleme.click();
-    }
-    loadTextBox(n) {
-        console.log(n);
     }
     textBoxKeyup(n, block) {
         let _block = block;

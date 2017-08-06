@@ -2,6 +2,7 @@
 import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
 import { BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { LocaleService, Language } from 'angular-l10n';
+
 export class VideoModalContext extends BSModalContext {
     public src: string;
 }
@@ -12,8 +13,10 @@ export class VideoModalContext extends BSModalContext {
 })
 
 export class CustomModal implements CloseGuard, ModalComponent<VideoModalContext> {
+
     context: VideoModalContext;
     @Language() lang: string;
+
     constructor(public dialog: DialogRef<VideoModalContext>) {
         this.context = dialog.context;
         dialog.setCloseGuard(this);

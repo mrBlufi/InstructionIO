@@ -1,13 +1,12 @@
 ﻿<div class="row">
     <span defaultOverlayTarget></span>
-    <div [(ngClass)]="theme"  class="profile">
+    <div [(ngClass)]="theme" class="profile">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div [(ngClass)]="theme" class="panel panel-default">
                 <div *ngIf="roleinfo.adminRole && roleinfo.id!=user.id" class="admin panel-heading">
-                    
                     <a class="deleteuser" (click)="deleteUserModal()"><i class="glyphicon glyphicon-remove"></i><span> Delete User</span></a>
                 </div>
-                <div   class="panel-body">
+                <div class="panel-body">
                     <div class="media">
                         <div align="center" id="profile_img">
                             <img *ngIf="user.avatar" class="thumbnail img-responsive" src="{{user.avatar}}">
@@ -18,14 +17,13 @@
                         <div class="media-body">
                             <hr>
                             <div>
-                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable"(click)="editDate('interestsSpan')"></span></h3>
+                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsSpan')"></span></h3>
                                 <span id="interestsSpan" disabled="disabled" class="col-md-11 col-sm-11 col-xs-11" contenteditable="false" [innerHTML]="user.interests"></span>
                             </div>
                             <hr class="col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" [value]="user.birthday | date:'yyyy-MM-dd'" style="border:none" (input)="user.birthday=parseDate($event.target.value)" />
-
                             </div>
                         </div>
                     </div>
@@ -34,10 +32,9 @@
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <div [(ngClass)]="theme" class="panel panel-default">
-               
                 <div class="panel-body">
                     <div>
-                        <div><span  *ngIf="roleinfo.id==user.id || roleinfo.adminRole"class="pull-right s glyphicon glyphicon-pencil editable" (click)="editDate('nameBox')"></span></div>
+                        <div><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right s glyphicon glyphicon-pencil editable" (click)="editDate('nameBox')"></span></div>
                         <input id="nameBox" type="text" class="editableTarget pull-left h1Input" disabled="disabled" [(ngModel)]="user.fullName" style="border:none" [value]="user.fullName" />
                     </div>
                     <br />
@@ -49,21 +46,12 @@
                             Average user ratings: {{statisticsuser.averageRating}};
                         </small>
                     </div>
-                    @*<span class="pull-left">
-                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
-                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
-                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
-                        <img class="achivmets" style="height:60px;" src="https://lh4.ggpht.com/kNDhHm6fpKdO9EqhC-EkUP_gQZ7Ixj-qa6ZP4sg0EEspY60BkukqTn-wz_MJE0CIS31O=w300" />
-                    </span>*@
                 </div>
             </div>
             <hr>
-
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <child-content [theme]="theme"></child-content>
             </div>
-
         </div>
     </div>
-
 </div>

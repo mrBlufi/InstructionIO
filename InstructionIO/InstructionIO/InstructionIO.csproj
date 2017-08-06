@@ -27,9 +27,7 @@
     <Content Include="wwwroot\app\model\Comment.ts" />
     <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
-    <Content Include="wwwroot\app\model\Rating.js" />
     <Content Include="wwwroot\app\model\Rating.js.map" />
-    <Content Include="wwwroot\app\model\Rating.ts" />
     <Content Include="wwwroot\app\model\RatingRelation.js" />
     <Content Include="wwwroot\app\model\RatingRelation.js.map" />
     <Content Include="wwwroot\app\model\RatingRelation.ts" />
@@ -60,8 +58,6 @@
     <Content Include="wwwroot\app\service\Role.Service.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
     <Content Include="wwwroot\app\stepView.component.ts" />
-    <Content Include="wwwroot\app\tools\safeHtml.ts" />
-    <Content Include="wwwroot\app\tools\safeOn.ts" />
     <Content Include="wwwroot\assets\locale-en.json" />
     <Content Include="wwwroot\assets\locale-ru.json" />
     <Content Include="wwwroot\css\appcomponent.css" />

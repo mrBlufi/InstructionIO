@@ -16,16 +16,17 @@ import { CommentService } from "./service/Comment.Service";
 })
 
 export class CommentComponent {
+
     @Language() lang: string;
     @Input() comment: Comment[] = new Array<Comment>();
     @Input() idInstruction: number;
     @Input() theme: string;
     roleinfo: RoleData = new RoleData(-1, false, false);
-  
+    public editorContent: string = 'Comment Text';  
+
     constructor(private roleservice: RoleService, private http: Http,private commentservice:CommentService) {
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
     submit() {
@@ -38,34 +39,24 @@ export class CommentComponent {
     getComment() {
         this.commentservice.getComment(this.idInstruction).subscribe(date => {
             this.comment = date;
-            console.log(this.comment);
         });
     }
+
     addComment(obj: Comment) {
         this.commentservice.addComment(obj, this.idInstruction).subscribe(
             (data) => {
-                console.log('push Complit');
                 this.getComment();
             },
             (err) => { console.log('Error'); }
-        );
-        
-        
+        ); 
     }
-
 
     delcomment(id: number) {
         this.commentservice.delcomment(id, this.idInstruction).subscribe(
             (data) => {
-                console.log('del Complit');
                 this.getComment();
             },
             (err) => { console.log('Error'); }
-        );
-        
+        );       
     }
-    public editorContent: string = 'Comment Text';
-
-   
-   
 }

@@ -21,7 +21,6 @@ import { AppComponent } from './app.component';
 import { ChildComponent } from './childcontenthome.component';
 import { TextBoxTemplate } from './patrialComponent/textBoxTemplate';
 import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
-import { SafeHtml } from './tools/safeHtml';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { CustomModal } from './patrialComponent/videoModal';
@@ -36,7 +35,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     slidesPerView: '2',
     keyboardControl: true
 };
-// enableProdMode();
+enableProdMode();
 
 @NgModule({
     imports:
@@ -47,8 +46,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
         ModalModule.forRoot(), TagInputModule,
         BootstrapModalModule
     ],
-    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, ModalCustom, SafeHtml,CommentComponent],
-    providers: [CommentService,CookieService,ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, SafeHtml, { provide: APP_BASE_HREF, useValue: '/' }],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, ModalCustom, CommentComponent],
+    providers: [CommentService,CookieService,ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent],
     entryComponents: [CustomModal, ModalCustom]
 })
