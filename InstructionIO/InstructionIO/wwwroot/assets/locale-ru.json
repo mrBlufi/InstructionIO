@@ -7,7 +7,7 @@
   "Birthday": "День рождения",
   "About Me": "Обо мне",
   "Create date": "Дата создания",
-  "Read more": "Читать дольше",
+  "Read more": "Читать дальше",
   "Last updated": "Последнее обновление",
   "Categories": "Категории",
   "Full": "Все",
@@ -23,6 +23,12 @@
   "No": "Нет",
   "Load": "Загрузить",
   "Search for": "Искать",
-  "Leave a Comment": "Оставить комментарий"
+  "Leave a Comment": "Оставить комментарий",
+  "light": "светлая",
+  "dark": "темная",
+  "Comments": "Комментарии",
+  "Submit": "Отправить",
+  "Author": "Автор",
+  "This field must be filled": "Это поле должно быть заполнено"
 
 }

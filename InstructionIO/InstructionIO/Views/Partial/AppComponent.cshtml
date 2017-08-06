@@ -61,10 +61,10 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a (click)="settheme('light'); " >light</a>
+                                <a (click)="settheme('light'); " >{{ 'light' | translate:lang }}</a>
                             </li>
                             <li>
-                                <a (click)="settheme('dark');" >dark</a>
+                                <a (click)="settheme('dark');" >{{ 'dark' | translate:lang }}</a>
                             </li>
                         </ul>
                     </li>
@@ -100,10 +100,10 @@
                      </li>
                       <li><span>theme:</span></li>
                       <li class="point">
-                      <a (click)="settheme('light');">light</a>
+                      <a (click)="settheme('light');">{{ 'light' | translate:lang }}</a>
                       </li>
                       <li class="point">
-                       <a (click)="settheme('dark');">dark</a>
+                       <a (click)="settheme('dark');">{{ 'dark' | translate:lang }}</a>
                        </li>
                 </ul>
 

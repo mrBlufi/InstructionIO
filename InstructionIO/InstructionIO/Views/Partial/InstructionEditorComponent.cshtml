@@ -7,8 +7,9 @@
     </div>
     <div class="panel-body">
         <div class="form">
+            <span *ngIf="instvalidate.Name instForm" class="text-danger">{{ 'This field must be filled' | translate:lang }}</span>
             <input type="text" class="form-control instForm" [(ngModel)]="Inst.name" placeholder="Instruction name" />
-            <span *ngIf="instvalidate.Name instForm" class="text-danger">gde name?</span>
+            <span *ngIf="instvalidate.Tag instForm" class="text-danger">{{ 'This field must be filled' | translate:lang }}</span>
             <tag-input class="instForm" [(ngModel)]='tagsArray' [displayBy]="'name'"
                                     [identifyBy]="'name'">
                 <tag-input-dropdown [showDropdownIfEmpty]="true"
@@ -19,13 +20,13 @@
                                     >
                 </tag-input-dropdown>
             </tag-input>
-            <span *ngIf="instvalidate.Tag instForm" class="text-danger">gde tagi?</span>
+            <span *ngIf="instvalidate.Category instForm" class="text-danger instForm">{{ 'This field must be filled' | translate:lang }}</span>
             <span class="instForm"><strong>Category</strong></span>
             <select [(ngModel)]="Inst.category" class="form-control instForm">
                 <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
             </select>
-            <span *ngIf="instvalidate.Category instForm" class="text-danger instForm">gde Category?</span>
         </div>
+        <span *ngIf="instvalidate.PrevievText" class="text-danger">{{ 'This field must be filled' | translate:lang }}</span>
         <accordion class="previevDropDown">
             <accordion-group>
                 <div accordion-heading>
@@ -44,7 +45,6 @@
                 </div>
             </accordion-group>
         </accordion>
-        <span *ngIf="instvalidate.PrevievText" class="text-danger">gde PrevievText?</span>
     </div>
 </div>
 <div class="panel panel-default">

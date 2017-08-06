@@ -1,5 +1,4 @@
-﻿    <hr />
-    <div class="container-fluid">
+﻿    <div class="container-fluid">
         <div class="row">
             <div *ngIf="roleinfo.id!=-1"
                  class="cl-md-12 addcomment panel panel-white post panel-shadow">
@@ -9,11 +8,11 @@
                 </div>
                 
                 <div class="submit panel-footer">
-                    <button (click)="submit()" type="submit" name="say" value="" class="btn"><i class="fa fa-reply"></i> Submit</button>
+                    <button (click)="submit()" type="submit" name="say" value="" class="btn"><i class="fa fa-reply"></i> {{ 'Submit' | translate:lang }}</button>
                 </div>
             </div>
 
-            <h3 *ngIf="comment">{{comment.length}} Comments</h3>
+            <h3 *ngIf="comment">{{comment.length}} {{ 'Comments' | translate:lang }}</h3>
             <hr />
         
             <div [(ngClass)]="theme" class="col-md-12" *ngFor="let com of comment">
