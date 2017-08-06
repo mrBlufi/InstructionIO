@@ -2,10 +2,13 @@
     padding:13px;
 }
 
-.miniSlide {
-    width: 50px;
-    height: 50px;
+.slide-mini {
     margin: 5px;
+    background-color: whitesmoke;
+}
+
+.panel-footer{
+    padding-bottom:40px;
 }
 
 .miniSwiperContainerhorizontal {
@@ -24,8 +27,6 @@
 .panle_body_main{
     padding: 0px 5px 0px 5px;
 }
-
-.slide-mini{ } 
 
 .mainWrapper {
     margin-bottom: -20px;

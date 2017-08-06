@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="row step_body panel panel-default">
-        <div class="panel-body" [dragula]="step.id" [dragulaModel]="contentBlocks">
+        <div class="panel-body" [dragula] [dragulaModel]="step.contentBlock">
             <div class="row contentBlock" *ngFor="let block of step.contentBlock" >
                 <div class="contetnRow">
                     <div class="pull-left" style="margin-left:-16px;">

@@ -15,9 +15,10 @@ const instruction_Service_1 = require("./service/instruction.Service");
 const ngx_swiper_wrapper_1 = require("ngx-swiper-wrapper");
 const router_1 = require("@angular/router");
 let InstructionView = class InstructionView {
-    constructor(_instructionservice, _ActivatedRoute) {
+    constructor(_instructionservice, _ActivatedRoute, router) {
         this._instructionservice = _instructionservice;
         this._ActivatedRoute = _ActivatedRoute;
+        this.router = router;
         this.instruction = new Instruction_1.Instruction();
         this.mainViewSiper = {
             direction: 'horizontal',
@@ -30,7 +31,9 @@ let InstructionView = class InstructionView {
             slidesPerView: '3',
             centeredSlides: true,
             keyboardControl: false,
-            slideActiveClass: 'slide_activMin'
+            slideActiveClass: 'slide_activMin',
+            slideDuplicateClass: 'slide-mini',
+            slideVisibleClass: 'slide-miniV'
         };
     }
     onIndexChange(event) {
@@ -38,8 +41,8 @@ let InstructionView = class InstructionView {
         this.miniSwiper.setIndex(event);
         console.log('kek');
     }
-    cw(any) {
-        console.log(any);
+    goToEdit() {
+        this.router.navigate(['instructioneditor'], { queryParams: { 'id': this._id } });
     }
     ngOnInit() {
         let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
@@ -65,7 +68,7 @@ InstructionView = __decorate([
         styleUrls: ['./css/instructionView.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css']
     }),
     __metadata("design:paramtypes", [instruction_Service_1.InstructionService,
-        router_1.ActivatedRoute])
+        router_1.ActivatedRoute, router_1.Router])
 ], InstructionView);
 exports.InstructionView = InstructionView;
 //# sourceMappingURL=instructionview.component.js.map

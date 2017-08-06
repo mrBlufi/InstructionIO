@@ -25,8 +25,6 @@ export class AppComponent implements OnInit {
             this.getImageProfile();
             console.log(this.roleinfo);
         });
-       
-       
     }
 
     enterClick() {

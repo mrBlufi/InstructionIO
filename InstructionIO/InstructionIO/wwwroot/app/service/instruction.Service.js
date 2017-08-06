@@ -32,6 +32,13 @@ let InstructionService = class InstructionService {
     create(instruction) {
         return this.http.post('api/Instruction/create', instruction);
     }
+    tags(mask) {
+        let params = new http_2.URLSearchParams();
+        if (mask) {
+            params.set('mask', mask);
+        }
+        return this.http.get('api/Instruction/tags', { params: params }).map(res => (res).json());
+    }
 };
 InstructionService = __decorate([
     core_1.Injectable(),

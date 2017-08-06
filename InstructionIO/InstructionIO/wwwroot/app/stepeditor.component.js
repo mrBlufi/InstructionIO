@@ -25,15 +25,12 @@ let StepEditorComponent = class StepEditorComponent {
         this.sanitizer = sanitizer;
         this.http = http;
         this.step = new Step_1.Step('0');
-        //dragulaService.setOptions(this.step.id, {
-        //    moves: function (el: any, container: any, handle: any) {
-        //        return !(handle.className.includes('delete'));
-        //    }
-        //});
         dragulaService.dropModel.subscribe((value) => {
+            console.log(value);
             this.onDropModel(value.slice(1));
         });
         dragulaService.removeModel.subscribe((value) => {
+            console.log(value);
             this.onRemoveModel(value.slice(1));
         });
     }
@@ -49,7 +46,7 @@ let StepEditorComponent = class StepEditorComponent {
         console.log(n);
     }
     textBoxAdd() {
-        let n = new ContetnBlock_1.ContentBlock('text'); //, this.sanitizer);
+        let n = new ContetnBlock_1.ContentBlock('text');
         this.step.contentBlock.push(n);
     }
     addPictureBox(url) {

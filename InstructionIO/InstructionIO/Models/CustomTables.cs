@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using InstructionIO.Data;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,8 +20,6 @@ namespace InstructionIO.Models
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
         public string Interests { get; set; }
-
-       
     }
 
     public class Instruction
@@ -33,8 +33,7 @@ namespace InstructionIO.Models
         public DateTime CreateDate { get; set; }
         public DateTime LastChangedDate { get; set; }
         public Category Category { get; set; }
-        public double Rating { get;
-            set; }
+        public double Rating { get; set; }
         public ICollection<TagsRelation> TagsRelation { get; set; }
         public ICollection<Step> Step { get; set; }
         public ICollection<Comment> Comment { get; set; }
@@ -98,11 +97,11 @@ namespace InstructionIO.Models
     public class TagsRelation
     {
         public int Id{ get; set; }
-        [Required]
-        [JsonIgnore]
-        public Instruction Instruction { get; set; }
         [ForeignKey("TagId")]
         public Tag Tag { get; set; }
+        [JsonIgnore]
+        [Required]
+        public Instruction Instruction { get; set; }
     }
 
     public class Category

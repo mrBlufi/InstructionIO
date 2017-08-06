@@ -28,4 +28,12 @@ export class InstructionService {
     create(instruction: Instruction): Observable<Response> {
         return this.http.post('api/Instruction/create', instruction);
     }
+
+    tags(mask?: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        if (mask) {
+            params.set('mask', mask);
+        }
+        return this.http.get('api/Instruction/tags', { params: params }).map(res => (res).json());
+    }
 }

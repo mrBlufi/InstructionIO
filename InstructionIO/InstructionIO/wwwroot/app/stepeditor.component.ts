@@ -21,15 +21,13 @@ export class StepEditorComponent {
     @Input() step: Step = new Step('0');
 
     constructor(public modal: Modal,private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http) {
-        //dragulaService.setOptions(this.step.id, {
-        //    moves: function (el: any, container: any, handle: any) {
-        //        return !(handle.className.includes('delete'));
-        //    }
-        //});
         dragulaService.dropModel.subscribe((value: any) => {
+            console.log(value);
             this.onDropModel(value.slice(1));
         });
         dragulaService.removeModel.subscribe((value: any) => {
+            console.log(value);
+
             this.onRemoveModel(value.slice(1));
         });
     }
@@ -49,7 +47,7 @@ export class StepEditorComponent {
     }
 
     textBoxAdd() {
-        let n: ContentBlock = new ContentBlock('text')//, this.sanitizer);
+        let n: ContentBlock = new ContentBlock('text');
         this.step.contentBlock.push(n);
     }
 

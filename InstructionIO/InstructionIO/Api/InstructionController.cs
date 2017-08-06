@@ -28,17 +28,29 @@ namespace InstructionIO.Controllers.Api {
         [HttpGet("get")]
         public IActionResult GetInstruction(int? id)
         {
-            Instruction instruction = new Instruction();
+            Instruction instruction = new Instruction()
+            {
+                PreviewText = "...",
+                CreateDate = DateTime.Now,
+                LastChangedDate = DateTime.Now
+            };
             if (id != null)
             {
                 instruction = context.Instructions.Where(instruct => instruct.Id == id)
                     .Include(inst => inst.Author)
                     .Include(inst => inst.Step).ThenInclude(step => step.ContentBlock)
                     .Include(inst => inst.Comment)
-                    .Include(inst => inst.TagsRelation)
+                    .Include(inst => inst.TagsRelation).ThenInclude(tag => tag.Tag)
                     .FirstOrDefault();
+                //test default
             }
             return new ObjectResult(instruction);
+        }
+
+        [HttpGet("tags")]
+        public IActionResult GetTags(string mask = "")
+        {
+            return new ObjectResult(context.Tags.Where(tag => tag.Name.Contains(mask)));
         }
 
         [HttpPost("update")]
@@ -61,8 +73,14 @@ namespace InstructionIO.Controllers.Api {
         public IActionResult CreateInstruction([FromBody]Instruction instruction)
         {
             var n = context.Users.Find(userManager.GetUserId(HttpContext.User));
-            instruction.Author = context.UserInfos.Where(User => User.User == n).ToArray()[0];
-            var result = context.Instructions.Add(instruction);
+            instruction.Author = context.UserInfos.Where(User => User.User == n).First();
+            foreach (var tagsRelation in instruction.TagsRelation)
+            {
+                tagsRelation.Id = 0;
+                tagsRelation.Tag = context.Tags.Find(tagsRelation.Tag.Id) ?? tagsRelation.Tag;
+            }
+            context.Entry(instruction.Category).State = EntityState.Modified;
+            context.Instructions.Add(instruction);          
             context.SaveChanges();
             return Ok(instruction.Id);
         }

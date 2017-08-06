@@ -19,7 +19,7 @@ export class InstructionView {
 
     instruction: Instruction = new Instruction();
     _id: string;
-
+    
     mainViewSiper: SwiperConfigInterface = {
         direction: 'horizontal',
         slidesPerView: '1',
@@ -32,11 +32,13 @@ export class InstructionView {
         slidesPerView: '3',
         centeredSlides: true,
         keyboardControl: false,
-        slideActiveClass: 'slide_activMin'
+        slideActiveClass: 'slide_activMin',
+        slideDuplicateClass: 'slide-mini',
+        slideVisibleClass:'slide-miniV'
     }
 
     constructor(private _instructionservice: InstructionService,
-        private _ActivatedRoute: ActivatedRoute){}
+        private _ActivatedRoute: ActivatedRoute, private router: Router){}
 
     onIndexChange(event: number) {
         this.mainSwiper.setIndex(event);
@@ -44,9 +46,10 @@ export class InstructionView {
         console.log('kek');
     }
 
-    cw(any: any) {
-        console.log(any);
+    goToEdit() {
+        this.router.navigate(['instructioneditor'], { queryParams: { 'id': this._id } });
     }
+
     ngOnInit() {
         let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
             this._id = parmas['id'];

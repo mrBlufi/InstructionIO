@@ -3,6 +3,7 @@
         <div class="panel-heading">
             <h2 class="text-uppercase">{{instruction.name}}</h2>
             <span>tag,tag,tag</span>
+            <span class="pull-right glyphicon glyphicon-pencil" (click)="goToEdit()"></span>
         </div>
         <div class="panel-body">
             <swiper #mainSwiper (indexChange)="onIndexChange($event)" [config]="mainViewSiper">

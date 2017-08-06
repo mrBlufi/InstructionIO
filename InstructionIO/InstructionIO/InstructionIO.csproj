@@ -30,7 +30,6 @@
     <Content Include="wwwroot\app\model\Rating.js" />
     <Content Include="wwwroot\app\model\Rating.js.map" />
     <Content Include="wwwroot\app\model\Rating.ts" />
-    <Content Include="wwwroot\app\model\RatingRelathion.ts" />
     <Content Include="wwwroot\app\model\RatingRelation.js" />
     <Content Include="wwwroot\app\model\RatingRelation.js.map" />
     <Content Include="wwwroot\app\model\RatingRelation.ts" />
