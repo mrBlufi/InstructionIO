@@ -11,11 +11,15 @@ import { RoleService } from "./service/Role.Service";
 import { RoleData } from "./model/RoleData";
 import { RatingRelation } from "./model/RatingRelation";
 import { ThemeService } from "./service/Theme.Service";
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { InstructionCustom } from "./patrialComponent/deleteInstructionModal";
+import { Overlay, overlayConfigFactory } from 'angular2-modal';
+import { LocaleService, Language } from 'angular-l10n';
 
 @Component({
     selector: 'InstructionView',
     templateUrl: '/partial/InstructionView',
-    styleUrls: ['./css/instructionView.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
+    styleUrls: ['css/instructionView.css' , 'css/themes/themeCommon.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
 })
 
 export class InstructionView {
@@ -25,10 +29,11 @@ export class InstructionView {
     instruction: Instruction = new Instruction();
     _id: string;
     onClickResult: IStarRatingOnClickEvent;
+    @Language() lang: string;
 
     roleinfo: RoleData = new RoleData(-1, false, false);
     @Input() theme: string;
-    constructor(private _instructionservice: InstructionService,
+    constructor(public locale: LocaleService,public modal: Modal,private _instructionservice: InstructionService,
         private _ActivatedRoute: ActivatedRoute, private homeservice: HomeService,
         private roleservice: RoleService,private themeservice:ThemeService,private router:Router) {
         this.theme = this.themeservice.getCookie('theme');
@@ -42,6 +47,22 @@ export class InstructionView {
         if (this.roleinfo.id != -1)
             this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
     };
+
+    deleteInstructionModal() {
+        return this.modal.open(InstructionCustom, overlayConfigFactory({ delete: false }, BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(
+                () => this.delinstruction(resultPromise.context.delete));
+        });
+    }
+
+    delinstruction(tag: boolean) {
+        if (tag) {
+            this._instructionservice.deleteInstruction(this.instruction.id).subscribe(data => {
+                this.router.navigate(['home']);
+            });
+        }
+    }
 
     mainViewSiper: SwiperConfigInterface = {
         direction: 'horizontal',

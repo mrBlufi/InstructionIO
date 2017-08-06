@@ -40,19 +40,13 @@
     margin-top: 5px;
 }
 
-/*.textBox>div{
-    margin: 5px;
-    border-bottom: solid;
-    border-width: thin;
-    border-bottom-color: gray;
-}*/
 .textBox {
     margin: 5px;
     margin-left:-12px;
     margin-right:-12px;
     border-bottom: solid;
     border-width: thin;
-    border-bottom-color: gray;
+    border-bottom-color: rgba(138, 138, 138, 0.72);
 }
 
 .btn-circle:focus {

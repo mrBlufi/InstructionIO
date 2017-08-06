@@ -17,7 +17,7 @@ import { Overlay, overlayConfigFactory } from 'angular2-modal';
 @Component({
     selector: 'my-profile',
     templateUrl: '/partial/profileComponent',
-    styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css']
+    styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css', 'css/themes/themeCommon.css']
 })
 
 export class ProfileComponent implements OnInit, OnDestroy {
@@ -88,7 +88,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     getstatistics() {
         this._profileservice.getstatistics(this.userQueryParams).subscribe(data => {
-            console.log(data);
             this.statisticsuser = data;
         });
     }
@@ -102,8 +101,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     } 
 
     ngOnDestroy() {
-        if (this.user) {
-            this.user.interests = document.getElementById('interestsSpan').innerHTML;
+        if (this.user && this.roleinfo.id != -1) {
+            console.log(this.user.interests);
             this._profileservice.setProfileData(this.user);
         }
         this.sub.unsubscribe();
@@ -119,7 +118,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     @HostListener('window:beforeunload', ['$event'])
     public beforeUnload(event: any) {
-        if (this.user) {
+        if (this.user && this.roleinfo.id != -1) {   
             this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
         }

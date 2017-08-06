@@ -15,9 +15,7 @@ a.dropdown-toggle {
 .nav > li > a:hover{
     background-color:black;
 }
-.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-    background-color: black;
-} 
+
 
 li {
     list-style-type: none;

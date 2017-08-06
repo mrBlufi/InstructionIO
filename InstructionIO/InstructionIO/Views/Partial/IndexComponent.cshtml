@@ -2,7 +2,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <div class="categories">
             <p>
-                <span>{{ 'Categories' | translate:lang }} </span>
+                <span [(ngClass)]="theme">{{ 'Categories' | translate:lang }} </span>
                 <select id="categories" class="form-control" [(ngModel)]="categoryQueryParams">
                     <option [value]="'Full'" ng-selected="selected">{{ 'Full' | translate:lang }}</option>
                     <option *ngFor="let category of categories" [value]="category.name">
@@ -11,16 +11,16 @@
                 </select>
             </p>
         </div>
-        <ul style="visibility: visible;" class="nav nav-tabs ">
-            <li data-toggle="tab" class="active">
+        <ul  style="visibility: visible;" class="nav nav-tabs ">
+            <li [(ngClass)]="theme" data-toggle="tab" class="active">
                 <a [routerLink]="['../home']"
                    [queryParams]="{'category':categoryQueryParams, 'sort':'popular'}">{{ 'Popular' | translate:lang }}</a>
             </li>
-            <li data-toggle="tab" class="">
+            <li [(ngClass)]="theme" data-toggle="tab" class="">
                 <a [routerLink]="['../home']"
                    [queryParams]="{'category':categoryQueryParams, 'sort':'lastchange'}">{{ 'Last Update' | translate:lang }}</a>
             </li>
-            <li data-toggle="tab" class="">
+            <li [(ngClass)]="theme" data-toggle="tab" class="">
                 <a [routerLink]="['../home']"
                    [queryParams]="{'category':categoryQueryParams, 'sort':'full'}">{{ 'Full' | translate:lang }}</a>
             </li>

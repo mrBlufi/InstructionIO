@@ -31,7 +31,6 @@ let IndexComponent = class IndexComponent {
     getTags() {
         this.homeservice.getPopularTags().subscribe(data => {
             this.tags = data;
-            console.log(this.tags);
         }, err => console.log(err));
     }
     getCategories() {
@@ -52,7 +51,7 @@ IndexComponent = __decorate([
     core_1.Component({
         selector: 'my-index',
         templateUrl: '/partial/indexComponent',
-        styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css']
+        styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css', , 'css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [Home_Service_1.HomeService, router_1.ActivatedRoute, Theme_Service_1.ThemeService])
 ], IndexComponent);

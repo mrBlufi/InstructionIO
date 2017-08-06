@@ -2,10 +2,10 @@
     <span defaultOverlayTarget></span>
     <div class="step_info">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Step name" [(ngModel)]="step.subtitle" />
+            <input type="text" class="form-control" placeholder="{{ 'Step Name' | translate:lang }}" [(ngModel)]="step.subtitle" />
         </div>
     </div>
-    <div class="panel panel-default">
+    <div [(ngClass)]="theme" class="panel panel-default">
         <div class="panel-body" [dragula] [dragulaModel]="step.contentBlock">
             <div class="contentBlock" *ngFor="let block of step.contentBlock">
                 <div class="contetnRow">

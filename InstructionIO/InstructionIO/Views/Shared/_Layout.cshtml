@@ -9,24 +9,6 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-    </environment>
-    <link rel="stylesheet" href="~/css/StepEditor.css" />
-    <link href="~/node_modules/dragula/dist/dragula.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Exo+2|Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    @Html.Raw(JavaScriptSnippet.FullScript)
-</head>
-<body>
-    @RenderBody()
-    <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="/node_modules/core-js/client/shim.min.js"></script>
@@ -34,16 +16,34 @@
         <script src="/node_modules/systemjs/dist/system.src.js"></script>
         <script src="~/systemjs.config.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="node_modules/froala-editor/css/froala_editor.pkgd.min.css">
-        <link rel="stylesheet" href="node_modules/froala-editor/css/froala_style.min.css">
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+        <link rel="stylesheet" href="~/node_modules/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/node_modules/froala-editor/css/froala_editor.pkgd.min.css">
+        <link rel="stylesheet" href="~/node_modules/froala-editor/css/froala_style.min.css">
+        <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="~/node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
         <script>
             System.import('app').catch(function (err) { console.error(err); });
         </script>
+        <link rel="stylesheet" href="~/css/StepEditor.css" />
+        <link href="~/node_modules/dragula/dist/dragula.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Exo+2|Nunito" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </environment>
     <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/StepEditor.css" />
+        <link href="~/node_modules/dragula/dist/dragula.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Exo+2|Nunito" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
@@ -62,10 +62,21 @@
         <script src="/node_modules/systemjs/dist/system.src.js"></script>
         <script src="~/lib/angular-ui-carousel/dist/ui-carousel.js"></script>
         <script src="~/systemjs.config.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="~/node_modules/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/node_modules/froala-editor/css/froala_editor.pkgd.min.css">
+        <link rel="stylesheet" href="~/node_modules/froala-editor/css/froala_style.min.css">
+        <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="~/node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
         <script>
             System.import('app').catch(function (err) { console.error(err); });
         </script>
     </environment>
+   @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body>
+    @RenderBody()
     @RenderSection("Scripts", required: false)
 </body>
 </html>

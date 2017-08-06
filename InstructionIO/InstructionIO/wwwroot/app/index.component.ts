@@ -9,7 +9,7 @@ import { ThemeService } from "./service/Theme.Service";
 @Component({
     selector: 'my-index',
     templateUrl: '/partial/indexComponent',
-    styleUrls: ['css/blog-home.css' , 'css/themes/themeIndexAndSearch.css']
+    styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css', , 'css/themes/themeCommon.css']
 })
 
 export class IndexComponent implements OnInit {
@@ -32,7 +32,6 @@ export class IndexComponent implements OnInit {
     private getTags() {
         this.homeservice.getPopularTags().subscribe(data => {
             this.tags = data;
-            console.log(this.tags);
         }, err => console.log(err));
     }
 

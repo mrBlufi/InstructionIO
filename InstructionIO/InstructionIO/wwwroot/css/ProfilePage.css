@@ -1,4 +1,6 @@
-﻿
+﻿div{
+    word-break:break-word;
+}
 textarea {
     border: none;
     background-color: white;

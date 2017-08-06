@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@angular/core");
 const Step_1 = require("./model/Step");
+const angular_l10n_1 = require("angular-l10n");
 let StepView = class StepView {
-    constructor() {
+    constructor(locale) {
+        this.locale = locale;
         this.step = new Step_1.Step('0');
     }
 };
@@ -24,12 +26,17 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", String)
 ], StepView.prototype, "theme", void 0);
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], StepView.prototype, "lang", void 0);
 StepView = __decorate([
     core_1.Component({
         selector: 'stepView',
         templateUrl: '/partial/StepComponent',
-        styleUrls: ['css/themes/themeStepView.css']
-    })
+        styleUrls: ['css/themes/themeStepView.css', 'css/themes/themeCommon.css']
+    }),
+    __metadata("design:paramtypes", [angular_l10n_1.LocaleService])
 ], StepView);
 exports.StepView = StepView;
 //# sourceMappingURL=stepView.component.js.map

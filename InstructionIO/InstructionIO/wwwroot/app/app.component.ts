@@ -11,7 +11,7 @@ import { Router, NavigationEnd } from "@angular/router";
 @Component({
     selector: 'my-app',
     templateUrl: '/partial/appComponent',
-    styleUrls: ['css/site_nav.css', 'css/themes/themeapp.css', 'css/appcomponent.css']
+    styleUrls: ['css/site_nav.css', 'css/themes/themeapp.css', 'css/appcomponent.css','css/themes/themeCommon.css']
 })
 
 export class AppComponent implements OnInit {
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
     public theme: string;
     roleinfo: RoleData = new RoleData(-1,false,false);
     imageprofile: any;
+    @Language() lang: string;
 
     public constructor(private titleService: Title, public locale: LocaleService,
         private roleservice: RoleService, private profileservice: ProfileService,
@@ -53,7 +54,6 @@ export class AppComponent implements OnInit {
         this.titleService.setTitle(newTitle);
     }
 
-    @Language() lang: string;
     ngOnInit(): void {
     }
 

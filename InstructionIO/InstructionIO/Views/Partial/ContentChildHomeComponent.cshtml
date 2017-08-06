@@ -1,8 +1,8 @@
 <div *ngIf="instructions &&instructions.length==0 && searchQueryParams">
-    <h2>{{ 'No result' | translate:lang }}</h2>
+    <h2 [(ngClass)]="theme">{{ 'No result' | translate:lang }}</h2>
 </div>
 <div *ngIf="instructions">
-    <h2 *ngIf="instructions.length==0 && !searchQueryParams">{{ 'No instruction' | translate:lang }}</h2>
+    <h2 *ngIf="instructions.length==0 && !searchQueryParams" [(ngClass)]="theme">{{ 'No instruction' | translate:lang }}</h2>
 </div>
 <div infinite-scroll
      [infiniteScrollDisabled]='infinitydisable'
@@ -15,19 +15,11 @@
                 <div class="row">
                     <span class="name col-md-9 col-lg-10 col-sm-8 col-xs-7">{{instruction.name}}  <small class="text-muted"> {{instruction.category.name}}</small></span>
                     <div class="rating col-md-3 col-lg-2 col-sm-4 col-xs-5">
-                        <star-rating-comp class="hidden-xs" [starType]="'svg'"
+                        <star-rating-comp  [starType]="'svg'"
                                           [step]="0.1"
                                           [speed]="'slow'"
                                           [rating]="setrating(instruction.ratingRelation)"
                                           [staticColor]="'default'"
-                                          [showHalfStars]="true"
-                                          (onClick)="onClick($event,instruction.id)">
-                        </star-rating-comp>
-                        <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
-                                          [step]="0.1"
-                                          [speed]="'slow'"
-                                          [staticColor]="'default'"
-                                          [rating]="setrating(instruction.ratingRelation)"
                                           [showHalfStars]="true"
                                           (onClick)="onClick($event,instruction.id)">
                         </star-rating-comp>
@@ -43,10 +35,9 @@
             </div>
             <div class="panel-body">
                 <img class="img-responsive" src="{{instruction.previewImage}}">
-
                 <div class="paneltextbody">
                     <span id="foo" class="lead">{{instruction.previewText}}</span>
-                    <p><small class="text-muted ">{{ 'Create date' | translate:lang }}: {{instruction.createDate | date:'MM/dd/yyyy'}}  {{ 'Author' | translate:lang }}:<span class="profile-link" [routerLink]="['../../profile',theme]" [queryParams]="{'user':instruction.author.id}"> {{instruction.author.fullName}}</span></small></p>
+                    <p><small class="text-muted ">{{ 'Create date' | translate:lang }}: {{instruction.createDate | date:'MM/dd/yyyy'}}  {{ 'Author' | translate:lang }}:<span class="profile-link" [routerLink]="['../profile']" [queryParams]="{'user':instruction.author.id}"> {{instruction.author.fullName}}</span></small></p>
                 </div>
             </div>
             <div class="panel-footer">

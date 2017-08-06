@@ -9,6 +9,7 @@ using InstructionIO.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using InstructionIO.Api;
+using Microsoft.AspNetCore.Authorization;
 
 namespace instructionsIO.Controllers.Api
 {
@@ -28,7 +29,7 @@ namespace instructionsIO.Controllers.Api
             _signInManager = signInManager;
             _context = context;
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpPost("deleteuser/")]
         public IActionResult DeleteUserById([FromBody]int id)
         {
@@ -57,7 +58,7 @@ namespace instructionsIO.Controllers.Api
                 .Include(t => t.Category).ToList();
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
-        
+       
         [HttpPost("user/update")]
         public UserInfo SetUserProfile([FromBody]UserInfo userprofile)
         {
@@ -70,17 +71,7 @@ namespace instructionsIO.Controllers.Api
             _context.SaveChanges();
             return messages;
         }
-
-        [HttpGet("test")]
-        public IActionResult GetTest()
-        {
-            var test = _context.Instructions.Include(x => x.Step).ThenInclude(x => x.ContentBlock)
-                .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
-                .Include(x => x.Author).Include(x => x.Category).Include(x => x.RatingRelation)
-                .Include(x => x.Comment).ToList();
-            return new ObjectResult(test);
-        }
-
+        
         [HttpGet("userimage/{id}")]
         public IActionResult GetImageProfile(int id)
         {

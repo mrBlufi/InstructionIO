@@ -18,8 +18,14 @@ const Home_Service_1 = require("./service/Home.Service");
 const Role_Service_1 = require("./service/Role.Service");
 const RoleData_1 = require("./model/RoleData");
 const Theme_Service_1 = require("./service/Theme.Service");
+const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
+const deleteInstructionModal_1 = require("./patrialComponent/deleteInstructionModal");
+const angular2_modal_1 = require("angular2-modal");
+const angular_l10n_1 = require("angular-l10n");
 let InstructionView = class InstructionView {
-    constructor(_instructionservice, _ActivatedRoute, homeservice, roleservice, themeservice, router) {
+    constructor(locale, modal, _instructionservice, _ActivatedRoute, homeservice, roleservice, themeservice, router) {
+        this.locale = locale;
+        this.modal = modal;
         this._instructionservice = _instructionservice;
         this._ActivatedRoute = _ActivatedRoute;
         this.homeservice = homeservice;
@@ -55,6 +61,19 @@ let InstructionView = class InstructionView {
             this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
     }
     ;
+    deleteInstructionModal() {
+        return this.modal.open(deleteInstructionModal_1.InstructionCustom, angular2_modal_1.overlayConfigFactory({ delete: false }, bootstrap_1.BSModalContext)).then(resultPromise => {
+            return resultPromise.result
+                .then(() => this.delinstruction(resultPromise.context.delete));
+        });
+    }
+    delinstruction(tag) {
+        if (tag) {
+            this._instructionservice.deleteInstruction(this.instruction.id).subscribe(data => {
+                this.router.navigate(['home']);
+            });
+        }
+    }
     setrating(ratingRelation) {
         if (!ratingRelation || ratingRelation.length == 0)
             return 0;
@@ -89,6 +108,10 @@ __decorate([
     __metadata("design:type", ngx_swiper_wrapper_1.SwiperComponent)
 ], InstructionView.prototype, "miniSwiper", void 0);
 __decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], InstructionView.prototype, "lang", void 0);
+__decorate([
     core_1.Input(),
     __metadata("design:type", String)
 ], InstructionView.prototype, "theme", void 0);
@@ -96,9 +119,9 @@ InstructionView = __decorate([
     core_1.Component({
         selector: 'InstructionView',
         templateUrl: '/partial/InstructionView',
-        styleUrls: ['./css/instructionView.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
+        styleUrls: ['css/instructionView.css', 'css/themes/themeCommon.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
     }),
-    __metadata("design:paramtypes", [instruction_Service_1.InstructionService,
+    __metadata("design:paramtypes", [angular_l10n_1.LocaleService, bootstrap_1.Modal, instruction_Service_1.InstructionService,
         router_1.ActivatedRoute, Home_Service_1.HomeService,
         Role_Service_1.RoleService, Theme_Service_1.ThemeService, router_1.Router])
 ], InstructionView);

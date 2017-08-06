@@ -7,6 +7,7 @@ using InstructionIO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InstructionIO.Api
 {
@@ -76,17 +77,7 @@ namespace InstructionIO.Api
             IEnumerable<Category> category = _context.Categorys.AsNoTracking().ToList();
             return category;
         }
-
-        [HttpGet("instr")]
-        public IEnumerable<Instruction> GetTest12()
-        {
-            IEnumerable<Instruction> category = _context.Instructions
-                .Include(x => x.RatingRelation)
-                .Include(x => x.TagsRelation).ThenInclude(x => x.Tag)
-                .Include(t => t.Author).Include(t => t.Category).ToArray();
-            return category;
-        }
-
+        
         [HttpGet("instruction/search/{search}/{page}/{tag}")]
         public IEnumerable<Instruction> GetSearchInstruction(string search,int page,bool tag)
         {
@@ -120,7 +111,7 @@ namespace InstructionIO.Api
             .ThenInclude(x => x.Tag).Include(t => t.Author)
             .Include(t => t.Category).ToList();
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("instruction/setrating/{idI}/{idU}/{rating}")]
         public async Task<IActionResult> SetRatingAsync(int idI, int idU, int rating)
         {

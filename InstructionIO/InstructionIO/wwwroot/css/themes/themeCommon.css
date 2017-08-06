@@ -1,0 +1,95 @@
+﻿.light .panel {
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.84);
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+
+light .panel .panet-footer {
+    background-color: #f5f5f5;
+}
+
+.light .panel .panel-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+a.light:hover {
+    color: darkgray;
+    font: normal;
+}
+
+a.light {
+    color: gray;
+}
+
+.light .sidebar-nav-fixed > .well {
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.84);
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+
+.light .well {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+
+.light .nav .open > a:hover {
+    background-color: #252839;
+}
+
+.light .nav .open > a, .light .nav .open > a:hover, .light .nav .open > a:focus {
+    background-color: #252839;
+}
+
+.light .navbar > ul > li:hover {
+    background-color: #252839;
+}
+
+
+
+.dark .panel {
+    background-color: #eaeaea;
+    border: 1px solid rgba(128, 128, 128, 0.84);
+    box-shadow: rgba(193, 193, 193, 0.40) 6px 6px 6px;
+}
+
+.dark .panel .panet-footer {
+    background-color: #f5f5f5;
+}
+
+    .dark .panel .panel-header {
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #ddd;
+    }
+
+a.dark:hover {
+    color: gray;
+    font: normal;
+}
+
+a.dark {
+    color: black;
+}
+
+.dark .sidebar-nav-fixed > .well {
+    background-color: #eaeaea;
+    border: 1px solid rgba(128, 128, 128, 0.84);
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+
+.dark .well {
+    background-color: #c4c4c4;
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}
+
+.dark .nav .open > a:hover {
+    background-color: #717272;
+}
+
+.dark .nav .open > a, .light .nav .open > a:hover, .light .nav .open > a:focus {
+    background-color: #717272;
+}
+
+.dark .navbar > ul > li:hover {
+    background-color: #717272;
+}

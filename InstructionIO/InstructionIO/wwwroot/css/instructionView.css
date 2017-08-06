@@ -3,6 +3,9 @@
     font-size: x-large;
   
 }
+.admin .glyphicon-remove{
+    color:red;
+}
 
 .swiper-button-prev, .swiper-button-next {
     width: 25px;
@@ -18,12 +21,13 @@
     right: 0px;
 } 
 
-.tag {
-    margin-left: 10px;
+.tag{
+    padding-left:20px;
 }
 
 .rating {
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .slide-activMini {

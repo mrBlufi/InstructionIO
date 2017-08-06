@@ -46,6 +46,10 @@ let InstructionService = class InstructionService {
         }
         return this.http.get('api/Instruction/tags', { params: params }).map(res => (res).json());
     }
+    deleteInstruction(id) {
+        let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('/api/Instruction/deleteinstruction', id, { headers: headers });
+    }
 };
 InstructionService = __decorate([
     core_1.Injectable(),

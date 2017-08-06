@@ -18,11 +18,12 @@ import { Tag } from './model/Tag'
 import { TagInputModule } from 'ng2-tag-input'
 import { TagsRelation } from "./model/TagsRelation";
 import { ThemeService } from "./service/Theme.Service";
+import { LocaleService, Language } from 'angular-l10n';
 
 @Component({
     selector: 'instructionEditor',
     templateUrl: '/partial/InstructionEditorComponent',
-    styleUrls: ['css/themes/themeInstructionEditor.css','css/InstructionEditor.css'] 
+    styleUrls: ['css/themes/themeInstructionEditor.css', 'css/InstructionEditor.css', , 'css/themes/themeCommon.css'] 
 })
 
 export class InstructionEditorComponent {
@@ -35,10 +36,11 @@ export class InstructionEditorComponent {
     tagsArray: Tag[] = new Array<Tag>();
     instvalidate: InstructionValidate = new InstructionValidate();
     viewS: boolean = true;
+    @Language() lang: string;
 
     private _id: string;
     @Input() theme: string;
-    constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService, private _homeservice: HomeService,
+    constructor(public locale: LocaleService,private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService, private _homeservice: HomeService,
         private _ActivatedRoute: ActivatedRoute, private router: Router, private themeservice: ThemeService) {
         this.theme = this.themeservice.getCookie('theme');
         dragulaService.setOptions('stepD', {
@@ -65,6 +67,10 @@ export class InstructionEditorComponent {
         }
         if (this.Inst.previewText.length <= 15) {
             this.instvalidate.PrevievText = true;
+            state = false;
+        }
+        if (this.Inst.step.length <= 0) {
+            this.instvalidate.Step = true;
             state = false;
         }
         return state;
@@ -188,4 +194,5 @@ class InstructionValidate {
     public Tag: boolean = false;
     public Category: boolean = false;
     public PrevievText: boolean = false;
+    public Step: boolean = false;
 }

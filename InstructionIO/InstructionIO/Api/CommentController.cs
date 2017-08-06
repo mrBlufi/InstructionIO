@@ -7,6 +7,7 @@ using InstructionIO.Data;
 using InstructionIO.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InstructionIO.Api
 {
@@ -25,9 +26,9 @@ namespace InstructionIO.Api
             _signInManager = signInManager;
             _context = context;
         }
-        
+        [Authorize(Roles = "Admin,User")]
         [HttpPost("instruction/{idI}/push")]
-        public async Task<IActionResult> GetTest2Async(int idI,[FromBody] Comment comment)
+        public async Task<IActionResult> AddComment(int idI,[FromBody] Comment comment)
         {
             var instruction = _context.Instructions.Find(idI);
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -36,7 +37,7 @@ namespace InstructionIO.Api
             _context.SaveChanges();
             return Ok();
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpPost("instruction/{idI}/del")]
         public async Task<IActionResult> GetDelCommentAsync(int idI,[FromBody]int id)
         {

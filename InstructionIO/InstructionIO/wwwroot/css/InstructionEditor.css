@@ -1,16 +1,18 @@
-﻿/*.mySlide {
-    padding:13px;
-}*/
-
-
-.swiper-button-prev, .swiper-button-next {
+﻿.swiper-button-prev, .swiper-button-next {
     width: 25px;
     height: 70px;
     color: rgba(92, 184, 92, 1);
 }
 
-.swiper-button-prev{
-    left:0px;
+.textpreview {
+    padding-left:14px;
+}
+
+.loadimage {
+    margin-top:10px;
+}
+.swiper-button-prev {
+    left: 0px;
 }
 
 .swiper-button-prev {
@@ -47,17 +49,6 @@
     margin-bottom: -20px;
 }
 
-/*.contentBody{
-    padding-right:90px;
-    padding-left:20px;
-}
-
-@media(max-width:750px) {
-    .contentBody {
-        padding-right: 20px;
-        padding-left: 20px;
-    }
-}*/
 
 .instForm {
     margin: 5px;

@@ -9,6 +9,7 @@ using InstructionIO.Models;
 using InstructionIO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InstructionIO.Controllers.Api { 
 
@@ -24,7 +25,7 @@ namespace InstructionIO.Controllers.Api {
             this.context = context;
             this.userManager = userManager;
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("get")]
         public IActionResult GetInstruction(int? id)
         {
@@ -62,13 +63,13 @@ namespace InstructionIO.Controllers.Api {
             }
             return new ObjectResult(instruction);
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("tags")]
         public IActionResult GetTags(string mask = "")
         {
             return new ObjectResult(context.Tags.Where(tag => tag.Name.Contains(mask)));
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpPost("update")]
         public  IActionResult UpdateInstruction([FromBody]Instruction instruction)
         {
@@ -88,7 +89,7 @@ namespace InstructionIO.Controllers.Api {
             instruction.RatingRelation = ratings;
             return CreateInstruction(instruction);
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpPost("create")]
         public IActionResult CreateInstruction([FromBody]Instruction instruction)
         {
@@ -105,6 +106,15 @@ namespace InstructionIO.Controllers.Api {
             context.Instructions.Add(instruction);          
             context.SaveChanges();
             return Ok(instruction.Id);
+        }
+
+        [Authorize(Roles = "Admin,User")]
+        [HttpPost("deleteinstruction")]
+        public IActionResult DeleteInstruction([FromBody]int idI)
+        {
+            context.Instructions.Remove(context.Instructions.FirstOrDefault(x=>x.Id==idI));
+            context.SaveChanges();
+            return Ok();
         }
     }
 }

@@ -1,14 +1,8 @@
-﻿.light .panel {
-    background-color: white;
-    border: 1px solid rgba(128, 128, 128, 0.84);
-    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+﻿.dark .tag-wrapper{
+    background-color:#808080;
+    color:white;
 }
 
-    .light .panel .panet-footer {
-        background-color: #f5f5f5;
-    }
-
-    .light .panel .panel-header {
-        background-color: #f5f5f5;
-        border-bottom: 1px solid #ddd;
-    }
+tag-input.dark{
+    background-color:white;
+}

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InstructionIO.Api
 {
@@ -29,7 +30,7 @@ namespace InstructionIO.Api
             };
             return cloudinary.Upload(uploadParams);
         }
-
+        [Authorize(Roles = "Admin,User")]
         [HttpPost("upload")]
         public IActionResult Upload()
         {

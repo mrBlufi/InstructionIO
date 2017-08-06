@@ -12,7 +12,7 @@ import { CommentService } from "./service/Comment.Service";
 @Component({
     selector: 'comment',
     templateUrl: '/partial/commentComponent',
-    styleUrls: ['css/comment.css' , 'css/themes/themeComment.css']
+    styleUrls: ['css/comment.css', 'css/themes/themeComment.css' , 'css/themes/themeCommon.css']
 })
 
 export class CommentComponent {

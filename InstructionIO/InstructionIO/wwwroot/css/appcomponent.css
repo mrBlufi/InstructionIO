@@ -18,6 +18,8 @@ span{
 }
 li{
     padding-left:10px;
-
 }
 
+.navbar-brand:hover {
+    background-color: none;
+}

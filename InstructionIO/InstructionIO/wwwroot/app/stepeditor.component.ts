@@ -10,18 +10,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Overlay, overlayConfigFactory } from 'angular2-modal';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { CustomModal, VideoModalContext } from './patrialComponent/videoModal'
+import { LocaleService, Language } from 'angular-l10n';
 
 @Component({
     selector: 'my-stepEditor',
     templateUrl: '/partial/StepEditorComponent',
-    styleUrls: [ 'css/themes/themeStepEditor.css']
+    styleUrls: ['css/themes/themeStepEditor.css', 'css/themes/themeCommon.css']
 })
 
 export class StepEditorComponent {
     @Input() step: Step = new Step('0');
     @Input() theme: string;
+    @Language() lang: string;
     constructor(public modal: Modal, private dragulaService: DragulaService,
-        private sanitizer: DomSanitizer, private http: Http) {
+        private sanitizer: DomSanitizer, private http: Http, public locale: LocaleService) {
         dragulaService.dropModel.subscribe((value: any) => {
             this.onDropModel(value.slice(1));
         });

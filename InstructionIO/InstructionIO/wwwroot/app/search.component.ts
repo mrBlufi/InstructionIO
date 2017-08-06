@@ -9,7 +9,7 @@ import { ThemeService } from "./service/Theme.Service";
 @Component({
     selector: 'my-search',
     templateUrl: '/partial/searchComponent',
-    styleUrls: ['css/blog-home.css','css/themes/themeIndexAndSearch.css']
+    styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css', 'css/themes/themeCommon.css']
 })
 
 export class SearchComponent implements OnInit {

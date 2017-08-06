@@ -18,10 +18,10 @@
                             <hr>
                             <div>
                                 <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsSpan')"></span></h3>
-                                <span id="interestsSpan" disabled="disabled" class="col-md-11 col-sm-11 col-xs-11" contenteditable="false" [innerHTML]="user.interests"></span>
+                                <span id="interestsSpan" disabled="disabled"  contenteditable="false" [innerHTML]="user.interests" ></span>
                             </div>
-                            <hr class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <hr>
+                            <div>
                                 <h3><strong>{{ 'Birthday' | translate:lang }} </strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('birthdayBox')"></span></h3>
                                 <input id="birthdayBox" type="date" class="editableTarget" disabled="disabled" [value]="user.birthday | date:'yyyy-MM-dd'" style="border:none" (input)="user.birthday=parseDate($event.target.value)" />
                             </div>

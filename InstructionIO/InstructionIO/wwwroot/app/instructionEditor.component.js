@@ -21,8 +21,10 @@ const Instruction_1 = require("./model/Instruction");
 const Step_1 = require("./model/Step");
 const TagsRelation_1 = require("./model/TagsRelation");
 const Theme_Service_1 = require("./service/Theme.Service");
+const angular_l10n_1 = require("angular-l10n");
 let InstructionEditorComponent = class InstructionEditorComponent {
-    constructor(dragulaService, sanitizer, http, _instructionservice, _homeservice, _ActivatedRoute, router, themeservice) {
+    constructor(locale, dragulaService, sanitizer, http, _instructionservice, _homeservice, _ActivatedRoute, router, themeservice) {
+        this.locale = locale;
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
@@ -76,6 +78,10 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         }
         if (this.Inst.previewText.length <= 15) {
             this.instvalidate.PrevievText = true;
+            state = false;
+        }
+        if (this.Inst.step.length <= 0) {
+            this.instvalidate.Step = true;
             state = false;
         }
         return state;
@@ -167,6 +173,10 @@ __decorate([
     __metadata("design:type", ngx_swiper_wrapper_1.SwiperComponent)
 ], InstructionEditorComponent.prototype, "miniSwiper", void 0);
 __decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], InstructionEditorComponent.prototype, "lang", void 0);
+__decorate([
     core_1.Input(),
     __metadata("design:type", String)
 ], InstructionEditorComponent.prototype, "theme", void 0);
@@ -174,9 +184,9 @@ InstructionEditorComponent = __decorate([
     core_1.Component({
         selector: 'instructionEditor',
         templateUrl: '/partial/InstructionEditorComponent',
-        styleUrls: ['css/themes/themeInstructionEditor.css']
+        styleUrls: ['css/themes/themeInstructionEditor.css', 'css/InstructionEditor.css', , 'css/themes/themeCommon.css']
     }),
-    __metadata("design:paramtypes", [ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService, Home_Service_1.HomeService,
+    __metadata("design:paramtypes", [angular_l10n_1.LocaleService, ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService, Home_Service_1.HomeService,
         router_1.ActivatedRoute, router_1.Router, Theme_Service_1.ThemeService])
 ], InstructionEditorComponent);
 exports.InstructionEditorComponent = InstructionEditorComponent;
@@ -186,6 +196,7 @@ class InstructionValidate {
         this.Tag = false;
         this.Category = false;
         this.PrevievText = false;
+        this.Step = false;
     }
 }
 //# sourceMappingURL=instructionEditor.component.js.map

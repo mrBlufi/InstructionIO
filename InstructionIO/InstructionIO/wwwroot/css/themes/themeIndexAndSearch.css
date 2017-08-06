@@ -1,8 +1,4 @@
-﻿.light .sidebar-nav-fixed > .well {
-    background-color: white;
-    border: 1px solid rgba(128, 128, 128, 0.84);
-    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
-}
+﻿
 .light .sidebar-nav-fixed > .well>ul>li.nav-header {
    font-weight:bold;
 
@@ -20,12 +16,60 @@
     color:#001387;
 }
 
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus {
+.dark .sidebar-nav-fixed > .well > ul > li.nav-header {
+    font-weight: bold;
+}
+
+.dark .sidebar-nav-fixed > .well > ul > li > a {
+    color: black;
+}
+
+    .dark .sidebar-nav-fixed > .well > ul > li > a:hover {
+        color: black;
+    }
+
+.dark .nav-tabs {
+    border-bottom: none;
+    font-weight: bold;
+    color: none;
+}
+
+span.dark {
+    color:white;
+}
+li.dark>a{
+    color:white;
+}
+
+
+
+
+
+.light .nav-tabs > li.active > a,
+.light .nav-tabs > li.active > a:hover,
+.light .nav-tabs > li.active > a:focus {
     border: none;
     background-color: #f5f6ff;
 }
-.nav > li > a:hover, .nav > li > a:focus{
-    background-color:#dbdbdb;
+
+.light .nav > li > a:hover, .light .nav > li > a:focus {
+    background-color: #dbdbdb;
 }
+
+.dark .nav-tabs > li.active > a,
+.dark .nav-tabs > li.active > a:hover,
+.dark .nav-tabs > li.active > a:focus {
+    border: none;
+    background-color: #141934;
+    color: #c2c2c2;
+}
+
+.dark .nav > li > a:hover, .dark .nav > li > a:focus {
+    background-color: #979595;
+    
+}
+
+h2.dark {
+    color: white;
+}
+

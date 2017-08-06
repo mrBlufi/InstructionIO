@@ -1,17 +1,6 @@
-﻿.dark {
-    background-color: #252839;
-    color: #f2b632;
+﻿.light .glyphicon-search {
+    color: black;
 }
-    .dark > .navbar {
-        background-color: #677077;
-        color: #f2b632;
-    }
-
-.light .glyphicon-search {
-    color:black;
-}
-
-
 
 .light {
     background-color: #f5f6ff;
@@ -19,20 +8,32 @@
 
     .light .navbar {
         background-color: #252839;
-        color:white;
+        color: white;
     }
-    /*.light .navbar >ul>li:hover{
-        color:lightgray;
-    }*/
-    .light .navbar-brand:hover {
-        background-color:none;
-    }
-    
-    
-    div.light {
-        min-height: 100%;
+div.light {
+    min-height: 100%;
+}
+
+
+
+
+.dark {
+    background-color: #141934;
+}
+
+    .dark > .navbar {
+        background-color: #717272;
+        color: #ffffff;
     }
 
-form:hover{
-    background-color:none;
+    .dark .glyphicon-search {
+        color: black;
+    }
+
+div.dark {
+    min-height: 100%;
+}
+
+form:hover {
+    background-color: none;
 }

@@ -169,7 +169,7 @@ ChildComponent = __decorate([
     core_1.Component({
         selector: 'child-content',
         templateUrl: '/partial/contentChildHomeComponent',
-        styleUrls: ['css/blog-home.css', 'css/themes/themeChildContent.css']
+        styleUrls: ['css/blog-home.css', 'css/themes/themeChildContent.css', , 'css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router, Home_Service_1.HomeService,

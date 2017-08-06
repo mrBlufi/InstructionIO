@@ -29,6 +29,7 @@ import { CommentComponent } from './comment.component';
 import { ModalCustom } from "./patrialComponent/deleteUserModal";
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { TagInputModule } from 'ng2-tag-input';
+import { InstructionCustom } from "./patrialComponent/deleteInstructionModal";
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -46,10 +47,10 @@ enableProdMode();
         ModalModule.forRoot(), TagInputModule,
         BootstrapModalModule
     ],
-    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, ModalCustom, CommentComponent],
+    declarations: [AppComponent, routedComponents, TextBoxTemplate, ChildComponent, CustomModal, InstructionCustom, ModalCustom, CommentComponent],
     providers: [CommentService,CookieService,ThemeService,RoleService,HomeService, ProfileService, InstructionService, Title, { provide: APP_BASE_HREF, useValue: '/' }],
     bootstrap: [AppComponent],
-    entryComponents: [CustomModal, ModalCustom]
+    entryComponents: [CustomModal, ModalCustom, InstructionCustom]
 })
 
 export class AppModule {

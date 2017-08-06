@@ -1,34 +1,27 @@
 ﻿<div [(ngClass)]="theme" class="container-fluid">
+    <span defaultOverlayTarget></span>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div *ngIf="roleinfo.adminRole && roleinfo.id!=instruction.author.id" class="admin panel-heading">
-                <a class="deleteuser" (click)="deleteUserModal()"><i class="glyphicon glyphicon-remove"></i><span> Delete User</span></a>
+            <div *ngIf="roleinfo.adminRole || roleinfo.id==instruction.author.id" class="text-right admin panel-heading">
+                <a class="deleteinstruction" (click)="deleteInstructionModal()" ><i class="glyphicon glyphicon-remove"></i><span> Delete Instruction</span></a>
             </div>
-            <span class="name col-md-9 col-lg-10 col-sm-8 col-xs-7">{{instruction.name}} </span>
-            <div class="rating col-md-3 col-lg-2 col-sm-4 col-xs-5">
-                <star-rating-comp class="hidden-xs" [starType]="'svg'"
+            <span class="name col-md-10 col-lg-11 col-sm-8 col-xs-8">{{instruction.name}} </span>
+            <div class="rating col-md-2 col-lg-1 col-sm-4 col-xs-4">
+                <star-rating-comp  [starType]="'svg'"
                                   [step]="0.1"
                                   [speed]="'slow'"
                                   [rating]="setrating(instruction.ratingRelation)"
                                   [staticColor]="'default'"
-                                  [showHalfStars]="true"
-                                  (onClick)="onClick($event,instruction.id)">
-                </star-rating-comp>
-                <star-rating-comp id="star{{instruction.id}}" class="visible-xs" [starType]="'svg'"
-                                  [step]="0.1"
-                                  [speed]="'slow'"
-                                  [staticColor]="'default'"
-                                  [rating]="setrating(instruction.ratingRelation)"
                                   [showHalfStars]="true"
                                   (onClick)="onClick($event,instruction.id)">
                 </star-rating-comp>
             </div>
             <div class="tag" style="display:inline;">
-                <span class="pull-left glyphicon glyphicon-cloud">
-                    <small class="text-muted " *ngFor="let tag of instruction.tagsRelation">
-                        <a [routerLink]="['../search']"
-                           [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}}</a>
-                    </small>
+                <span class="glyphicon glyphicon-cloud">
+                    <span class="text-muted " *ngFor="let tag of instruction.tagsRelation">
+                        <a [(ngClass)]="theme" [routerLink]="['../search']"
+                           [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}} </a>
+                    </span>
                 </span>
                 <span class="pull-right" (click)="goToEdit()"><i class="glyphicon glyphicon-pencil"></i></span>
             </div>
@@ -40,10 +33,11 @@
         </div>
         <div class="panel-footer">
             <swiper #miniSwiper (indexChange)="onIndexChange($event)" [config]="miniSwiperConfig">
-                <span style="height:50px;width:50px;background-color:white" *ngFor="let step of instruction.step" class="swiper-slide miniSlide well">{{step.subtitle}}</span>
+                <span style="height:50px;width:50px;background-color:white" *ngFor="let step of instruction.step" class="swiper-slide miniSlide well">
+                {{ 'Step' | translate:lang }} {{instruction.step.indexOf(step)+1}}</span>
             </swiper>
             <div style="text-align:right">
-                <span class="">create by {{instruction.author.fullName}}</span>
+                <span class="">{{ 'Author' | translate:lang }}: {{instruction.author.fullName}}</span>
             </div>
         </div>
     </div>

@@ -44,4 +44,9 @@ export class InstructionService {
         }
         return this.http.get('api/Instruction/tags', { params: params }).map(res => (res).json());
     }
+
+    deleteInstruction(id: number) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post('/api/Instruction/deleteinstruction', id, { headers: headers });
+    }
 }

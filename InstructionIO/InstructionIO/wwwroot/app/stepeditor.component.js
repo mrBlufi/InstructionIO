@@ -18,12 +18,14 @@ const Step_1 = require("./model/Step");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 const videoModal_1 = require("./patrialComponent/videoModal");
+const angular_l10n_1 = require("angular-l10n");
 let StepEditorComponent = class StepEditorComponent {
-    constructor(modal, dragulaService, sanitizer, http) {
+    constructor(modal, dragulaService, sanitizer, http, locale) {
         this.modal = modal;
         this.dragulaService = dragulaService;
         this.sanitizer = sanitizer;
         this.http = http;
+        this.locale = locale;
         this.step = new Step_1.Step('0');
         dragulaService.dropModel.subscribe((value) => {
             this.onDropModel(value.slice(1));
@@ -84,14 +86,18 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", String)
 ], StepEditorComponent.prototype, "theme", void 0);
+__decorate([
+    angular_l10n_1.Language(),
+    __metadata("design:type", String)
+], StepEditorComponent.prototype, "lang", void 0);
 StepEditorComponent = __decorate([
     core_1.Component({
         selector: 'my-stepEditor',
         templateUrl: '/partial/StepEditorComponent',
-        styleUrls: ['css/themes/themeStepEditor.css']
+        styleUrls: ['css/themes/themeStepEditor.css', 'css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [bootstrap_1.Modal, ng2_dragula_1.DragulaService,
-        platform_browser_1.DomSanitizer, http_1.Http])
+        platform_browser_1.DomSanitizer, http_1.Http, angular_l10n_1.LocaleService])
 ], StepEditorComponent);
 exports.StepEditorComponent = StepEditorComponent;
 //# sourceMappingURL=stepeditor.component.js.map

@@ -82,7 +82,6 @@ let ProfileComponent = class ProfileComponent {
     }
     getstatistics() {
         this._profileservice.getstatistics(this.userQueryParams).subscribe(data => {
-            console.log(data);
             this.statisticsuser = data;
         });
     }
@@ -94,8 +93,8 @@ let ProfileComponent = class ProfileComponent {
         }, err => console.log(err));
     }
     ngOnDestroy() {
-        if (this.user) {
-            this.user.interests = document.getElementById('interestsSpan').innerHTML;
+        if (this.user && this.roleinfo.id != -1) {
+            console.log(this.user.interests);
             this._profileservice.setProfileData(this.user);
         }
         this.sub.unsubscribe();
@@ -109,7 +108,7 @@ let ProfileComponent = class ProfileComponent {
         }
     }
     beforeUnload(event) {
-        if (this.user) {
+        if (this.user && this.roleinfo.id != -1) {
             this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
         }
@@ -143,7 +142,7 @@ ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
         templateUrl: '/partial/profileComponent',
-        styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css']
+        styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css', 'css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [bootstrap_1.Modal, router_1.ActivatedRoute,
         router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http, Theme_Service_1.ThemeService])

@@ -1,7 +1,7 @@
 <div [(ngClass)]="theme" class="row">
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <div class="categories">
-            <h2>{{ 'Search for result' | translate:lang }}: {{searchyQueryParams}}</h2>
+            <h2 [(ngClass)]="theme">{{ 'Search for result' | translate:lang }}: {{searchyQueryParams}}</h2>
         </div>
         <hr />
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
