@@ -97,6 +97,7 @@ namespace InstructionIO.Controllers.Api {
                 tagsRelation.Tag = context.Tags.Find(tagsRelation.Tag.Id) ?? tagsRelation.Tag;
                 tagsRelation.Tag.Frequency++;
             }
+            instruction.LastChangedDate = DateTime.Now;
             context.Entry(instruction.Category).State = EntityState.Modified;
             context.Instructions.Add(instruction);          
             context.SaveChanges();
