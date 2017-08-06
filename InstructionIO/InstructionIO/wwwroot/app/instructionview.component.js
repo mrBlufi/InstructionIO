@@ -19,12 +19,13 @@ const Role_Service_1 = require("./service/Role.Service");
 const RoleData_1 = require("./model/RoleData");
 const Theme_Service_1 = require("./service/Theme.Service");
 let InstructionView = class InstructionView {
-    constructor(_instructionservice, _ActivatedRoute, homeservice, roleservice, themeservice) {
+    constructor(_instructionservice, _ActivatedRoute, homeservice, roleservice, themeservice, router) {
         this._instructionservice = _instructionservice;
         this._ActivatedRoute = _ActivatedRoute;
         this.homeservice = homeservice;
         this.roleservice = roleservice;
         this.themeservice = themeservice;
+        this.router = router;
         this.roleinfo = new RoleData_1.RoleData(-1, false, false);
         this.instruction = new Instruction_1.Instruction();
         this.mainViewSiper = {
@@ -38,7 +39,9 @@ let InstructionView = class InstructionView {
             slidesPerView: '3',
             centeredSlides: true,
             keyboardControl: false,
-            slideActiveClass: 'slide_activMin'
+            slideActiveClass: 'slide_activMin',
+            slideDuplicateClass: 'slide-mini',
+            slideVisibleClass: 'slide-miniV'
         };
         this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
@@ -69,8 +72,8 @@ let InstructionView = class InstructionView {
         this.miniSwiper.setIndex(event);
         console.log('kek');
     }
-    cw(any) {
-        console.log(any);
+    goToEdit() {
+        this.router.navigate(['instructioneditor'], { queryParams: { 'id': this._id } });
     }
     ngOnInit() {
         let sub = this._ActivatedRoute.queryParams.subscribe(parmas => {
@@ -102,7 +105,7 @@ InstructionView = __decorate([
     }),
     __metadata("design:paramtypes", [instruction_Service_1.InstructionService,
         router_1.ActivatedRoute, Home_Service_1.HomeService,
-        Role_Service_1.RoleService, Theme_Service_1.ThemeService])
+        Role_Service_1.RoleService, Theme_Service_1.ThemeService, router_1.Router])
 ], InstructionView);
 exports.InstructionView = InstructionView;
 //# sourceMappingURL=instructionview.component.js.map

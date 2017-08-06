@@ -42,9 +42,6 @@
     <Content Include="wwwroot\app\model\UserInfo.ts" />
     <Content Include="wwwroot\app\model\UserStatistics.ts" />
     <Content Include="wwwroot\app\patrialComponent\deleteUserModal.ts" />
-    <Content Include="wwwroot\app\patrialComponent\UserInfo.js" />
-    <Content Include="wwwroot\app\patrialComponent\UserInfo.js.map" />
-    <Content Include="wwwroot\app\patrialComponent\UserInfo.ts" />
     <Content Include="wwwroot\app\patrialComponent\videoModal.ts" />
     <Content Include="wwwroot\app\search.component.ts" />
     <Content Include="wwwroot\app\service\Comment.Service.js" />
@@ -61,7 +58,6 @@
     <Content Include="wwwroot\app\service\Profile.Service.ts" />
     <Content Include="wwwroot\app\patrialComponent\textBoxTemplate.ts" />
     <Content Include="wwwroot\app\service\Role.Service.ts" />
-    <Content Include="wwwroot\app\service\ThemeService.ts" />
     <Content Include="wwwroot\app\stepeditor.component.ts" />
     <Content Include="wwwroot\app\stepView.component.ts" />
     <Content Include="wwwroot\app\tools\safeHtml.ts" />
@@ -75,12 +71,6 @@
     <Content Include="wwwroot\css\instructionView.css" />
     <Content Include="wwwroot\css\site_nav.css" />
     <Content Include="wwwroot\css\StepEditor.css" />
-    <Content Include="wwwroot\css\themeapp.css" />
-    <Content Include="wwwroot\css\themeChildContent.css" />
-    <Content Include="wwwroot\css\themeComment.css" />
-    <Content Include="wwwroot\css\themeIndexAndSearch.css" />
-    <Content Include="wwwroot\css\themeInstructionEditor.css" />
-    <Content Include="wwwroot\css\themes\stepEditor.css" />
     <Content Include="wwwroot\css\themes\themeapp.css" />
     <Content Include="wwwroot\css\themes\themeChildContent.css" />
     <Content Include="wwwroot\css\themes\themeComment.css" />

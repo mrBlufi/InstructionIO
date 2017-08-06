@@ -28,7 +28,7 @@ export class InstructionView {
     @Input() theme: string;
     constructor(private _instructionservice: InstructionService,
         private _ActivatedRoute: ActivatedRoute, private homeservice: HomeService,
-        private roleservice: RoleService,private themeservice:ThemeService) {
+        private roleservice: RoleService,private themeservice:ThemeService,private router:Router) {
         this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;

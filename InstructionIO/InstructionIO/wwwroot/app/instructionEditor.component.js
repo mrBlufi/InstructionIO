@@ -62,7 +62,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             this.instvalidate.Name = true;
             state = false;
         }
-        if (this.Inst.tagsRelation.length == 0) {
+        if (this.tagsArray.length == 0) {
             this.instvalidate.Tag = true;
             state = false;
         }

@@ -31,7 +31,7 @@
       'angular2-infinite-scroll': 'npm:angular2-infinite-scroll',
       'ng2-dragula': 'npm:ng2-dragula/bundles/ng2-dragula.umd.js',
       'angular-l10n': 'npm:angular-l10n/bundles/angular-l10n.umd.js',
-      'moment': 'node_modules/moment/moment.js',
+      'moment': 'npm:moment/moment.js',
       'ngx-bootstrap': 'npm:ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
       'ngx-swiper-wrapper': 'npm:ngx-swiper-wrapper/bundles/ngx-swiper-wrapper.umd.js',
       'angular2-modal': 'npm:angular2-modal/bundles/angular2-modal.umd.js',
