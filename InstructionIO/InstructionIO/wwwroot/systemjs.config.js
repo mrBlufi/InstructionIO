@@ -26,7 +26,10 @@
       '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
       '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
 
-      // other libraries
+   
+      
+
+      'ng2-material-dropdown': 'npm:ng2-material-dropdown/dist/ng2-dropdown.bundle.js',
       'rxjs': 'npm:rxjs',
       'angular-froala-wysiwyg': 'npm:angular-froala-wysiwyg/bundles/angular-froala-wysiwyg.umd.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
@@ -34,11 +37,12 @@
       'angular2-infinite-scroll': 'npm:angular2-infinite-scroll',
       'ng2-dragula': 'npm:ng2-dragula/bundles/ng2-dragula.umd.js',
       'angular-l10n': 'npm:angular-l10n/bundles/angular-l10n.umd.js',
-      'moment': 'npm:moment/moment.js',
+      'moment': 'node_modules/moment/moment.js',
       'ngx-bootstrap': 'npm:ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
       'ngx-swiper-wrapper': 'npm:ngx-swiper-wrapper/bundles/ngx-swiper-wrapper.umd.js',
       'angular2-modal': 'npm:angular2-modal/bundles/angular2-modal.umd.js',
       'angular2-modal/plugins/bootstrap': 'npm:angular2-modal/bundles/angular2-modal.bootstrap.umd.js',
+      'ng2-tag-input': 'npm:ng2-tag-input/dist/ng2-tag-input.bundle.js',
       'angular2-cookie': 'npm:angular2-cookie'
     },
     // packages tells the System loader how to load when no filename and/or no extension
