@@ -18,9 +18,8 @@
                         <div class="media-body">
                             <hr>
                             <div>
-                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsBox')"></span></h3>
-                                <textarea   (change)="autogrow()" (keyup)="autogrow()"  class="col-md-11 col-sm-11 col-xs-11 editableTarget" id="interestsBox" disabled="disabled" [(ngModel)]="user.interests"></textarea>
-                               
+                                <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable"(click)="editDate('interestsSpan')"></span></h3>
+                                <span id="interestsSpan" disabled="disabled" class="col-md-11 col-sm-11 col-xs-11" contenteditable="false" [innerHTML]="user.interests"></span>
                             </div>
                             <hr class="col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-12 col-sm-12 col-xs-12">

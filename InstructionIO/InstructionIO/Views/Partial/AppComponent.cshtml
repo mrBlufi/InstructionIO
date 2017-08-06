@@ -16,7 +16,7 @@
                 <ul class="nav navbar-nav navbar-right hidden-xs">
                     <li *ngIf="roleinfo.id!=-1">
                         <p class="navbar-btn">
-                            <a class="btn btn-glyphicon btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
+                            <a class="btn btn-glyphicon btn-success" [routerLink]="['../instructioneditor']"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
                         </p>
                     </li>
                     <li *ngIf="roleinfo.id!=-1">
@@ -25,7 +25,7 @@
                             <ul class="navbar-brand">
                                 <li class="dropdown ">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img *ngIf="!imageprofile" class="" id="img_prof" src="https://st2.depositphotos.com/1063693/10677/v/950/depositphotos_106775558-stock-illustration-flete-guy-man-woman-avatar.jpg" />
+                                    <img *ngIf="!imageprofile" class="" id="img_prof" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png" />
                                     <img *ngIf="imageprofile" class="" id="img_prof" src="{{imageprofile}}" />
                                     <b class="caret"></b>
                                     </a>
@@ -74,10 +74,10 @@
                 <ul class="nav navbar-nav navbar-right visible-xs">
                     <li *ngIf="roleinfo.id!=-1">
                         <p>
-                            <img *ngIf="!imageprofile" class="" id="img_prof" src="https://st2.depositphotos.com/1063693/10677/v/950/depositphotos_106775558-stock-illustration-flete-guy-man-woman-avatar.jpg" />
+                            <img *ngIf="!imageprofile" class="" id="img_prof" src="http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png" />
                             <img *ngIf="imageprofile" class="" id="img_prof" src="{{imageprofile}}" />
                             <span class="navbar-btn">
-                                <a class="btn btn-glyphicon btn-success" href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
+                                <a class="btn btn-glyphicon btn-success" [routerLink]="['../instructioneditor']"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span> Add</a>
                             </span>
                         </p>
                     </li>

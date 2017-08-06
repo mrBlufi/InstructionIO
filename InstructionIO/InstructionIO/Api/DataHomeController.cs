@@ -25,7 +25,7 @@ namespace InstructionIO.Api
         [HttpGet("tag")]
         public IEnumerable<Tag> getListPopulTags()
         {
-            IEnumerable <Tag> populartag= _context.Tags.AsNoTracking().ToList().OrderBy(d => d.Frequency).Take(6);
+            IEnumerable <Tag> populartag= _context.Tags.AsNoTracking().ToList().OrderByDescending(d => d.Frequency).Take(6);
             return populartag;
         }
 
@@ -135,6 +135,8 @@ namespace InstructionIO.Api
                 UpdateRating(ratingr, rating);
             else
                 await AddRatingAsync(instr, idU, rating);
+
+            SetInstructionRating(instr);
             return Ok();
         }
 
@@ -155,6 +157,7 @@ namespace InstructionIO.Api
                 Value = rating
             };
             await _context.RatingRelations.AddAsync(ratingrelation);
+            _context.SaveChanges();
         }
 
 

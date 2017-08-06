@@ -34,12 +34,6 @@ let AppComponent = class AppComponent {
             console.log(this.roleinfo);
         });
         this.theme = this.themeservice.getCookie('theme');
-        this.router.events.subscribe((val) => {
-            if (val instanceof router_1.NavigationEnd) {
-                //update the shared data when this page is being navigated to
-                this.theme = this.themeservice.getCookie('theme');
-            }
-        });
     }
     enterClick() {
         this.router.navigate(['search'], { queryParams: { 'q': this.searchQueryParams } });

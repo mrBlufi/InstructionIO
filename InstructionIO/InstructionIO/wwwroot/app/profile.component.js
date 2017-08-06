@@ -38,7 +38,6 @@ let ProfileComponent = class ProfileComponent {
         this.theme = this.themeservice.getCookie('theme');
         roleservice.getDataRole().subscribe(data => {
             this.roleinfo = data;
-            console.log(this.roleinfo);
         });
     }
     autogrow() {
@@ -63,12 +62,13 @@ let ProfileComponent = class ProfileComponent {
         }
     }
     editDate(id) {
-        this.autogrow();
         let elem = document.getElementById(id);
+        elem.contentEditable = 'true';
         elem.removeAttribute('disabled');
         elem.focus();
         elem.addEventListener('focusout', function () {
             elem.setAttribute('disabled', 'disabled');
+            elem.contentEditable = 'false';
         });
     }
     getDataUser() {
@@ -95,9 +95,10 @@ let ProfileComponent = class ProfileComponent {
         }, err => console.log(err));
     }
     ngOnDestroy() {
-        console.log('destroy and user', this.user);
-        if (this.user)
+        if (this.user) {
+            this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
+        }
         this.sub.unsubscribe();
     }
     parseDate(dateString) {
@@ -110,7 +111,7 @@ let ProfileComponent = class ProfileComponent {
     }
     beforeUnload(event) {
         if (this.user) {
-            console.log('log1');
+            this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
         }
     }

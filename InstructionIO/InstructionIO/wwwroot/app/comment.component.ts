@@ -42,15 +42,27 @@ export class CommentComponent {
         });
     }
     addComment(obj: Comment) {
-        this.commentservice.addComment(obj, this.idInstruction);
-        this.getComment();
+        this.commentservice.addComment(obj, this.idInstruction).subscribe(
+            (data) => {
+                console.log('push Complit');
+                this.getComment();
+            },
+            (err) => { console.log('Error'); }
+        );
+        
         
     }
 
 
     delcomment(id: number) {
-        this.commentservice.delcomment(id, this.idInstruction);
-        this.getComment();
+        this.commentservice.delcomment(id, this.idInstruction).subscribe(
+            (data) => {
+                console.log('del Complit');
+                this.getComment();
+            },
+            (err) => { console.log('Error'); }
+        );
+        
     }
     public editorContent: string = 'Comment Text';
 
