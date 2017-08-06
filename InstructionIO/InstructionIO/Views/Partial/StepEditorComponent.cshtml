@@ -17,7 +17,7 @@
                     </div>
                     <div [ngSwitch]="block.type">
                         <template ngSwitchCase="text">
-                            <div class="content_block_type_text textBox" [innerHTML]="block.content" (focusout)="textBoxKeyup($event,block)" role="textbox" contenteditable="true" aria-multiline="true">
+                            <div class="content_block_type_text textBox" [innerHTML]="block.content" (focusout)="textBoxKeyup($event,block)" contenteditable="true">
                             </div>
                         </template>
                         <template ngSwitchCase="img">

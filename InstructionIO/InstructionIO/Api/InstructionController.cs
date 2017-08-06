@@ -76,7 +76,7 @@ namespace InstructionIO.Controllers.Api {
             var comments = context.Comments.Where(x => x.Instruction.Id == instruction.Id).ToList();
             var ratings = context.RatingRelations.Where(x => x.Instruction.Id == instruction.Id).ToList();
             context.Remove(context.Instructions.Find(instruction.Id));
-            instruction.Id = -1;
+            instruction.Id = 0;
             foreach (var step in instruction.Step)
             {
                 step.Id = 0;
