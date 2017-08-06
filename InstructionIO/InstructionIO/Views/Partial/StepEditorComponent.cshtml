@@ -1,18 +1,18 @@
-﻿<div class="container contentBody">
+﻿<div [(ngClass)]="theme" class="contentBody">
     <span defaultOverlayTarget></span>
-    <div class="row step_info">
-        <div class="col-xs-12 form-group">
+    <div class="step_info">
+        <div class="form-group">
             <input type="text" class="form-control" placeholder="Step name" [(ngModel)]="step.subtitle"/>
         </div>
     </div>
-    <div class="row step_body panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-body" [dragula] [dragulaModel]="step.contentBlock">
-            <div class="row contentBlock" *ngFor="let block of step.contentBlock" >
+            <div class="contentBlock" *ngFor="let block of step.contentBlock" >
                 <div class="contetnRow">
-                    <div class="pull-left" style="margin-left:-16px;">
+                    <div class="pull-left" style="margin-left:-30px;">
                         <span class="glyphicon glyphicon-move"></span>
                     </div>
-                    <div class="pull-right" style="margin-right:-16px;">
+                    <div class="pull-right" style="margin-right:-30px;">
                         <span class="glyphicon glyphicon-remove delete" (click)="boxDelete(block)"></span>
                     </div>
                     <div [ngSwitch]="block.type">
@@ -22,7 +22,7 @@
                         </template>
                         <template ngSwitchCase="img">
                             <div class="content_block_type_pictire">
-                                <img class="pictireBox" [(src)]="block.content"/>
+                                <img class="img-responsive pictireBox" [(src)]="block.content"/>
                             </div>
                         </template>
                         <template ngSwitchCase="video">
@@ -35,13 +35,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="text-center add_panel">
-                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-pencil" (click)="textBoxAdd()"></button>
-                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)"></button>
-                <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-facetime-video" (click)="videoBoxModal()"></button>
-                <input  #imgInput type="file" (change)="saveFile($event)" style="display:none" />
-            </div>
+        <div class="text-center add_panel">
+            <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-pencil" (click)="textBoxAdd()"></button>
+            <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)"></button>
+            <button type="button" class="btn btn-default btn-circle btn-lg glyphicon glyphicon-facetime-video" (click)="videoBoxModal()"></button>
+            <input #imgInput type="file" (change)="saveFile($event)" style="display:none" />
         </div>
     </div>
 </div>

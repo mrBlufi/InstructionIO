@@ -20,6 +20,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Step_1.Step)
 ], StepView.prototype, "step", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], StepView.prototype, "theme", void 0);
 StepView = __decorate([
     core_1.Component({
         selector: 'stepView',

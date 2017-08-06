@@ -55,15 +55,16 @@ export class InstructionView {
         direction: 'horizontal',
         slidesPerView: '1',
         keyboardControl: true,
-        slideActiveClass: 'slide_activMain'
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
     };
 
     miniSwiperConfig: SwiperConfigInterface = {
         direction: 'horizontal',
-        slidesPerView: '3',
+        slidesPerView: '5',
         centeredSlides: true,
         keyboardControl: false,
-        slideActiveClass: 'slide_activMin',
+        slideActiveClass: 'slide-activMini',
         slideDuplicateClass: 'slide-mini',
         slideVisibleClass:'slide-miniV'
     }

@@ -1,12 +1,12 @@
-﻿/*.light .panel {
-    background-color: white;
-    border: 1px solid rgba(128, 128, 128, 0.84);
-    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
-}*/
-
-
-.light .panel-body {
+﻿.light .panel {
     background-color: white;
     border: 1px solid rgba(128, 128, 128, 0.84);
     box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
 }
+
+
+/*.light .panel-body {
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.84);
+    box-shadow: rgba(0, 0, 0, 0.3) 6px 6px 6px;
+}*/

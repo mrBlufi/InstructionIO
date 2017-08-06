@@ -1,74 +1,73 @@
 <link rel="stylesheet" href="~/css/InstructionEditor.css" />
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <span class="glyphicon glyphicon-eye-open pull-right" (click)="nn($event)"></span>
-        <h3>Instruction construction</h3>
-    </div>
-    <div class="panel-body">
-        <div class="form">
-            <input type="text" class="form-control instForm" [(ngModel)]="Inst.name" placeholder="Instruction name" />
-            <span *ngIf="instvalidate.Name instForm" class="text-danger">gde name?</span>
-            <tag-input class="instForm" [(ngModel)]='tagsArray' [displayBy]="'name'"
-                                    [identifyBy]="'name'">
-                <tag-input-dropdown [showDropdownIfEmpty]="true"
-                                    [displayBy]="'name'"
-                                    [identifyBy]="'name'"
-                                    [focusFirstElement]="true"
-                                    [autocompleteObservable]='requestAutocompleteItems'
-                                    >
-                </tag-input-dropdown>
-            </tag-input>
-            <span *ngIf="instvalidate.Tag instForm" class="text-danger">gde tagi?</span>
-            <span class="instForm"><strong>Category</strong></span>
-            <select [(ngModel)]="Inst.category" class="form-control instForm">
-                <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
-            </select>
-            <span *ngIf="instvalidate.Category instForm" class="text-danger instForm">gde Category?</span>
+<div [(ngClass)]="theme" class="container-fluid">
+    <div  class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-eye-open pull-right" (click)="nn($event)"></span>
+            <h3>Instruction construction</h3>
         </div>
-        <accordion class="previevDropDown">
-            <accordion-group>
-                <div accordion-heading>
-                    Previev
-                    <i class="pull-right float-xs-right glyphicon glyphicon-chevron-down"></i>
-                </div>
-                <div class="text-center">
-                    <img *ngIf="Inst.previewImage" class="img-responsive" src="{{Inst.previewImage}}">
-                    <img *ngIf="!Inst.previewImage" class="img-responsive" src="http://markell.by/templates/default/img/noimage/430x430.jpg">
-                </div>
-                <button type="button" class="btn btn-default  glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)">Load Image</button>
-                <input #imgInput type="file" (change)="saveFile($event)" style="display:none" />
-                <br />
-                <span>About</span>
-                <div class="content_block_type_text textBox" [(innerHTML)]="Inst.previewText"  (focusout)="previwKeyup($event)" role="textbox" contenteditable="true" aria-multiline="true">
-                </div>
-            </accordion-group>
-        </accordion>
-        <span *ngIf="instvalidate.PrevievText" class="text-danger">gde PrevievText?</span>
-    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-body panle_body_main">
-        <swiper *ngIf="viewS" #mainSwiper [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
-                <my-stepEditor *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></my-stepEditor>
-        </swiper>
-        <swiper *ngIf="!viewS" [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
-            <stepView *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></stepView>
-        </swiper>
-    </div>
-    <div class="panel-footer">
-        <swiper #miniSwiper class="container" [config]="miniSwiperConfig" (indexChange)="onIndexChange($event)" >
-            <div *ngFor="let step of Inst.step" class="well slide-mini">
-                <span class="glyphicon glyphicon-remove pull-right" (click)="removeStep(step)"></span>
-                <span>step number {{Inst.step.indexOf(step)+1}}</span>
+        <div class="panel-body">
+            <div class="form">
+                <input type="text" class="form-control instForm" [(ngModel)]="Inst.name" placeholder="Instruction name" />
+                <span *ngIf="instvalidate.Name instForm" class="text-danger">gde name?</span>
+                <tag-input class="instForm" [(ngModel)]='tagsArray' [displayBy]="'name'"
+                           [identifyBy]="'name'">
+                    <tag-input-dropdown [showDropdownIfEmpty]="true"
+                                        [displayBy]="'name'"
+                                        [identifyBy]="'name'"
+                                        [focusFirstElement]="true"
+                                        [autocompleteObservable]='requestAutocompleteItems'>
+                    </tag-input-dropdown>
+                </tag-input>
+                <span *ngIf="instvalidate.Tag instForm" class="text-danger">gde tagi?</span>
+                <span class="instForm"><strong>Category</strong></span>
+                <select [(ngModel)]="Inst.category" class="form-control instForm">
+                    <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+                </select>
+                <span *ngIf="instvalidate.Category instForm" class="text-danger instForm">gde Category?</span>
             </div>
-            <span class="slide-mini well glyphicon glyphicon-plus text-center" style="width:70px;height:70px" (click)="add()"></span>
-        </swiper>
-        <div>
-            <button type="submit" class="btn btn-success pull-right" (click)="save()">Save</button>
+            <accordion class="previevDropDown">
+                <accordion-group>
+                    <div accordion-heading>
+                        Previev
+                        <i class="pull-right float-xs-right glyphicon glyphicon-chevron-down"></i>
+                    </div>
+                    <div class="text-center">
+                        <img *ngIf="Inst.previewImage" class="img-responsive" src="{{Inst.previewImage}}">
+                        <img *ngIf="!Inst.previewImage" class="img-responsive" src="http://markell.by/templates/default/img/noimage/430x430.jpg">
+                    </div>
+                    <button type="button" class="btn btn-default  glyphicon glyphicon-picture" (click)="redirectToInput(imgInput)">Load Image</button>
+                    <input #imgInput type="file" (change)="saveFile($event)" style="display:none" />
+                    <br />
+                    <span>About</span>
+                    <div class="content_block_type_text textBox" [(innerHTML)]="Inst.previewText" (focusout)="previwKeyup($event)" role="textbox" contenteditable="true" aria-multiline="true">
+                    </div>
+                </accordion-group>
+            </accordion>
+            <span *ngIf="instvalidate.PrevievText" class="text-danger">gde PrevievText?</span>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body panle_body_main">
+            <swiper *ngIf="viewS" #mainSwiper [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
+                <my-stepEditor *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></my-stepEditor>
+            </swiper>
+            <swiper *ngIf="!viewS" [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
+                <stepView *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step" [theme]="theme"></stepView>
+            </swiper>
+        </div>
+        <div class="panel-footer">
+            <swiper #miniSwiper class="container" [config]="miniSwiperConfig" (indexChange)="onIndexChange($event)">
+                <div *ngFor="let step of Inst.step" class="well slide-mini">
+                    <span class="glyphicon glyphicon-remove pull-right" (click)="removeStep(step)"></span>
+                    <span>step number {{Inst.step.indexOf(step)+1}}</span>
+                </div>
+                <span class="slide-mini well glyphicon glyphicon-plus text-center" style="width:70px;height:70px" (click)="add()"></span>
+            </swiper>
+            <div>
+                <button type="submit" class="btn btn-success pull-right" (click)="save()">Save</button>
+            </div>
         </div>
     </div>
 </div>
 
-        
 

@@ -17,6 +17,7 @@ import { Category } from './model/Category'
 import { Tag } from './model/Tag'
 import { TagInputModule } from 'ng2-tag-input'
 import { TagsRelation } from "./model/TagsRelation";
+import { ThemeService } from "./service/Theme.Service";
 
 @Component({
     selector: 'instructionEditor',
@@ -37,7 +38,8 @@ export class InstructionEditorComponent {
     private _id: string;
     @Input() theme: string;
     constructor(private dragulaService: DragulaService, private sanitizer: DomSanitizer, private http: Http, private _instructionservice: InstructionService, private _homeservice: HomeService,
-        private _ActivatedRoute: ActivatedRoute, private router: Router) {
+        private _ActivatedRoute: ActivatedRoute, private router: Router, private themeservice: ThemeService) {
+        this.theme = this.themeservice.getCookie('theme');
         dragulaService.setOptions('stepD', {
             moves: function (el: any, container: any, handle: any) {
                 return !(handle.className.includes('delete'));
@@ -89,14 +91,16 @@ export class InstructionEditorComponent {
     mainSwiperConfig: SwiperConfigInterface = {
         direction: 'horizontal',
         slidesPerView: '1',
-        keyboardControl: true
+        keyboardControl: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
     };
 
     miniSwiperConfig: SwiperConfigInterface = {
         direction: 'horizontal',
-        slidesPerView: '3',
+        slidesPerView: '5',
         centeredSlides: true,
-        keyboardControl: true,
+        keyboardControl: false,
         slideActiveClass: 'slide-activMini'
     }
 

@@ -1,11 +1,26 @@
-﻿.mySlide {
+﻿/*.mySlide {
     padding:13px;
+}*/
+
+
+.swiper-button-prev, .swiper-button-next {
+    width: 25px;
+    height: 70px;
+    color: rgba(92, 184, 92, 1);
 }
 
-.slide-mini {
-    margin: 5px;
-    background-color: whitesmoke;
+.swiper-button-prev{
+    left:0px;
 }
+
+.swiper-button-prev {
+    right: 0px;
+} 
+
+.slide-mini {
+        margin: 5px;
+        background-color: whitesmoke;
+    }
 
 .panel-footer{
     padding-bottom:40px;
@@ -18,7 +33,7 @@
 }
 
 .slide-activMini {
-    border-color: red;
+    border-color: #007aff;
 }
 
 .previevDropDown {
@@ -32,7 +47,7 @@
     margin-bottom: -20px;
 }
 
-.contentBody{
+/*.contentBody{
     padding-right:90px;
     padding-left:20px;
 }
@@ -42,8 +57,11 @@
         padding-right: 20px;
         padding-left: 20px;
     }
-}
+}*/
 
 .instForm {
     margin: 5px;
+}
+.container-fluid {
+    padding-top: 15px;
 }

@@ -4,6 +4,20 @@
   
 }
 
+.swiper-button-prev, .swiper-button-next {
+    width: 25px;
+    height: 70px;
+    color: rgba(92, 184, 92, 1);
+}
+
+.swiper-button-prev {
+    left: 0px;
+}
+
+.swiper-button-prev {
+    right: 0px;
+} 
+
 .tag {
     margin-left: 10px;
 }
@@ -11,6 +25,11 @@
 .rating {
     padding-top: 10px;
 }
-.slide_activMin{
-    border-color:blue;
-} 
+
+.slide-activMini {
+    border-color: #007aff;
+}
+
+.container-fluid{
+    padding-top:15px;
+}
