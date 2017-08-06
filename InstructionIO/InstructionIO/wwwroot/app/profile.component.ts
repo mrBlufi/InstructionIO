@@ -57,7 +57,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     deluser(tag: boolean) {
         if (tag) {
             console.log(this.user.id);
-            this._profileservice.deleteUserById(this.user.id);
+            this._profileservice.deleteUserById(this.user.id).subscribe(data => {
+                this.user = null;
+                this._router.navigate(['home']);
+            });
         }
     }
 

@@ -37,9 +37,7 @@ let ProfileService = class ProfileService {
     }
     deleteUserById(id) {
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/profile/deleteuser', id, { headers: headers }).subscribe(data => {
-            console.log(data);
-        });
+        return this.http.post('/api/profile/deleteuser', id, { headers: headers });
     }
     getstatistics(id) {
         return this.http.get('/api/profile/getstatistics/' + id).map(res => (res).json());
