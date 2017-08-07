@@ -23,7 +23,6 @@ let CustomModal = class CustomModal {
         dialog.setCloseGuard(this);
     }
     load(elem) {
-        console.log(elem);
         let input = elem;
         this.context.src = input.value;
         this.dialog.close();

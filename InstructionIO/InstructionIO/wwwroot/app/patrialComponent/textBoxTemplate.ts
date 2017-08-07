@@ -12,7 +12,6 @@ export class TextBoxTemplate {
 
     @HostListener("keypress") onkeyUp() {
         let element: HTMLElement = this.elementRef.nativeElement;
-        console.log(element.innerHTML);
         this.textBox = element.innerHTML;
     }
 

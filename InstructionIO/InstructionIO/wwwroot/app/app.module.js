@@ -40,6 +40,7 @@ const deleteUserModal_1 = require("./patrialComponent/deleteUserModal");
 const cookies_service_1 = require("angular2-cookie/services/cookies.service");
 const ng2_tag_input_1 = require("ng2-tag-input");
 const deleteInstructionModal_1 = require("./patrialComponent/deleteInstructionModal");
+const stepeditor_component_1 = require("./stepeditor.component");
 const SWIPER_CONFIG = {
     direction: 'horizontal',
     slidesPerView: '2',
@@ -68,7 +69,7 @@ AppModule = __decorate([
             angular2_modal_1.ModalModule.forRoot(), ng2_tag_input_1.TagInputModule,
             bootstrap_1.BootstrapModalModule
         ],
-        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, deleteInstructionModal_1.InstructionCustom, deleteUserModal_1.ModalCustom, comment_component_1.CommentComponent],
+        declarations: [app_component_1.AppComponent, app_routing_1.routedComponents, textBoxTemplate_1.TextBoxTemplate, childcontenthome_component_1.ChildComponent, videoModal_1.CustomModal, deleteInstructionModal_1.InstructionCustom, deleteUserModal_1.ModalCustom, comment_component_1.CommentComponent, stepeditor_component_1.SafePipe],
         providers: [Comment_Service_1.CommentService, cookies_service_1.CookieService, Theme_Service_1.ThemeService, Role_Service_1.RoleService, Home_Service_1.HomeService, Profile_Service_1.ProfileService, instruction_Service_1.InstructionService, platform_browser_1.Title, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
         bootstrap: [app_component_1.AppComponent],
         entryComponents: [videoModal_1.CustomModal, deleteUserModal_1.ModalCustom, deleteInstructionModal_1.InstructionCustom]

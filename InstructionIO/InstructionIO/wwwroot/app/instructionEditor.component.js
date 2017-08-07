@@ -76,7 +76,7 @@ let InstructionEditorComponent = class InstructionEditorComponent {
             this.instvalidate.Category = true;
             state = false;
         }
-        if (this.Inst.previewText.length <= 15) {
+        if (!this.Inst.previewText.length || this.Inst.previewText.length <= 15) {
             this.instvalidate.PrevievText = true;
             state = false;
         }
@@ -115,7 +115,12 @@ let InstructionEditorComponent = class InstructionEditorComponent {
         }
     }
     onIndexChange(event) {
-        this.mainSwiper.setIndex(event);
+        if (this.mainSwiper) {
+            this.mainSwiper.setIndex(event);
+        }
+        if (this.mainPreView) {
+            this.mainPreView.setIndex(event);
+        }
         this.miniSwiper.setIndex(event);
     }
     ngOnInit() {
@@ -172,6 +177,10 @@ __decorate([
     core_1.ViewChild('miniSwiper'),
     __metadata("design:type", ngx_swiper_wrapper_1.SwiperComponent)
 ], InstructionEditorComponent.prototype, "miniSwiper", void 0);
+__decorate([
+    core_1.ViewChild('mainPreView'),
+    __metadata("design:type", ngx_swiper_wrapper_1.SwiperComponent)
+], InstructionEditorComponent.prototype, "mainPreView", void 0);
 __decorate([
     angular_l10n_1.Language(),
     __metadata("design:type", String)
