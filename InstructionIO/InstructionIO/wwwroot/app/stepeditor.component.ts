@@ -15,7 +15,7 @@ import { LocaleService, Language } from 'angular-l10n';
 @Component({
     selector: 'my-stepEditor',
     templateUrl: '/partial/StepEditorComponent',
-    styleUrls: [ 'css/themes/themeCommon.css']
+    styleUrls: ['css/themes/themeCommon.css']
 })
 
 export class StepEditorComponent {
@@ -62,7 +62,8 @@ export class StepEditorComponent {
 
     videoBoxAdd(src: string) {
         let n: ContentBlock = new ContentBlock('video');
-        n.content = 'https://www.youtube.com/embed/' + src.slice(src.indexOf('/'));
+        n.content = 'https://www.youtube.com/embed/' + src.slice(src.lastIndexOf('=')+1);
+        console.log(n);
         this.step.contentBlock.push(n);
     }
 
@@ -70,10 +71,15 @@ export class StepEditorComponent {
         return this.modal.open(CustomModal, overlayConfigFactory({ src: "" }, BSModalContext)).then(resultPromise => {
             return resultPromise.result
                 .then(
-                () => this.videoBoxAdd(resultPromise.context.src));
+                () => {
+                    console.log(resultPromise.context.src);
+                    if (resultPromise.context.src.length > 10) {
+                        this.videoBoxAdd(resultPromise.context.src)
+                    }
+                });
         });
     }
-
+        
     boxDelete(event: ContentBlock) {
         this.step.contentBlock.splice(this.step.contentBlock.indexOf(event), 1);
     }
@@ -84,5 +90,13 @@ export class StepEditorComponent {
         let formData: FormData = new FormData();
         formData.append(elem.files[0].name, elem.files[0]);
         this.http.post('/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g,"")));
+    }
+}
+
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+    constructor(private sanitizer: DomSanitizer) { }
+    transform(url: any) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
 }

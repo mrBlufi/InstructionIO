@@ -17,7 +17,6 @@ let TextBoxTemplate = class TextBoxTemplate {
     }
     onkeyUp() {
         let element = this.elementRef.nativeElement;
-        console.log(element.innerHTML);
         this.textBox = element.innerHTML;
     }
     get getInnerHtml() {

@@ -27,7 +27,6 @@
     <Content Include="wwwroot\app\model\Comment.ts" />
     <Content Include="wwwroot\app\model\ContetnBlock.ts" />
     <Content Include="wwwroot\app\model\Instruction.ts" />
-    <Content Include="wwwroot\app\model\Rating.js.map" />
     <Content Include="wwwroot\app\model\RatingRelation.js" />
     <Content Include="wwwroot\app\model\RatingRelation.js.map" />
     <Content Include="wwwroot\app\model\RatingRelation.ts" />

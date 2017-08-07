@@ -23,7 +23,6 @@ export class CustomModal implements CloseGuard, ModalComponent<VideoModalContext
     }
 
     load(elem: HTMLElement) {
-        console.log(elem);
         let input: HTMLInputElement = elem as HTMLInputElement;
         this.context.src = input.value;
         this.dialog.close();

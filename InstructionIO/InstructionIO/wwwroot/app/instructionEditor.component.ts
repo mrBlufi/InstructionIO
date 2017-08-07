@@ -30,6 +30,8 @@ export class InstructionEditorComponent {
 
     @ViewChild('mainSwiper') mainSwiper: SwiperComponent;
     @ViewChild('miniSwiper') miniSwiper: SwiperComponent;
+    @ViewChild('mainPreView') mainPreView: SwiperComponent;
+
 
     Inst: Instruction = new Instruction();
     categories: Category[];
@@ -65,7 +67,7 @@ export class InstructionEditorComponent {
             this.instvalidate.Category = true;
             state = false;
         }
-        if (this.Inst.previewText.length <= 15) {
+        if (!this.Inst.previewText.length || this.Inst.previewText.length <= 15) {
             this.instvalidate.PrevievText = true;
             state = false;
         }
@@ -124,7 +126,12 @@ export class InstructionEditorComponent {
     }
 
     onIndexChange(event: number) {
-        this.mainSwiper.setIndex(event);
+        if (this.mainSwiper){
+            this.mainSwiper.setIndex(event);
+        }
+        if (this.mainPreView) {
+            this.mainPreView.setIndex(event);
+        }
         this.miniSwiper.setIndex(event);
     }
 

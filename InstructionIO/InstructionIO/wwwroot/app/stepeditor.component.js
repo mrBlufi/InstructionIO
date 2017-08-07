@@ -15,6 +15,7 @@ const ContetnBlock_1 = require("./model/ContetnBlock");
 const platform_browser_1 = require("@angular/platform-browser");
 const http_1 = require("@angular/http");
 const Step_1 = require("./model/Step");
+const core_2 = require("@angular/core");
 const angular2_modal_1 = require("angular2-modal");
 const bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 const videoModal_1 = require("./patrialComponent/videoModal");
@@ -58,13 +59,19 @@ let StepEditorComponent = class StepEditorComponent {
     }
     videoBoxAdd(src) {
         let n = new ContetnBlock_1.ContentBlock('video');
-        n.content = 'https://www.youtube.com/embed/' + src.slice(src.indexOf('/'));
+        n.content = 'https://www.youtube.com/embed/' + src.slice(src.lastIndexOf('=') + 1);
+        console.log(n);
         this.step.contentBlock.push(n);
     }
     videoBoxModal() {
         return this.modal.open(videoModal_1.CustomModal, angular2_modal_1.overlayConfigFactory({ src: "" }, bootstrap_1.BSModalContext)).then(resultPromise => {
             return resultPromise.result
-                .then(() => this.videoBoxAdd(resultPromise.context.src));
+                .then(() => {
+                console.log(resultPromise.context.src);
+                if (resultPromise.context.src.length > 10) {
+                    this.videoBoxAdd(resultPromise.context.src);
+                }
+            });
         });
     }
     boxDelete(event) {
@@ -100,4 +107,17 @@ StepEditorComponent = __decorate([
         platform_browser_1.DomSanitizer, http_1.Http, angular_l10n_1.LocaleService])
 ], StepEditorComponent);
 exports.StepEditorComponent = StepEditorComponent;
+let SafePipe = class SafePipe {
+    constructor(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    transform(url) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+};
+SafePipe = __decorate([
+    core_2.Pipe({ name: 'safe' }),
+    __metadata("design:paramtypes", [platform_browser_1.DomSanitizer])
+], SafePipe);
+exports.SafePipe = SafePipe;
 //# sourceMappingURL=stepeditor.component.js.map

@@ -9,7 +9,7 @@ import { ThemeService } from "./service/Theme.Service";
 @Component({
     selector: 'my-index',
     templateUrl: '/partial/indexComponent',
-    styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css', , 'css/themes/themeCommon.css']
+    styleUrls: ['css/blog-home.css', 'css/themes/themeIndexAndSearch.css', 'css/themes/themeCommon.css']
 })
 
 export class IndexComponent implements OnInit {

@@ -51,7 +51,7 @@
             <swiper *ngIf="viewS" #mainSwiper [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
                 <my-stepEditor *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step"></my-stepEditor>
             </swiper>
-            <swiper *ngIf="!viewS" [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
+            <swiper *ngIf="!viewS" #mainPreView [config]="mainSwiperConfig" (indexChange)="onIndexChange($event)">
                 <stepView *ngFor="let step of Inst.step" class="swiper-slide mySlide" style="box-sizing:border-box" [step]="step" [theme]="theme"></stepView>
             </swiper>
         </div>
