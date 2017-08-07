@@ -45,7 +45,7 @@ const SWIPER_CONFIG = {
     slidesPerView: '2',
     keyboardControl: true
 };
-core_1.enableProdMode();
+//enableProdMode();
 let AppModule = class AppModule {
     constructor(locale, translation) {
         this.locale = locale;

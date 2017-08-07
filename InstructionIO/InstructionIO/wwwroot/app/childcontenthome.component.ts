@@ -13,7 +13,7 @@ import { RoleService } from "./service/Role.Service";
 @Component({
     selector: 'child-content',
     templateUrl: '/partial/contentChildHomeComponent',
-    styleUrls: ['css/blog-home.css', 'css/themes/themeChildContent.css', , 'css/themes/themeCommon.css']
+    styleUrls: ['css/blog-home.css', 'css/themes/themeChildContent.css', 'css/themes/themeCommon.css']
 })
 
 export class ChildComponent implements OnInit {

@@ -72,11 +72,8 @@
     <Content Include="wwwroot\css\themes\themeChildContent.css" />
     <Content Include="wwwroot\css\themes\themeComment.css" />
     <Content Include="wwwroot\css\themes\themeCommon.css" />
-    <Content Include="wwwroot\css\themes\themeCommon.ts" />
     <Content Include="wwwroot\css\themes\themeIndexAndSearch.css" />
     <Content Include="wwwroot\css\themes\themeInstructionEditor.css" />
-    <Content Include="wwwroot\css\themes\themeInstructionView.css" />
-    <Content Include="wwwroot\css\themes\themeStepView.css" />
     <Content Include="wwwroot\images\giphy.gif" />
     <Content Include="wwwroot\images\Rolling.gif" />
     <Content Include="wwwroot\lib\js\file.js" />

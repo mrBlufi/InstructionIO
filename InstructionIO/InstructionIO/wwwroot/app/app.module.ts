@@ -36,7 +36,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     slidesPerView: '2',
     keyboardControl: true
 };
-enableProdMode();
+//enableProdMode();
 
 @NgModule({
     imports:

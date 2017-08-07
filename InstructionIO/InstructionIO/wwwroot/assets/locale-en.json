@@ -35,7 +35,7 @@
   "NullName": "The field name must be filled.",
   "NullTag": "Please enter at least one tag.",
   "NullCategory": "Select a category.",
-  "NulPreview": "The Instruction description field can not be empty (at least 15 characters).",
+  "NullPreview": "The Instruction description field can not be empty (at least 15 characters).",
   "NullStep": "Add at least one step.",
   "Load Image": "Load Image",
   "Preview": "Preview",

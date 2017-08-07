@@ -108,17 +108,18 @@ namespace instructionsIO.Controllers.Api
         [HttpGet("getstatistics/{id}")]
         public IActionResult GetStatisticsUser(int id)
         {
+            var instruction = _context.Instructions.Where(x => x.Author.Id == id);
             UserStatistics statisc = new UserStatistics()
             {
                 CountComment = 0,
                 CountInstructions = 0,
                 AverageRating = 0
             };
-            statisc.CountInstructions = _context.Instructions.Where(x => x.Author.Id == id).Count();
-            statisc.CountComment = _context.Comments.Where(x => x.Author.Id == id).Count();
+            statisc.CountInstructions = instruction.Count();
+            statisc.CountComment = instruction.Count();
             try
             {
-                statisc.AverageRating = _context.Instructions.Where(x => x.Author.Id == id).Average(x => x.RatingRelation.Average(xs => xs.Value));
+                statisc.AverageRating = instruction.Average(x => x.RatingRelation.Average(xs => xs.Value));
             }
             catch
             {
