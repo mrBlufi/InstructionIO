@@ -18,7 +18,7 @@
                             <hr>
                             <div>
                                 <h3><strong>{{ 'About Me' | translate:lang }}</strong><span *ngIf="roleinfo.id==user.id || roleinfo.adminRole" class="pull-right small glyphicon glyphicon-pencil editable" (click)="editDate('interestsSpan')"></span></h3>
-                                <span id="interestsSpan" disabled="disabled"  contenteditable="false" [innerHTML]="user.interests" ></span>
+                                <span id="interestsSpan" disabled="disabled"  contenteditable="false" [innerHTML]="user.interests" (focusout)="beforeUnload($event)" ></span>
                             </div>
                             <hr>
                             <div>
