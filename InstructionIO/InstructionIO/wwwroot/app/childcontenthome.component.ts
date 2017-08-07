@@ -55,7 +55,7 @@ export class ChildComponent implements OnInit {
     onClick($event: IStarRatingOnClickEvent, idI: number) {
         this.onClickResult = $event;
         if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => { console.log(data)});
     };
 
     private getInstructions() {

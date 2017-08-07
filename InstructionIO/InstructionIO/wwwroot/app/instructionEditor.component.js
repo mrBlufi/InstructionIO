@@ -184,7 +184,7 @@ InstructionEditorComponent = __decorate([
     core_1.Component({
         selector: 'instructionEditor',
         templateUrl: '/partial/InstructionEditorComponent',
-        styleUrls: ['css/themes/themeInstructionEditor.css', 'css/InstructionEditor.css', , 'css/themes/themeCommon.css']
+        styleUrls: ['css/themes/themeInstructionEditor.css', 'css/InstructionEditor.css', 'css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [angular_l10n_1.LocaleService, ng2_dragula_1.DragulaService, platform_browser_1.DomSanitizer, http_1.Http, instruction_Service_1.InstructionService, Home_Service_1.HomeService,
         router_1.ActivatedRoute, router_1.Router, Theme_Service_1.ThemeService])

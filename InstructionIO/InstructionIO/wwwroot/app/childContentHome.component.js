@@ -52,7 +52,7 @@ let ChildComponent = class ChildComponent {
     onClick($event, idI) {
         this.onClickResult = $event;
         if (this.roleinfo.id != -1)
-            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating);
+            this.homeservice.setRating(idI, this.roleinfo.id, $event.rating).subscribe(data => { console.log(data); });
     }
     ;
     getInstructions() {

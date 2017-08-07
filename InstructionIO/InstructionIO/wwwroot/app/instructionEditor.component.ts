@@ -23,7 +23,7 @@ import { LocaleService, Language } from 'angular-l10n';
 @Component({
     selector: 'instructionEditor',
     templateUrl: '/partial/InstructionEditorComponent',
-    styleUrls: ['css/themes/themeInstructionEditor.css', 'css/InstructionEditor.css', , 'css/themes/themeCommon.css'] 
+    styleUrls: ['css/themes/themeInstructionEditor.css', 'css/InstructionEditor.css', 'css/themes/themeCommon.css'] 
 })
 
 export class InstructionEditorComponent {
