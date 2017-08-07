@@ -15,7 +15,7 @@ import { LocaleService, Language } from 'angular-l10n';
 @Component({
     selector: 'my-stepEditor',
     templateUrl: '/partial/StepEditorComponent',
-    styleUrls: ['css/themes/themeStepEditor.css', 'css/themes/themeCommon.css']
+    styleUrls: [ 'css/themes/themeCommon.css']
 })
 
 export class StepEditorComponent {

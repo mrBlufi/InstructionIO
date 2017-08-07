@@ -41,8 +41,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'Language' | translate:lang }}<b class="caret"></b></a>
-
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ 'Language' | translate:lang }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a (click)="selectLanguage('en');">English</a>
@@ -53,7 +52,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'theme' | translate:lang }}<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ 'theme' | translate:lang }} <b class="caret"></b></a>
 
                         <ul class="dropdown-menu">
                             <li>
@@ -85,14 +84,14 @@
 
                         <a href="#myModal" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span>{{ 'Log in' | translate:lang }}</a>
                     </li>
-                    <li><span>{{ 'Language' | translate:lang }}:</span></li>
+                    <li><span> {{ 'Language' | translate:lang }}: </span></li>
                     <li class="point">
                         <a (click)="selectLanguage('en');">English</a>
                     </li>
                     <li class="point">
                         <a (click)="selectLanguage('ru');">Русский</a>
                     </li>
-                    <li><span>{{ 'theme' | translate:lang }}:</span></li>
+                    <li><span> {{ 'theme' | translate:lang }}: </span></li>
                     <li class="point">
                         <a (click)="settheme('light');">{{ 'light' | translate:lang }}</a>
                     </li>

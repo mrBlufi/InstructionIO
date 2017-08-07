@@ -41,9 +41,9 @@
                     <hr>
                     <div class="row" *ngIf="statisticsuser">
                         <small style="padding-left:10px;">
-                            Count add Instructions: {{statisticsuser.countInstructions}};
-                            Count add Coments: {{statisticsuser.countComment}};
-                            Average user ratings: {{statisticsuser.averageRating}};
+                            {{ 'Count add Instructions' | translate:lang }}: {{statisticsuser.countInstructions}};
+                            {{ 'Count add Coments' | translate:lang }}: {{statisticsuser.countComment}};
+                            {{ 'User Rating' | translate:lang }}: {{statisticsuser.averageRating}};
                         </small>
                     </div>
                 </div>

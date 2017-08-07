@@ -142,7 +142,7 @@ ProfileComponent = __decorate([
     core_1.Component({
         selector: 'my-profile',
         templateUrl: '/partial/profileComponent',
-        styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css', 'css/themes/themeCommon.css']
+        styleUrls: ['css/ProfilePage.css', 'css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [bootstrap_1.Modal, router_1.ActivatedRoute,
         router_1.Router, Profile_Service_1.ProfileService, Role_Service_1.RoleService, http_1.Http, Theme_Service_1.ThemeService])

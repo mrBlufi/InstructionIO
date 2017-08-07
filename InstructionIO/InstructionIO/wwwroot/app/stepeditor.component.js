@@ -94,7 +94,7 @@ StepEditorComponent = __decorate([
     core_1.Component({
         selector: 'my-stepEditor',
         templateUrl: '/partial/StepEditorComponent',
-        styleUrls: ['css/themes/themeStepEditor.css', 'css/themes/themeCommon.css']
+        styleUrls: ['css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [bootstrap_1.Modal, ng2_dragula_1.DragulaService,
         platform_browser_1.DomSanitizer, http_1.Http, angular_l10n_1.LocaleService])

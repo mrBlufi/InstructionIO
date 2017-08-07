@@ -119,7 +119,7 @@ InstructionView = __decorate([
     core_1.Component({
         selector: 'InstructionView',
         templateUrl: '/partial/InstructionView',
-        styleUrls: ['css/instructionView.css', 'css/themes/themeCommon.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
+        styleUrls: ['css/instructionView.css', 'css/themes/themeCommon.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css']
     }),
     __metadata("design:paramtypes", [angular_l10n_1.LocaleService, bootstrap_1.Modal, instruction_Service_1.InstructionService,
         router_1.ActivatedRoute, Home_Service_1.HomeService,

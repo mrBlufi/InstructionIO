@@ -7,6 +7,14 @@ footer {
     margin: 50px 0;
 }
 
+a.linkName{
+    color:black;
+}
+
+a.linkName:hover {
+    color: #575555;
+}
+
 .navbar-brand {
     padding-top:10px;
 }

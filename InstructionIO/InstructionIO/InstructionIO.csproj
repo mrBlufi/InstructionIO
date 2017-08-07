@@ -76,8 +76,6 @@
     <Content Include="wwwroot\css\themes\themeIndexAndSearch.css" />
     <Content Include="wwwroot\css\themes\themeInstructionEditor.css" />
     <Content Include="wwwroot\css\themes\themeInstructionView.css" />
-    <Content Include="wwwroot\css\themes\themeProfile.css" />
-    <Content Include="wwwroot\css\themes\themeStepEditor.css" />
     <Content Include="wwwroot\css\themes\themeStepView.css" />
     <Content Include="wwwroot\images\giphy.gif" />
     <Content Include="wwwroot\images\Rolling.gif" />

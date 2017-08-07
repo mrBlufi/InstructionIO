@@ -45,12 +45,14 @@ a.light {
     background-color: #252839;
 }
 
-
+h2.dark {
+    color: white;
+}
 
 .dark .panel {
     background-color: #eaeaea;
     border: 1px solid rgba(128, 128, 128, 0.84);
-    box-shadow: rgba(193, 193, 193, 0.40) 6px 6px 6px;
+    box-shadow:rgba(83, 81, 81, 0.83) 6px 6px 6px;
 }
 
 .dark .panel .panet-footer {

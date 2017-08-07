@@ -34,7 +34,7 @@ StepView = __decorate([
     core_1.Component({
         selector: 'stepView',
         templateUrl: '/partial/StepComponent',
-        styleUrls: ['css/themes/themeStepView.css', 'css/themes/themeCommon.css']
+        styleUrls: ['css/themes/themeCommon.css']
     }),
     __metadata("design:paramtypes", [angular_l10n_1.LocaleService])
 ], StepView);

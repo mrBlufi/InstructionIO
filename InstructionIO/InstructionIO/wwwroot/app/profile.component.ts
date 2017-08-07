@@ -17,7 +17,7 @@ import { Overlay, overlayConfigFactory } from 'angular2-modal';
 @Component({
     selector: 'my-profile',
     templateUrl: '/partial/profileComponent',
-    styleUrls: ['css/ProfilePage.css', 'css/themes/themeProfile.css', 'css/themes/themeCommon.css']
+    styleUrls: ['css/ProfilePage.css', 'css/themes/themeCommon.css']
 })
 
 export class ProfileComponent implements OnInit, OnDestroy {

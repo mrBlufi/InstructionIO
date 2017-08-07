@@ -1,4 +1,8 @@
 ﻿<div class="contentBody">
+    <div>
+        <h3>{{step.subtitle}}
+        </h3>
+    </div>
     <div [(ngClass)]="theme" class="contentBlock" *ngFor="let block of step.contentBlock">
         <div class="contetnRow">
             <div [ngSwitch]="block.type">

@@ -5,7 +5,7 @@ import { LocaleService, Language } from 'angular-l10n';
 @Component({
     selector: 'stepView',
     templateUrl: '/partial/StepComponent',
-    styleUrls: ['css/themes/themeStepView.css', 'css/themes/themeCommon.css']
+    styleUrls: [ 'css/themes/themeCommon.css']
 })
 
 export class StepView {

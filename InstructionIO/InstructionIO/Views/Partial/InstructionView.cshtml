@@ -23,7 +23,7 @@
                            [queryParams]="{'q':tag.tag.name,'tag':true}">#{{tag.tag.name}} </a>
                     </span>
                 </span>
-                <span class="pull-right" (click)="goToEdit()"><i class="glyphicon glyphicon-pencil"></i></span>
+                <span  *ngIf="roleinfo.adminRole || roleinfo.id==instruction.author.id"class="pull-right" (click)="goToEdit()"><i class="glyphicon glyphicon-pencil"></i></span>
             </div>
         </div>
         <div class="panel-body">

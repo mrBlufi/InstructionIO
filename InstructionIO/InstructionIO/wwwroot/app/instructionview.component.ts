@@ -19,7 +19,7 @@ import { LocaleService, Language } from 'angular-l10n';
 @Component({
     selector: 'InstructionView',
     templateUrl: '/partial/InstructionView',
-    styleUrls: ['css/instructionView.css' , 'css/themes/themeCommon.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css', 'css/themes/themeInstructionView.css']
+    styleUrls: ['css/instructionView.css' , 'css/themes/themeCommon.css', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css']
 })
 
 export class InstructionView {
