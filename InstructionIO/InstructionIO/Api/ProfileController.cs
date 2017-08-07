@@ -19,7 +19,7 @@ namespace instructionsIO.Controllers.Api
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private int _stepTake = 10;
+        private int _stepTake = 3;
         private ApplicationDbContext _context;
 
         public ProfileController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
@@ -58,8 +58,8 @@ namespace instructionsIO.Controllers.Api
                 .Include(t => t.Category).ToList();
             return _unstructions.Skip(page * _stepTake).Take(_stepTake);
         }
-       
-        [HttpPost("user/update")]
+
+        [HttpPost("user/updated")]
         public UserInfo SetUserProfile([FromBody]UserInfo userprofile)
         {
             var messages = _context.UserInfos.FirstOrDefault(f => f.Id == userprofile.Id);

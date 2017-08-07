@@ -94,7 +94,6 @@ let ProfileComponent = class ProfileComponent {
     }
     ngOnDestroy() {
         if (this.user && this.roleinfo.id != -1) {
-            console.log(this.user.interests);
             this._profileservice.setProfileData(this.user);
         }
         this.sub.unsubscribe();
@@ -121,7 +120,10 @@ let ProfileComponent = class ProfileComponent {
         let elem = event.srcElement;
         let formData = new FormData();
         formData.append(elem.files[0].name, elem.files[0]);
-        this.http.post('/api/StepEditor/Upload', formData).subscribe(data => { this.user.avatar = data["_body"].replace(/"/g, ""); });
+        this.http.post('/api/StepEditor/Upload', formData).subscribe(data => {
+            this.user.avatar = data["_body"].replace(/"/g, "");
+            this._profileservice.setProfileData(this.user);
+        });
     }
 };
 __decorate([

@@ -23,7 +23,7 @@ export class ProfileService {
     setProfileData(obj: UserInfo) {
         const body = JSON.stringify(obj);
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/profile/user/update', body, { headers: headers });
+        return this.http.post('/api/profile/user/updated', body, { headers: headers }).subscribe();
     }
 
     deleteUserById(id: number) {

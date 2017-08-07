@@ -88,8 +88,10 @@ export class StepEditorComponent {
         let src: string;
         let elem: HTMLInputElement = event.srcElement as HTMLInputElement;
         let formData: FormData = new FormData();
-        formData.append(elem.files[0].name, elem.files[0]);
-        this.http.post('/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g,"")));
+        if (elem.files.length > 0) {
+            formData.append(elem.files[0].name, elem.files[0]);
+            this.http.post('/api/StepEditor/Upload', formData).subscribe((data) => this.addPictureBox(data["_body"].replace(/"/g, "")));
+        }
     }
 }
 

@@ -17,7 +17,7 @@ namespace InstructionIO.Api
     {
         private ApplicationDbContext _context;
         private IEnumerable<Instruction> _unstructions=null;
-        private int _stepTake =10;
+        private int _stepTake =3;
         public DataHomeController(ApplicationDbContext context)
         {
             _context = context;

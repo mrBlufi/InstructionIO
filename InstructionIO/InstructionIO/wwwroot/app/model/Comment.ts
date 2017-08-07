@@ -2,7 +2,7 @@
 
 export class Comment{
     public id: number;
-    public author: UserInfo;
+    public author: UserInfo = new UserInfo();
     public context: string;
     public datecreate: Date;
 }

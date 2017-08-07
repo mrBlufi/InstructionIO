@@ -78,7 +78,8 @@ namespace InstructionIO.Controllers
                     FullName = "Nickname",
                     Birthday = new DateTime().Date,
                     Interests = "Interests",
-                    User = user
+                    User = user,
+                    Avatar = "http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-15.png"
                 };
        
                 if (result1.Succeeded)

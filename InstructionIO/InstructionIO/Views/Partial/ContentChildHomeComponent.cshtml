@@ -37,7 +37,7 @@
             <div class="panel-body">
                 <img class="img-responsive" src="{{instruction.previewImage}}">
                 <div class="paneltextbody">
-                    <span id="foo" class="lead">{{instruction.previewText}}</span>
+                    <span id="foo" class="lead" [innerHTML]="instruction.previewText"></span>
                     <p><small class="text-muted ">{{ 'Create date' | translate:lang }}: {{instruction.createDate | date:'MM/dd/yyyy'}}  {{ 'Author' | translate:lang }}:<span class="profile-link" [routerLink]="['../profile']" [queryParams]="{'user':instruction.author.id}"> {{instruction.author.fullName}}</span></small></p>
                 </div>
             </div>

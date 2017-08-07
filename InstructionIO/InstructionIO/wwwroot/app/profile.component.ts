@@ -102,7 +102,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         if (this.user && this.roleinfo.id != -1) {
-            console.log(this.user.interests);
             this._profileservice.setProfileData(this.user);
         }
         this.sub.unsubscribe();
@@ -118,7 +117,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     @HostListener('window:beforeunload', ['$event'])
     public beforeUnload(event: any) {
-        if (this.user && this.roleinfo.id != -1) {   
+        if (this.user && this.roleinfo.id != -1) {
             this.user.interests = document.getElementById('interestsSpan').innerHTML;
             this._profileservice.setProfileData(this.user);
         }
@@ -133,6 +132,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
         let elem: HTMLInputElement = event.srcElement as HTMLInputElement;
         let formData: FormData = new FormData();
         formData.append(elem.files[0].name, elem.files[0]);
-        this.http.post('/api/StepEditor/Upload', formData).subscribe(data => { this.user.avatar = data["_body"].replace(/"/g, "") });
+        this.http.post('/api/StepEditor/Upload', formData).subscribe(data => {
+            this.user.avatar = data["_body"].replace(/"/g, "");
+            this._profileservice.setProfileData(this.user);
+        });
     }
 }

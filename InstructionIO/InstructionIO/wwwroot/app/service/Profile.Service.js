@@ -28,7 +28,7 @@ let ProfileService = class ProfileService {
     setProfileData(obj) {
         const body = JSON.stringify(obj);
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('/api/profile/user/update', body, { headers: headers });
+        return this.http.post('/api/profile/user/updated', body, { headers: headers }).subscribe();
     }
     deleteUserById(id) {
         let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
